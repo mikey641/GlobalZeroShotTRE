@@ -12,7 +12,7 @@ const config = {
         "splitWindow": false,
         "debug": false,
         "exportAlways": false,
-        "removeTransitive": true,
+        "removeTransitive": false,
     },
     instFiles: {
         "axis": "axis_inst.html",
