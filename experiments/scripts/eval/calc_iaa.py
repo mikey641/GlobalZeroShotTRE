@@ -7,8 +7,8 @@ from sklearn.metrics import cohen_kappa_score
 from scripts.eval.utils import count_stats_in_file, get_annotations, find_diffs
 
 
-def create_report(data1, data2):
-    tmp_score, tmp_diff, tmp_unagreed, coref_score, coref_diff, coref_unagreed, cause_score, cause_diff, cause_unagreed = calculate_iaa(data1, data2)
+def create_report(data1, num_mentions1, num_pairs1, expected_pairs1, data2, num_mentions2, num_pairs2, expected_pairs2,
+                  tmp_score, tmp_diff, tmp_unagreed, coref_score, coref_diff, coref_unagreed, cause_score, cause_diff, cause_unagreed):
     df = pd.DataFrame(columns=['Mention1', 'Mention2', annotator1, annotator2], data=tmp_diff)
     df_string = df.to_string(index=False)
     file_path = f'{output_file}.txt'
@@ -22,6 +22,10 @@ def create_report(data1, data2):
         file.write('Most tmp unagreed mentions:\n')
         for mention, count in dict(sorted(tmp_unagreed.items(), key=lambda item: item[1], reverse=True)).items():
             file.write(f'{mention})={count}\n')
+
+        file.write('\n\n')
+        file.write(f'Num of mentions {annotator1}={num_mentions1}, Num of mentions {annotator2}={num_mentions2}\n')
+        file.write(f'Num of pairs {annotator1}={num_pairs1} (Expected={expected_pairs1}), Num of pairs {annotator2}={num_pairs2} (Expected={expected_pairs2})\n')
 
     print(f"DataFrame written to {file_path}")
 
@@ -52,17 +56,19 @@ def main():
         data2 = json.load(f)
 
     print('81d6_rel_FinalAnnotations_1')
-    count_stats_in_file(data1)
+    num_mentions1, num_pairs1, expected_pairs1 = count_stats_in_file(data1)
     print('81d6_rel_FinalAnnotations_1')
-    count_stats_in_file(data2)
+    num_mentions2, num_pairs2, expected_pairs2 = count_stats_in_file(data2)
 
-    create_report(data1, data2)
+    tmp_score, tmp_diff, tmp_unagreed, coref_score, coref_diff, coref_unagreed, cause_score, cause_diff, cause_unagreed = calculate_iaa(data1, data2)
+    create_report(data1, num_mentions1, num_pairs1, expected_pairs1, data2, num_mentions2, num_pairs2, expected_pairs2,
+                  tmp_score, tmp_diff, tmp_unagreed, coref_score, coref_diff, coref_unagreed, cause_score, cause_diff, cause_unagreed)
 
 
 if __name__ == "__main__":
-    annotator1 = 'benji'
+    annotator1 = 'netta'
     annotator2 = 'michael'
-    output_file = f'data/my_data/output/68d7_tmp_{annotator1}_{annotator2}_unagreed2'
-    annot1_file = f'data/my_data/input/68d7_tmp_benji2.json'
-    annot2_file = f'data/my_data/input/68d7_tmp_michael2.json'
+    output_file = f'data/my_data/output/148d5_tmp_{annotator1}_{annotator2}_v2'
+    annot1_file = f'data/my_data/input/148d5_temp_netta.json'
+    annot2_file = f'data/my_data/input/148d5_temp_michael.json'
     main()

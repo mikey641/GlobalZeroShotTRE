@@ -11,8 +11,10 @@ def count_stats_in_file(data):
 
     num_mentions = len(final_mentions)
     num_pairs = len(data["allPairs"])
+    expected_pairs = (math.pow(num_mentions, 2) - num_mentions) / 2
     print(f'Number of mentions={num_mentions}')
-    print(f'Number of relations={num_pairs} (expected={(math.pow(num_mentions, 2) - num_mentions)/2})')
+    print(f'Number of relations={num_pairs} (expected={expected_pairs})')
+    return num_mentions, num_pairs, expected_pairs
 
 
 def get_annotations(data):
