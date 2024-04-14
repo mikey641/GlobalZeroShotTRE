@@ -14,42 +14,45 @@ def count_stats_in_file(data):
     expected_pairs = (math.pow(num_mentions, 2) - num_mentions) / 2
     print(f'Number of mentions={num_mentions}')
     print(f'Number of relations={num_pairs} (expected={expected_pairs})')
-    return num_mentions, num_pairs, expected_pairs
+    return final_mentions, num_pairs, expected_pairs
 
 
-def get_annotations(data):
+def get_annotations(pairs):
     tmp_lables = list()
     coref_lables = list()
     causal_lables = list()
-    for pair in data['allPairs']:
+    for pair in pairs:
+        first_id = pair['_firstId']
+        second_id = pair['_secondId']
         relation = pair['_relation']
         if '/' in relation:
             split_rel = relation.split('/')
-            tmp_lables.append(split_rel[0])
+            tmp_lables.append((first_id, second_id, split_rel[0]))
             if split_rel[0] == 'before' or split_rel[0] == 'after':
-                causal_lables.append(split_rel[1])
+                causal_lables.append((first_id, second_id, split_rel[1]))
             elif split_rel[0] == 'equal':
-                coref_lables.append(split_rel[1])
+                coref_lables.append((first_id, second_id, split_rel[1]))
             else:
                 print("Not suppose to be here")
         else:
-            tmp_lables.append(relation)
+            tmp_lables.append((first_id, second_id, relation))
 
+    tmp_lables.sort(key=lambda tup: (tup[0], tup[1]))
+    coref_lables.sort(key=lambda tup: tup[0])
+    causal_lables.sort(key=lambda tup: tup[0])
     return tmp_lables, coref_lables, causal_lables
 
 
-def find_diffs(data, lab1, lab2):
+def find_diffs(mentions, labs1, labs2):
     diffs = list()
     most_unagreed = dict()
-    mentions = data['allMentions']
-    pairs = data['allPairs']
-    for i in range(len(lab1)):
-        if lab1[i] != lab2[i]:
-            ment1 = find_ment_by_id(mentions, pairs[i]['_firstId'])
-            text_m1 = f'{ment1["tokens"]}({pairs[i]["_firstId"]})'
-            ment2 = find_ment_by_id(mentions, pairs[i]['_secondId'])
-            text_m2 = f'{ment2["tokens"]}({pairs[i]["_secondId"]})'
-            diffs.append([text_m1, text_m2, lab1[i], lab2[i]])
+    for i in range(len(labs1)):
+        if labs1[i] != labs2[i]:
+            ment1 = find_ment_by_id(mentions, labs1[i][0])
+            text_m1 = f'{ment1["tokens"]}({ment1["m_id"]})'
+            ment2 = find_ment_by_id(mentions, labs1[i][1])
+            text_m2 = f'{ment2["tokens"]}({ment2["m_id"]})'
+            diffs.append([text_m1, text_m2, labs1[i][2], labs2[i][2]])
 
             if text_m1 not in most_unagreed:
                 most_unagreed[text_m1] = 0
