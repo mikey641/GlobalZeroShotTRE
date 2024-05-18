@@ -2,6 +2,7 @@ class DocObject {
     constructor() {
         this.doc_id = null;
         this.tokens = null;
+        this.time_exprs = null;
         this.mentions = null;
     }
 
@@ -15,6 +16,13 @@ class DocObject {
             if(jsonObject.mentions) {
                 for (let i = 0; i < jsonObject.mentions.length; i++) {
                     retDoc.mentions.push(EventObject.fromJsonObject(jsonObject.mentions[i]));
+                }
+            }
+
+            retDoc.time_exprs = [];
+            if(jsonObject.time_exprs) {
+                for (let i = 0; i < jsonObject.time_exprs.length; i++) {
+                    retDoc.time_exprs.push(TimeExpressionObject.fromJsonObject(jsonObject.time_exprs[i]));
                 }
             }
         } else {

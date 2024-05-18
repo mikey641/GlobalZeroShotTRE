@@ -39,3 +39,9 @@ function getAllEqualPairs(allPairsFlat) {
 function getAllContainsPairs(allPairsFlat) {
     return getAllPairsByRelationGroup(allPairsFlat, isContainsOrSubEvent);
 }
+
+function flatten(arr) {
+    return arr.reduce(function (flat, toFlatten) {
+        return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+    }, []);
+}

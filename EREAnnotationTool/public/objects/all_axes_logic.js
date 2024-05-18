@@ -170,6 +170,16 @@ class AllAxes {
         return this.main_doc['tokens'];
     }
 
+    getAllTimeExpressions() {
+        const timeExpr = this.main_doc['time_exprs'];
+        let timeExprIndexs = [];
+        for (let i = 0; i < timeExpr.length; i++) {
+            timeExprIndexs.push(timeExpr[i].indices);
+        }
+
+        return [...new Set(flatten(timeExprIndexs))];
+    }
+
     getEventByEventId(eventId) {
         const allAxesEvents = this.main_doc.mentions
         for (let i = 0; i < allAxesEvents.length; i++) {

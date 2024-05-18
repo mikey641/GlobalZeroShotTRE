@@ -172,6 +172,7 @@ class PairsForm extends UIForm {
     formatText(pair) {
         let text = [...this._allAxes.getMainDocTokens()];
         const allEvents = this._allAxes.getAllRelEvents();
+        const allTimeExpressions = this._allAxes.getAllTimeExpressions();
         let event1 = this._allAxes.getEventByEventId(pair.getFirstId());
         let event2 = this._allAxes.getEventByEventId(pair.getSecondId());
         let start1Idx = event1.getTokensIds()[0];
@@ -183,6 +184,10 @@ class PairsForm extends UIForm {
             for (let i = eventStartIds; i <= eventEndIds; i++) {
                 text[i] = `<span style=\"font-weight: bold;\">${text[i]}</span>`;
             }
+        }
+
+        for (let i = 0; i < allTimeExpressions.length; i++) {
+            text[allTimeExpressions[i]] = `<span style=\"text-decoration: underline;\">${text[allTimeExpressions[i]]}</span>`;
         }
 
         for (let i = start1Idx; i <= end1Idx; i++) {
