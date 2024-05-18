@@ -73,9 +73,9 @@ def main():
 
 
 if __name__ == "__main__":
-    annotator1 = 'netta'
+    annotator1 = 'michael'
     annotator2 = 'benji'
-    output_file = f'data/my_data/output/85d8_tmp_{annotator1}_{annotator2}_v3'
-    annot1_file = f'data/my_data/benji_netta/85d8_tmp_netta_v2.json'
-    annot2_file = f'data/my_data/benji_netta/85d8_tmp_benji_v2.json'
+    output_file = f'data/my_data/output/68d7_tmp_{annotator1}_{annotator2}_v1'
+    annot1_file = f'data/my_data/benji_michael/68d7_temp_michael.json'
+    annot2_file = f'data/my_data/benji_michael/68d7_temp_benji.json'
     main()
