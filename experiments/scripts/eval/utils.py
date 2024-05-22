@@ -45,13 +45,16 @@ def get_annotations(pairs):
 
 def find_diffs(mentions, labs1, labs2):
     diffs = list()
+    sames = list()
     most_unagreed = dict()
     for i in range(len(labs1)):
+        ment1 = find_ment_by_id(mentions, labs1[i][0])
+        text_m1 = f'{ment1["tokens"]}({ment1["m_id"]})'
+        ment2 = find_ment_by_id(mentions, labs1[i][1])
+        text_m2 = f'{ment2["tokens"]}({ment2["m_id"]})'
+        if labs1[i] == labs2[i]:
+            sames.append([text_m1, text_m2, labs1[i][2], labs2[i][2]])
         if labs1[i] != labs2[i]:
-            ment1 = find_ment_by_id(mentions, labs1[i][0])
-            text_m1 = f'{ment1["tokens"]}({ment1["m_id"]})'
-            ment2 = find_ment_by_id(mentions, labs1[i][1])
-            text_m2 = f'{ment2["tokens"]}({ment2["m_id"]})'
             diffs.append([text_m1, text_m2, labs1[i][2], labs2[i][2]])
 
             if text_m1 not in most_unagreed:
@@ -61,7 +64,7 @@ def find_diffs(mentions, labs1, labs2):
             most_unagreed[text_m1] += 1
             most_unagreed[text_m2] += 1
 
-    return diffs, most_unagreed
+    return diffs, sames, most_unagreed
 
 
 def find_ment_by_id(mentions, m_id):
