@@ -12,8 +12,8 @@ def count_stats_in_file(data):
     num_mentions = len(final_mentions)
     num_pairs = len(data["allPairs"])
     expected_pairs = (math.pow(num_mentions, 2) - num_mentions) / 2
-    print(f'Number of mentions={num_mentions}')
-    print(f'Number of relations={num_pairs} (expected={expected_pairs})')
+    # print(f'Number of mentions={num_mentions}')
+    # print(f'Number of relations={num_pairs} (expected={expected_pairs})')
     return final_mentions, num_pairs, expected_pairs
 
 
@@ -33,7 +33,7 @@ def get_annotations(pairs):
             elif split_rel[0] == 'equal':
                 coref_lables.append((first_id, second_id, split_rel[1]))
             else:
-                print("Not suppose to be here")
+                raise ValueError(f'Unknown relation {split_rel[0]}')
         else:
             tmp_lables.append((first_id, second_id, relation))
 
