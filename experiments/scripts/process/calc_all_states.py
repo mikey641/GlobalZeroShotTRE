@@ -3,6 +3,9 @@ import os
 from scripts.eval import calc_iaa
 
 
+groups = ['group_a', 'group_b', 'group_c']
+
+
 def gather_files(path):
     group_files = dict()
     for file in os.listdir(path):
@@ -19,7 +22,7 @@ def gather_files(path):
 
 
 def read_group_files(group):
-    path = f'data/my_data/groups/{group}/'
+    path = f'data/my_data/groups_exports/{group}/'
     group_files = gather_files(path)
     group_tmp_results = dict()
     for file_group_name, files in group_files.items():
@@ -51,25 +54,12 @@ def print_group_stats(group, group_a_files, group_a_tmp_results):
     return total_ment, total_pairs, total_diff, total_same, avg_agreement, total_diff_same
 
 
-def extract_file_agree_pairs(group_a_tmp_results):
-    merged = list()
-    for file_name, result_tup in group_a_tmp_results.items():
-        iaa_same = result_tup[2].same
-        iaa_same_with_file = [(file_name, iaa) for iaa in iaa_same]
-        merged.extend(iaa_same_with_file)
-
-    return merged
-
-
 def run_all_groups():
     total_files = 0
     total_ment, total_pairs, total_diff, total_same, avg_agreement, total_diff_same = 0, 0, 0, 0, 0, 0
-    groups = ['group_a', 'group_b', 'group_c']
     groups_files = dict()
-    all_merged = list()
     for group in groups:
         groups_files[group] = read_group_files(group)
-        all_merged.extend(extract_file_agree_pairs(groups_files[group][1]))
 
     for group in groups:
         _total_ment, _total_pairs, _total_diff, _total_same, _avg_agreement, _total_diff_same = print_group_stats(group, groups_files[group][0], groups_files[group][1])
@@ -92,7 +82,7 @@ def run_all_groups():
     print(f'Average agreement: {avg_agreement / len(groups)}')
     print('---------------------------------')
 
-    return all_merged
+    return groups_files
 
 
 if __name__ == "__main__":
