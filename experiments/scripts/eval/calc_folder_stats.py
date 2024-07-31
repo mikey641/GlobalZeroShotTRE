@@ -1,9 +1,7 @@
 import json
 import os
 
-from scripts.eval import calc_iaa
 from scripts.eval.utils import count_stats_in_file
-from scripts.process.calc_all_states import print_group_stats
 
 
 def gather_files(path):
