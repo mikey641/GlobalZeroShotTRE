@@ -6,3 +6,4 @@ EREAnnotationTool/input
 EREAnnotationTool/output
 experiments/data
 __pycache__
+experiments/scorer

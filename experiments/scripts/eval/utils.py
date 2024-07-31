@@ -10,11 +10,20 @@ def count_stats_in_file(data):
             final_mentions.append(mention)
 
     num_mentions = len(final_mentions)
-    num_pairs = len(data["allPairs"])
+    num_tmp_pairs = len(data["allPairs"])
+    num_coref_pairs = 0
+    num_cause_pairs = 0
+    all_pairs = data["allPairs"]
+    for pair in all_pairs:
+        if pair['_relation'].startswith('equal'):
+            num_coref_pairs += 1
+        elif pair['_relation'].startswith('before') or pair['_relation'].startswith('after'):
+            num_cause_pairs += 1
+
     expected_pairs = (math.pow(num_mentions, 2) - num_mentions) / 2
     # print(f'Number of mentions={num_mentions}')
-    # print(f'Number of relations={num_pairs} (expected={expected_pairs})')
-    return final_mentions, num_pairs, expected_pairs
+    # print(f'Number of relations={num_tmp_pairs} (expected={expected_pairs})')
+    return final_mentions, num_tmp_pairs, num_coref_pairs, num_cause_pairs, expected_pairs
 
 
 def get_annotations(pairs):
