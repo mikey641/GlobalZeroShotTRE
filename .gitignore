@@ -6,5 +6,6 @@ EREAnnotationTool/input
 EREAnnotationTool/output
 experiments/data/*
 !experiments/data/EventFullTrainExports
+!experiments/data/DOT_format
 __pycache__
 experiments/scorer
