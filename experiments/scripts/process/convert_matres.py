@@ -33,7 +33,7 @@ class EVENT:
         self.corefState = 'unknown'
         self.m_id = eid
         self.tokens = text
-        self.tokens_ids = [tokens_ids]
+        self.tokens_ids = tokens_ids
         self.event_class = event_class
 
 
@@ -112,7 +112,7 @@ def extract_xml_text_as_tokens(root):
             tmp_text = plain_text.replace('\n', ' ')
             tmp_text = tmp_text.strip().split(' ')
             tmp_text = list(filter(None, tmp_text))
-            new_event = EVENT(element.get('eid'), element.text.strip(), len(tmp_text), element.get('class'))
+            new_event = EVENT(element.get('eid'), element.text.strip(), list(range(len(tmp_text), len(tmp_text) + len(element.text.strip().split(" ")))), element.get('class'))
             events.append(new_event)
         if element.text:
             tmp_text = element.text.strip().split(' ')
@@ -129,11 +129,11 @@ def extract_xml_text_as_tokens(root):
 
     # sanity check
     for event in events:
-        if event.tokens != plain_text[event.tokens_ids[0]]:
-            if event.tokens == plain_text[event.tokens_ids[0] - 1] and len(event.tokens_ids) == 1:
-                event.tokens_ids[0] += 1
-            else:
-                print(f"ERROR: {event.tokens} != {plain_text[event.tokens_ids[0]]}")
+        if event.tokens != ' '.join(plain_text[event.tokens_ids[0]:event.tokens_ids[-1]+1]):
+            # if event.tokens == plain_text[event.tokens_ids[0] - 1] and len(event.tokens_ids) == 1:
+            #     event.tokens_ids[0] += 1
+            # else:
+            print(f"ERROR: {event.tokens} != {plain_text[event.tokens_ids[0]:event.tokens_ids[-1]+1]}")
 
     sycn_ids(root, events, plain_text)
     return plain_text, events
@@ -207,37 +207,35 @@ def read_folder(folder_path):
     return all_read_files
 
 
-def generate(all_tb, all_aq, matres_aq, matres_pl, matres_tb):
+def generate(all_tb, matres):
     my_format = dict()
     for tb_file_name, tb_file_values in all_tb.items():
         tb_file_name = tb_file_name.removesuffix('.tml')
-        if tb_file_name not in matres_tb:
+        if tb_file_name not in matres:
             print(f"ERROR: {tb_file_name} not in matres_tb")
             continue
 
         doc, tokens, events, tlinks = tb_file_values
-        matres_pairs = matres_tb[tb_file_name]
+        matres_pairs = matres[tb_file_name]
         relv_events = set()
         for pair in matres_pairs:
             for event in events:
                 if event.m_id == pair._firstId:
                     if event.tokens != pair.firstEventText:
                         print(f"ERROR: {event.tokens} != {pair.firstEventText}")
-
                     relv_events.add(event)
                 elif event.m_id == pair._secondId:
                     if event.tokens != pair.secondEventText:
                         print(f"ERROR: {event.tokens} != {pair.secondEventText}")
-
                     relv_events.add(event)
 
-        my_format[tb_file_name] = {"tokens": tokens, "allMentions": events, "allPairs": matres_pairs}
+        my_format[tb_file_name] = {"tokens": tokens, "allMentions": list(relv_events), "allPairs": matres_pairs}
 
     return my_format
 
 
 def main():
-    timebank_path = 'data/MATRES/orig_files/TimeBank-Dense/all_in_one_folder'
+    timebank_path = 'data/MATRES/orig_files/te3-platinum'
     # time_aquaint = 'data/MATRES/orig_files/aquaint'
     all_tb = read_folder(timebank_path)
     # all_aq = read_folder(time_aquaint)
@@ -245,7 +243,7 @@ def main():
     matres_pl = read_matres_file('data/MATRES/platinum.txt')
     matres_tb = read_matres_file('data/MATRES/timebank.txt')
 
-    conv_my_format = generate(all_tb, None, matres_aq, matres_pl, matres_tb)
+    conv_my_format = generate(all_tb, matres_pl)
     for doc_id, doc_data in conv_my_format.items():
         with open(f"data/MATRES/maters_in_my_format/{doc_id}.json", 'w') as f:
             json.dump(doc_data, f, default=lambda o: o.__dict__, indent=4)
