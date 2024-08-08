@@ -10,24 +10,58 @@ from scripts.eval.utils import count_stats_in_file, get_annotations, find_diffs
 
 
 def create_report(annot_obj1, annot_obj2, tmp_iaa_result, coref_iaa_result, cause_iaa_result):
-    df = pd.DataFrame(columns=['Mention1', 'Mention2', annotator1, annotator2], data=tmp_iaa_result.diff)
-    df_string = df.to_string(index=False)
+    df_tmp = pd.DataFrame(columns=['Mention1', 'Mention2', annotator1, annotator2], data=tmp_iaa_result.diff)
+    df_tmp_string = df_tmp.to_string(index=False)
+
+    df_coref = pd.DataFrame(columns=['Mention1', 'Mention2', annotator1, annotator2], data=coref_iaa_result.diff)
+    df_coref_string = df_coref.to_string(index=False)
+
+    df_cause = pd.DataFrame(columns=['Mention1', 'Mention2', annotator1, annotator2], data=cause_iaa_result.diff)
+    df_cause_string = df_cause.to_string(index=False)
+
     file_path = f'{output_file}.txt'
     with open(file_path, 'w') as file:
-        file.write(df_string)
-        file.write('\n\n')
         file.write(f'Temporal Kappa={tmp_iaa_result.iaa}\n')
-        file.write(f'Causal Kappa={cause_iaa_result.iaa}\n')
-        file.write(f'Coref Kappa={coref_iaa_result.iaa}\n')
-        file.write('\n\n')
+        file.write('\n')
+        file.write(df_tmp_string)
+        file.write('\n')
         file.write('Most tmp unagreed mentions:\n')
-        for mention, count in dict(sorted(tmp_iaa_result.unagreed.items(), key=lambda item: item[1], reverse=True)).items():
+        for mention, count in dict(
+                sorted(tmp_iaa_result.unagreed.items(), key=lambda item: item[1], reverse=True)).items():
             file.write(f'{mention})={count}\n')
 
+        file.write('\n')
+        file.write('--------------------------------------------------\n')
+
+        file.write(f'Coref Kappa={coref_iaa_result.iaa}\n')
+        file.write('\n')
+        file.write(df_coref_string)
+        file.write('\n')
+        file.write('Most coref unagreed mentions:\n')
+        for mention, count in dict(
+                sorted(coref_iaa_result.unagreed.items(), key=lambda item: item[1], reverse=True)).items():
+            file.write(f'{mention})={count}\n')
+        file.write('\n')
+        file.write('--------------------------------------------------\n')
+
+        file.write(f'Causal Kappa={cause_iaa_result.iaa}\n')
+        file.write('\n')
+        file.write(df_cause_string)
+        file.write('\n')
+        file.write('Most cause unagreed mentions:\n')
+        for mention, count in dict(
+                sorted(cause_iaa_result.unagreed.items(), key=lambda item: item[1], reverse=True)).items():
+            file.write(f'{mention})={count}\n')
+
+        file.write('--------------------------------------------------\n')
         file.write('\n\n')
         file.write(f'Num of mentions {annotator1}={len(annot_obj1.mentions)}, Num of mentions {annotator2}={len(annot_obj2.mentions)}\n')
-        file.write(f'Num of pairs {annotator1}={annot_obj1.num_pairs} (Expected={annot_obj1.expected_pairs}), '
-                   f'Num of pairs {annotator2}={annot_obj2.num_pairs} (Expected={annot_obj2.expected_pairs})\n')
+        file.write(f'Num of temp pairs {annotator1}={annot_obj1.num_tmp_pairs} (Expected={annot_obj1.expected_pairs}), '
+                   f'Num of temp pairs {annotator2}={annot_obj2.num_tmp_pairs} (Expected={annot_obj2.expected_pairs})\n')
+        file.write(f'Num of coref pairs {annotator1}={annot_obj1.num_coref_pairs} (Expected={annot_obj1.expected_pairs}), '
+                   f'Num of coref pairs {annotator2}={annot_obj2.num_coref_pairs} (Expected={annot_obj2.expected_pairs})\n')
+        file.write(f'Num of cause pairs {annotator1}={annot_obj1.num_cause_pairs} (Expected={annot_obj1.expected_pairs}), '
+                   f'Num of cause pairs {annotator2}={annot_obj2.num_cause_pairs} (Expected={annot_obj2.expected_pairs})\n')
 
     # print(f"DataFrame written to {file_path}")
 
@@ -47,12 +81,20 @@ def calculate_iaa(ments1, pairs1, ments2, pairs2):
     # print(f'Temporal Kappa={tmp_score}')
     tmp_diff, tmp_sames, tmp_unagreed = find_diffs(ments1, tmp_annot1, tmp_annot2)
 
-    coref_score = 0 # cohen_kappa_score(coref_annot1_unpacked, coref_annot2_unpacked)
-    coref_diff, coref_sames, coref_unagreed = [], [], 0 # find_diffs(ments1, coref_annot1, coref_annot2)
+    if len(coref_annot1_unpacked) > 0:
+        coref_score = cohen_kappa_score(coref_annot1_unpacked, coref_annot2_unpacked)
+        coref_diff, coref_sames, coref_unagreed = find_diffs(ments1, coref_annot1, coref_annot2)
+    else:
+        coref_diff, coref_sames, coref_unagreed = [], [], []
+        coref_score = 0
     # print(f'Temporal Kappa={coref_score}')
 
-    cause_score = 0 # cohen_kappa_score(cause_annot1_unpacked, cause_annot2_unpacked)
-    cause_diff, cause_sames, cause_unagreed = [], [], 0 # find_diffs(ments1, cause_annot1, cause_annot2)
+    if len(cause_annot1_unpacked) > 0:
+        cause_score = cohen_kappa_score(cause_annot1_unpacked, cause_annot2_unpacked)
+        cause_diff, cause_sames, cause_unagreed = find_diffs(ments1, cause_annot1, cause_annot2)
+    else:
+        cause_diff, cause_sames, cause_unagreed = [], [], []
+        cause_score = 0
     # print(f'Causal Score={cause_score}')
 
     tmp_iaa_result = IAAResultObj(tmp_score, tmp_diff, tmp_sames, tmp_unagreed)
@@ -69,22 +111,22 @@ def main(annot1_file, annot2_file):
     with open(annot2_file) as f:
         data2 = json.load(f)
 
-    mentions1, num_pairs1, expected_pairs1 = count_stats_in_file(data1)
-    annot_obj1 = AnnotObj(data1, mentions1, num_pairs1, expected_pairs1)
+    mentions1, num_tmp_pairs1, num_equal_pairs1, num_before_after_pairs1, _, expected_pairs1 = count_stats_in_file(data1)
+    annot_obj1 = AnnotObj(data1, mentions1, num_tmp_pairs1, num_equal_pairs1, num_before_after_pairs1, expected_pairs1)
 
-    mentions2, num_pairs2, expected_pairs2 = count_stats_in_file(data2)
-    annot_obj2 = AnnotObj(data2, mentions2, num_pairs2, expected_pairs2)
+    mentions2, num_tmp_pairs2, num_equal_pairs2, num_before_after_pairs2, _, expected_pairs2 = count_stats_in_file(data2)
+    annot_obj2 = AnnotObj(data2, mentions2, num_tmp_pairs2, num_equal_pairs2, num_before_after_pairs2, expected_pairs2)
 
     tmp_iaa_result, coref_iaa_result, cause_iaa_result = calculate_iaa(mentions1, data1["allPairs"], mentions2, data2["allPairs"])
     return annot_obj1, annot_obj2, tmp_iaa_result, coref_iaa_result, cause_iaa_result
 
 
 if __name__ == "__main__":
-    annotator1 = 'netta'
-    annotator2 = 'michael'
-    output_file = f'data/my_data/output/162d7_tmp_{annotator1}_{annotator2}_v1'
-    _annot1_file = f'data/my_data/groups/group_b/162d7_temp_netta.json'
-    _annot2_file = f'data/my_data/groups/group_b/162d7_temp_michael.json'
+    annotator1 = 'exper'
+    annotator2 = 'exper'
+    output_file = f'data/my_data/evaluations/output/131d3_coref_{annotator1}_{annotator2}_v1'
+    _annot1_file = f'data/my_data/evaluations/coref_cause/{annotator1}/131d3_temp_exper.json'
+    _annot2_file = f'data/my_data/evaluations/coref_cause/{annotator2}/131d3_temp_exper.json'
 
     _annot_obj1, _annot_obj2, _tmp_iaa_result, _coref_iaa_result, _cause_iaa_result = main(_annot1_file, _annot2_file)
     create_report(_annot_obj1, _annot_obj2, _tmp_iaa_result, _coref_iaa_result, _cause_iaa_result)

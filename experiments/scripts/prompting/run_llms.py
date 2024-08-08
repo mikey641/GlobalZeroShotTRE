@@ -5,7 +5,7 @@ import google.generativeai as genai
 from openai import OpenAI
 
 from scripts.eval.utils import find_ment_by_id
-from scripts.model.prompting.prompts import task_description_v1, task_description_v2, task_description_v3, task_description_v4
+from scripts.prompting.prompts import task_description_v2
 
 
 def run_gpt4_turbo(_prompt):

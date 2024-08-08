@@ -2,9 +2,8 @@ import json
 import random
 
 import pandas as pd
-from tabulate import tabulate
 
-from scripts.process.calc_all_states import run_all_groups, groups
+from scripts.eval.calc_all_states import run_all_groups, groups
 
 
 def extract_file_agree_pairs(group_a_tmp_results):
