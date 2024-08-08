@@ -1,0 +1,5 @@
+- Run `convert_matres_and_tbd.py` to convert TB to my json format (will create a directory with all the files in my json format).
+    - Run 'data/MATRES/orig_files/TimeBank' with `MATRES/timebank.txt` for train
+    - Run 'data/MATRES/orig_files/te3-platinum' with `MATRES/platinum.txt` for test
+- Run `convert_mydata_to_dot.py` to convert my json format to DOT format graphs files (will create a single file containing all the documents graph in dot format).
+- 

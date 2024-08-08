@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import uuid
 import xml.etree.ElementTree as ET
 
@@ -35,6 +36,12 @@ class EVENT:
         self.tokens = text
         self.tokens_ids = tokens_ids
         self.event_class = event_class
+
+
+class MAKEINSTANCE:
+    def __init__(self, eiid, eventID):
+        self.eiid = re.sub("[^0-9]", "", eiid)
+        self.eventID = eventID
 
 
 class TLINK:
@@ -76,6 +83,24 @@ def extract_tlinks(root):
     return tlinks
 
 
+def extract_makeinstances(root):
+    makeinstances = []
+    for mis in root.findall('MAKEINSTANCE'):
+        eiid = mis.get('eiid')
+        eventID = mis.get('eventID')
+        makeinstances.append(MAKEINSTANCE(eiid, eventID))
+
+    return makeinstances
+
+
+def get_eiid_from_event_id(event_id, makeinstances):
+    for mi in makeinstances:
+        if mi.eventID == event_id:
+            return mi.eiid
+
+    return None
+
+
 def parse_timeml(root, doc_id):
     dct_element = root.find('DCT').find('TIMEX3')
     dct = DCT(TIMEX3(dct_element.get('tid'), dct_element.get('type'), dct_element.get('value'),
@@ -95,7 +120,7 @@ def sycn_ids(root, events, tokens):
                 event.m_id = eiid.replace('ei', 'e')
 
 
-def extract_xml_text_as_tokens(root):
+def extract_xml_text_as_tokens(root, makeinstances):
     # Parse the XML string
     # root = ET.fromstring(xml_string)
 
@@ -112,7 +137,8 @@ def extract_xml_text_as_tokens(root):
             tmp_text = plain_text.replace('\n', ' ')
             tmp_text = tmp_text.strip().split(' ')
             tmp_text = list(filter(None, tmp_text))
-            new_event = EVENT(element.get('eid'), element.text.strip(), list(range(len(tmp_text), len(tmp_text) + len(element.text.strip().split(" ")))), element.get('class'))
+            eiid = get_eiid_from_event_id(element.get('eid'), makeinstances)
+            new_event = EVENT(eiid, element.text.strip(), list(range(len(tmp_text), len(tmp_text) + len(element.text.strip().split(" ")))), element.get('class'))
             events.append(new_event)
         if element.text:
             tmp_text = element.text.strip().split(' ')
@@ -135,7 +161,7 @@ def extract_xml_text_as_tokens(root):
             # else:
             print(f"ERROR: {event.tokens} != {plain_text[event.tokens_ids[0]:event.tokens_ids[-1]+1]}")
 
-    sycn_ids(root, events, plain_text)
+    # sycn_ids(root, events, plain_text)
     return plain_text, events
 
 
@@ -144,7 +170,8 @@ def read_file(file_path):
     tree = ET.parse(file_path)
     root = tree.getroot()
     doc = parse_timeml(root, file_path.name)
-    tokens, events = extract_xml_text_as_tokens(root)
+    makeinstances = extract_makeinstances(root)
+    tokens, events = extract_xml_text_as_tokens(root, makeinstances)
     tlinks = extract_tlinks(root)
 
     print(f"DOCID: {doc.docid}")
@@ -186,8 +213,8 @@ def read_matres_file(file_path):
 
             vb1 = split[1].strip()
             vb2 = split[2].strip()
-            eiid1 = 'e'+split[3].strip()
-            eiid2 = 'e'+split[4].strip()
+            eiid1 = re.sub("[^0-9]", "", split[3].strip())
+            eiid2 = re.sub("[^0-9]", "", split[4].strip())
             rel = split[5].strip()
             all_file_data[file_name].append(MATRES_PAIR(vb1, eiid1, vb2, eiid2, rel))
 
@@ -219,15 +246,22 @@ def generate(all_tb, matres):
         matres_pairs = matres[tb_file_name]
         relv_events = set()
         for pair in matres_pairs:
+            found_first = False
+            found_second = False
             for event in events:
                 if event.m_id == pair._firstId:
                     if event.tokens != pair.firstEventText:
                         print(f"ERROR: {event.tokens} != {pair.firstEventText}")
+                    found_first = True
                     relv_events.add(event)
                 elif event.m_id == pair._secondId:
                     if event.tokens != pair.secondEventText:
                         print(f"ERROR: {event.tokens} != {pair.secondEventText}")
+                    found_second = True
                     relv_events.add(event)
+
+            if not found_first or not found_second:
+                print(f"ERROR: {pair._firstId} or {pair._secondId} not found in events")
 
         my_format[tb_file_name] = {"tokens": tokens, "allMentions": list(relv_events), "allPairs": matres_pairs}
 
@@ -243,9 +277,11 @@ def main():
     matres_pl = read_matres_file('data/MATRES/platinum.txt')
     matres_tb = read_matres_file('data/MATRES/timebank.txt')
 
+    output_path = 'data/MATRES/in_my_format/test'
+
     conv_my_format = generate(all_tb, matres_pl)
     for doc_id, doc_data in conv_my_format.items():
-        with open(f"data/MATRES/maters_in_my_format/{doc_id}.json", 'w') as f:
+        with open(f"{output_path}/{doc_id}.json", 'w') as f:
             json.dump(doc_data, f, default=lambda o: o.__dict__, indent=4)
 
 

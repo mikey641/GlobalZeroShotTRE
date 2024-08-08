@@ -47,8 +47,8 @@ def convert_doc_to_dot(content):
 
 
 if __name__ == '__main__':
-    _folder_path = 'data/MATRES/maters_in_my_format'
-    _output_path = 'data/tmp/MATRES_dot.json'
+    _folder_path = 'data/MATRES/in_my_format/test'
+    _output_path = 'data/tmp/MATRES_test_dot.json'
     _files_content = read_files_from_folder(_folder_path)
 
     _out_json = dict()
