@@ -56,8 +56,12 @@ def create_report(annot_obj1, annot_obj2, tmp_iaa_result, coref_iaa_result, caus
         file.write('--------------------------------------------------\n')
         file.write('\n\n')
         file.write(f'Num of mentions {annotator1}={len(annot_obj1.mentions)}, Num of mentions {annotator2}={len(annot_obj2.mentions)}\n')
-        file.write(f'Num of pairs {annotator1}={annot_obj1.num_pairs} (Expected={annot_obj1.expected_pairs}), '
-                   f'Num of pairs {annotator2}={annot_obj2.num_pairs} (Expected={annot_obj2.expected_pairs})\n')
+        file.write(f'Num of temp pairs {annotator1}={annot_obj1.num_tmp_pairs} (Expected={annot_obj1.expected_pairs}), '
+                   f'Num of temp pairs {annotator2}={annot_obj2.num_tmp_pairs} (Expected={annot_obj2.expected_pairs})\n')
+        file.write(f'Num of coref pairs {annotator1}={annot_obj1.num_coref_pairs} (Expected={annot_obj1.expected_pairs}), '
+                   f'Num of coref pairs {annotator2}={annot_obj2.num_coref_pairs} (Expected={annot_obj2.expected_pairs})\n')
+        file.write(f'Num of cause pairs {annotator1}={annot_obj1.num_cause_pairs} (Expected={annot_obj1.expected_pairs}), '
+                   f'Num of cause pairs {annotator2}={annot_obj2.num_cause_pairs} (Expected={annot_obj2.expected_pairs})\n')
 
     # print(f"DataFrame written to {file_path}")
 
@@ -107,22 +111,22 @@ def main(annot1_file, annot2_file):
     with open(annot2_file) as f:
         data2 = json.load(f)
 
-    mentions1, num_tmp_pairs1, num_coref_pairs1, num_cause_pairs1, expected_pairs1 = count_stats_in_file(data1)
-    annot_obj1 = AnnotObj(data1, mentions1, num_tmp_pairs1, num_coref_pairs1, num_cause_pairs1, expected_pairs1)
+    mentions1, num_tmp_pairs1, num_equal_pairs1, num_before_after_pairs1, _, expected_pairs1 = count_stats_in_file(data1)
+    annot_obj1 = AnnotObj(data1, mentions1, num_tmp_pairs1, num_equal_pairs1, num_before_after_pairs1, expected_pairs1)
 
-    mentions2, num_tmp_pairs2, num_coref_pairs2, num_cause_pairs2, expected_pairs2 = count_stats_in_file(data2)
-    annot_obj2 = AnnotObj(data2, mentions2, num_tmp_pairs2, num_coref_pairs2, num_cause_pairs2, expected_pairs2)
+    mentions2, num_tmp_pairs2, num_equal_pairs2, num_before_after_pairs2, _, expected_pairs2 = count_stats_in_file(data2)
+    annot_obj2 = AnnotObj(data2, mentions2, num_tmp_pairs2, num_equal_pairs2, num_before_after_pairs2, expected_pairs2)
 
     tmp_iaa_result, coref_iaa_result, cause_iaa_result = calculate_iaa(mentions1, data1["allPairs"], mentions2, data2["allPairs"])
     return annot_obj1, annot_obj2, tmp_iaa_result, coref_iaa_result, cause_iaa_result
 
 
 if __name__ == "__main__":
-    annotator1 = 'benji'
-    annotator2 = 'alon'
-    output_file = f'data/my_data/output/93d5_coref_{annotator1}_{annotator2}_v1'
-    _annot1_file = f'data/my_data/coref_cause/{annotator1}/93d5_temp_test_consolidated_FinalAnnotations _done.json'
-    _annot2_file = f'data/my_data/coref_cause/{annotator2}/93d5_temp_consolidated_FinalAnnotations.json'
+    annotator1 = 'exper'
+    annotator2 = 'exper'
+    output_file = f'data/my_data/evaluations/output/131d3_coref_{annotator1}_{annotator2}_v1'
+    _annot1_file = f'data/my_data/evaluations/coref_cause/{annotator1}/131d3_temp_exper.json'
+    _annot2_file = f'data/my_data/evaluations/coref_cause/{annotator2}/131d3_temp_exper.json'
 
     _annot_obj1, _annot_obj2, _tmp_iaa_result, _coref_iaa_result, _cause_iaa_result = main(_annot1_file, _annot2_file)
     create_report(_annot_obj1, _annot_obj2, _tmp_iaa_result, _coref_iaa_result, _cause_iaa_result)
