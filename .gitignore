@@ -4,6 +4,7 @@ package-lock.json
 input/multi_news
 EREAnnotationTool/input
 EREAnnotationTool/output
-experiments/data
+experiments/data/*
+!experiments/data/EventFullTrainExports
 __pycache__
 experiments/scorer
