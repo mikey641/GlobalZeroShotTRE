@@ -2,7 +2,12 @@
 node_modules
 package-lock.json
 data/*
+!data/MATRES
 !data/EventFullTrainExports
 !data/DOT_format
+data/MATRES/orig_files
+data/MATRES/aquaint.txt
+data/MATRES/platinum.txt
+data/MATRES/timebank.txt
 __pycache__
 scorer
