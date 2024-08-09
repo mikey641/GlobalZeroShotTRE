@@ -75,19 +75,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "100",
-            "tokens": "aimed",
-            "tokens_ids": [
-                24
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "95",
@@ -99,7 +87,19 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "100",
+            "tokens": "aimed",
+            "tokens_ids": [
+                24
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "103",

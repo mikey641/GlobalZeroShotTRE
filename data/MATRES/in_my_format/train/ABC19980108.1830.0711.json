@@ -418,163 +418,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "391",
-            "tokens": "sold",
-            "tokens_ids": [
-                157
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "418",
-            "tokens": "talking",
-            "tokens_ids": [
-                350
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "392",
-            "tokens": "said",
-            "tokens_ids": [
-                164
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "405",
-            "tokens": "believe",
-            "tokens_ids": [
-                242
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "420",
-            "tokens": "think",
-            "tokens_ids": [
-                355
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "408",
-            "tokens": "plunged",
-            "tokens_ids": [
-                280
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "379",
-            "tokens": "fallen",
-            "tokens_ids": [
-                47
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "422",
-            "tokens": "think",
-            "tokens_ids": [
-                365
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "409",
-            "tokens": "soared",
-            "tokens_ids": [
-                285
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "399",
-            "tokens": "crashed",
-            "tokens_ids": [
-                209
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "380",
-            "tokens": "lost",
-            "tokens_ids": [
-                55
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "400",
-            "tokens": "owns",
-            "tokens_ids": [
-                213
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "402",
-            "tokens": "estimates",
-            "tokens_ids": [
-                222
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "388",
@@ -586,7 +430,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "389",
@@ -598,7 +442,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "378",
@@ -610,13 +454,169 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "400",
+            "tokens": "owns",
+            "tokens_ids": [
+                213
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "402",
+            "tokens": "estimates",
+            "tokens_ids": [
+                222
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "422",
+            "tokens": "think",
+            "tokens_ids": [
+                365
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "391",
+            "tokens": "sold",
+            "tokens_ids": [
+                157
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "381",
             "tokens": "hit",
             "tokens_ids": [
                 65
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "418",
+            "tokens": "talking",
+            "tokens_ids": [
+                350
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "392",
+            "tokens": "said",
+            "tokens_ids": [
+                164
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "405",
+            "tokens": "believe",
+            "tokens_ids": [
+                242
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "420",
+            "tokens": "think",
+            "tokens_ids": [
+                355
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "379",
+            "tokens": "fallen",
+            "tokens_ids": [
+                47
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "408",
+            "tokens": "plunged",
+            "tokens_ids": [
+                280
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "409",
+            "tokens": "soared",
+            "tokens_ids": [
+                285
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "399",
+            "tokens": "crashed",
+            "tokens_ids": [
+                209
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "380",
+            "tokens": "lost",
+            "tokens_ids": [
+                55
             ],
             "event_class": "OCCURRENCE"
         }

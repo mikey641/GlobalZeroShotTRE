@@ -183,91 +183,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "243",
-            "tokens": "offer",
-            "tokens_ids": [
-                124
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "229",
-            "tokens": "added",
-            "tokens_ids": [
-                40
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "245",
-            "tokens": "rumored",
-            "tokens_ids": [
-                146
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "233",
-            "tokens": "had",
-            "tokens_ids": [
-                70
-            ],
-            "event_class": "STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "248",
-            "tokens": "said",
-            "tokens_ids": [
-                165
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "236",
-            "tokens": "had",
-            "tokens_ids": [
-                102
-            ],
-            "event_class": "STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "224",
-            "tokens": "took",
-            "tokens_ids": [
-                11
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "239",
@@ -279,7 +195,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "242",
@@ -288,6 +204,90 @@
                 121
             ],
             "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "243",
+            "tokens": "offer",
+            "tokens_ids": [
+                124
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "229",
+            "tokens": "added",
+            "tokens_ids": [
+                40
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "245",
+            "tokens": "rumored",
+            "tokens_ids": [
+                146
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "233",
+            "tokens": "had",
+            "tokens_ids": [
+                70
+            ],
+            "event_class": "STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "248",
+            "tokens": "said",
+            "tokens_ids": [
+                165
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "236",
+            "tokens": "had",
+            "tokens_ids": [
+                102
+            ],
+            "event_class": "STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "224",
+            "tokens": "took",
+            "tokens_ids": [
+                11
+            ],
+            "event_class": "OCCURRENCE"
         }
     ],
     "allPairs": [

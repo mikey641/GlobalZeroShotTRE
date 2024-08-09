@@ -847,631 +847,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2071",
-            "tokens": "ranged",
-            "tokens_ids": [
-                539
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2023",
-            "tokens": "say",
-            "tokens_ids": [
-                216
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2072",
-            "tokens": "said",
-            "tokens_ids": [
-                549
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2024",
-            "tokens": "eaten",
-            "tokens_ids": [
-                224
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2074",
-            "tokens": "regain",
-            "tokens_ids": [
-                566
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2026",
-            "tokens": "made",
-            "tokens_ids": [
-                237
-            ],
-            "event_class": "STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2076",
-            "tokens": "continue",
-            "tokens_ids": [
-                577
-            ],
-            "event_class": "ASPECTUAL"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2027",
-            "tokens": "says",
-            "tokens_ids": [
-                240
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2077",
-            "tokens": "put",
-            "tokens_ids": [
-                579
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2137",
-            "tokens": "went",
-            "tokens_ids": [
-                293
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2031",
-            "tokens": "closed",
-            "tokens_ids": [
-                302
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2083",
-            "tokens": "said",
-            "tokens_ids": [
-                600
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2037",
-            "tokens": "said",
-            "tokens_ids": [
-                329
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2086",
-            "tokens": "retained",
-            "tokens_ids": [
-                624
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2038",
-            "tokens": "reading",
-            "tokens_ids": [
-                339
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2087",
-            "tokens": "reported",
-            "tokens_ids": [
-                642
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2039",
-            "tokens": "deciding",
-            "tokens_ids": [
-                343
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2088",
-            "tokens": "slowing",
-            "tokens_ids": [
-                648
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2089",
-            "tokens": "said",
-            "tokens_ids": [
-                654
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2042",
-            "tokens": "said",
-            "tokens_ids": [
-                356
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2090",
-            "tokens": "told",
-            "tokens_ids": [
-                657
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2045",
-            "tokens": "announcing",
-            "tokens_ids": [
-                379
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2093",
-            "tokens": "reassigned",
-            "tokens_ids": [
-                669
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "1995",
-            "tokens": "cost",
-            "tokens_ids": [
-                10
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2094",
-            "tokens": "said",
-            "tokens_ids": [
-                677
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2047",
-            "tokens": "said",
-            "tokens_ids": [
-                389
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "1996",
-            "tokens": "quit",
-            "tokens_ids": [
-                21
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "1997",
-            "tokens": "suspending",
-            "tokens_ids": [
-                28
-            ],
-            "event_class": "ASPECTUAL"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2000",
-            "tokens": "said",
-            "tokens_ids": [
-                42
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2098",
-            "tokens": "telling",
-            "tokens_ids": [
-                717
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2051",
-            "tokens": "said",
-            "tokens_ids": [
-                406
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2001",
-            "tokens": "delaying",
-            "tokens_ids": [
-                45
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2102",
-            "tokens": "called",
-            "tokens_ids": [
-                742
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2104",
-            "tokens": "forecast",
-            "tokens_ids": [
-                756
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2055",
-            "tokens": "indicated",
-            "tokens_ids": [
-                416
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2005",
-            "tokens": "turning",
-            "tokens_ids": [
-                61
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2056",
-            "tokens": "has",
-            "tokens_ids": [
-                419
-            ],
-            "event_class": "STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2106",
-            "tokens": "earned",
-            "tokens_ids": [
-                770
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2107",
-            "tokens": "expected",
-            "tokens_ids": [
-                783
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2108",
-            "tokens": "reported",
-            "tokens_ids": [
-                786
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2059",
-            "tokens": "has",
-            "tokens_ids": [
-                428
-            ],
-            "event_class": "STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2010",
-            "tokens": "losing",
-            "tokens_ids": [
-                102
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2110",
-            "tokens": "fell",
-            "tokens_ids": [
-                791
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2011",
-            "tokens": "believed",
-            "tokens_ids": [
-                115
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2113",
-            "tokens": "rose",
-            "tokens_ids": [
-                808
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2062",
-            "tokens": "constrained",
-            "tokens_ids": [
-                462
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2014",
-            "tokens": "Led",
-            "tokens_ids": [
-                128
-            ],
-            "event_class": "STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2116",
-            "tokens": "had",
-            "tokens_ids": [
-                818
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2063",
-            "tokens": "boosting",
-            "tokens_ids": [
-                464
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2015",
-            "tokens": "gained",
-            "tokens_ids": [
-                137
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2064",
-            "tokens": "operating",
-            "tokens_ids": [
-                471
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "2017",
-            "tokens": "say",
-            "tokens_ids": [
-                164
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "2066",
@@ -1483,7 +859,19 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2067",
+            "tokens": "pulled",
+            "tokens_ids": [
+                503
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "2120",
@@ -1495,13 +883,625 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "2067",
-            "tokens": "pulled",
+            "m_id": "2071",
+            "tokens": "ranged",
             "tokens_ids": [
-                503
+                539
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2023",
+            "tokens": "say",
+            "tokens_ids": [
+                216
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2072",
+            "tokens": "said",
+            "tokens_ids": [
+                549
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2024",
+            "tokens": "eaten",
+            "tokens_ids": [
+                224
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2074",
+            "tokens": "regain",
+            "tokens_ids": [
+                566
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2026",
+            "tokens": "made",
+            "tokens_ids": [
+                237
+            ],
+            "event_class": "STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2076",
+            "tokens": "continue",
+            "tokens_ids": [
+                577
+            ],
+            "event_class": "ASPECTUAL"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2027",
+            "tokens": "says",
+            "tokens_ids": [
+                240
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2077",
+            "tokens": "put",
+            "tokens_ids": [
+                579
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2116",
+            "tokens": "had",
+            "tokens_ids": [
+                818
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2137",
+            "tokens": "went",
+            "tokens_ids": [
+                293
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2031",
+            "tokens": "closed",
+            "tokens_ids": [
+                302
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2083",
+            "tokens": "said",
+            "tokens_ids": [
+                600
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2037",
+            "tokens": "said",
+            "tokens_ids": [
+                329
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2086",
+            "tokens": "retained",
+            "tokens_ids": [
+                624
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2038",
+            "tokens": "reading",
+            "tokens_ids": [
+                339
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2087",
+            "tokens": "reported",
+            "tokens_ids": [
+                642
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2039",
+            "tokens": "deciding",
+            "tokens_ids": [
+                343
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2088",
+            "tokens": "slowing",
+            "tokens_ids": [
+                648
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2089",
+            "tokens": "said",
+            "tokens_ids": [
+                654
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2042",
+            "tokens": "said",
+            "tokens_ids": [
+                356
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2090",
+            "tokens": "told",
+            "tokens_ids": [
+                657
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2045",
+            "tokens": "announcing",
+            "tokens_ids": [
+                379
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2017",
+            "tokens": "say",
+            "tokens_ids": [
+                164
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2093",
+            "tokens": "reassigned",
+            "tokens_ids": [
+                669
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "1995",
+            "tokens": "cost",
+            "tokens_ids": [
+                10
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2094",
+            "tokens": "said",
+            "tokens_ids": [
+                677
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2047",
+            "tokens": "said",
+            "tokens_ids": [
+                389
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "1996",
+            "tokens": "quit",
+            "tokens_ids": [
+                21
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "1997",
+            "tokens": "suspending",
+            "tokens_ids": [
+                28
+            ],
+            "event_class": "ASPECTUAL"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2000",
+            "tokens": "said",
+            "tokens_ids": [
+                42
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2098",
+            "tokens": "telling",
+            "tokens_ids": [
+                717
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2051",
+            "tokens": "said",
+            "tokens_ids": [
+                406
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2001",
+            "tokens": "delaying",
+            "tokens_ids": [
+                45
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2102",
+            "tokens": "called",
+            "tokens_ids": [
+                742
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2104",
+            "tokens": "forecast",
+            "tokens_ids": [
+                756
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2055",
+            "tokens": "indicated",
+            "tokens_ids": [
+                416
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2005",
+            "tokens": "turning",
+            "tokens_ids": [
+                61
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2056",
+            "tokens": "has",
+            "tokens_ids": [
+                419
+            ],
+            "event_class": "STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2106",
+            "tokens": "earned",
+            "tokens_ids": [
+                770
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2113",
+            "tokens": "rose",
+            "tokens_ids": [
+                808
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2107",
+            "tokens": "expected",
+            "tokens_ids": [
+                783
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2108",
+            "tokens": "reported",
+            "tokens_ids": [
+                786
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2059",
+            "tokens": "has",
+            "tokens_ids": [
+                428
+            ],
+            "event_class": "STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2010",
+            "tokens": "losing",
+            "tokens_ids": [
+                102
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2110",
+            "tokens": "fell",
+            "tokens_ids": [
+                791
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2011",
+            "tokens": "believed",
+            "tokens_ids": [
+                115
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2062",
+            "tokens": "constrained",
+            "tokens_ids": [
+                462
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2014",
+            "tokens": "Led",
+            "tokens_ids": [
+                128
+            ],
+            "event_class": "STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2063",
+            "tokens": "boosting",
+            "tokens_ids": [
+                464
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2015",
+            "tokens": "gained",
+            "tokens_ids": [
+                137
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "2064",
+            "tokens": "operating",
+            "tokens_ids": [
+                471
             ],
             "event_class": "OCCURRENCE"
         }

@@ -202,55 +202,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "352",
-            "tokens": "appoint",
-            "tokens_ids": [
-                192
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "326",
-            "tokens": "suspended",
-            "tokens_ids": [
-                37
-            ],
-            "event_class": "ASPECTUAL"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "329",
-            "tokens": "cut",
-            "tokens_ids": [
-                61
-            ],
-            "event_class": "ASPECTUAL"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "349",
-            "tokens": "working",
-            "tokens_ids": [
-                172
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "331",
@@ -262,19 +214,19 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "348",
-            "tokens": "said",
+            "m_id": "352",
+            "tokens": "appoint",
             "tokens_ids": [
-                168
+                192
             ],
-            "event_class": "REPORTING"
+            "event_class": "OCCURRENCE"
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "336",
@@ -286,31 +238,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "345",
-            "tokens": "said",
-            "tokens_ids": [
-                151
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "338",
-            "tokens": "said",
-            "tokens_ids": [
-                106
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "350",
@@ -322,7 +250,19 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "338",
+            "tokens": "said",
+            "tokens_ids": [
+                106
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "321",
@@ -334,7 +274,31 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "342",
+            "tokens": "add",
+            "tokens_ids": [
+                134
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "348",
+            "tokens": "said",
+            "tokens_ids": [
+                168
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "344",
@@ -346,15 +310,51 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "342",
-            "tokens": "add",
+            "m_id": "326",
+            "tokens": "suspended",
             "tokens_ids": [
-                134
+                37
+            ],
+            "event_class": "ASPECTUAL"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "345",
+            "tokens": "said",
+            "tokens_ids": [
+                151
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "349",
+            "tokens": "working",
+            "tokens_ids": [
+                172
             ],
             "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "329",
+            "tokens": "cut",
+            "tokens_ids": [
+                61
+            ],
+            "event_class": "ASPECTUAL"
         }
     ],
     "allPairs": [

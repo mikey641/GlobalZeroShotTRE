@@ -144,7 +144,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "103",
@@ -156,19 +156,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "107",
-            "tokens": "launched",
-            "tokens_ids": [
-                79
-            ],
-            "event_class": "ASPECTUAL"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "100",
@@ -180,19 +168,19 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "99",
-            "tokens": "told",
+            "m_id": "107",
+            "tokens": "launched",
             "tokens_ids": [
-                10
+                79
             ],
-            "event_class": "REPORTING"
+            "event_class": "ASPECTUAL"
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "104",
@@ -201,6 +189,18 @@
                 53
             ],
             "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "99",
+            "tokens": "told",
+            "tokens_ids": [
+                10
+            ],
+            "event_class": "REPORTING"
         }
     ],
     "allPairs": [

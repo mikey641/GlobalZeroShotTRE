@@ -62,19 +62,19 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "55",
-            "tokens": "completed",
+            "m_id": "57",
+            "tokens": "reported",
             "tokens_ids": [
-                14
+                31
             ],
-            "event_class": "ASPECTUAL"
+            "event_class": "REPORTING"
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "53",
@@ -86,7 +86,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "58",
@@ -98,15 +98,15 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "57",
-            "tokens": "reported",
+            "m_id": "55",
+            "tokens": "completed",
             "tokens_ids": [
-                31
+                14
             ],
-            "event_class": "REPORTING"
+            "event_class": "ASPECTUAL"
         }
     ],
     "allPairs": [

@@ -193,67 +193,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "277",
-            "tokens": "think",
-            "tokens_ids": [
-                129
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "262",
-            "tokens": "announced",
-            "tokens_ids": [
-                51
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "282",
-            "tokens": "think",
-            "tokens_ids": [
-                162
-            ],
-            "event_class": "I_STATE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "265",
-            "tokens": "applauded",
-            "tokens_ids": [
-                67
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "284",
-            "tokens": "approaching",
-            "tokens_ids": [
-                171
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "274",
@@ -265,7 +205,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "275",
@@ -274,6 +214,66 @@
                 122
             ],
             "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "277",
+            "tokens": "think",
+            "tokens_ids": [
+                129
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "262",
+            "tokens": "announced",
+            "tokens_ids": [
+                51
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "282",
+            "tokens": "think",
+            "tokens_ids": [
+                162
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "265",
+            "tokens": "applauded",
+            "tokens_ids": [
+                67
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "284",
+            "tokens": "approaching",
+            "tokens_ids": [
+                171
+            ],
+            "event_class": "I_ACTION"
         }
     ],
     "allPairs": [

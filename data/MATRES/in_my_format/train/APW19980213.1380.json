@@ -222,223 +222,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "329",
-            "tokens": "called",
-            "tokens_ids": [
-                132
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "330",
-            "tokens": "report",
-            "tokens_ids": [
-                135
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "331",
-            "tokens": "urged",
-            "tokens_ids": [
-                147
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "332",
-            "tokens": "targeted",
-            "tokens_ids": [
-                152
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "305",
-            "tokens": "kept",
-            "tokens_ids": [
-                5
-            ],
-            "event_class": "ASPECTUAL"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "336",
-            "tokens": "said",
-            "tokens_ids": [
-                185
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "337",
-            "tokens": "suffered",
-            "tokens_ids": [
-                198
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "328",
-            "tokens": "stuffed",
-            "tokens_ids": [
-                125
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "308",
-            "tokens": "took",
-            "tokens_ids": [
-                14
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "310",
-            "tokens": "found",
-            "tokens_ids": [
-                18
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "313",
-            "tokens": "wrapped",
-            "tokens_ids": [
-                26
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "314",
-            "tokens": "confirmed",
-            "tokens_ids": [
-                32
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "315",
-            "tokens": "found",
-            "tokens_ids": [
-                37
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "317",
-            "tokens": "kidnapped",
-            "tokens_ids": [
-                57
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "318",
-            "tokens": "said",
-            "tokens_ids": [
-                75
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "319",
-            "tokens": "demanded",
-            "tokens_ids": [
-                79
-            ],
-            "event_class": "I_ACTION"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "322",
-            "tokens": "broke",
-            "tokens_ids": [
-                88
-            ],
-            "event_class": "ASPECTUAL"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "323",
-            "tokens": "gave",
-            "tokens_ids": [
-                95
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "326",
@@ -450,7 +234,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "327",
@@ -459,6 +243,222 @@
                 120
             ],
             "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "328",
+            "tokens": "stuffed",
+            "tokens_ids": [
+                125
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "329",
+            "tokens": "called",
+            "tokens_ids": [
+                132
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "330",
+            "tokens": "report",
+            "tokens_ids": [
+                135
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "331",
+            "tokens": "urged",
+            "tokens_ids": [
+                147
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "332",
+            "tokens": "targeted",
+            "tokens_ids": [
+                152
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "305",
+            "tokens": "kept",
+            "tokens_ids": [
+                5
+            ],
+            "event_class": "ASPECTUAL"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "336",
+            "tokens": "said",
+            "tokens_ids": [
+                185
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "337",
+            "tokens": "suffered",
+            "tokens_ids": [
+                198
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "308",
+            "tokens": "took",
+            "tokens_ids": [
+                14
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "310",
+            "tokens": "found",
+            "tokens_ids": [
+                18
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "313",
+            "tokens": "wrapped",
+            "tokens_ids": [
+                26
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "314",
+            "tokens": "confirmed",
+            "tokens_ids": [
+                32
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "315",
+            "tokens": "found",
+            "tokens_ids": [
+                37
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "317",
+            "tokens": "kidnapped",
+            "tokens_ids": [
+                57
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "318",
+            "tokens": "said",
+            "tokens_ids": [
+                75
+            ],
+            "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "319",
+            "tokens": "demanded",
+            "tokens_ids": [
+                79
+            ],
+            "event_class": "I_ACTION"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "322",
+            "tokens": "broke",
+            "tokens_ids": [
+                88
+            ],
+            "event_class": "ASPECTUAL"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "323",
+            "tokens": "gave",
+            "tokens_ids": [
+                95
+            ],
+            "event_class": "REPORTING"
         }
     ],
     "allPairs": [

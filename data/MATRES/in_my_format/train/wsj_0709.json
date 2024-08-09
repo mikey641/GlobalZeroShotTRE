@@ -107,31 +107,7 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "131",
-            "tokens": "changed",
-            "tokens_ids": [
-                38
-            ],
-            "event_class": "OCCURRENCE"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "124",
-            "tokens": "said",
-            "tokens_ids": [
-                3
-            ],
-            "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "132",
@@ -143,19 +119,19 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "125",
-            "tokens": "expects",
+            "m_id": "128",
+            "tokens": "said",
             "tokens_ids": [
-                5
+                22
             ],
-            "event_class": "I_STATE"
+            "event_class": "REPORTING"
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "129",
@@ -167,15 +143,39 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
-            "m_id": "128",
+            "m_id": "124",
             "tokens": "said",
             "tokens_ids": [
-                22
+                3
             ],
             "event_class": "REPORTING"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "125",
+            "tokens": "expects",
+            "tokens_ids": [
+                5
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "131",
+            "tokens": "changed",
+            "tokens_ids": [
+                38
+            ],
+            "event_class": "OCCURRENCE"
         }
     ],
     "allPairs": [

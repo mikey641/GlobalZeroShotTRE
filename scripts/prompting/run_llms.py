@@ -113,30 +113,60 @@ def get_prompt_pairs(mentions, gold_pairs):
     return prompt_pairs, example_with_rels
 
 
-def main():
-    # load json file
-    results_to_print = list()
-    for file1 in os.listdir(input_folder):
-        with open(f'{input_folder}/{file1}') as file:
-            data = json.load(file)
-
+def get_input_text(data):
+    if data is not None:
         tokens = data['tokens']
         all_mentions = filter_non_events(data['allMentions'])
         all_mentions.sort(key=lambda x: x['tokens_ids'][0])
         all_mentions_text = [m['tokens'] for m in all_mentions]
-        all_ment_ids = [m['m_id'] for m in all_mentions]
-        all_pairs = data['allPairs']
+        # all_ment_ids = [m['m_id'] for m in all_mentions]
+        # all_pairs = data['allPairs']
         text = mark_events_in_text(tokens, all_mentions)
-
-        # num_of_mentions_txt = f'The following text contains-{len(all_mentions)} mentions \n'
-        # print(num_of_mentions_txt)
         print(f'The mentions are-{all_mentions_text}')
         print(f'The input text is-{text}')
-        all_prompt_pairs, example_with_rels = get_prompt_pairs(all_mentions, all_pairs)
-        # print(f'The pairs are-{all_prompt_pairs}')
+        return text
 
+
+def prepare_instructions(train_folder, dot_train_data, number_of_examples=1, instructions_func=task_description_v2):
+    examples = list()
+    for file1 in os.listdir(train_folder):
+        if len(examples) < number_of_examples:
+            data = open_input_file(f'{train_folder}/{file1}')
+            intput_text = get_input_text(data)
+            output_example = dot_train_data[file1]['target']
+            examples.append((intput_text, output_example))
+
+    instruct_examples = list()
+    for i, example in enumerate(examples):
+        index = f'Example {i + 1}:\n'
+        input = "Input:\n" + example[0] + "\n"
+        output = "Expected output:\n" + example[1] + "\n"
+        instruct_examples.append(index + input + output)
+
+    final_instructions = instructions_func("\n".join(instruct_examples))
+    return final_instructions
+
+
+def open_input_file(file_path):
+    with open(file_path) as file:
+        data = json.load(file)
+    return data
+
+
+def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_func):
+    # load json file
+    results_to_print = list()
+    instructions = prepare_instructions(train_folder, dot_train_data, 1, instructions_func)
+    response = llm_to_use(task_desc)
+    for file1 in os.listdir(test_folder):
+        data = open_input_file(f'{test_folder}/{file1}')
+        text = get_input_text(data)
+        # num_of_mentions_txt = f'The following text contains-{len(all_mentions)} mentions \n'
+        # print(num_of_mentions_txt)
+        # all_prompt_pairs, example_with_rels = get_prompt_pairs(all_mentions, all_pairs)
+        # print(f'The pairs are-{all_prompt_pairs}')
         # get_example_matrix(all_pairs, all_ment_ids)
-        task_desc = instructions() + text + '\n' + indicate_pairs + "\n" + ",".join(all_prompt_pairs)
+        task_desc = instructions_func() + text + '\n' + indicate_pairs + "\n" + ",".join(all_prompt_pairs)
         response = llm_to_use(task_desc)
         results_to_print.append(f'File:{file1}\n')
         results_to_print.append(f'Gold:{",".join(example_with_rels)}\n')
@@ -152,10 +182,13 @@ def main():
 
 
 if __name__ == "__main__":
-    indicate_pairs = "Pairs to Resolve:"
-    input_folder = 'data/my_data/predictions/input'
-    output_file = 'data/my_data/predictions/output/gpt4_turbo_v2.txt'
+    _indicate_pairs = "Pairs to Resolve:"
+    _test_folder = 'data/my_data/predictions/input'
+    _output_file = 'data/my_data/predictions/output/gpt4_turbo_v2.txt'
+    _train_folder = 'data/MATRES/in_my_format/train'
+    _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
 
-    instructions = task_description_v2
-    llm_to_use = run_gpt4_turbo
-    main()
+    _instructions = task_description_v2
+    _llm_to_use = run_gpt3_5
+    main(test_folder=_test_folder, train_folder=_train_folder, dot_train_data=_dot_train_data,
+         llm_to_use=_llm_to_use, instructions_func=_instructions)

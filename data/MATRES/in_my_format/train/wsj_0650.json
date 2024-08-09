@@ -76,7 +76,19 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "61",
+            "tokens": "issued",
+            "tokens_ids": [
+                34
+            ],
+            "event_class": "OCCURRENCE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "60",
@@ -88,7 +100,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "57",
@@ -97,18 +109,6 @@
                 6
             ],
             "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "61",
-            "tokens": "issued",
-            "tokens_ids": [
-                34
-            ],
-            "event_class": "OCCURRENCE"
         }
     ],
     "allPairs": [

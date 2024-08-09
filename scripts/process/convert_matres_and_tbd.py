@@ -249,6 +249,7 @@ def generate(all_tb, matres):
             found_first = False
             found_second = False
             for event in events:
+                event.axisType = 'main'
                 if event.m_id == pair._firstId:
                     if event.tokens != pair.firstEventText:
                         print(f"ERROR: {event.tokens} != {pair.firstEventText}")
@@ -270,6 +271,7 @@ def generate(all_tb, matres):
 
 def main():
     timebank_path = 'data/MATRES/orig_files/te3-platinum'
+    # timebank_path = 'data/MATRES/orig_files/TimeBank'
     # time_aquaint = 'data/MATRES/orig_files/aquaint'
     all_tb = read_folder(timebank_path)
     # all_aq = read_folder(time_aquaint)

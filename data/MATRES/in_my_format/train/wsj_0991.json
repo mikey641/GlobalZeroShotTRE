@@ -95,7 +95,19 @@
     "allMentions": [
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
+            "rootAxisEventId": -1,
+            "corefState": "unknown",
+            "m_id": "87",
+            "tokens": "expects",
+            "tokens_ids": [
+                10
+            ],
+            "event_class": "I_STATE"
+        },
+        {
+            "eventIndex": -1,
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "85",
@@ -107,7 +119,7 @@
         },
         {
             "eventIndex": -1,
-            "axisType": "na",
+            "axisType": "main",
             "rootAxisEventId": -1,
             "corefState": "unknown",
             "m_id": "91",
@@ -116,18 +128,6 @@
                 27
             ],
             "event_class": "REPORTING"
-        },
-        {
-            "eventIndex": -1,
-            "axisType": "na",
-            "rootAxisEventId": -1,
-            "corefState": "unknown",
-            "m_id": "87",
-            "tokens": "expects",
-            "tokens_ids": [
-                10
-            ],
-            "event_class": "I_STATE"
         }
     ],
     "allPairs": [
