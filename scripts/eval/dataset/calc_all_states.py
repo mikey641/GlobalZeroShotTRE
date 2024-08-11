@@ -1,7 +1,6 @@
 import os
 
-from scripts.eval import calc_iaa
-
+from scripts.eval.dataset import calc_iaa
 
 # groups = ['group_a', 'group_b', 'group_c']
 # groups = ['g_demo_a', 'g_demo_b', 'g_demo_c']

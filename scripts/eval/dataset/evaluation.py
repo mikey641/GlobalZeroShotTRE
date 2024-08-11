@@ -1,10 +1,6 @@
-import json
-import os
-
-import pandas as pd
 from sklearn.metrics import precision_score, recall_score, f1_score
 
-from scripts.eval.utils import get_annotations, count_stats_in_file, find_diffs
+from scripts.eval.dataset.utils import get_annotations, find_diffs
 
 
 def create_report(golds, preds, files):

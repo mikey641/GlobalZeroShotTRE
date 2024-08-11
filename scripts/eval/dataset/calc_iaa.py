@@ -4,9 +4,9 @@ import json
 import pandas as pd
 from sklearn.metrics import cohen_kappa_score
 
-from scripts.eval.annot_obj import AnnotObj
-from scripts.eval.iaa_result_obj import IAAResultObj
-from scripts.eval.utils import count_stats_in_file, get_annotations, find_diffs
+from scripts.eval.dataset.annot_obj import AnnotObj
+from scripts.eval.dataset.iaa_result_obj import IAAResultObj
+from scripts.eval.dataset.utils import count_stats_in_file, get_annotations, find_diffs
 
 
 def create_report(annot_obj1, annot_obj2, tmp_iaa_result, coref_iaa_result, cause_iaa_result):

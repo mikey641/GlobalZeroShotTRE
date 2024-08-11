@@ -1,7 +1,7 @@
 import json
 import os
 
-from scripts.eval.utils import count_stats_in_file
+from scripts.eval.dataset.utils import count_stats_in_file
 
 
 def gather_files(path):

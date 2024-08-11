@@ -1,8 +1,8 @@
 import json
 import os
 
-from scripts.eval.calc_iaa import calculate_iaa
-from scripts.eval.utils import count_stats_in_file
+from scripts.eval.dataset.calc_iaa import calculate_iaa
+from scripts.eval.dataset.utils import count_stats_in_file
 
 
 def main():

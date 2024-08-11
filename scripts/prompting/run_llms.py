@@ -4,7 +4,7 @@ import os
 import google.generativeai as genai
 from openai import OpenAI
 
-from scripts.eval.utils import find_ment_by_id
+from scripts.eval.dataset.utils import find_ment_by_id
 from scripts.prompting.prompts import task_description_v2
 
 
