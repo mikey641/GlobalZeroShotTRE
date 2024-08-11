@@ -37,8 +37,8 @@ def convert_doc_to_dot(content):
     all_ment = content['mentions']
     pair_str_list = list()
     for pair in content['pairs']:
-        mention1 = all_ment[pair['_firstId']]['tokens']
-        mention2 = all_ment[pair['_secondId']]['tokens']
+        mention1 = all_ment[pair['_firstId']]['tokens'] + '(' + str(pair['_firstId']) + ')'
+        mention2 = all_ment[pair['_secondId']]['tokens'] + '(' + str(pair['_secondId']) + ')'
 
         relation = 'vague' if pair['_relation'] == 'uncertain' else pair['_relation']
         pair_str_list.append('"' + mention1 + '"'' -- ''"' + mention2 + '" [rel=' + relation.upper() + '];')
@@ -47,8 +47,8 @@ def convert_doc_to_dot(content):
 
 
 if __name__ == '__main__':
-    _folder_path = 'data/MATRES/in_my_format/test'
-    _output_path = 'data/tmp/MATRES_test_dot.json'
+    _folder_path = 'data/EventFullTrainExports'
+    _output_path = 'data/tmp/EventFull_dot.json'
     _files_content = read_files_from_folder(_folder_path)
 
     _out_json = dict()

@@ -127,7 +127,7 @@ def get_input_text(data):
         return text
 
 
-def prepare_instructions(train_folder, dot_train_data, number_of_examples=1, instructions_func=task_description_v2):
+def prepare_instructions(train_folder, dot_train_data, number_of_examples=1):
     examples = list()
     for file1 in os.listdir(train_folder):
         if len(examples) < number_of_examples:
@@ -138,13 +138,11 @@ def prepare_instructions(train_folder, dot_train_data, number_of_examples=1, ins
 
     instruct_examples = list()
     for i, example in enumerate(examples):
-        index = f'Example {i + 1}:\n'
-        input = "Input:\n" + example[0] + "\n"
+        input = f'Example {i + 1}:\n' + example[0] + '\n'
         output = "Expected output:\n" + example[1] + "\n"
-        instruct_examples.append(index + input + output)
+        instruct_examples.append(input + output)
 
-    final_instructions = instructions_func("\n".join(instruct_examples))
-    return final_instructions
+    return "\n".join(instruct_examples)
 
 
 def open_input_file(file_path):
@@ -153,42 +151,36 @@ def open_input_file(file_path):
     return data
 
 
-def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_func):
+def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, instructions_func, output_file):
     # load json file
-    results_to_print = list()
-    instructions = prepare_instructions(train_folder, dot_train_data, 1, instructions_func)
-    response = llm_to_use(task_desc)
-    for file1 in os.listdir(test_folder):
+    predictions = dict()
+    examples = prepare_instructions(train_folder, dot_train_data, 1)
+    final_instructions = instructions_func(examples)
+    count = 0
+    for i, file1 in enumerate(os.listdir(test_folder)):
+        if count >= 1:
+            break
+        count += 1
         data = open_input_file(f'{test_folder}/{file1}')
         text = get_input_text(data)
-        # num_of_mentions_txt = f'The following text contains-{len(all_mentions)} mentions \n'
-        # print(num_of_mentions_txt)
-        # all_prompt_pairs, example_with_rels = get_prompt_pairs(all_mentions, all_pairs)
-        # print(f'The pairs are-{all_prompt_pairs}')
-        # get_example_matrix(all_pairs, all_ment_ids)
-        task_desc = instructions_func() + text + '\n' + indicate_pairs + "\n" + ",".join(all_prompt_pairs)
+        task_desc = final_instructions + '\n' + text
         response = llm_to_use(task_desc)
-        results_to_print.append(f'File:{file1}\n')
-        results_to_print.append(f'Gold:{",".join(example_with_rels)}\n')
-        results_to_print.append(f'Pred:{response}\n')
-        results_to_print.append(f'---------------\n')
-
-        print(f'{file1} Gold pairs: {example_with_rels}')
-        print(f'{file1} Predicted pairs: {response}')
-        print("-----------------------------------")
+        predictions[file1] = {"target": response}
 
     with open(output_file, 'w') as file:
-        file.writelines(results_to_print)
+        json.dump(predictions, file, indent=4)
 
 
 if __name__ == "__main__":
-    _indicate_pairs = "Pairs to Resolve:"
-    _test_folder = 'data/my_data/predictions/input'
-    _output_file = 'data/my_data/predictions/output/gpt4_turbo_v2.txt'
+    _test_folder = 'data/MATRES/in_my_format/test'
+    _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
+
     _train_folder = 'data/MATRES/in_my_format/train'
     _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
 
+    _output_file = 'data/my_data/predictions/output/matres_gpt3.5_turbo_v2.json'
+
     _instructions = task_description_v2
     _llm_to_use = run_gpt3_5
-    main(test_folder=_test_folder, train_folder=_train_folder, dot_train_data=_dot_train_data,
-         llm_to_use=_llm_to_use, instructions_func=_instructions)
+    main(test_folder=_test_folder, train_folder=_train_folder, dot_test_data=_dot_test_data,
+         dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions, output_file=_output_file)

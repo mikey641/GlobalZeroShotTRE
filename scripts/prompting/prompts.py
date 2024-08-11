@@ -5,6 +5,7 @@ Task Overview:
 You will be given a text with event mentions highlighted within it (identified by '<' and '>' symbols),
 Each event mention in the text is coupled with its mention ID immediately after (in parentheses).  
 Your task is to determine the temporal relationships between all given pairs based on the provided text and output a temporal relation graph.
+Output only the temporal relationships between the pairs in DOT format, without any additional information.
 
 Instructions:
 Consider only the starting time of events to determine the temporal relationships between them.
@@ -33,6 +34,7 @@ def task_description_v2(examples):
 Task Overview:
 You will analyze a text where events are marked with '<' and '>' symbols, and each event is identified with an ID shown in parentheses immediately after the event. 
 Your task is to determine the temporal relationships between these pairs based on the starting times of the event mentions.
+Output only the temporal relationships between the pairs in DOT format, without any additional information.
 
 Instructions for Determining Temporal Relationships:
 Before: If Event A starts before Event B. Example: "A traveler is <kidnapped(01)>, and the police officers <said(02)> The kidnapper is demanding money". 
@@ -59,6 +61,7 @@ Task Overview:
 You will analyze a text where events are marked with '<' and '>' symbols, and each event is identified with an ID shown in parentheses immediately after the event. A list of event pairs in the format event1(id1)/event2(id2) will be given. 
 Your task is to determine the temporal relationships between these pairs based on the starting times of the event mentions.
 The temporal relation can be one of [before, after, equal, vague (for when the temporal relation cannot be determine from the context)].
+Output only the temporal relationships between the pairs in DOT format, without any additional information.
 
 Output Format:
 Output the list of event pairs with the resolved temporal relationships in DOT format.
