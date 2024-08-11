@@ -1,4 +1,5 @@
 import math
+import re
 
 
 def count_stats_in_file(data):
@@ -86,3 +87,56 @@ def find_ment_by_id(mentions, m_id):
             return mention
 
     return None
+
+
+def parse_DOT(dot_json):
+    edges = dot_json[14:].split(';')
+    key_set = set()
+    graph = [] # graph edge list
+    duplicate = 0
+    for edge_str in edges:
+        rel_list = re.findall(r'rel=([a-zA-Z]+)', edge_str)
+
+        if len(rel_list) < 1:
+            break
+
+        rel = rel_list[0].lower()
+
+        if rel not in ['after', 'before', 'equal', 'vague']: #['after', 'before']:
+            continue
+
+        event_pair = edge_str.split('[rel=')[0]
+        if len(event_pair.split('--')) < 2:
+            continue
+
+        event_1 = event_pair.split(' -- ')[0].lower().strip()
+        event_2 = event_pair.split(' -- ')[1].lower().strip()
+
+        if event_1[0] == ' ':
+            event_1 = event_1[1:]
+
+        event_1 = re.sub(r'\"', '', event_1)
+        event_2 = re.sub(r'\"', '', event_2)
+
+        if len(event_1) == 0 or len(event_2) == 0:
+            continue
+        if event_1 == " " or event_2 == " ":
+            continue
+        if event_1[0] == ' ':
+            event_1 = event_1[1:]
+        if event_2[0] == ' ':
+            event_2 = event_2[1:]
+        if event_1[-1] == ' ':
+            event_1 = event_1[:-1]
+        if event_2[-1] == ' ':
+            event_2 = event_2[:-1]
+
+        key = f"{event_1}||{rel}||{event_2}"
+        if key in key_set:
+            duplicate += 1
+        else:
+            graph.append((event_1, rel, event_2))
+            key_set.add(key)
+            # print(event_1, rel, event_2)
+    #print(f"Num of duplication: {duplicate}")
+    return graph, duplicate
