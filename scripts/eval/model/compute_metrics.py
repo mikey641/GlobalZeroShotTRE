@@ -16,6 +16,14 @@ def get_transitive_relation(reach_graph, i, j, k):
         return 'NA'
 
 
+def set_edge_in_graph(graph_matrix, i, j, excepted_symmetric_rel):
+    if graph_matrix[j][i] == "NA":
+        graph_matrix[j][i] = excepted_symmetric_rel
+    elif graph_matrix[j][i] != excepted_symmetric_rel:
+        graph_matrix[i][j] = "contradict"
+        graph_matrix[j][i] = "contradict"
+
+
 def fill_transitive_closure(node_list: List, edge_list: List):
     graph_matrix, index_map = get_direct_reach_graph(node_list, edge_list)
     length = len(graph_matrix)
@@ -31,13 +39,13 @@ def fill_transitive_closure(node_list: List, edge_list: List):
 
                 if inferred_rel == 'before':
                     graph_matrix[i][j] = 'before'
-                    graph_matrix[j][i] = 'after'
+                    set_edge_in_graph(graph_matrix, i, j, 'after')
                 elif inferred_rel == 'after':
                     graph_matrix[i][j] = 'after'
-                    graph_matrix[j][i] = 'before'
+                    set_edge_in_graph(graph_matrix, i, j, 'before')
                 elif inferred_rel == 'equal':
                     graph_matrix[i][j] = 'equal'
-                    graph_matrix[j][i] = 'equal'
+                    set_edge_in_graph(graph_matrix, i, j, 'equal')
 
     return from_matrix_to_edges(graph_matrix, index_map)
 
@@ -57,30 +65,32 @@ def get_direct_reach_graph(node_list: List, edge_list: List):
     graph_matrix = [["NA" for _ in range(len(node_list))] for _ in range(len(node_list))]
     index_map = {node: i for i, node in enumerate(node_list)}
 
+    # Fill the direct edges
+    for edge in edge_list:
+        e1, rel, e2 = edge
+        graph_matrix[index_map[e1]][index_map[e2]] = rel
+
+    # Fill the missing symmetric edges
     for edge in edge_list:
         e1, rel, e2 = edge
         if rel == "equal":
-            graph_matrix[index_map[e1]][index_map[e2]] = "equal"
-            graph_matrix[index_map[e2]][index_map[e1]] = "equal"
+            set_edge_in_graph(graph_matrix, index_map[e1], index_map[e2], "equal")
         elif rel == "before":
-            graph_matrix[index_map[e1]][index_map[e2]] = "before"
-            graph_matrix[index_map[e2]][index_map[e1]] = "after"
+            set_edge_in_graph(graph_matrix, index_map[e1], index_map[e2], "after")
         elif rel == "after":
-            graph_matrix[index_map[e1]][index_map[e2]] = "after"
-            graph_matrix[index_map[e2]][index_map[e1]] = "before"
+            set_edge_in_graph(graph_matrix, index_map[e1], index_map[e2], "before")
         elif rel == 'vague':
-            graph_matrix[index_map[e1]][index_map[e2]] = "vague"
-            graph_matrix[index_map[e2]][index_map[e1]] = "vague"
+            set_edge_in_graph(graph_matrix, index_map[e1], index_map[e2], "vague")
 
     return graph_matrix, index_map
 
 
-def fill_all_edges(edge_list: List, rel_dist: Dict):
+def fill_all_edges(edge_list: List, rel_dist_before: Dict):
     node_set = set()
     for edge in edge_list:
         node_set.add(edge[0])
         node_set.add(edge[2])
-        rel_dist[edge[1]] = rel_dist.get(edge[1], 0) + 1
+        rel_dist_before[edge[1]] = rel_dist_before.get(edge[1], 0) + 1
 
     edge_set = fill_transitive_closure(sorted(list(node_set)), edge_list)
     return node_set, edge_set
@@ -93,6 +103,7 @@ def calculate(test_dict):
     total_gold_edges = 0
     generated_edges_fill = 0
     gold_edges_fill = 0
+    edges_filtered = 0
 
     node_precision = 0
     node_recall = 0
@@ -100,8 +111,11 @@ def calculate(test_dict):
     edge_precision = 0
     edge_recall = 0
 
-    gold_rel_dist = {}
-    gen_rel_dist = {}
+    gold_rel_dist_before = {}
+    gold_rel_dist_after = {}
+    gen_rel_dist_before = {}
+    gen_rel_dist_after = {}
+    currect_rel_dist = {}
 
     for doc_id in test_dict:
         consider_edges = set()
@@ -111,27 +125,36 @@ def calculate(test_dict):
         generated_edge_list = test_dict[doc_id]['generated']
         total_generated_edges += len(generated_edge_list)
 
-        gold_node_set, gold_edge_set = fill_all_edges(gold_edge_list, gold_rel_dist)
+        gold_node_set, gold_edge_set = fill_all_edges(gold_edge_list, gold_rel_dist_before)
+        for edge in gold_edge_set:
+            gold_rel_dist_after[edge[1]] = gold_rel_dist_after.get(edge[1], 0) + 1
+
         gold_edges_fill += len(gold_edge_set)
         total_gold_nodes += len(gold_node_set)
         # After adding all possible edges, we can create the set of edges to consider
         for gold_edge in gold_edge_set:
-            consider_edges.add(f'{gold_edge[0]}, {gold_edge[2]}')
-            consider_edges.add(f'{gold_edge[2]}, {gold_edge[0]}')
+            consider_edges.add(f'{gold_edge[0]}#{gold_edge[2]}')
+            consider_edges.add(f'{gold_edge[2]}#{gold_edge[0]}')
 
-        generated_node_set, generated_edge_set = fill_all_edges(generated_edge_list, gen_rel_dist)
+        generated_node_set, generated_edge_set = fill_all_edges(generated_edge_list, gen_rel_dist_before)
         # After adding all possible generated edges, we can filter out the edges that are not in the gold graph
-        generated_edge_set = set(filter(lambda x: f'{x[0]}, {x[2]}' in consider_edges, generated_edge_set))
-        generated_edges_fill += len(generated_edge_set)
+        generated_edge_set_filtered = set(filter(lambda x: f'{x[0]}#{x[2]}' in consider_edges, generated_edge_set))
+        for edge in generated_edge_set_filtered:
+            gen_rel_dist_after[edge[1]] = gen_rel_dist_after.get(edge[1], 0) + 1
+
+        edges_filtered += (len(generated_edge_set) - len(generated_edge_set_filtered))
+        generated_edges_fill += len(generated_edge_set_filtered)
         total_generated_nodes += len(generated_node_set)
 
         node_intersection = generated_node_set.intersection(gold_node_set)
         node_precision += len(node_intersection) / len(generated_node_set)
         node_recall += len(node_intersection) / len(gold_node_set)
 
-        edge_intersection = generated_edge_set.intersection(gold_edge_set)
-        edge_precision += len(edge_intersection) / len(generated_edge_set)
+        edge_intersection = generated_edge_set_filtered.intersection(gold_edge_set)
+        edge_precision += len(edge_intersection) / len(generated_edge_set_filtered)
         edge_recall += len(edge_intersection) / len(gold_edge_set)
+        for edge in edge_intersection:
+            currect_rel_dist[edge[1]] = currect_rel_dist.get(edge[1], 0) + 1
 
     print("---------------------Nodes---------------------")
     node_precision = node_precision / len(test_dict)
@@ -152,8 +175,12 @@ def calculate(test_dict):
     print("Gold Total Edges (after fill): ", gold_edges_fill)
     print("Generated Total Edges (before fill): ", total_generated_edges)
     print("Generated Total Edges (after fill): ", generated_edges_fill)
-    print("Gold Relation Distribution: ", gold_rel_dist)
-    print("Generated Relation Distribution: ", gen_rel_dist)
+    print("Edges Filtered (pairs no part of gold): ", edges_filtered)
+    print("Gold Relation Distribution (before fill): ", gold_rel_dist_before)
+    print("Gold Relation Distribution (after fill): ", gold_rel_dist_after)
+    print("Generated Relation Distribution (before fill): ", gen_rel_dist_before)
+    print("Generated Relation Distribution (after fill): ", gen_rel_dist_after)
+    print("Correct Relation Distribution: ", currect_rel_dist)
 
     print("----Eval-----")
     print("Edge Precision: ", edge_precision)

@@ -24,6 +24,22 @@ def run_gpt4_turbo(_prompt):
     return response_content
 
 
+def run_gpt4o_mini(_prompt):
+    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "user",
+                "content": _prompt
+            },
+        ]
+    )
+
+    response_content = response.choices[0].message.content
+    return response_content
+
+
 def run_gpt4(_prompt):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     response = client.chat.completions.create(
@@ -173,9 +189,9 @@ def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, i
 
 if __name__ == "__main__":
     num_of_pred = -1
-    num_of_prompt_examples = 5
+    num_of_prompt_examples = 1
     _instructions = task_description_v2
-    _llm_to_use = run_gpt3_5
+    _llm_to_use = run_gpt4o_mini
     _test_folder = 'data/MATRES/in_my_format/test'
     _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
 
