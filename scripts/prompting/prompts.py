@@ -38,8 +38,8 @@ Output only the temporal relationships between the pairs in DOT format, without 
 
 Instructions for Determining Temporal Relationships:
 Before: If Event A starts before Event B. Example: "A traveler is <kidnapped(01)>, and the police officers <said(02)> The kidnapper is demanding money". 
-Since 'kidnapped' must have occurred before 'said', the relationship should be 'before'.
-After: If Event A starts after Event B. Using the previous example, the relationship for 'said(02)/kidnapped(01)' is 'after'.
+Since 'kidnapped' must have occurred before 'said', the relationship should be kidnapped 'before' said.
+After: If Event A starts after Event B. Using the previous example, the relationship for 'said(02) and kidnapped(01)' is 'after'.
 Equal: If Event A and B start simultaneously, for example: "They <filed(03)> objections, <claiming(04)> unfair treatment". Since both events refer to the same thing, they occured at the same time, thus, the relationship should be 'equal'.
 Vague: If the start times of Event A and B cannot be determined, for example: "I <ate(05)> and <drank(06)> at lunch". The sequence cannot be determined if I first started to eat or first started to drink as both are logically possible, the relationship should be 'vague'.
 
@@ -58,7 +58,7 @@ Following is the input text with events for you to process and predict:
 def task_description_v3(examples):
     desc = f"""
 Task Overview:
-You will analyze a text where events are marked with '<' and '>' symbols, and each event is identified with an ID shown in parentheses immediately after the event. A list of event pairs in the format event1(id1)/event2(id2) will be given. 
+You will analyze a text where events are marked with '<' and '>' symbols, and each event is identified with an ID shown in parentheses immediately after the event. 
 Your task is to determine the temporal relationships between these pairs based on the starting times of the event mentions.
 The temporal relation can be one of [before, after, equal, vague (for when the temporal relation cannot be determine from the context)].
 Output only the temporal relationships between the pairs in DOT format, without any additional information.

@@ -5,7 +5,7 @@ import google.generativeai as genai
 from openai import OpenAI
 
 from scripts.eval.dataset.utils import find_ment_by_id
-from scripts.prompting.prompts import task_description_v2
+from scripts.prompting.prompts import task_description_v2, task_description_v3
 
 
 def run_gpt4_turbo(_prompt):
@@ -151,14 +151,14 @@ def open_input_file(file_path):
     return data
 
 
-def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, instructions_func, output_file):
+def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, instructions_func, output_file, number_of_pred, prompt_examples):
     # load json file
     predictions = dict()
     examples = prepare_instructions(train_folder, dot_train_data, 1)
     final_instructions = instructions_func(examples)
     count = 0
     for i, file1 in enumerate(os.listdir(test_folder)):
-        if count >= 1:
+        if count == number_of_pred:
             break
         count += 1
         data = open_input_file(f'{test_folder}/{file1}')
@@ -172,15 +172,20 @@ def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, i
 
 
 if __name__ == "__main__":
+    num_of_pred = -1
+    num_of_examples = 1
+    _instructions = task_description_v2
+    _llm_to_use = run_gpt3_5
     _test_folder = 'data/MATRES/in_my_format/test'
     _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
 
-    _train_folder = 'data/MATRES/in_my_format/train'
-    _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
+    # _train_folder = 'data/MATRES/in_my_format/train'
+    # _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
+    _train_folder = 'data/EventFullTrainExports'
+    _dot_train_data = open_input_file('data/DOT_format/EventFull_dot.json')
 
-    _output_file = 'data/my_data/predictions/output/matres_gpt3.5_turbo_v2.json'
+    _output_file = f'data/my_data/predictions/output/eventfull_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_examples}exmples_{_instructions.__name__}.json'
 
-    _instructions = task_description_v2
-    _llm_to_use = run_gpt3_5
     main(test_folder=_test_folder, train_folder=_train_folder, dot_test_data=_dot_test_data,
-         dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions, output_file=_output_file)
+         dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions,
+         output_file=_output_file, number_of_pred=num_of_pred, prompt_examples=num_of_examples)
