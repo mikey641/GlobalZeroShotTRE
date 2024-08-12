@@ -4,7 +4,7 @@ from scripts.eval.dataset.utils import parse_DOT
 from scripts.eval.model.compute_metrics import calculate
 
 if __name__ == "__main__":
-    prediction_file = "data/my_data/predictions/output/eventfull_run_gpt3_5_-1pred_1exmples_task_description_v2.json"
+    prediction_file = "data/my_data/predictions/output/eventfull_run_gpt3_5_-1pred_5exmples_task_description_v2.json"
     gold_file = "data/DOT_format/MATRES_test_dot.json"
 
     with open(prediction_file) as f:

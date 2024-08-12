@@ -1,4 +1,4 @@
-from typing import Set, Tuple, List, Dict
+from typing import Set, List, Dict
 
 
 def get_transitive_relation(reach_graph, i, j, k):
@@ -16,44 +16,48 @@ def get_transitive_relation(reach_graph, i, j, k):
         return 'NA'
 
 
-def fill_transitive_closure(node_set: Set, edge_set: Set):
-    graph_matrix, index_map = get_direct_reach_graph(node_set, edge_set)
-    index_map_reverse = {v: k for k, v in index_map.items()}
+def fill_transitive_closure(node_list: List, edge_list: List):
+    graph_matrix, index_map = get_direct_reach_graph(node_list, edge_list)
     length = len(graph_matrix)
 
     for k in range(length):
         for i in range(length):
             for j in range(length):
-                if i == j:
-                    continue
-
                 inferred_rel = get_transitive_relation(graph_matrix, i, j, k)
                 empty_rel = graph_matrix[i][j] == "NA"
+
+                if i == j or not empty_rel:
+                    continue
+
                 if inferred_rel == 'before':
-                    if empty_rel:
-                        graph_matrix[i][j] = 'before'
-                        graph_matrix[j][i] = 'after'
-                        edge_set.add((index_map_reverse[i], 'before', index_map_reverse[j]))
-                        edge_set.add((index_map_reverse[j], 'after', index_map_reverse[i]))
+                    graph_matrix[i][j] = 'before'
+                    graph_matrix[j][i] = 'after'
                 elif inferred_rel == 'after':
-                    if empty_rel:
-                        graph_matrix[i][j] = 'after'
-                        graph_matrix[j][i] = 'before'
-                        edge_set.add((index_map_reverse[i], 'after', index_map_reverse[j]))
-                        edge_set.add((index_map_reverse[j], 'before', index_map_reverse[i]))
+                    graph_matrix[i][j] = 'after'
+                    graph_matrix[j][i] = 'before'
                 elif inferred_rel == 'equal':
-                    if empty_rel:
-                        graph_matrix[i][j] = 'equal'
-                        graph_matrix[j][i] = 'equal'
-                        edge_set.add((index_map_reverse[i], 'equal', index_map_reverse[j]))
-                        edge_set.add((index_map_reverse[j], 'equal', index_map_reverse[i]))
+                    graph_matrix[i][j] = 'equal'
+                    graph_matrix[j][i] = 'equal'
+
+    return from_matrix_to_edges(graph_matrix, index_map)
 
 
-def get_direct_reach_graph(node_set: Set, edge_set: Set):
-    graph_matrix = [["NA" for _ in range(len(node_set))] for _ in range(len(node_set))]
-    index_map = {node: i for i, node in enumerate(node_set)}
+def from_matrix_to_edges(graph_matrix, index_map):
+    edge_set = set()
+    reversed_index_map = {v: k for k, v in index_map.items()}
+    for i in range(len(graph_matrix)):
+        for j in range(len(graph_matrix)):
+            if graph_matrix[i][j] != "NA":
+                edge_set.add((reversed_index_map[i], graph_matrix[i][j], reversed_index_map[j]))
 
-    for edge in edge_set:
+    return edge_set
+
+
+def get_direct_reach_graph(node_list: List, edge_list: List):
+    graph_matrix = [["NA" for _ in range(len(node_list))] for _ in range(len(node_list))]
+    index_map = {node: i for i, node in enumerate(node_list)}
+
+    for edge in edge_list:
         e1, rel, e2 = edge
         if rel == "equal":
             graph_matrix[index_map[e1]][index_map[e2]] = "equal"
@@ -71,32 +75,14 @@ def get_direct_reach_graph(node_set: Set, edge_set: Set):
     return graph_matrix, index_map
 
 
-def add_edge_to_set(edge_set: Set, edge: Tuple):
-    e1, rel, e2 = edge
-    if rel == "equal":
-        edge_set.add((e1, rel, e2))
-        edge_set.add((e2, rel, e1))
-    elif rel == "before":
-        edge_set.add((e1, rel, e2))
-        edge_set.add((e2, "after", e1))
-    elif rel == "after":
-        edge_set.add((e1, rel, e2))
-        edge_set.add((e2, "before", e1))
-    elif rel == 'vague':
-        edge_set.add((e1, rel, e2))
-        edge_set.add((e2, rel, e1))
-
-
 def fill_all_edges(edge_list: List, rel_dist: Dict):
     node_set = set()
-    edge_set = set()
     for edge in edge_list:
         node_set.add(edge[0])
         node_set.add(edge[2])
-        add_edge_to_set(edge_set, edge)
         rel_dist[edge[1]] = rel_dist.get(edge[1], 0) + 1
 
-    fill_transitive_closure(node_set, edge_set)
+    edge_set = fill_transitive_closure(sorted(list(node_set)), edge_list)
     return node_set, edge_set
 
 

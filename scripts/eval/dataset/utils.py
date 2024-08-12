@@ -90,7 +90,11 @@ def find_ment_by_id(mentions, m_id):
 
 
 def parse_DOT(dot_json):
-    edges = dot_json[14:].split(';')
+    if 'strict graph' not in dot_json:
+        print("Invalid DOT file!!!!!")
+        return None
+
+    edges = dot_json[dot_json.index('strict graph')+len('strict graph {'):].split(';')
     key_set = set()
     graph = [] # graph edge list
     duplicate = 0
