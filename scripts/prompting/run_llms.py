@@ -188,19 +188,23 @@ def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, i
 
 
 if __name__ == "__main__":
+    # -1 for all predictions
     num_of_pred = -1
+    # Number of prompt examples
     num_of_prompt_examples = 1
     _instructions = task_description_v2
-    _llm_to_use = run_gpt4o_mini
-    _test_folder = 'data/MATRES/in_my_format/test'
-    _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
+    _llm_to_use = run_gpt3_5
+    # _test_folder = 'data/MATRES/in_my_format/test'
+    # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
+    _test_folder = 'data/EventFullTrainExports/test'
+    _dot_test_data = open_input_file('data/DOT_format/EventFull_test_dot.json')
 
-    # _train_folder = 'data/MATRES/in_my_format/train'
-    # _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
-    _train_folder = 'data/EventFullTrainExports'
-    _dot_train_data = open_input_file('data/DOT_format/EventFull_dot.json')
+    _train_folder = 'data/MATRES/in_my_format/train'
+    _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
+    # _train_folder = 'data/EventFullTrainExports/dev'
+    # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
-    _output_file = f'data/my_data/predictions/output/eventfull_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
+    _output_file = f'data/my_data/predictions/output/matres_eventfull_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
 
     main(test_folder=_test_folder, train_folder=_train_folder, dot_test_data=_dot_test_data,
          dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions,

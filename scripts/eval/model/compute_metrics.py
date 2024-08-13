@@ -31,12 +31,11 @@ def fill_transitive_closure(node_list: List, edge_list: List):
     for k in range(length):
         for i in range(length):
             for j in range(length):
-                inferred_rel = get_transitive_relation(graph_matrix, i, j, k)
-                empty_rel = graph_matrix[i][j] == "NA"
-
-                if i == j or not empty_rel:
+                # skip self relations
+                if i == j:
                     continue
 
+                inferred_rel = get_transitive_relation(graph_matrix, i, j, k)
                 if inferred_rel == 'before':
                     graph_matrix[i][j] = 'before'
                     set_edge_in_graph(graph_matrix, i, j, 'after')
@@ -115,7 +114,7 @@ def calculate(test_dict):
     gold_rel_dist_after = {}
     gen_rel_dist_before = {}
     gen_rel_dist_after = {}
-    currect_rel_dist = {}
+    current_rel_dist = {}
 
     for doc_id in test_dict:
         consider_edges = set()
@@ -154,7 +153,7 @@ def calculate(test_dict):
         edge_precision += len(edge_intersection) / len(generated_edge_set_filtered)
         edge_recall += len(edge_intersection) / len(gold_edge_set)
         for edge in edge_intersection:
-            currect_rel_dist[edge[1]] = currect_rel_dist.get(edge[1], 0) + 1
+            current_rel_dist[edge[1]] = current_rel_dist.get(edge[1], 0) + 1
 
     print("---------------------Nodes---------------------")
     node_precision = node_precision / len(test_dict)
@@ -176,11 +175,11 @@ def calculate(test_dict):
     print("Generated Total Edges (before fill): ", total_generated_edges)
     print("Generated Total Edges (after fill): ", generated_edges_fill)
     print("Edges Filtered (pairs no part of gold): ", edges_filtered)
-    print("Gold Relation Distribution (before fill): ", gold_rel_dist_before)
-    print("Gold Relation Distribution (after fill): ", gold_rel_dist_after)
-    print("Generated Relation Distribution (before fill): ", gen_rel_dist_before)
-    print("Generated Relation Distribution (after fill): ", gen_rel_dist_after)
-    print("Correct Relation Distribution: ", currect_rel_dist)
+    print("Gold Relation Distribution (before fill):\t\t\t", dict(sorted(gold_rel_dist_before.items())))
+    print("Gold Relation Distribution (after fill):\t\t\t", dict(sorted(gold_rel_dist_after.items())))
+    print("Generated Relation Distribution (before fill):\t\t", dict(sorted(gen_rel_dist_before.items())))
+    print("Generated Relation Distribution (after fill):\t\t", dict(sorted(gen_rel_dist_after.items())))
+    print("Correct Relation Distribution:\t\t\t\t\t\t", dict(sorted(current_rel_dist.items())))
 
     print("----Eval-----")
     print("Edge Precision: ", edge_precision)

@@ -1,0 +1,231 @@
+/Users/aloneirew/miniconda3/envs/expr3.9/bin/python /Users/aloneirew/workspace/DenseEREGraph/scripts/eval/dataset/calc_graph_stats.py
+-------------- File: CNN_20130322_1003.json ------------------
+Node count: 43
+Edge count: 119
+Expected edge count: 903.0
+Delta (expected-actual): 784.0
+Duplicates: 0
+Avg Node degree: 5.534883720930233
+Node degree distribution: {1: 1, 2: 5, 3: 5, 4: 2, 5: 13, 6: 4, 7: 3, 9: 6, 10: 4}
+Node without edges: 0
+Relation distribution: [('after', 51), ('before', 51), ('equal', 1), ('vague', 16)]
+---------------------------------------------
+-------------- File: nyt_20130322_strange_computer.json ------------------
+Node count: 9
+Edge count: 20
+Expected edge count: 36.0
+Delta (expected-actual): 16.0
+Duplicates: 0
+Avg Node degree: 4.444444444444445
+Node degree distribution: {2: 1, 3: 1, 4: 2, 5: 3, 6: 2}
+Node without edges: 0
+Relation distribution: [('after', 1), ('before', 13), ('equal', 2), ('vague', 4)]
+---------------------------------------------
+-------------- File: CNN_20130322_1243.json ------------------
+Node count: 6
+Edge count: 3
+Expected edge count: 15.0
+Delta (expected-actual): 12.0
+Duplicates: 0
+Avg Node degree: 1.0
+Node degree distribution: {1: 6}
+Node without edges: 0
+Relation distribution: [('after', 1), ('before', 1), ('vague', 1)]
+---------------------------------------------
+-------------- File: bbc_20130322_332.json ------------------
+Node count: 27
+Edge count: 53
+Expected edge count: 351.0
+Delta (expected-actual): 298.0
+Duplicates: 0
+Avg Node degree: 3.925925925925926
+Node degree distribution: {2: 2, 3: 9, 4: 9, 5: 5, 7: 2}
+Node without edges: 0
+Relation distribution: [('after', 18), ('before', 28), ('equal', 2), ('vague', 5)]
+---------------------------------------------
+-------------- File: bbc_20130322_1150.json ------------------
+Node count: 32
+Edge count: 63
+Expected edge count: 496.0
+Delta (expected-actual): 433.0
+Duplicates: 0
+Avg Node degree: 3.9375
+Node degree distribution: {2: 3, 3: 11, 4: 4, 5: 13, 6: 1}
+Node without edges: 0
+Relation distribution: [('after', 23), ('before', 34), ('equal', 1), ('vague', 5)]
+---------------------------------------------
+-------------- File: nyt_20130321_women_senate.json ------------------
+Node count: 39
+Edge count: 89
+Expected edge count: 741.0
+Delta (expected-actual): 652.0
+Duplicates: 0
+Avg Node degree: 4.564102564102564
+Node degree distribution: {2: 5, 3: 6, 4: 7, 5: 13, 6: 2, 7: 3, 8: 3}
+Node without edges: 0
+Relation distribution: [('after', 28), ('before', 39), ('equal', 7), ('vague', 15)]
+---------------------------------------------
+-------------- File: CNN_20130322_314.json ------------------
+Node count: 17
+Edge count: 39
+Expected edge count: 136.0
+Delta (expected-actual): 97.0
+Duplicates: 0
+Avg Node degree: 4.588235294117647
+Node degree distribution: {2: 2, 3: 4, 4: 4, 6: 5, 8: 2}
+Node without edges: 0
+Relation distribution: [('after', 10), ('before', 15), ('equal', 3), ('vague', 11)]
+---------------------------------------------
+-------------- File: AP_20130322.json ------------------
+Node count: 19
+Edge count: 33
+Expected edge count: 171.0
+Delta (expected-actual): 138.0
+Duplicates: 0
+Avg Node degree: 3.473684210526316
+Node degree distribution: {1: 1, 2: 5, 3: 1, 4: 10, 6: 2}
+Node without edges: 0
+Relation distribution: [('after', 4), ('before', 21), ('vague', 8)]
+---------------------------------------------
+-------------- File: nyt_20130321_china_pollution.json ------------------
+Node count: 26
+Edge count: 64
+Expected edge count: 325.0
+Delta (expected-actual): 261.0
+Duplicates: 0
+Avg Node degree: 4.923076923076923
+Node degree distribution: {1: 1, 2: 2, 3: 2, 4: 4, 5: 7, 6: 7, 8: 3}
+Node without edges: 0
+Relation distribution: [('after', 20), ('before', 32), ('equal', 5), ('vague', 7)]
+---------------------------------------------
+-------------- File: WSJ_20130322_804.json ------------------
+Node count: 17
+Edge count: 28
+Expected edge count: 136.0
+Delta (expected-actual): 108.0
+Duplicates: 0
+Avg Node degree: 3.2941176470588234
+Node degree distribution: {1: 4, 2: 2, 3: 1, 4: 5, 5: 5}
+Node without edges: 0
+Relation distribution: [('after', 5), ('before', 17), ('equal', 2), ('vague', 4)]
+---------------------------------------------
+-------------- File: nyt_20130321_sarcozy.json ------------------
+Node count: 9
+Edge count: 19
+Expected edge count: 36.0
+Delta (expected-actual): 17.0
+Duplicates: 0
+Avg Node degree: 4.222222222222222
+Node degree distribution: {1: 1, 3: 2, 4: 1, 5: 3, 6: 2}
+Node without edges: 0
+Relation distribution: [('after', 6), ('before', 12), ('equal', 1)]
+---------------------------------------------
+-------------- File: bbc_20130322_1600.json ------------------
+Node count: 17
+Edge count: 45
+Expected edge count: 136.0
+Delta (expected-actual): 91.0
+Duplicates: 0
+Avg Node degree: 5.294117647058823
+Node degree distribution: {2: 2, 3: 1, 4: 5, 5: 2, 7: 3, 8: 4}
+Node without edges: 0
+Relation distribution: [('after', 7), ('before', 31), ('vague', 7)]
+---------------------------------------------
+-------------- File: CNN_20130322_248.json ------------------
+Node count: 6
+Edge count: 15
+Expected edge count: 15.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 5.0
+Node degree distribution: {5: 6}
+Node without edges: 0
+Relation distribution: [('after', 6), ('before', 7), ('equal', 1), ('vague', 1)]
+---------------------------------------------
+-------------- File: nyt_20130321_cyprus.json ------------------
+Node count: 23
+Edge count: 36
+Expected edge count: 253.0
+Delta (expected-actual): 217.0
+Duplicates: 0
+Avg Node degree: 3.130434782608696
+Node degree distribution: {2: 7, 3: 7, 4: 8, 5: 1}
+Node without edges: 0
+Relation distribution: [('after', 12), ('before', 13), ('equal', 4), ('vague', 7)]
+---------------------------------------------
+-------------- File: WSJ_20130318_731.json ------------------
+Node count: 12
+Edge count: 16
+Expected edge count: 66.0
+Delta (expected-actual): 50.0
+Duplicates: 0
+Avg Node degree: 2.6666666666666665
+Node degree distribution: {1: 1, 2: 6, 3: 1, 4: 4}
+Node without edges: 0
+Relation distribution: [('after', 5), ('before', 10), ('vague', 1)]
+---------------------------------------------
+-------------- File: CNN_20130321_821.json ------------------
+Node count: 6
+Edge count: 4
+Expected edge count: 15.0
+Delta (expected-actual): 11.0
+Duplicates: 0
+Avg Node degree: 1.3333333333333333
+Node degree distribution: {1: 4, 2: 2}
+Node without edges: 0
+Relation distribution: [('before', 3), ('vague', 1)]
+---------------------------------------------
+-------------- File: WSJ_20130321_1145.json ------------------
+Node count: 11
+Edge count: 14
+Expected edge count: 55.0
+Delta (expected-actual): 41.0
+Duplicates: 0
+Avg Node degree: 2.5454545454545454
+Node degree distribution: {2: 5, 3: 6}
+Node without edges: 0
+Relation distribution: [('after', 7), ('before', 6), ('vague', 1)]
+---------------------------------------------
+-------------- File: bbc_20130322_721.json ------------------
+Node count: 16
+Edge count: 33
+Expected edge count: 120.0
+Delta (expected-actual): 87.0
+Duplicates: 0
+Avg Node degree: 4.125
+Node degree distribution: {1: 2, 3: 4, 4: 2, 5: 6, 7: 2}
+Node without edges: 0
+Relation distribution: [('after', 11), ('before', 18), ('vague', 4)]
+---------------------------------------------
+-------------- File: WSJ_20130322_159.json ------------------
+Node count: 25
+Edge count: 75
+Expected edge count: 300.0
+Delta (expected-actual): 225.0
+Duplicates: 0
+Avg Node degree: 6.0
+Node degree distribution: {3: 1, 4: 3, 5: 5, 6: 5, 7: 8, 8: 3}
+Node without edges: 0
+Relation distribution: [('after', 23), ('before', 43), ('equal', 1), ('vague', 8)]
+---------------------------------------------
+-------------- File: bbc_20130322_1353.json ------------------
+Node count: 24
+Edge count: 69
+Expected edge count: 276.0
+Delta (expected-actual): 207.0
+Duplicates: 0
+Avg Node degree: 5.75
+Node degree distribution: {3: 6, 4: 5, 5: 1, 7: 5, 8: 3, 9: 4}
+Node without edges: 0
+Relation distribution: [('after', 31), ('before', 30), ('equal', 1), ('vague', 7)]
+---------------------------------------------
+--------------- Dataset Stats------------------
+Total nodes: 384
+Total edges: 138
+Expected edges: 552.0
+Duplicates: 0
+Avg Node degree: 5.5
+Node degree distribution (node_degree: num_of_such_nodes): {1: 21, 2: 49, 3: 68, 4: 75, 5: 83, 6: 30, 7: 26, 8: 18, 9: 10, 10: 4}
+Relation distribution: {'after': 269, 'before': 424, 'equal': 31, 'vague': 113}
+
+Process finished with exit code 0

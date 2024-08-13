@@ -1,0 +1,231 @@
+/Users/aloneirew/miniconda3/envs/expr3.9/bin/python /Users/aloneirew/workspace/DenseEREGraph/scripts/eval/dataset/calc_graph_stats.py
+-------------- File: 10_final.json ------------------
+Node count: 14
+Edge count: 91
+Expected edge count: 91.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 13.0
+Node degree distribution: {13: 14}
+Node without edges: 0
+Relation distribution: [('after', 33), ('before', 51), ('equal', 3), ('vague', 4)]
+---------------------------------------------
+-------------- File: 3_final.json ------------------
+Node count: 12
+Edge count: 66
+Expected edge count: 66.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 11.0
+Node degree distribution: {11: 12}
+Node without edges: 0
+Relation distribution: [('before', 12), ('equal', 3), ('vague', 51)]
+---------------------------------------------
+-------------- File: 15_final.json ------------------
+Node count: 14
+Edge count: 91
+Expected edge count: 91.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 13.0
+Node degree distribution: {13: 14}
+Node without edges: 0
+Relation distribution: [('after', 31), ('before', 34), ('equal', 2), ('vague', 24)]
+---------------------------------------------
+-------------- File: 6_final.json ------------------
+Node count: 16
+Edge count: 120
+Expected edge count: 120.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 15.0
+Node degree distribution: {15: 16}
+Node without edges: 0
+Relation distribution: [('after', 47), ('before', 60), ('equal', 6), ('vague', 7)]
+---------------------------------------------
+-------------- File: 18_final.json ------------------
+Node count: 13
+Edge count: 78
+Expected edge count: 78.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 12.0
+Node degree distribution: {12: 13}
+Node without edges: 0
+Relation distribution: [('after', 17), ('before', 51), ('equal', 2), ('vague', 8)]
+---------------------------------------------
+-------------- File: 1_final.json ------------------
+Node count: 17
+Edge count: 136
+Expected edge count: 136.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 16.0
+Node degree distribution: {16: 17}
+Node without edges: 0
+Relation distribution: [('after', 55), ('before', 77), ('equal', 1), ('vague', 3)]
+---------------------------------------------
+-------------- File: 12_final.json ------------------
+Node count: 16
+Edge count: 120
+Expected edge count: 120.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 15.0
+Node degree distribution: {15: 16}
+Node without edges: 0
+Relation distribution: [('after', 59), ('before', 54), ('equal', 1), ('vague', 6)]
+---------------------------------------------
+-------------- File: 4_final.json ------------------
+Node count: 18
+Edge count: 153
+Expected edge count: 153.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 17.0
+Node degree distribution: {17: 18}
+Node without edges: 0
+Relation distribution: [('after', 44), ('before', 64), ('equal', 5), ('vague', 40)]
+---------------------------------------------
+-------------- File: 20_final.json ------------------
+Node count: 16
+Edge count: 120
+Expected edge count: 120.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 15.0
+Node degree distribution: {15: 16}
+Node without edges: 0
+Relation distribution: [('after', 32), ('before', 69), ('equal', 3), ('vague', 16)]
+---------------------------------------------
+-------------- File: 17_final.json ------------------
+Node count: 17
+Edge count: 136
+Expected edge count: 136.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 16.0
+Node degree distribution: {16: 17}
+Node without edges: 0
+Relation distribution: [('after', 16), ('before', 94), ('equal', 1), ('vague', 25)]
+---------------------------------------------
+-------------- File: 9_final.json ------------------
+Node count: 17
+Edge count: 136
+Expected edge count: 136.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 16.0
+Node degree distribution: {16: 17}
+Node without edges: 0
+Relation distribution: [('after', 64), ('before', 63), ('equal', 3), ('vague', 6)]
+---------------------------------------------
+-------------- File: 14_final.json ------------------
+Node count: 16
+Edge count: 120
+Expected edge count: 120.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 15.0
+Node degree distribution: {15: 16}
+Node without edges: 0
+Relation distribution: [('after', 65), ('before', 20), ('equal', 21), ('vague', 14)]
+---------------------------------------------
+-------------- File: 7_final.json ------------------
+Node count: 16
+Edge count: 120
+Expected edge count: 120.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 15.0
+Node degree distribution: {15: 16}
+Node without edges: 0
+Relation distribution: [('after', 25), ('before', 60), ('equal', 5), ('vague', 30)]
+---------------------------------------------
+-------------- File: 19_final.json ------------------
+Node count: 17
+Edge count: 136
+Expected edge count: 136.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 16.0
+Node degree distribution: {16: 17}
+Node without edges: 0
+Relation distribution: [('after', 47), ('before', 81), ('equal', 8)]
+---------------------------------------------
+-------------- File: 11_final.json ------------------
+Node count: 15
+Edge count: 105
+Expected edge count: 105.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 14.0
+Node degree distribution: {14: 15}
+Node without edges: 0
+Relation distribution: [('after', 46), ('before', 39), ('equal', 5), ('vague', 15)]
+---------------------------------------------
+-------------- File: 2_final.json ------------------
+Node count: 14
+Edge count: 91
+Expected edge count: 91.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 13.0
+Node degree distribution: {13: 14}
+Node without edges: 0
+Relation distribution: [('after', 42), ('before', 27), ('equal', 15), ('vague', 7)]
+---------------------------------------------
+-------------- File: 5_final.json ------------------
+Node count: 13
+Edge count: 78
+Expected edge count: 78.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 12.0
+Node degree distribution: {12: 13}
+Node without edges: 0
+Relation distribution: [('after', 46), ('before', 20), ('equal', 9), ('vague', 3)]
+---------------------------------------------
+-------------- File: 16_final.json ------------------
+Node count: 17
+Edge count: 136
+Expected edge count: 136.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 16.0
+Node degree distribution: {16: 17}
+Node without edges: 0
+Relation distribution: [('after', 62), ('before', 65), ('equal', 5), ('vague', 4)]
+---------------------------------------------
+-------------- File: 8_final.json ------------------
+Node count: 17
+Edge count: 136
+Expected edge count: 136.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 16.0
+Node degree distribution: {16: 17}
+Node without edges: 0
+Relation distribution: [('after', 71), ('before', 39), ('equal', 11), ('vague', 15)]
+---------------------------------------------
+-------------- File: 13_final.json ------------------
+Node count: 16
+Edge count: 120
+Expected edge count: 120.0
+Delta (expected-actual): 0.0
+Duplicates: 0
+Avg Node degree: 15.0
+Node degree distribution: {15: 16}
+Node without edges: 0
+Relation distribution: [('after', 70), ('before', 44), ('equal', 3), ('vague', 3)]
+---------------------------------------------
+--------------- Dataset Stats------------------
+Total nodes: 311
+Total edges: 240
+Expected edges: 240.0
+Duplicates: 0
+Avg Node degree: 14.0
+Node degree distribution (node_degree: num_of_such_nodes): {11: 12, 12: 26, 13: 42, 14: 15, 15: 96, 16: 102, 17: 18}
+Relation distribution: {'after': 872, 'before': 1024, 'equal': 112, 'vague': 281}
+
+Process finished with exit code 0
