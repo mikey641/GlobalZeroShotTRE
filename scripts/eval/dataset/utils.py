@@ -95,9 +95,7 @@ def parse_DOT(dot_json):
         return None, None
 
     edges = dot_json[dot_json.index('strict graph')+len('strict graph {'):].split(';')
-    key_set = set()
     graph = [] # graph edge list
-    duplicate = 0
     for edge_str in edges:
         rel_list = re.findall(r'rel=([a-zA-Z]+)', edge_str)
 
@@ -135,12 +133,7 @@ def parse_DOT(dot_json):
         if event_2[-1] == ' ':
             event_2 = event_2[:-1]
 
-        key = f"{event_1}||{rel}||{event_2}"
-        if key in key_set:
-            duplicate += 1
-        else:
-            graph.append((event_1, rel, event_2))
-            key_set.add(key)
-            # print(event_1, rel, event_2)
+        graph.append((event_1, rel, event_2))
+        # print(event_1, rel, event_2)
     #print(f"Num of duplication: {duplicate}")
-    return graph, duplicate
+    return graph

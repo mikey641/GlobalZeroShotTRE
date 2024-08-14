@@ -20,17 +20,11 @@ if __name__ == "__main__":
 
     all_predictions = dict()
     for file in predictions.keys():
-        predicted_graph, pred_duplicate = parse_DOT(predictions[file]['target'])
+        predicted_graph = parse_DOT(predictions[file]['target'])
         if predicted_graph is None:
             continue
 
-        if pred_duplicate > 0:
-            print(f"Duplicate generated edges in {file}: {pred_duplicate}")
-
-        gold_graph, gold_duplicate = parse_DOT(golds[file]['target'])
-        if gold_duplicate > 0:
-            print(f"Duplicate gold edges in {file}: {gold_duplicate}")
-
+        gold_graph = parse_DOT(golds[file]['target'])
         all_predictions[file] = {"generated": predicted_graph, "gold": gold_graph}
 
     calculate(all_predictions)
