@@ -12,7 +12,11 @@ class EvalObj:
         self.edge_set = set()
         self.fill_all_edges()
 
-        self.duplicates = self.calc_duplicates()
+        self.duplicates = 0
+        self.contradictions = 0
+        self.orig_node_degree = dict()
+        self.calc_degree()
+        self.calc_duplicates()
         self.orig_distribution = EvalObj.calc_edge_distributions(self.orig_edge_list)
         self.set_distribution = EvalObj.calc_edge_distributions(self.edge_set)
 
@@ -133,16 +137,23 @@ class EvalObj:
         return False
 
     def calc_duplicates(self):
-        duplicates = 0
         key_set = set()
         for edge in self.orig_edge_list:
             e1, rel, e2 = edge
             key = f'{e1}#{rel}#{e2}'
             key_rev = f'{e2}#{EvalObj.get_reverse_relation(rel)}#{e1}'
+            contr_key = f'{e2}#{rel}#{e1}'
+            contr_key_rev = f'{e1}#{EvalObj.get_reverse_relation(rel)}#{e2}'
             if key in key_set or key_rev in key_set:
-                duplicates += 1
+                self.duplicates += 1
+            elif contr_key in key_set or contr_key_rev in key_set:
+                self.contradictions += 1
             else:
                 key_set.add(key)
                 key_set.add(key_rev)
 
-        return duplicates
+    def calc_degree(self):
+        for edge in self.orig_edge_list:
+            e1, rel, e2 = edge
+            self.orig_node_degree[e1] = self.orig_node_degree.get(e1, 0) + 1
+            self.orig_node_degree[e2] = self.orig_node_degree.get(e2, 0) + 1

@@ -79,7 +79,8 @@ def calculate(test_dict):
     print("Predicted Edges (after align): ", sum([len(pred_eval_objs[doc_id].edge_set) for doc_id in pred_eval_objs]))
     print(f"Predicted Edges Distribution (before): {pred_dist_before}, tot={pred_dist_before_sanity}")
     print(f"Predicted Edges Distribution (after): {pred_dist_after}, tot={pred_dist_after_sanity}")
-    print(f"Predicted Edges Duplicate: {sum([pred_eval_objs[doc_id].duplicates for doc_id in pred_eval_objs])}")
+    print(f"Predicted Edges Direct Duplicate: {sum([pred_eval_objs[doc_id].duplicates for doc_id in pred_eval_objs])}")
+    print(f"Predicted Edges Direct Contradictions: {sum([pred_eval_objs[doc_id].contradictions for doc_id in pred_eval_objs])}")
     print("Predicted Edges Filtered (edges not part of gold): ", edges_filtered)
     print(f"True Positive Edges: {true_positive_edges_dist}, tot={true_positive_edges_dist_tot}")
 
