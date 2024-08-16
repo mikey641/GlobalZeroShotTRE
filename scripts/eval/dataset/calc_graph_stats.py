@@ -55,18 +55,18 @@ def calc_stats(golds):
 
     print('--------------- Dataset Stats------------------')
     print(f'Total nodes: {_tot_nodes}')
-    print(f'Total edges: {_graph_edge_num}')
+    print(f'Total (aligned) edges: {_graph_edge_num}')
     print(f'Expected edges: {_expected_edge_num}')
     print(f'Duplicates: {_duplicates}')
     print(f'Direct Contradictions: {_direct_contradictions}')
     print(f'Avg Node degree: {sum(_degree_hist.keys()) / len(_degree_hist.keys())}')
     print(f'Node degree distribution (node_degree: num_of_such_nodes): {dict(sorted(dict(_degree_hist).items()))}')
-    print(f'Original Relation distribution: {dict(sorted(dict(_orig_rel_dist).items()))}')
+    print(f'Original Relation distribution: {dict(sorted(dict(_orig_rel_dist).items()))}, tot={sum(_orig_rel_dist.values())}')
     print(f'After Alignment Relation distribution: {dict(sorted(dict(_aligned_rel_dist).items()))}')
 
 
 if __name__ == "__main__":
-    in_file = "data/DOT_format/MATRES_test_dot.json"
+    in_file = "data/DOT_format/MATRES_train_dot.json"
     # in_file = "data/DOT_format/EventFull_test_dot.json"
     # in_file = "data/my_data/predictions/output/experiments/matres/eventfull_run_gpt3_5_-1pred_1exmples_task_description_v2.json"
 
