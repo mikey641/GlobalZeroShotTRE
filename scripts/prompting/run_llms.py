@@ -3,9 +3,32 @@ import os
 
 import google.generativeai as genai
 from openai import OpenAI
+from together import Together
 
 from scripts.eval.dataset.utils import find_ment_by_id
 from scripts.prompting.prompts import task_description_v2, task_description_v3
+
+gemini_pro_model = None
+gemini_flash_model = None
+
+
+def run_together_llama_8b(_prompt):
+    client = Together(api_key=os.environ.get("TOGETHER_API_KEY"))
+
+    stream = client.chat.completions.create(
+        model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        messages=[{"role": "user", "content": _prompt}],
+        max_tokens=4096,
+        stream=True,
+    )
+
+    response = []
+    for chunk in stream:
+        print(chunk.choices[0].delta.content or "", end="", flush=True)
+        if chunk.choices[0].delta.content:
+            response.append(chunk.choices[0].delta.content)
+
+    return "".join(response)
 
 
 def run_gpt4_turbo(_prompt):
@@ -28,6 +51,22 @@ def run_gpt4o_mini(_prompt):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "user",
+                "content": _prompt
+            },
+        ]
+    )
+
+    response_content = response.choices[0].message.content
+    return response_content
+
+
+def run_gpt4o(_prompt):
+    client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+    response = client.chat.completions.create(
+        model="gpt-4o",
         messages=[
             {
                 "role": "user",
@@ -73,13 +112,38 @@ def run_gpt3_5(_prompt):
 
 
 def run_gemini_pro(_prompt):
-    genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-    model = genai.GenerativeModel('gemini-pro')
+    global gemini_pro_model
+    if gemini_pro_model is None:
+        genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+        gemini_pro_model = genai.GenerativeModel('gemini-1.5-pro')
+        model_info = genai.get_model("models/gemini-1.5-pro")
+        print(f"{model_info.input_token_limit=}")
+        print(f"{model_info.output_token_limit=}")
 
     # for m in genai.list_models():
     #     if 'generateContent' in m.supported_generation_methods:
     #         print(m.name)
-    response = model.generate_content(_prompt)
+    print('prompt text:\n', _prompt)
+    print("prompt: ", gemini_pro_model.count_tokens(_prompt))
+
+    response = gemini_pro_model.generate_content(_prompt)
+    print("response: ", gemini_pro_model.count_tokens(response.text))
+    return response.text
+
+
+def run_gemini_flash(_prompt):
+    global gemini_flash_model
+    if gemini_flash_model is None:
+        genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
+        gemini_flash_model = genai.GenerativeModel('gemini-1.5-flash')
+        model_info = genai.get_model("models/gemini-1.5-flash")
+        print(f"{model_info.input_token_limit=}")
+        print(f"{model_info.output_token_limit=}")
+
+    print('prompt text:\n', _prompt)
+    print("prompt: ", gemini_flash_model.count_tokens(_prompt))
+    response = gemini_flash_model.generate_content(_prompt)
+    print("response: ", gemini_flash_model.count_tokens(response.text))
     return response.text
 
 
@@ -180,31 +244,36 @@ def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, i
         data = open_input_file(f'{test_folder}/{file1}')
         text = get_input_text(data)
         task_desc = final_instructions + '\n' + text
-        response = llm_to_use(task_desc)
-        predictions[file1] = {"target": response}
+        try:
+            response = llm_to_use(task_desc)
+            predictions[file1] = {"target": response}
+        except Exception as e:
+            predictions[file1] = {"target": "Generation Failed"}
 
     with open(output_file, 'w') as file:
         json.dump(predictions, file, indent=4)
 
 
 if __name__ == "__main__":
+    example_db = 'matres'
+    test_db = 'matres'
     # -1 for all predictions
     num_of_pred = -1
     # Number of prompt examples
     num_of_prompt_examples = 1
     _instructions = task_description_v2
-    _llm_to_use = run_gpt3_5
-    # _test_folder = 'data/MATRES/in_my_format/test'
-    # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
-    _test_folder = 'data/EventFullTrainExports/test'
-    _dot_test_data = open_input_file('data/DOT_format/EventFull_test_dot.json')
+    _llm_to_use = run_together_llama_8b
+    _test_folder = 'data/MATRES/in_my_format/test'
+    _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
+    # _test_folder = 'data/EventFullTrainExports/test'
+    # _dot_test_data = open_input_file('data/DOT_format/EventFull_test_dot.json')
 
     _train_folder = 'data/MATRES/in_my_format/train'
     _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
     # _train_folder = 'data/EventFullTrainExports/dev'
     # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
-    _output_file = f'data/my_data/predictions/output/matres_eventfull_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
+    _output_file = f'data/my_data/predictions/output/experiments/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
 
     main(test_folder=_test_folder, train_folder=_train_folder, dot_test_data=_dot_test_data,
          dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions,

@@ -44,7 +44,7 @@ Equal: If Event A and B start simultaneously, for example: "They <filed(03)> obj
 Vague: If the start times of Event A and B cannot be determined, for example: "I <ate(05)> and <drank(06)> at lunch". The sequence cannot be determined if I first started to eat or first started to drink as both are logically possible, the relationship should be 'vague'.
 
 Look for Temporal Indicators:
-Use explicit temporal indicators such as dates, times, and keywords like 'before', 'after', and 'at the same time' in the provided context to help determine relationships. 
+Use explicit temporal indicators such as dates, times, and keywords like 'before', 'after', and 'at the same time' in the provided context to help determine relationships when logical deduction fails. 
 If no indicators are present, and logical deduction fails, mark the relationship as 'vague'.
 
 Example(s):
