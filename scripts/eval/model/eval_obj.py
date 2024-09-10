@@ -1,7 +1,9 @@
-from copy import deepcopy
+import numpy as np
 
-EMPTY_REL = 'NA'
-CONT_REL = 'contradict'
+from scripts.utils.transitive_algos import triplets_to_numpy_graph, transitive_closure_with_relations, \
+    transitive_reduction_with_relations
+
+EMPTY_REL = ''
 
 
 class EvalObj:
@@ -10,6 +12,7 @@ class EvalObj:
         self.orig_edge_list = edge_list
         self.node_set = set()
         self.edge_set = set()
+        self.edge_set_reduced = set()
         self.fill_all_edges()
 
         self.duplicates = 0
@@ -25,36 +28,12 @@ class EvalObj:
             self.node_set.add(edge[0])
             self.node_set.add(edge[2])
 
-        self.fill_transitive_closure()
+        graph_matrix, index_map = triplets_to_numpy_graph(self.orig_edge_list)
+        trans_matrix = transitive_closure_with_relations(graph_matrix)
+        reduced_matrix, _ = transitive_reduction_with_relations(trans_matrix)
 
-    def fill_transitive_closure(self):
-        # node_list = sorted(list(self.node_set))
-        graph_matrix, index_map = self.get_direct_reach_graph()
-        trans_matrix = deepcopy(graph_matrix)
-        length = len(trans_matrix)
-
-        for k in range(length):
-            for i in range(length):
-                for j in range(length):
-                    direct_rel = graph_matrix[i][j]
-                    # skip self relations
-                    if i == j or direct_rel != EMPTY_REL:
-                        continue
-
-                    trans_rel = trans_matrix[i][j]
-                    inferred_rel = EvalObj.get_transitive_relation(trans_matrix, i, j, k)
-                    if inferred_rel != EMPTY_REL:
-                        if trans_rel == EMPTY_REL:
-                            trans_matrix[i][j] = inferred_rel
-                        elif trans_rel != EMPTY_REL and inferred_rel != trans_rel:
-                            trans_matrix[i][j] = CONT_REL
-
-        for i in range(length):
-            for j in range(length):
-                if trans_matrix[i][j] != CONT_REL:
-                    graph_matrix[i][j] = trans_matrix[i][j]
-
-        self.from_matrix_to_edges(graph_matrix, index_map)
+        self.edge_set = self.from_matrix_to_edges(trans_matrix, index_map)
+        self.edge_set_reduced = self.from_matrix_to_edges(reduced_matrix, index_map)
 
     @staticmethod
     def get_reverse_relation(rel):
@@ -65,46 +44,16 @@ class EvalObj:
         else:
             return rel
 
-    def get_direct_reach_graph(self):
-        node_list = sorted(list(self.node_set))
-        graph_matrix = [[EMPTY_REL for _ in range(len(node_list))] for _ in range(len(node_list))]
-        index_map = {node: i for i, node in enumerate(node_list)}
-
-        # Fill the direct edges
-        for edge in self.orig_edge_list:
-            e1, rel, e2 = edge
-            current_rel = graph_matrix[index_map[e1]][index_map[e2]]
-            rev_rel = graph_matrix[index_map[e2]][index_map[e1]]
-            if (current_rel == EMPTY_REL or current_rel == rel) and (rev_rel == EMPTY_REL or rev_rel == EvalObj.get_reverse_relation(rel)):
-                graph_matrix[index_map[e1]][index_map[e2]] = rel
-                graph_matrix[index_map[e2]][index_map[e1]] = EvalObj.get_reverse_relation(rel)
-            else:
-                graph_matrix[index_map[e1]][index_map[e2]] = CONT_REL
-                graph_matrix[index_map[e2]][index_map[e1]] = CONT_REL
-
-        return graph_matrix, index_map
-
     @staticmethod
-    def get_transitive_relation(reach_graph, i, j, k):
-        if ((reach_graph[i][k] == 'after' and reach_graph[k][j] == 'after') or
-                (reach_graph[i][k] == 'after' and reach_graph[k][j] == 'equal') or
-                (reach_graph[i][k] == 'equal' and reach_graph[k][j] == 'after')):
-            return 'after'
-        elif ((reach_graph[i][k] == 'before' and reach_graph[k][j] == 'before') or
-              (reach_graph[i][k] == 'before' and reach_graph[k][j] == 'equal') or
-              (reach_graph[i][k] == 'equal' and reach_graph[k][j] == 'before')):
-            return 'before'
-        elif reach_graph[i][k] == 'equal' and reach_graph[k][j] == 'equal':
-            return 'equal'
-        else:
-            return EMPTY_REL
-
-    def from_matrix_to_edges(self, graph_matrix, index_map):
+    def from_matrix_to_edges(graph_matrix, index_map):
+        loc_edge_set = set()
         reversed_index_map = {v: k for k, v in index_map.items()}
+        rel_convert = {'B': 'before', 'A': 'after', 'E': 'equal', 'V': 'vague', 'C': 'contradiction'}
         for i in range(len(graph_matrix)):
             for j in range(i + 1, len(graph_matrix)):
                 if graph_matrix[i][j] != EMPTY_REL:
-                    self.edge_set.add((reversed_index_map[i], graph_matrix[i][j], reversed_index_map[j]))
+                    loc_edge_set.add((reversed_index_map[i], rel_convert[graph_matrix[i][j]], reversed_index_map[j]))
+        return loc_edge_set
 
     @staticmethod
     def calc_edge_distributions(edges):

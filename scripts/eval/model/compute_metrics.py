@@ -29,23 +29,21 @@ def calculate(test_dict):
         gold_edge_list = test_dict[doc_id]['gold']
         gold_eval_obj = EvalObj(doc_id, gold_edge_list)
         gold_eval_objs[doc_id] = gold_eval_obj
-        # After adding all possible edges, we can create the set of edges to consider
-        consider_edges = gold_eval_obj.get_edge_map()
 
         gen_edge_list = test_dict[doc_id]['generated']
         gen_eval_obj = EvalObj(doc_id, gen_edge_list)
-        # After adding all possible generated edges, we can filter out the edges that are not in the gold graph
-        edges_filtered += gen_eval_obj.filter_edges(consider_edges, gold_eval_obj.node_set)
         pred_eval_objs[doc_id] = gen_eval_obj
 
         node_intersection = gen_eval_obj.node_set.intersection(gold_eval_obj.node_set)
         node_precision += len(node_intersection) / len(gen_eval_obj.node_set)
         node_recall += len(node_intersection) / len(gold_eval_obj.node_set)
 
-        edge_intersection = gen_eval_obj.edge_set.intersection(gold_eval_obj.edge_set)
-        true_positive_edges.append(EvalObj.calc_edge_distributions(edge_intersection))
-        edge_precision += len(edge_intersection) / len(gen_eval_obj.edge_set)
-        edge_recall += len(edge_intersection) / len(gold_eval_obj.edge_set)
+        p_edge_intersection = gen_eval_obj.edge_set_reduced.intersection(gold_eval_obj.edge_set)
+        r_edge_intersection = gen_eval_obj.edge_set.intersection(gold_eval_obj.edge_set_reduced)
+        true_positive_edges.append(EvalObj.calc_edge_distributions(p_edge_intersection))
+        edge_precision += len(p_edge_intersection) / (len(gen_eval_obj.edge_set_reduced))
+        edge_recall += len(r_edge_intersection) / len(gold_eval_obj.edge_set_reduced)
+        # edges_filtered += edge_filtered
 
     print("---------------------Nodes---------------------")
     node_precision = node_precision / len(test_dict)

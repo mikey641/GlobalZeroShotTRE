@@ -12,7 +12,7 @@ gemini_pro_model = None
 gemini_flash_model = None
 
 
-def run_together_llama_8b(_prompt):
+def llama_8b(_prompt):
     client = Together(api_key=os.environ.get("TOGETHER_API_KEY"))
 
     stream = client.chat.completions.create(
@@ -31,7 +31,7 @@ def run_together_llama_8b(_prompt):
     return "".join(response)
 
 
-def run_gpt4_turbo(_prompt):
+def gpt4_turbo(_prompt):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-4-turbo",
@@ -47,7 +47,7 @@ def run_gpt4_turbo(_prompt):
     return response_content
 
 
-def run_gpt4o_mini(_prompt):
+def gpt4o_mini(_prompt):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -255,23 +255,23 @@ def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, i
 
 
 if __name__ == "__main__":
-    example_db = 'matres'
-    test_db = 'matres'
+    example_db = 'eventfull'
+    test_db = 'eventfull'
     # -1 for all predictions
     num_of_pred = -1
     # Number of prompt examples
     num_of_prompt_examples = 1
     _instructions = task_description_v2
-    _llm_to_use = run_together_llama_8b
-    _test_folder = 'data/MATRES/in_my_format/test'
-    _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
-    # _test_folder = 'data/EventFullTrainExports/test'
-    # _dot_test_data = open_input_file('data/DOT_format/EventFull_test_dot.json')
+    _llm_to_use = llama_8b
+    # _test_folder = 'data/MATRES/in_my_format/test'
+    # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
+    _test_folder = 'data/EventFullTrainExports/test'
+    _dot_test_data = open_input_file('data/DOT_format/EventFull_test_dot.json')
 
-    _train_folder = 'data/MATRES/in_my_format/train'
-    _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
-    # _train_folder = 'data/EventFullTrainExports/dev'
-    # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
+    # _train_folder = 'data/MATRES/in_my_format/train'
+    # _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
+    _train_folder = 'data/EventFullTrainExports/dev'
+    _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
     _output_file = f'data/my_data/predictions/output/experiments/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
 
