@@ -134,47 +134,45 @@ def json_to_numpy_graph(content):
 
 # This method is for the evaluation script
 def triplets_to_numpy_graph(triplet_list):
-    event_ids = dict()
-    running_ids = 0
+    event_ids = set()
     for triplet in triplet_list:
         if triplet[0] not in event_ids:
-            event_ids[triplet[0]] = running_ids
-            running_ids += 1
+            event_ids.add(triplet[0])
         if triplet[2] not in event_ids:
-            event_ids[triplet[2]] = running_ids
-            running_ids += 1
+            event_ids.add(triplet[2])
 
+    event_ids_dict = {event: i for i, event in enumerate(sorted(list(event_ids)))}
     # build the graph
-    graph = np.full((running_ids, running_ids), '')
+    graph = np.full((len(event_ids), len(event_ids)), '')
     for triplet in triplet_list:
         if triplet[1] == 'before':
-            if graph[event_ids[triplet[0]], event_ids[triplet[2]]] == '' or graph[event_ids[triplet[0]], event_ids[triplet[2]]] == 'B':
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'B'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'A'
+            if graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == '' or graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == 'B':
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'B'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'A'
             else:
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'C'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'C'
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'C'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'C'
         elif triplet[1] == 'after':
-            if graph[event_ids[triplet[0]], event_ids[triplet[2]]] == '' or graph[event_ids[triplet[0]], event_ids[triplet[2]]] == 'A':
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'A'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'B'
+            if graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == '' or graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == 'A':
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'A'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'B'
             else:
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'C'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'C'
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'C'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'C'
         elif triplet[1] == 'equal':
-            if graph[event_ids[triplet[0]], event_ids[triplet[2]]] == '' or graph[event_ids[triplet[0]], event_ids[triplet[2]]] == 'E':
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'E'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'E'
+            if graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == '' or graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == 'E':
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'E'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'E'
             else:
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'C'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'C'
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'C'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'C'
         elif triplet[1] == 'vague':
-            if graph[event_ids[triplet[0]], event_ids[triplet[2]]] == '' or graph[event_ids[triplet[0]], event_ids[triplet[2]]] == 'V':
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'V'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'V'
+            if graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == '' or graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] == 'V':
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'V'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'V'
             else:
-                graph[event_ids[triplet[0]], event_ids[triplet[2]]] = 'C'
-                graph[event_ids[triplet[2]], event_ids[triplet[0]]] = 'C'
+                graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = 'C'
+                graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = 'C'
 
     # returning the upper triangular matrix
-    return numpy.triu(graph, k=1), event_ids
+    return numpy.triu(graph, k=1), event_ids_dict

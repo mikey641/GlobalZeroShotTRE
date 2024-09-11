@@ -14,6 +14,7 @@ gemini_flash_model = None
 
 def llama_8b(_prompt):
     client = Together(api_key=os.environ.get("TOGETHER_API_KEY"))
+    print(f"Prompt: {_prompt}")
 
     stream = client.chat.completions.create(
         model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
@@ -63,7 +64,7 @@ def gpt4o_mini(_prompt):
     return response_content
 
 
-def run_gpt4o(_prompt):
+def gpt4o(_prompt):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-4o",
@@ -79,7 +80,7 @@ def run_gpt4o(_prompt):
     return response_content
 
 
-def run_gpt4(_prompt):
+def gpt4(_prompt):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-4-0125-preview",
@@ -95,7 +96,7 @@ def run_gpt4(_prompt):
     return response_content
 
 
-def run_gpt3_5(_prompt):
+def gpt3_5(_prompt):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -262,18 +263,18 @@ if __name__ == "__main__":
     # Number of prompt examples
     num_of_prompt_examples = 1
     _instructions = task_description_v2
-    _llm_to_use = llama_8b
+    _llm_to_use = gpt3_5
     # _test_folder = 'data/MATRES/in_my_format/test'
     # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
     _test_folder = 'data/EventFullTrainExports/test'
-    _dot_test_data = open_input_file('data/DOT_format/EventFull_test_dot.json')
+    _dot_test_data = None #open_input_file('data/DOT_format/EventFull_test_dot.json')
 
     # _train_folder = 'data/MATRES/in_my_format/train'
     # _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
     _train_folder = 'data/EventFullTrainExports/dev'
-    _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
+    _dot_train_data = open_input_file('data/DOT_format/trans_reduced/EventFull_dev_dot.json')
 
-    _output_file = f'data/my_data/predictions/output/experiments/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
+    _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_reduced_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
 
     main(test_folder=_test_folder, train_folder=_train_folder, dot_test_data=_dot_test_data,
          dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions,

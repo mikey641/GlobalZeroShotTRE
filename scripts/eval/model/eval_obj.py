@@ -22,6 +22,7 @@ class EvalObj:
         self.calc_duplicates()
         self.orig_distribution = EvalObj.calc_edge_distributions(self.orig_edge_list)
         self.set_distribution = EvalObj.calc_edge_distributions(self.edge_set)
+        self.reduced_distribution = EvalObj.calc_edge_distributions(self.edge_set_reduced)
 
     def fill_all_edges(self):
         for edge in self.orig_edge_list:
@@ -95,11 +96,12 @@ class EvalObj:
             contr_key_rev = f'{e1}#{EvalObj.get_reverse_relation(rel)}#{e2}'
             if key in key_set or key_rev in key_set:
                 self.duplicates += 1
-            elif contr_key in key_set or contr_key_rev in key_set:
+
+            if contr_key in key_set or contr_key_rev in key_set:
                 self.contradictions += 1
-            else:
-                key_set.add(key)
-                key_set.add(key_rev)
+
+            key_set.add(key)
+            key_set.add(key_rev)
 
     def calc_degree(self):
         for edge in self.orig_edge_list:

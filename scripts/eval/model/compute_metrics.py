@@ -1,15 +1,26 @@
 from collections import Counter
+from enum import Enum
 
 from scripts.eval.model.eval_obj import EvalObj
 
 
-def get_dist(eval_objs, before=True):
-    if before:
+class DIST_TYPE(Enum):
+    NOT_ALIGNED = 1
+    ALIGNED = 2
+    REDUCED = 3
+
+
+def get_dist(eval_objs, dist_type=DIST_TYPE.NOT_ALIGNED):
+    if dist_type == DIST_TYPE.NOT_ALIGNED:
         dict_sum = sum([Counter(eval_objs[doc_id].orig_distribution) for doc_id in eval_objs], Counter())
-        return sorted(dict(dict_sum).items()), sum(dict_sum.values())
-    else:
+    elif dist_type == DIST_TYPE.ALIGNED:
         dict_sum = sum([Counter(eval_objs[doc_id].set_distribution) for doc_id in eval_objs], Counter())
-        return sorted(dict(dict_sum).items()), sum(dict_sum.values())
+    elif dist_type == DIST_TYPE.REDUCED:
+        dict_sum = sum([Counter(eval_objs[doc_id].reduced_distribution) for doc_id in eval_objs], Counter())
+    else:
+        raise ValueError("Invalid dist type")
+
+    return sorted(dict(dict_sum).items()), sum(dict_sum.values())
 
 
 def calculate(test_dict):
@@ -38,11 +49,10 @@ def calculate(test_dict):
         node_precision += len(node_intersection) / len(gen_eval_obj.node_set)
         node_recall += len(node_intersection) / len(gold_eval_obj.node_set)
 
-        p_edge_intersection = gen_eval_obj.edge_set_reduced.intersection(gold_eval_obj.edge_set)
-        r_edge_intersection = gen_eval_obj.edge_set.intersection(gold_eval_obj.edge_set_reduced)
-        true_positive_edges.append(EvalObj.calc_edge_distributions(p_edge_intersection))
-        edge_precision += len(p_edge_intersection) / (len(gen_eval_obj.edge_set_reduced))
-        edge_recall += len(r_edge_intersection) / len(gold_eval_obj.edge_set_reduced)
+        edge_intersection = gen_eval_obj.edge_set.intersection(gold_eval_obj.edge_set)
+        true_positive_edges.append(EvalObj.calc_edge_distributions(edge_intersection))
+        edge_precision += len(edge_intersection) / (len(gen_eval_obj.edge_set))
+        edge_recall += len(edge_intersection) / len(gold_eval_obj.edge_set)
         # edges_filtered += edge_filtered
 
     print("---------------------Nodes---------------------")
@@ -61,28 +71,38 @@ def calculate(test_dict):
     edge_recall = edge_recall / len(test_dict)
 
     print("----States-----")
-    gold_dist_before, gold_dist_before_sanity = get_dist(gold_eval_objs, True)
-    gold_dist_after, gold_dist_after_sanity = get_dist(gold_eval_objs, False)
-    pred_dist_before, pred_dist_before_sanity = get_dist(pred_eval_objs, True)
-    pred_dist_after, pred_dist_after_sanity = get_dist(pred_eval_objs, False)
+    gold_dist_before, gold_dist_before_sanity = get_dist(gold_eval_objs, DIST_TYPE.NOT_ALIGNED)
+    gold_dist_after, gold_dist_after_sanity = get_dist(gold_eval_objs, DIST_TYPE.ALIGNED)
+    # gold_dist_reduced, gold_dist_reduced_sanity = get_dist(gold_eval_objs, DIST_TYPE.REDUCED)
+    pred_dist_before, pred_dist_before_sanity = get_dist(pred_eval_objs, DIST_TYPE.NOT_ALIGNED)
+    pred_dist_after, pred_dist_after_sanity = get_dist(pred_eval_objs, DIST_TYPE.ALIGNED)
+    # pred_dist_reduced, pred_dist_reduced_sanity = get_dist(pred_eval_objs, DIST_TYPE.REDUCED)
 
     true_positive_edges_dist = sorted(dict(sum([Counter(d) for d in true_positive_edges], Counter())).items())
     true_positive_edges_dist_tot = sum(dict(true_positive_edges_dist).values())
 
+    print("### GLOD ###")
     print("Gold Original Edges (before align): ", sum([len(gold_eval_objs[doc_id].orig_edge_list) for doc_id in gold_eval_objs]))
-    print("Gold Total Edges (after align): ", sum([len(gold_eval_objs[doc_id].edge_set) for doc_id in gold_eval_objs]))
+    print("Gold Total Edges (after align complete): ", sum([len(gold_eval_objs[doc_id].edge_set) for doc_id in gold_eval_objs]))
+    # print("Gold Total Edges (after align reduced): ", sum([len(gold_eval_objs[doc_id].edge_set_reduced) for doc_id in gold_eval_objs]))
     print(f"Gold Original Edges Distribution (before): {gold_dist_before}, tot={gold_dist_before_sanity}")
     print(f"Gold Total Edges Distribution (after): {gold_dist_after}, tot={gold_dist_after_sanity}")
+    # print(f"Gold Total Edges Distribution (reduced): {gold_dist_reduced}, tot={gold_dist_reduced_sanity}")
+    print()
+
+    print("\n### PRED ###")
     print("Predicted Edges (before align): ", sum([len(pred_eval_objs[doc_id].orig_edge_list) for doc_id in pred_eval_objs]))
-    print("Predicted Edges (after align): ", sum([len(pred_eval_objs[doc_id].edge_set) for doc_id in pred_eval_objs]))
+    print("Predicted Edges (after align complete): ", sum([len(pred_eval_objs[doc_id].edge_set) for doc_id in pred_eval_objs]))
+    # print("Predicted Edges (after align reduced): ", sum([len(pred_eval_objs[doc_id].edge_set_reduced) for doc_id in pred_eval_objs]))
     print(f"Predicted Edges Distribution (before): {pred_dist_before}, tot={pred_dist_before_sanity}")
     print(f"Predicted Edges Distribution (after): {pred_dist_after}, tot={pred_dist_after_sanity}")
+    # print(f"Predicted Edges Distribution (reduced): {pred_dist_reduced}, tot={pred_dist_reduced_sanity}")
     print(f"Predicted Edges Direct Duplicate: {sum([pred_eval_objs[doc_id].duplicates for doc_id in pred_eval_objs])}")
     print(f"Predicted Edges Direct Contradictions: {sum([pred_eval_objs[doc_id].contradictions for doc_id in pred_eval_objs])}")
     print("Predicted Edges Filtered (edges not part of gold): ", edges_filtered)
-    print(f"True Positive Edges: {true_positive_edges_dist}, tot={true_positive_edges_dist_tot}")
+    print(f"Edge Intersect Distribution: {true_positive_edges_dist}, tot={true_positive_edges_dist_tot}")
 
-    print("----Eval-----")
+    print("\n----Eval-----")
     print("Edge Precision: ", edge_precision)
     print("Edge Recall: ", edge_recall)
     print("Edge F1: ", 2 * edge_precision * edge_recall / (edge_precision + edge_recall))
