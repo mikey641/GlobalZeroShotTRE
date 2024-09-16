@@ -1,5 +1,16 @@
-## Scripts
+## Data Folders
+* DOT_format -- My data (EventFull) and MATRES in DOT format
+* DOT_format/trans_reduced -- The data after running the reduced transitive closure algorithm
+* EventFullTrainExports -- The data in the original format (Splits and all)
+* MATRES -- The original MATRES data
+* MATRES/in_my_format -- The MATRES data in my format
 
+## Experiment Data
+* my_data/batch_req -- The files generated for the OpenAI batch request API
+* predictions -- All Model predictions, file name indicate the model used and type of experiment
+
+
+## Scripts
 ### convert_matres_and_tbd.py
 - Run `convert_matres_and_tbd.py` to convert TB to my json format (will create a directory with all the files in my json format).
     - Run 'data/MATRES/orig_files/TimeBank' with `MATRES/timebank.txt` for train

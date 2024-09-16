@@ -5,7 +5,7 @@ from scripts.eval.model.compute_metrics import calculate
 
 
 if __name__ == "__main__":
-    prediction_file = "data/my_data/predictions/output/experiments/eventfull/eventfull_run_gpt3_5_-1pred_1exmples_task_description_v2.json"
+    prediction_file = "data/my_data/predictions/eventfull/outputs/eventfull_gpt4o_1exmlps_rand_21_task_description_v2.json"
     gold_file = "data/DOT_format/EventFull_test_dot.json"
     # gold_file = "data/DOT_format/MATRES_test_dot.json"
 

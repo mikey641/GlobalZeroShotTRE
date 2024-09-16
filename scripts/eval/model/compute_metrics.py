@@ -36,7 +36,9 @@ def calculate(test_dict):
     gold_eval_objs = dict()
     pred_eval_objs = dict()
 
+    print("##### Per Doc Precision and Recall #####")
     for doc_id in test_dict:
+        print("Doc ID: ", doc_id)
         gold_edge_list = test_dict[doc_id]['gold']
         gold_eval_obj = EvalObj(doc_id, gold_edge_list)
         gold_eval_objs[doc_id] = gold_eval_obj
@@ -51,8 +53,14 @@ def calculate(test_dict):
 
         edge_intersection = gen_eval_obj.edge_set.intersection(gold_eval_obj.edge_set)
         true_positive_edges.append(EvalObj.calc_edge_distributions(edge_intersection))
-        edge_precision += len(edge_intersection) / (len(gen_eval_obj.edge_set))
-        edge_recall += len(edge_intersection) / len(gold_eval_obj.edge_set)
+        e_per = len(edge_intersection) / (len(gen_eval_obj.edge_set))
+        e_rec = len(edge_intersection) / len(gold_eval_obj.edge_set)
+        edge_precision += e_per
+        edge_recall += e_rec
+        print("Edge Precision: ", e_per)
+        print("Edge Recall: ", e_rec)
+        print("Edge F1: ", 2 * e_per * e_rec / (e_per + e_rec))
+        print("=====================================")
         # edges_filtered += edge_filtered
 
     print("---------------------Nodes---------------------")

@@ -66,9 +66,10 @@ def calc_stats(golds):
 
 
 if __name__ == "__main__":
-    in_file = "data/DOT_format/MATRES_train_dot.json"
+    in_file = "data/DOT_format/MATRES_test_dot.json"
     # in_file = "data/DOT_format/EventFull_test_dot.json"
-    # in_file = "data/my_data/predictions/output/experiments/matres/eventfull_run_gpt3_5_-1pred_1exmples_task_description_v2.json"
+    # in_file = "data/NYT_SetAlign/NYT_des_human.json"
+    # in_file = "data/my_data/predictions/output/experiments/matres/eventfull_gpt3_5_-1pred_1exmples_task_description_v2.json"
 
     with open(in_file) as f:
         _golds = json.load(f)
