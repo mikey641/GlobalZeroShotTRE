@@ -59,7 +59,11 @@ def calculate(test_dict):
         edge_recall += e_rec
         print("Edge Precision: ", e_per)
         print("Edge Recall: ", e_rec)
-        print("Edge F1: ", 2 * e_per * e_rec / (e_per + e_rec))
+        if e_per + e_rec == 0:
+            print("Edge F1: ", 0)
+        else:
+            print("Edge F1: ", 2 * e_per * e_rec / (e_per + e_rec))
+
         print("=====================================")
         # edges_filtered += edge_filtered
 

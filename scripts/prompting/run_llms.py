@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 import google.generativeai as genai
 from openai import OpenAI
@@ -208,20 +209,32 @@ def get_input_text(data):
         return text
 
 
-def prepare_instructions(train_folder, dot_train_data, number_of_examples=1):
+def prepare_instructions(train_folder, dot_train_data, number_of_examples=1, sel_random=False, selected_file=None):
     examples = list()
-    for file1 in os.listdir(train_folder):
-        if len(examples) < number_of_examples:
-            data = open_input_file(f'{train_folder}/{file1}')
-            intput_text = get_input_text(data)
-            output_example = dot_train_data[file1]['target']
-            examples.append((intput_text, output_example))
+    if sel_random:
+        file1 = random.choice(os.listdir(train_folder))
+        print(f'Randomly Selected File: {file1}')
+        data = open_input_file(f'{train_folder}/{file1}')
+        intput_text = get_input_text(data)
+        output_example = dot_train_data[file1]['target']
+        examples.append((intput_text, output_example))
+    else:
+        for file1 in os.listdir(train_folder):
+            if selected_file and file1 != selected_file:
+                continue
+
+            if len(examples) < number_of_examples:
+                print(f'Sequentially Selected File: {file1}')
+                data = open_input_file(f'{train_folder}/{file1}')
+                intput_text = get_input_text(data)
+                output_example = dot_train_data[file1]['target']
+                examples.append((intput_text, output_example))
 
     instruct_examples = list()
     for i, example in enumerate(examples):
-        input = f'Example {i + 1}:\n' + example[0] + '\n'
-        output = "Expected output:\n" + example[1] + "\n"
-        instruct_examples.append(input + output)
+        input_expl = f'Example {i + 1}:\n' + example[0] + '\n'
+        output_expl = "Expected output:\n" + example[1] + "\n"
+        instruct_examples.append(input_expl + output_expl)
 
     return "\n".join(instruct_examples)
 
@@ -232,10 +245,10 @@ def open_input_file(file_path):
     return data
 
 
-def main(test_folder, train_folder, dot_test_data, dot_train_data, llm_to_use, instructions_func, output_file, number_of_pred, prompt_examples):
+def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_func, output_file, number_of_pred, prompt_examples, selected_file):
     # load json file
     predictions = dict()
-    examples = prepare_instructions(train_folder, dot_train_data, prompt_examples)
+    examples = prepare_instructions(train_folder, dot_train_data, prompt_examples, sel_random=False, selected_file=selected_file)
     final_instructions = instructions_func(examples)
     count = 0
     for i, file1 in enumerate(os.listdir(test_folder)):
@@ -259,23 +272,24 @@ if __name__ == "__main__":
     example_db = 'eventfull'
     test_db = 'eventfull'
     # -1 for all predictions
-    num_of_pred = -1
     # Number of prompt examples
+    num_of_pred = -1
     num_of_prompt_examples = 1
+    _selected_file = '22_final.json'
     _instructions = task_description_v2
-    _llm_to_use = gpt3_5
+    _llm_to_use = llama_8b
     # _test_folder = 'data/MATRES/in_my_format/test'
     # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
     _test_folder = 'data/EventFullTrainExports/test'
-    _dot_test_data = None #open_input_file('data/DOT_format/EventFull_test_dot.json')
 
     # _train_folder = 'data/MATRES/in_my_format/train'
     # _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
     _train_folder = 'data/EventFullTrainExports/dev'
-    _dot_train_data = open_input_file('data/DOT_format/trans_reduced/EventFull_dev_dot.json')
+    _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
-    _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_reduced_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
+    # _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
+    _output_file = f'data/my_data/predictions/{test_db}/outputs/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmp_rand_22_{_instructions.__name__}.json'
 
-    main(test_folder=_test_folder, train_folder=_train_folder, dot_test_data=_dot_test_data,
+    main(test_folder=_test_folder, train_folder=_train_folder,
          dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions,
-         output_file=_output_file, number_of_pred=num_of_pred, prompt_examples=num_of_prompt_examples)
+         output_file=_output_file, number_of_pred=num_of_pred, prompt_examples=num_of_prompt_examples, selected_file=_selected_file)

@@ -25,3 +25,6 @@
 ### model/evaluation.py
 - Run `model/evaluation.py` to evaluate the model (gold vs. prediction) reuslt state will be outputed similar to the calc_graph_stats script.
 
+### run_gpt_batch.ipynb
+- Run `prompting/run_gpt_batch.ipynb` to run GPT-X in batch mode (run step by step to create request, run and generate response).
+
