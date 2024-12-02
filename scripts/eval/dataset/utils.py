@@ -18,11 +18,11 @@ def count_stats_in_file(data):
 
     all_pairs = data["allPairs"]
     for pair in all_pairs:
-        if pair['_relation'].startswith('equal'):
+        if pair['_relation'].lower().startswith('equal'):
             num_equal_pairs += 1
-        elif pair['_relation'].startswith('before') or pair['_relation'].startswith('after'):
+        elif pair['_relation'].lower().startswith('before') or pair['_relation'].lower().startswith('after'):
             num_before_after_pairs += 1
-        elif pair['_relation'].startswith('uncertain'):
+        elif pair['_relation'].lower().startswith('uncertain') or pair['_relation'].lower().startswith('vague'):
             num_vague_pairs += 1
 
     expected_pairs = (math.pow(num_mentions, 2) - num_mentions) / 2

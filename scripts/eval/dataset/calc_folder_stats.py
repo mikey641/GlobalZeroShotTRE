@@ -15,7 +15,7 @@ def gather_files(path):
 
 
 def main():
-    group_files = gather_files('data/my_data/EventFullTrainExports')
+    group_files = gather_files('data/MATRES/in_my_format/train')
     total_files = 0
     _total_ment, _total_pairs, _total_diff, _total_same, _avg_agreement, _total_diff_same = 0, 0, 0, 0, 0, 0
 
