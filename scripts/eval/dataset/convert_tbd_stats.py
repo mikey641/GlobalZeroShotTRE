@@ -3,6 +3,7 @@ import os
 import re
 import uuid
 import xml.etree.ElementTree as ET
+from collections import Counter
 
 
 class Doc:
@@ -234,54 +235,29 @@ def read_folder(folder_path):
     return all_read_files
 
 
-def generate(all_tb, matres):
+def generate(all_tb):
     my_format = dict()
+    rel_list = list()
+    relv_events = set()
     for tb_file_name, tb_file_values in all_tb.items():
         tb_file_name = tb_file_name.removesuffix('.tml')
-        if tb_file_name not in matres:
-            print(f"ERROR: {tb_file_name} not in matres_tb")
-            continue
 
         doc, tokens, events, tlinks = tb_file_values
-        matres_pairs = matres[tb_file_name]
-        relv_events = set()
-        for pair in matres_pairs:
-            found_first = False
-            found_second = False
-            for event in events:
-                event.axisType = 'main'
-                if event.m_id == pair._firstId:
-                    if event.tokens != pair.firstEventText:
-                        print(f"ERROR: {event.tokens} != {pair.firstEventText}")
-                    found_first = True
-                    relv_events.add(event)
-                elif event.m_id == pair._secondId:
-                    if event.tokens != pair.secondEventText:
-                        print(f"ERROR: {event.tokens} != {pair.secondEventText}")
-                    found_second = True
-                    relv_events.add(event)
 
-            if not found_first or not found_second:
-                print(f"ERROR: {pair._firstId} or {pair._secondId} not found in events")
+        for pair in tlinks:
+            relv_events.add(pair.firstEvent)
+            relv_events.add(pair.secondEvent)
+            rel_list.append(pair.relType)
 
-        my_format[tb_file_name] = {"tokens": tokens, "allMentions": list(relv_events), "allPairs": matres_pairs}
-
+    histogram = Counter(rel_list)
     return my_format
 
 
 def main():
-    timebank_path = 'data/TimeBank-Dense/all_in_one_folder'
-    # timebank_path = 'data/MATRES/orig_files/TimeBank'
-    # time_aquaint = 'data/MATRES/orig_files/aquaint'
-    all_tb = read_folder(timebank_path)
-    # all_aq = read_folder(time_aquaint)
-    matres_aq = read_matres_file('data/MATRES/aquaint.txt')
-    matres_pl = read_matres_file('data/MATRES/platinum.txt')
-    matres_tb = read_matres_file('data/MATRES/timebank.txt')
+    all_tb = read_folder('data/TimeBank-Dense/all_in_one_folder')
+    output_path = 'data/TimeBank-Dense/in_my_format'
 
-    output_path = 'data/MATRES/in_my_format/test'
-
-    conv_my_format = generate(all_tb, matres_pl)
+    conv_my_format = generate(all_tb)
     for doc_id, doc_data in conv_my_format.items():
         with open(f"{output_path}/{doc_id}.json", 'w') as f:
             json.dump(doc_data, f, default=lambda o: o.__dict__, indent=4)
