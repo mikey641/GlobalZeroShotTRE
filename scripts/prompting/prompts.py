@@ -59,16 +59,89 @@ def task_description_v3(examples):
     desc = f"""
 Task Overview:
 You will analyze a text where events are marked with '<' and '>' symbols, and each event is identified with an ID shown in parentheses immediately after the event. 
-Your task is to determine the temporal relationships between these pairs based on the starting times of the event mentions.
-The temporal relation can be one of [before, after, equal, vague (for when the temporal relation cannot be determine from the context)].
+Your task is to determine the temporal relationships between these pairs based on the starting times (only) of the events.
+
 Output only the temporal relationships between the pairs in DOT format, without any additional information.
 
-Output Format:
-Output the list of event pairs with the resolved temporal relationships in DOT format.
+Instructions for Determining Temporal Relationships:
+Before: If Event A starts before Event B. Example: "A traveler is <kidnapped(01)>, and the police officers <said(02)> The kidnapper is demanding money". 
+Since 'kidnapped' must have occurred before 'said', the relationship should be kidnapped 'before' said.
+After: If Event A starts after Event B. Using the previous example, the relationship for 'said(02) and kidnapped(01)' is 'after'.
+Equal: If Event A and B start simultaneously, for example: "They <filed(03)> objections, <claiming(04)> unfair treatment". Since both events refer to the same thing, they occured at the same time, thus, the relationship should be 'equal'.
+Vague: If the start times of Event A and B cannot be determined, for example: "I <ate(05)> and <drank(06)> at lunch". The sequence cannot be determined if I first started to eat or first started to drink as both are logically possible, the relationship should be 'vague'.
 
-Example(s):
+Maintaining Transitive Consistency
+Before transitivity:
+If A is before B, and B is before C, then A is before C.
+If A is before B, and B equals C, then A is before C.
+
+After transitivity:
+If A is after B, and B is after C, then A is after C.
+If A is after B, and B equals C, then A is after C.
+
+Equal relationships:
+If A equals B, and B equals C, then A equals C.
+If A equals B, and B is before C, then A is before C.
+If A equals B, and B is after C, then A is after C.
+
+Vague handling:
+If A is vague B, and B equals C, then A is vague C.
+If A equals B, and B is vague C, then A is vague C.
+
+Look for Temporal Indicators:
+Use explicit temporal indicators such as dates, times, and keywords like 'before', 'after', and 'at the same time' in the provided context to help determine relationships when logical deduction fails. 
+If no indicators are present, and logical deduction fails, mark the relationship as 'vague'.
+
+Pay close attention to these instructions and examples to accurately determine the temporal relationships between events.
+
 {examples}
 
 Following is the input text with events for you to process and predict:
     """
+    return desc
+
+
+def task_description_v4(examples):
+    desc = f"""
+Task Overview:
+Analyze the text where events are marked with <eventName(identifier)> and determine temporal relationships (before, after, equal, or vague) based on explicit cues and narrative context.
+
+Key Guidelines: 
+Consider only the starting time of each event as the basis for determining temporal relationships, irrespective of the event's duration or ongoing nature.
+Prioritize explicit temporal cues in the text. In cases of ambiguity, rely on reasoning based on the narrative context.
+If no explicit cues or clear logical reasoning establish a sequence, label the relationship as vague.
+Treat every event marked with a unique identifier (e.g., <eventName(identifier)>) as distinct, regardless of similarities in descriptions. Ensure no identifiers are skipped.
+
+Output only the temporal relationships between the pairs in DOT format, without any additional information.
+{examples}
+
+Following is the input text with events for you to process and predict:
+    """
+    return desc
+
+
+def task_description_v5(examples):
+    desc = """
+Task Overview:
+Analyze the text where events are marked with <eventName(identifier)> and determine temporal relationships (before, after, equal, or vague) based on explicit cues and narrative context.
+The context will be followed by the event pairs list requiring evaluation.
+
+Key Guidelines: 
+Consider only the starting time of each event as the basis for determining temporal relationships, irrespective of the event's duration or ongoing nature.
+Prioritize explicit temporal cues in the text. In cases of ambiguity, rely on reasoning based on the narrative context.
+If no explicit cues or clear logical reasoning establish a sequence, label the relationship as vague.
+Treat every event marked with a unique identifier (e.g., <eventName(identifier)>) as distinct, regardless of similarities in descriptions. Ensure no identifiers are skipped.
+
+The output should be in two steps:
+First: provide a detailed explanation of the story timeline based on your interpretation and the events marked in it.
+
+Then:
+For every pair, provide the temporal relationship between the events in the following DOT format.
+
+strict graph {
+"Event1(id)" -- "Event2(id)" [rel=LABEL];
+"Event1(id)" -- "Event3(id)" [rel=LABEL];
+...
+}
+"""
     return desc

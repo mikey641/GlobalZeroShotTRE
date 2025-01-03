@@ -24,7 +24,7 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, instruc
 
         count += 1
         data = open_input_file(f'{test_folder}/{file1}')
-        text = get_input_text(data)
+        text, all_pairs = get_input_text(data)
         prompt = final_instructions + '\n' + text
 
         # Count the number of tokens in the prompt
@@ -72,7 +72,7 @@ if __name__ == "__main__":
                 continue
 
             data = open_input_file(f'{_train_folder}/{doc_name_test}')
-            text = get_input_text(data)
+            text, all_pairs = get_input_text(data)
             prompt = _final_instructions + '\n' + text
 
             # Count the number of tokens in the prompt

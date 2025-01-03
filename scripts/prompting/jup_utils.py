@@ -3,7 +3,7 @@ import os
 import random
 import tiktoken
 
-from scripts.prompting.prompts import task_description_v2
+from scripts.prompting.prompts import task_description_v2, task_description_v3, task_description_v4, task_description_v5
 
 
 def create_batch_request(prompt, request_id, model_id):
@@ -44,11 +44,11 @@ def get_input_text(data):
         all_mentions.sort(key=lambda x: x['tokens_ids'][0])
         # all_mentions_text = [m['tokens'] for m in all_mentions]
         # all_ment_ids = [m['m_id'] for m in all_mentions]
-        # all_pairs = data['allPairs']
+        all_pairs = data['allPairs']
         text = mark_events_in_text(tokens, all_mentions)
         # print(f'The mentions are-{all_mentions_text}')
         # print(f'The input text is-{text}')
-        return text
+        return text, all_pairs
 
 
 def open_input_file(file_path):
@@ -101,7 +101,7 @@ def prepare_instructions(train_folder, dot_train_data, number_of_examples=1, sel
 
 def get_example(file_to_use, target, reduction):
     data = open_input_file(file_to_use)
-    intput_text = get_input_text(data)
+    intput_text, all_pairs = get_input_text(data)
     if reduction > 0:
         split_out = target.split('\n')
         target_pref = split_out[0:2]
@@ -118,13 +118,23 @@ def get_example(file_to_use, target, reduction):
     return intput_text, output_example
 
 
+def get_all_pairs(all_pairs, ment_dict):
+    ret_pairs_dot = list()
+    for pair in all_pairs:
+        first_ment = ment_dict[pair['_firstId']]
+        second_ment = ment_dict[pair['_secondId']]
+        ret_pairs_dot.append(f"{first_ment} -- {second_ment}")
+
+    return ret_pairs_dot
+
+
 def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_file, num_of_files,
-                              num_of_examples, selected_file, model_id, reduction=-1):
+                              num_of_examples, selected_file, model_id, reduction=-1, gen_pairs=False):
     enc = tiktoken.encoding_for_model(model_id)
     json_lines = list()
 
     examples = prepare_instructions(train_folder, dot_train_data, num_of_examples, selected_file, reduction)
-    final_instructions = task_description_v2(examples)
+    final_instructions = task_description_v5(examples)
 
     total_tokens = 0
     count = 0
@@ -134,8 +144,14 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_
 
         count += 1
         data = open_input_file(f'{test_folder}/{file1}')
-        text = get_input_text(data)
+        text, all_pairs = get_input_text(data)
         prompt = final_instructions + '\n' + text
+
+        if gen_pairs:
+            all_mentions = data['allMentions']
+            all_ment_ids = {m['m_id']: f"{m['tokens']}({m['m_id']})" for m in all_mentions}
+            example_matrix = get_all_pairs(all_pairs, all_ment_ids)
+            prompt += '\nPairs require classification:\n' + '\n'.join(example_matrix)
 
         # Count the number of tokens in the prompt
         encoded_text = enc.encode(prompt)
