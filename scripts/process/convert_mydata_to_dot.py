@@ -47,8 +47,8 @@ def convert_doc_to_dot(content):
 
 
 if __name__ == '__main__':
-    _folder_path = 'data/EventFullTrainExports/test'
-    _output_path = 'data/tmp/EventFull_test_dot.json'
+    _folder_path = 'data/TimeBank-Dense/test_converted'
+    _output_path = 'data/tmp/TimeBankDense_test_dot.json'
     _files_content = read_files_from_folder(_folder_path)
 
     _out_json = dict()

@@ -87,16 +87,19 @@ def gpt4o(_prompt, messages=None):
     return response_content
 
 
-def gpt4(_prompt):
+def gpt4(_prompt, messages=None):
     client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-    response = client.chat.completions.create(
-        model="gpt-4-0125-preview",
-        messages=[
+    if messages is None:
+        messages = [
             {
                 "role": "user",
                 "content": _prompt
             },
         ]
+
+    response = client.chat.completions.create(
+        model="gpt-4-0125-preview",
+        messages=messages,
     )
 
     response_content = response.choices[0].message.content
@@ -195,8 +198,8 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
          number_of_pred, prompt_examples, selected_file, reduction=-1.0, gen_pairs=False):
     # load json file
     predictions = dict()
-    examples = prepare_instructions(train_folder, dot_train_data, prompt_examples, selected_file, reduction)
-    final_instructions = instructions_func(examples)
+    # examples = prepare_instructions(train_folder, dot_train_data, prompt_examples, selected_file, reduction)
+    final_instructions = instructions_func(None)
     count = 0
     for i, file1 in enumerate(tqdm(os.listdir(test_folder))):
         if count == number_of_pred:
@@ -209,8 +212,9 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
         task_desc = final_instructions + '\n' + text
         if gen_pairs:
             all_mentions = data['allMentions']
-            all_ment_ids = {m['m_id']: f"{m['tokens']}({m['m_id']})" for m in all_mentions}
-            example_matrix = get_all_pairs(all_pairs, all_ment_ids)
+            # all_ment_ids = {m['m_id']: f"{m['tokens']}({m['m_id']})" for m in all_mentions}
+            all_ment_ids = {m['m_id']: m for m in all_mentions}
+            example_matrix = get_all_pairs(all_pairs, all_ment_ids, reduction)
             task_desc += '\nPairs require classification:\n' + '\n'.join(example_matrix)
 
         try:
@@ -225,24 +229,25 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
 
 if __name__ == "__main__":
     example_db = 'eventfull'
-    test_db = 'eventfull'
+    test_db = 'tb_dense'
     # -1 for all predictions
     # Number of prompt examples
     num_of_pred = 1
     num_of_prompt_examples = 1
-    _reduction = -1
+    _reduction = 0.1
     # APW19980213.1380.json
-    _selected_file = '21_final.json'
+    _selected_file = 'AP_20130322.json'
     _instructions = task_description_v5
     _llm_to_use = gpt3_5
-    # _test_folder = 'data/MATRES/in_my_format/test'
+    _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
+    # _test_folder = 'data/TimeBank-Dense/test_converted'
     # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
-    _test_folder = 'data/EventFullTrainExports/test'
+    # _test_folder = 'data/EventFullTrainExports/test'
 
-    # _train_folder = 'data/MATRES/in_my_format/train'
-    # _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
-    _train_folder = 'data/EventFullTrainExports/train'
-    _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
+    _train_folder = 'data/MATRES/in_my_format/train'
+    _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
+    # _train_folder = 'data/EventFullTrainExports/train'
+    # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
     # _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
     _output_file = f'data/my_data/predictions/{test_db}/outputs/test_{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmp_rand_21_{_instructions.__name__}.json'

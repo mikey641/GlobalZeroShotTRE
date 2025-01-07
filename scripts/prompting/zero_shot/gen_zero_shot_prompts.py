@@ -59,10 +59,15 @@ def prepare_instructions(test_folder, instructions_func):
 if __name__ == "__main__":
     _instructions = prompt_cot
 
-    _test_folder = 'data/EventFullTrainExports/test'
-    _output_file = f'data/my_data/zero_shot/eventfull_cot_prompts.jsonl'
+    # _test_folder = 'data/EventFullTrainExports/test'
+    # _output_file = f'data/my_data/zero_shot/eventfull_cot_prompts.jsonl'
+
+    _test_folder = 'data/MATRES/in_my_format/test'
+    _output_file = f'data/my_data/zero_shot/matres_cot_prompts.jsonl'
 
     examples = prepare_instructions(_test_folder, _instructions)
     # Write the list as json list file
     with open(_output_file, 'w') as _file:
         json.dump(examples, _file, indent=4, ensure_ascii=False)
+
+    print(f"total examples: {len(examples)}")

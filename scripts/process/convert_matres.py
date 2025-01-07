@@ -192,8 +192,8 @@ def extract_pair(axis_id, tlink):
         pair['_relation'] = 'equal'
     elif tlink.relType == 'VAGUE':
         pair['_relation'] = 'uncertain'
-    elif tlink.relType == 'IS_INCLUDED' or tlink.relType == 'INCLUDES' or tlink.relType == 'OVERLAP':
-        pass
+    # elif tlink.relType == 'IS_INCLUDED' or tlink.relType == 'INCLUDES' or tlink.relType == 'OVERLAP':
+    #     pass
     else:
         pair['_relation'] = tlink.relType.lower()
 

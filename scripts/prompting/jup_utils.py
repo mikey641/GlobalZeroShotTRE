@@ -118,11 +118,27 @@ def get_example(file_to_use, target, reduction):
     return intput_text, output_example
 
 
-def get_all_pairs(all_pairs, ment_dict):
+def get_all_pairs(all_pairs, ment_dict, reduction):
     ret_pairs_dot = list()
+    if reduction > 0:
+        sample_size = max(1, int(len(all_pairs) * reduction))
+        indices_to_remove = random.sample(range(len(all_pairs)), sample_size)
+        all_pairs = [all_pairs[i] for i in range(len(all_pairs)) if i not in indices_to_remove]
+
+    pairs_with_id = list()
     for pair in all_pairs:
-        first_ment = ment_dict[pair['_firstId']]
-        second_ment = ment_dict[pair['_secondId']]
+        new_pair = pair.copy()
+        new_pair['index'] = ment_dict[pair['_firstId']]['tokens_ids'][0]
+        pairs_with_id.append(new_pair)
+
+    sorted_pairs = sorted(pairs_with_id, key=lambda x: x['index'])
+
+    for pair in sorted_pairs:
+        # m1 = f"{m['tokens']}({m['m_id']})"
+        m1 = ment_dict[pair['_firstId']]
+        m2 = ment_dict[pair['_secondId']]
+        first_ment = f"{m1['tokens']}({m1['m_id']})"
+        second_ment = f"{m2['tokens']}({m2['m_id']})"
         ret_pairs_dot.append(f"{first_ment} -- {second_ment}")
 
     return ret_pairs_dot
@@ -149,8 +165,9 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_
 
         if gen_pairs:
             all_mentions = data['allMentions']
-            all_ment_ids = {m['m_id']: f"{m['tokens']}({m['m_id']})" for m in all_mentions}
-            example_matrix = get_all_pairs(all_pairs, all_ment_ids)
+            # all_ment_ids = {m['m_id']: f"{m['tokens']}({m['m_id']})" for m in all_mentions}
+            all_ment_ids = {m['m_id']: m for m in all_mentions}
+            example_matrix = get_all_pairs(all_pairs, all_ment_ids, reduction)
             prompt += '\nPairs require classification:\n' + '\n'.join(example_matrix)
 
         # Count the number of tokens in the prompt
