@@ -61,9 +61,9 @@ def ret_only_relevant_mentions(mentions, pairs):
 
 
 if __name__ == "__main__":
-    _max_pairs_in_chunk = 150
+    _max_pairs_in_chunk = 120
     _test_folder = 'data/MATRES/in_my_format/test'
-    _test_out_folder = 'data/MATRES/in_my_format_all_pairs/test'
+    _test_out_folder = 'data/MATRES/in_my_format_all_pairs_120/test'
     for i, file1 in enumerate(tqdm(os.listdir(_test_folder))):
         file_name, file_extension = os.path.splitext(file1)
 
