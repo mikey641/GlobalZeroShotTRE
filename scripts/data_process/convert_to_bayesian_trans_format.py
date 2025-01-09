@@ -16,6 +16,7 @@ def prettify_xml(elem):
 
 def process_text(sentences, mentions):
     token_doc_index = 0
+    mentions.sort(key=lambda x: x['tokens_ids'][0])
     ment_iter = iter(mentions)
     curr_ment = next(ment_iter)
     for sent_id, sent in enumerate(sentences):
@@ -146,6 +147,6 @@ def start_process(nlp, input_folder, output_file):
 
 if __name__ == '__main__':
     _nlp = spacy.load("en_core_web_trf")
-    _input_folder = 'data/EventFullTrainExports/train'
-    _output_file = 'data/bayesian_format/trainset_eventfull.xml'
+    _input_folder = 'data/TimeBank-Dense/test_converted'
+    _output_file = 'data/bayesian_format/testset_tbd.xml'
     start_process(_nlp, _input_folder, _output_file)

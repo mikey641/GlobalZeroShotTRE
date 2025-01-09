@@ -74,6 +74,7 @@ class MATRES_PAIR:
 
 
 def extract_tlinks(root):
+    pairs_set = set()
     event_tlinks = []
     time_tlinks = []
     supported_res = list()
@@ -85,9 +86,13 @@ def extract_tlinks(root):
         timeId = tlink_element.get('timeID')
         relType = tlink_element.get('relType')
         # Other are cases that its related to time (event->timex, timex->event, timex->timex)
+        if f'{eventInstanceID}#{relatedToEventInstance}' in pairs_set:
+            continue
+
         if eventInstanceID and relatedToEventInstance and relType:
             event_tlinks.append(TLINK(eventInstanceID, relatedToEventInstance, relType))
             supported_res.append(relType)
+            pairs_set.add(f'{eventInstanceID}#{relatedToEventInstance}')
         elif eventInstanceID and relatedToTime and relType:
             time_tlinks.append(TLINK(eventInstanceID, relatedToTime, relType))
         elif timeId and relatedToEventInstance and relType:

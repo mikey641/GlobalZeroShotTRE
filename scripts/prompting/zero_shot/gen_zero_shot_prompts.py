@@ -62,8 +62,11 @@ if __name__ == "__main__":
     # _test_folder = 'data/EventFullTrainExports/test'
     # _output_file = f'data/my_data/zero_shot/eventfull_cot_prompts.jsonl'
 
-    _test_folder = 'data/MATRES/in_my_format/test'
-    _output_file = f'data/my_data/zero_shot/matres_cot_prompts.jsonl'
+    # _test_folder = 'data/MATRES/in_my_format/test'
+    # _output_file = f'data/my_data/zero_shot/matres_cot_prompts.jsonl'
+
+    _test_folder = 'data/TimeBank-Dense/test_converted'
+    _output_file = f'data/my_data/zero_shot/tbd_cot_prompts.jsonl'
 
     examples = prepare_instructions(_test_folder, _instructions)
     # Write the list as json list file

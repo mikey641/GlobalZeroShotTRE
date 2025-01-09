@@ -3,7 +3,8 @@ import os
 import random
 import tiktoken
 
-from scripts.prompting.prompts import task_description_v2, task_description_v3, task_description_v4, task_description_v5
+from scripts.prompting.prompts import task_description_v2, task_description_v3, \
+    task_description_v5, task_description_v5_with_example, task_description_tbd
 
 
 def create_batch_request(prompt, request_id, model_id):
@@ -150,7 +151,7 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_
     json_lines = list()
 
     examples = prepare_instructions(train_folder, dot_train_data, num_of_examples, selected_file, reduction)
-    final_instructions = task_description_v5(examples)
+    final_instructions = task_description_tbd(examples)
 
     total_tokens = 0
     count = 0
@@ -165,7 +166,6 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_
 
         if gen_pairs:
             all_mentions = data['allMentions']
-            # all_ment_ids = {m['m_id']: f"{m['tokens']}({m['m_id']})" for m in all_mentions}
             all_ment_ids = {m['m_id']: m for m in all_mentions}
             example_matrix = get_all_pairs(all_pairs, all_ment_ids, reduction)
             prompt += '\nPairs require classification:\n' + '\n'.join(example_matrix)

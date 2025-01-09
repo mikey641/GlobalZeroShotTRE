@@ -101,7 +101,7 @@ Following is the input text with events for you to process and predict:
     return desc
 
 
-def task_description_v4(examples):
+def task_description_v5_with_example(examples):
     desc = f"""
 Task Overview:
 Analyze the text where events are marked with <eventName(identifier)> and determine temporal relationships (before, after, equal, or vague) based on explicit cues and narrative context.
@@ -112,7 +112,11 @@ Prioritize explicit temporal cues in the text. In cases of ambiguity, rely on re
 If no explicit cues or clear logical reasoning establish a sequence, label the relationship as vague.
 Treat every event marked with a unique identifier (e.g., <eventName(identifier)>) as distinct, regardless of similarities in descriptions. Ensure no identifiers are skipped.
 
-Output only the temporal relationships between the pairs in DOT format, without any additional information.
+The output should be in two steps:
+First: provide a detailed explanation of the story timeline based on your interpretation and the events marked in it.
+
+Then:
+For each pair, based on your explanation, provide the temporal relationship between the events in DOT format.
 {examples}
 
 Following is the input text with events for you to process and predict:
@@ -150,7 +154,7 @@ strict graph {
 def task_description_tbd(examples):
     desc = """
 Task Overview:
-Analyze the text where events are marked with <eventName(identifier)> and determine temporal relationships (before, after, equal, includes, is-included, or vague) based on explicit cues and narrative context.
+Analyze the text where events are marked with <eventName(identifier)> and determine temporal relationships (before, after, equal, includes, included, or vague) based on explicit cues and narrative context.
 The context will be followed by the event pairs list requiring evaluation.
 
 Key Guidelines: 

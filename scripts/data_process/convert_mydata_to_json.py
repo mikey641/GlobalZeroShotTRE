@@ -1,6 +1,6 @@
 import json
 
-from scripts.process.convert_mydata_to_dot import read_files_from_folder
+from scripts.data_process.convert_mydata_to_dot import read_files_from_folder
 
 
 def convert_doc_to_json(content):

@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 from scripts.eval.dataset.utils import find_ment_by_id
 from scripts.prompting.jup_utils import open_input_file, get_input_text, prepare_instructions, get_all_pairs
-from scripts.prompting.prompts import task_description_v2, task_description_v3, task_description_v4, task_description_v5
+from scripts.prompting.prompts import task_description_v5
 
 gemini_pro_model = None
 gemini_flash_model = None

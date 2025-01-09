@@ -1,4 +1,5 @@
 import json
+import math
 import os
 
 from tqdm import tqdm
@@ -61,9 +62,9 @@ def ret_only_relevant_mentions(mentions, pairs):
 
 
 if __name__ == "__main__":
-    _max_pairs_in_chunk = 120
+    _max_pairs_in_chunk = 150
     _test_folder = 'data/MATRES/in_my_format/test'
-    _test_out_folder = 'data/MATRES/in_my_format_all_pairs_120/test'
+    _test_out_folder = 'data/MATRES/in_my_format_all_pairs/test'
     for i, file1 in enumerate(tqdm(os.listdir(_test_folder))):
         file_name, file_extension = os.path.splitext(file1)
 
@@ -74,9 +75,12 @@ if __name__ == "__main__":
         assert _pairs_with_rel == len(_data['allPairs'])
 
         if len(_all_new_pairs) > _max_pairs_in_chunk:
-            chunk_pairs = [_all_new_pairs[i:i + _max_pairs_in_chunk] for i in range(0, len(_all_new_pairs), _max_pairs_in_chunk)]
-            for j, chunk in enumerate(chunk_pairs):
+            chunks_size = math.ceil(len(_all_new_pairs) / math.ceil(len(_all_new_pairs) / _max_pairs_in_chunk))
+            chunk_pairs = [_all_new_pairs[i:i + chunks_size] for i in range(0, len(_all_new_pairs), chunks_size)]
+            total_pairs_all_chunks = sum([len(chunk) for chunk in chunk_pairs])
+            assert total_pairs_all_chunks == len(_all_new_pairs)
 
+            for j, chunk in enumerate(chunk_pairs):
                 new_data = {'tokens': _tokens, 'allMentions': ret_only_relevant_mentions(_mentions, chunk), 'allPairs': chunk}
                 with open(f'{_test_out_folder}/{file_name}_chunk_{j}.json', 'w') as file:
                     json.dump(new_data, file, indent=4)
