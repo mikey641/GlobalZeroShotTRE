@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 from scripts.eval.dataset.utils import find_ment_by_id
 from scripts.prompting.jup_utils import open_input_file, get_input_text, prepare_instructions, get_all_pairs
-from scripts.prompting.prompts import task_description_v5
+from scripts.prompting.prompts import task_description_v5, task_description_tbd
 
 gemini_pro_model = None
 gemini_flash_model = None
@@ -237,10 +237,10 @@ if __name__ == "__main__":
     _reduction = 0.1
     # APW19980213.1380.json
     _selected_file = 'AP_20130322.json'
-    _instructions = task_description_v5
+    _instructions = task_description_tbd
     _llm_to_use = gpt3_5
-    _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
-    # _test_folder = 'data/TimeBank-Dense/test_converted'
+    # _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
+    _test_folder = 'data/TimeBank-Dense/test_converted_managed_size'
     # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
     # _test_folder = 'data/EventFullTrainExports/test'
 

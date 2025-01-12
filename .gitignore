@@ -9,6 +9,7 @@ data/MATRES/orig_files
 data/MATRES/aquaint.txt
 data/MATRES/platinum.txt
 data/MATRES/timebank.txt
+data/MATRES/in_my_format
 data/MATRES/in_my_format_all_pairs
 data/MATRES/in_my_format_all_pairs_120
 __pycache__

@@ -32,7 +32,7 @@ def count_stats_in_file(data):
 
 
 def get_annotations(pairs):
-    tmp_lables = list()
+    tmp_lables = set()
     coref_lables = list()
     causal_lables = list()
     for pair in pairs:
@@ -41,17 +41,17 @@ def get_annotations(pairs):
         relation = pair['_relation']
         if '/' in relation:
             split_rel = relation.split('/')
-            tmp_lables.append((first_id, second_id, split_rel[0]))
+            tmp_lables.add((first_id, second_id, split_rel[0]))
             if split_rel[0] == 'before' or split_rel[0] == 'after':
                 causal_lables.append((first_id, second_id, split_rel[1]))
             elif split_rel[0] == 'equal':
-                coref_lables.append((first_id, second_id, split_rel[1]))
+                coref_lables.add((first_id, second_id, split_rel[1]))
             else:
                 raise ValueError(f'Unknown relation {split_rel[0]}')
         else:
-            tmp_lables.append((first_id, second_id, relation))
+            tmp_lables.add((first_id, second_id, relation.lower()))
 
-    tmp_lables.sort(key=lambda tup: (tup[0], tup[1]))
+    tmp_lables = sorted(list(tmp_lables), key=lambda tup: (tup[0], tup[1]))
     coref_lables.sort(key=lambda tup: tup[0])
     causal_lables.sort(key=lambda tup: tup[0])
     return tmp_lables, coref_lables, causal_lables

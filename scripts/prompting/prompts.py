@@ -154,10 +154,12 @@ strict graph {
 def task_description_tbd(examples):
     desc = """
 Task Overview:
-Analyze the text where events are marked with <eventName(identifier)> and determine temporal relationships (before, after, equal, includes, included, or vague) based on explicit cues and narrative context.
+Analyze the text where events are marked with <eventName(identifier)> and determine temporal relationships (before, after, equal, includes, is_included, or vague) based on explicit cues and narrative context.
 The context will be followed by the event pairs list requiring evaluation.
 
 Key Guidelines: 
+Determine relationships based on the starting time, ending time, duration, and ongoing nature of each event.
+Label events as includes or is_included when one event occurs within a larger ongoing event.
 Prioritize explicit temporal cues in the text. In cases of ambiguity, rely on reasoning based on the narrative context.
 If no explicit cues or clear logical reasoning establish a sequence, label the relationship as vague.
 Treat every event marked with a unique identifier (e.g., <eventName(identifier)>) as distinct, regardless of similarities in descriptions. Ensure no identifiers are skipped.

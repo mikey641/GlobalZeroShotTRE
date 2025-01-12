@@ -86,13 +86,14 @@ def extract_tlinks(root):
         timeId = tlink_element.get('timeID')
         relType = tlink_element.get('relType')
         # Other are cases that its related to time (event->timex, timex->event, timex->timex)
-        if f'{eventInstanceID}#{relatedToEventInstance}' in pairs_set:
+        if f'{eventInstanceID}#{relatedToEventInstance}' in pairs_set or f'{relatedToEventInstance}#{eventInstanceID}' in pairs_set:
             continue
 
         if eventInstanceID and relatedToEventInstance and relType:
             event_tlinks.append(TLINK(eventInstanceID, relatedToEventInstance, relType))
             supported_res.append(relType)
             pairs_set.add(f'{eventInstanceID}#{relatedToEventInstance}')
+            pairs_set.add(f'{relatedToEventInstance}#{eventInstanceID}')
         elif eventInstanceID and relatedToTime and relType:
             time_tlinks.append(TLINK(eventInstanceID, relatedToTime, relType))
         elif timeId and relatedToEventInstance and relType:
@@ -207,12 +208,12 @@ def read_file(file_path, timeml_parser):
 def convert_relation(rel):
     if rel == 'SIMULTANEOUS':
         ret_rel = 'equal'
-    elif rel == 'VAGUE':
-        ret_rel = 'uncertain'
-    elif rel == 'IS_INCLUDED':
-        ret_rel = 'after'
-    elif rel == 'INCLUDES' or rel == "OVERLAP":
-        ret_rel = 'before'
+    # elif rel == 'VAGUE':
+    #     ret_rel = 'uncertain'
+    # elif rel == 'IS_INCLUDED':
+    #     ret_rel = 'after'
+    # elif rel == 'INCLUDES' or rel == "OVERLAP":
+    #     ret_rel = 'before'
     else:
         ret_rel = rel.lower()
 
@@ -311,7 +312,7 @@ def generate(all_tb, convertor, label_set):
                 relv_events.add(event_map[pair.secondEvent])
 
             if found_first and found_second:
-                all_triplets.append((pair.firstEvent, label_set[convertor(pair.relType).upper()], pair.secondEvent))
+                # all_triplets.append((pair.firstEvent, label_set[convertor(pair.relType).upper()], pair.secondEvent))
                 if (pair.firstEvent, pair.secondEvent) not in event_pair_map or (pair.secondEvent, pair.firstEvent) in event_pair_map:
                     event_pair_map[(pair.firstEvent, pair.secondEvent)] = True
                     event_pair_map[(pair.secondEvent, pair.firstEvent)] = True
@@ -330,12 +331,12 @@ def generate(all_tb, convertor, label_set):
 
 
 def main():
-    EVENTFULL_LABELS = {"BEFORE": 0, "AFTER": 1, "EQUAL": 2, "UNCERTAIN": 3}
+    TB_LABELS = {"BEFORE": 0, "AFTER": 1, "EQUAL": 2, "UNCERTAIN": 3, "INCLUDES": 4, "IS_INCLUDED": 5}
     narrative_time_path = 'data/NarrativeTime/original'
     all_tb = read_folder(narrative_time_path, parse_timeml)
     output_path = 'data/NarrativeTime/converted'
 
-    conv_my_format = generate(all_tb, convert_relation, EVENTFULL_LABELS)
+    conv_my_format = generate(all_tb, convert_relation, TB_LABELS)
     for doc_id, doc_data in tqdm(conv_my_format.items()):
         with open(f"{output_path}/{doc_id}.json", 'w') as f:
             json.dump(doc_data, f, default=lambda o: o.__dict__, indent=4)
