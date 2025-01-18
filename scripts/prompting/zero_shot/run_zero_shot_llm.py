@@ -1,4 +1,5 @@
 import json
+import re
 import string
 import time
 
@@ -121,19 +122,50 @@ def run_zero_shot(all_examples, llm_to_use):
     return predictions
 
 
+def run_first_timeline(all_examples, llm_to_use):
+    predictions = {}
+    for i, example in enumerate(tqdm(all_examples)):
+        # if i == 3:
+        #     break
+
+        on_file = example['file']
+        source = example['source']
+        target = example['target']
+        instruction = example['instruct']
+        gold_label = example['gold_label']
+        key = f"{on_file}#{source}#{target}"
+
+        pattern = r"[Rr]elation\s?=\s?([A-Za-z]+)"
+        try:
+            response = llm_to_use(instruction)
+            match = re.search(pattern, response)
+            if match:
+                value = match.group(1)
+                predictions[key] = {"target": value, "gold_label": gold_label}
+            else:
+                predictions[key] = {"target": response, "gold_label": gold_label}
+        except Exception as e:
+            print('Failed to predict', repr(e))
+            predictions[key] = {"target": "Generation Failed", "gold_label": gold_label}
+            return None
+
+    return predictions
+
+
+
 if __name__ == "__main__":
     # read all line from file
     _llm_to_use = gpt4o
 
-    with open("data/my_data/zero_shot/matres_cot_prompts.jsonl") as _file:
+    with open("data/my_data/zero_shot/matres_first_timeline_brief_prompts.jsonl") as _file:
         data = json.load(_file)
 
     start_time = time.time()
-    _predictions = run_CoT(data, _llm_to_use)
+    _predictions = run_first_timeline(data, _llm_to_use)
     end_time = time.time()
 
     execution_time = end_time - start_time
     print(f"Execution time: {execution_time:.4f} seconds")
 
-    with open(f"data/my_data/zero_shot/matres_{_llm_to_use.__name__}_cot_predictions.json", "w") as _file:
+    with open(f"data/my_data/zero_shot/matres_{_llm_to_use.__name__}_first_timeline_brief_predictions.json", "w") as _file:
         json.dump(_predictions, _file, indent=4)

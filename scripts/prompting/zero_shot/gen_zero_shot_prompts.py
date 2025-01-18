@@ -14,6 +14,10 @@ def prompt_cot(source, target):
     return f"""Given the document D are <EVENT {source['m_id']}>{source['tokens']}</EVENT> and <EVENT {target['m_id']}>{target['tokens']}</EVENT> referring to the same event? Answer yes or no."""
 
 
+def prompt_first_timeline_then_rel(source, target):
+    return f"""Given the document D and a list of temporal relations [before, after, vague, equal], provide a brief explanation of the timeline between the source <EVENT {source['m_id']}>{source['tokens']}</EVENT> and target <EVENT {target['m_id']}>{target['tokens']}</EVENT> events. Conclude with your final decision based on your timeline interpretation in the format: Relation=Your Response."""
+
+
 def mark_events_in_text(tokens, all_mentions):
     for mention in all_mentions:
         tok_first_id = mention['tokens_ids'][0]
@@ -57,16 +61,16 @@ def prepare_instructions(test_folder, instructions_func):
 
 
 if __name__ == "__main__":
-    _instructions = prompt_cot
+    _instructions = prompt_first_timeline_then_rel
 
     # _test_folder = 'data/EventFullTrainExports/test'
     # _output_file = f'data/my_data/zero_shot/eventfull_cot_prompts.jsonl'
 
-    # _test_folder = 'data/MATRES/in_my_format/test'
-    # _output_file = f'data/my_data/zero_shot/matres_cot_prompts.jsonl'
+    _test_folder = 'data/MATRES/in_my_format/test'
+    _output_file = f'data/my_data/zero_shot/matres_first_timeline_prompts.jsonl'
 
-    _test_folder = 'data/TimeBank-Dense/test_converted'
-    _output_file = f'data/my_data/zero_shot/tbd_cot_prompts.jsonl'
+    # _test_folder = 'data/TimeBank-Dense/test_converted'
+    # _output_file = f'data/my_data/zero_shot/tbd_cot_prompts.jsonl'
 
     examples = prepare_instructions(_test_folder, _instructions)
     # Write the list as json list file
