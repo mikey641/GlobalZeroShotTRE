@@ -11,7 +11,7 @@ def prompt_zero_shot(source, target):
 
 
 def prompt_cot(source, target):
-    return f"""Given the document D are <EVENT {source['m_id']}>{source['tokens']}</EVENT> and <EVENT {target['m_id']}>{target['tokens']}</EVENT> referring to the same event? Answer yes or no."""
+    return f"""Given the document D, are <EVENT {source['m_id']}>{source['tokens']}</EVENT> and <EVENT {target['m_id']}>{target['tokens']}</EVENT> referring to the same event? Answer yes or no."""
 
 
 def prompt_first_timeline_then_rel(source, target):
@@ -61,13 +61,16 @@ def prepare_instructions(test_folder, instructions_func):
 
 
 if __name__ == "__main__":
-    _instructions = prompt_first_timeline_then_rel
+    _instructions = prompt_cot
 
     # _test_folder = 'data/EventFullTrainExports/test'
     # _output_file = f'data/my_data/zero_shot/eventfull_cot_prompts.jsonl'
 
-    _test_folder = 'data/MATRES/in_my_format/test'
-    _output_file = f'data/my_data/zero_shot/matres_first_timeline_prompts.jsonl'
+    # _test_folder = 'data/MATRES/in_my_format/test'
+    # _output_file = f'data/my_data/zero_shot/matres_first_timeline_prompts.jsonl'
+
+    _test_folder = 'data/NarrativeTime/converted_no_overlap/test_18ment'
+    _output_file = f'data/my_data/zero_shot/nt_cot_prompts.jsonl'
 
     # _test_folder = 'data/TimeBank-Dense/test_converted'
     # _output_file = f'data/my_data/zero_shot/tbd_cot_prompts.jsonl'
