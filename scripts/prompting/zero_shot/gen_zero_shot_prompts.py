@@ -69,8 +69,8 @@ if __name__ == "__main__":
     # _test_folder = 'data/MATRES/in_my_format/test'
     # _output_file = f'data/my_data/zero_shot/matres_first_timeline_prompts.jsonl'
 
-    _test_folder = 'data/NarrativeTime/converted_no_overlap/test_18ment'
-    _output_file = f'data/my_data/zero_shot/nt_cot_prompts.jsonl'
+    _test_folder = 'data/TimeBank-Dense/test_converted'
+    _output_file = f'data/my_data/zero_shot/tbd_remove_large_docs_cot_prompts.jsonl'
 
     # _test_folder = 'data/TimeBank-Dense/test_converted'
     # _output_file = f'data/my_data/zero_shot/tbd_cot_prompts.jsonl'

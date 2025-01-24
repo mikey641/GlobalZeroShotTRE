@@ -27,12 +27,11 @@ def convert_relation(rel):
 
 
 def main():
-    TBD_labels = {'BEFORE': 0, 'AFTER': 1, 'INCLUDES': 2, 'IS_INCLUDED': 3, 'EQUAL': 4, 'UNCERTAIN': 5}
     timebank_path = 'data/TimeBank-Dense/all_in_one_folder'
     all_tb = read_folder(timebank_path, parse_timeml)
-    output_path = 'data/TimeBank-Dense/all_converted'
+    output_path = 'data/TimeBank-Dense/all_converted_tmp'
 
-    conv_my_format = generate(all_tb, convert_relation, TBD_labels)
+    conv_my_format = generate(all_tb, convert_relation)
     for doc_id, doc_data in tqdm(conv_my_format.items()):
         with open(f"{output_path}/{doc_id}.json", 'w') as f:
             json.dump(doc_data, f, default=lambda o: o.__dict__, indent=4)

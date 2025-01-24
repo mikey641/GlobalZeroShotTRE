@@ -157,15 +157,15 @@ if __name__ == "__main__":
     # read all line from file
     _llm_to_use = gpt4o
 
-    with open("data/my_data/zero_shot/matres_first_timeline_brief_prompts.jsonl") as _file:
+    with open("data/my_data/zero_shot/nt_4rels_cot_prompts.jsonl") as _file:
         data = json.load(_file)
 
     start_time = time.time()
-    _predictions = run_first_timeline(data, _llm_to_use)
+    _predictions = run_CoT(data, _llm_to_use)
     end_time = time.time()
 
     execution_time = end_time - start_time
     print(f"Execution time: {execution_time:.4f} seconds")
 
-    with open(f"data/my_data/zero_shot/matres_{_llm_to_use.__name__}_first_timeline_brief_predictions.json", "w") as _file:
+    with open(f"data/my_data/zero_shot/nt_{_llm_to_use.__name__}_4rels_cot_prompts_predictions.json", "w") as _file:
         json.dump(_predictions, _file, indent=4)

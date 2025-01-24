@@ -1,6 +1,7 @@
 import json
 import math
 import os
+import random
 
 from tqdm import tqdm
 
@@ -53,6 +54,25 @@ def get_data(data):
     return data['tokens'], all_mentions, sorted(all_new_pairs, key=lambda x: x['index']), pairs_with_rel
 
 
+def handle_chunks(all_pairs, all_mentions, tokens, max_pairs_in_chunk, test_out_folder):
+    if len(all_pairs) > max_pairs_in_chunk:
+        random.shuffle(all_pairs)
+        chunks_size = math.ceil(len(all_pairs) / math.ceil(len(all_pairs) / max_pairs_in_chunk))
+        chunk_pairs = [all_pairs[i:i + chunks_size] for i in range(0, len(all_pairs), chunks_size)]
+
+        for j, chunk in enumerate(chunk_pairs):
+            chunk_sorted = sorted(chunk, key=lambda x: x['index'])
+            new_data = {'tokens': tokens, 'allMentions': ret_only_relevant_mentions(all_mentions, chunk_sorted),
+                        'allPairs': chunk_sorted}
+            with open(f'{test_out_folder}/{file_name}_chunk_{j}.json', 'w') as file:
+                json.dump(new_data, file, indent=4)
+    else:
+        new_data = {'tokens': tokens, 'allMentions': all_mentions,
+                    'allPairs': sorted(all_pairs, key=lambda x: x['index'])}
+        with open(f'{test_out_folder}/{file1}', 'w') as file:
+            json.dump(new_data, file, indent=4)
+
+
 def ret_only_relevant_mentions(mentions, pairs):
     relevant_mentions = set()
     for pair in pairs:
@@ -74,17 +94,4 @@ if __name__ == "__main__":
         assert len(_all_new_pairs) == (len(_mentions) * (len(_mentions) - 1)) / 2
         assert _pairs_with_rel == len(_data['allPairs'])
 
-        if len(_all_new_pairs) > _max_pairs_in_chunk:
-            chunks_size = math.ceil(len(_all_new_pairs) / math.ceil(len(_all_new_pairs) / _max_pairs_in_chunk))
-            chunk_pairs = [_all_new_pairs[i:i + chunks_size] for i in range(0, len(_all_new_pairs), chunks_size)]
-            total_pairs_all_chunks = sum([len(chunk) for chunk in chunk_pairs])
-            assert total_pairs_all_chunks == len(_all_new_pairs)
-
-            for j, chunk in enumerate(chunk_pairs):
-                new_data = {'tokens': _tokens, 'allMentions': ret_only_relevant_mentions(_mentions, chunk), 'allPairs': chunk}
-                with open(f'{_test_out_folder}/{file_name}_chunk_{j}.json', 'w') as file:
-                    json.dump(new_data, file, indent=4)
-        else:
-            new_data = {'tokens': _tokens, 'allMentions': _mentions, 'allPairs': _all_new_pairs}
-            with open(f'{_test_out_folder}/{file1}', 'w') as file:
-                json.dump(new_data, file, indent=4)
+        handle_chunks(_all_new_pairs, _mentions, _tokens, _max_pairs_in_chunk, _test_out_folder)

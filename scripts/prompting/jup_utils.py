@@ -119,6 +119,27 @@ def get_example(file_to_use, target, reduction):
     return intput_text, output_example
 
 
+def get_reverse_label(label):
+    if label == 'before':
+        return 'after'
+    elif label == 'after':
+        return 'before'
+    elif label == 'is_included':
+        return 'includes'
+    elif label == 'includes':
+        return 'is_included'
+    else:
+        return label
+
+def arrange_pairs(all_pairs, ment_dict):
+    for pair in all_pairs:
+        m1 = ment_dict[pair['_firstId']]
+        m2 = ment_dict[pair['_secondId']]
+        if m1['tokens_ids'][0] > m2['tokens_ids'][0]:
+            pair['_firstId'], pair['_secondId'] = pair['_secondId'], pair['_firstId']
+            pair['_relation'] = get_reverse_label(pair['_relation'])
+
+
 def get_all_pairs(all_pairs, ment_dict, reduction):
     ret_pairs_dot = list()
     if reduction > 0:
@@ -126,6 +147,7 @@ def get_all_pairs(all_pairs, ment_dict, reduction):
         indices_to_remove = random.sample(range(len(all_pairs)), sample_size)
         all_pairs = [all_pairs[i] for i in range(len(all_pairs)) if i not in indices_to_remove]
 
+    # arrange_pairs(all_pairs, ment_dict)
     pairs_with_id = list()
     for pair in all_pairs:
         new_pair = pair.copy()
@@ -151,7 +173,7 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_
     json_lines = list()
 
     examples = prepare_instructions(train_folder, dot_train_data, num_of_examples, selected_file, reduction)
-    final_instructions = task_description_tbd(examples)
+    final_instructions = task_description_v5(examples)
 
     total_tokens = 0
     count = 0

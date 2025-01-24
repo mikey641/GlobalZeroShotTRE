@@ -6,7 +6,6 @@ from collections import Counter
 def main(narrative_folder, narrative_folder_no_overlap):
     # read all files in folder
     sanity = list()
-    mentions_classes = list()
     for nar_file in os.listdir(narrative_folder):
         with open(f'{narrative_folder}/{nar_file}', mode='r') as file:
             overlap_nodes = list()
@@ -14,10 +13,9 @@ def main(narrative_folder, narrative_folder_no_overlap):
             data = json.load(file)
             all_pairs = data['allPairs']
             all_mentions = data['allMentions']
-            mentions_classes.extend([ment['event_class'] for ment in all_mentions])
             for pair in all_pairs:
                 rel = pair['_relation']
-                if rel == 'overlap':
+                if rel in ['overlap', 'is_included', 'includes']:
                     overlap_nodes.append(pair['_firstId'])
                     overlap_nodes.append(pair['_secondId'])
                     overlap_pairs.append((pair['_firstId'], pair['_secondId']))
@@ -41,11 +39,10 @@ def main(narrative_folder, narrative_folder_no_overlap):
 
             sanity.extend([pair['_relation'] for pair in new_pairs])
 
-    print(Counter(mentions_classes))
     print(Counter(sanity))
 
 
 if __name__ == '__main__':
     _narrative_folder = "data/NarrativeTime/converted"
-    _narrative_folder_no_overlap = "data/NarrativeTime/converted_no_overlap_v2"
+    _narrative_folder_no_overlap = "data/NarrativeTime/converted_no_overlap_include"
     main(_narrative_folder, _narrative_folder_no_overlap)

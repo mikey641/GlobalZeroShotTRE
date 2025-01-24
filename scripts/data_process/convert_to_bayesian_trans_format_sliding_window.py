@@ -120,17 +120,19 @@ def generate_xml_sents(mentions, pairs, data, doc_id):
         TARGET_SENTID = str(ment2['sent_id'])
         LABEL = p['_relation'].upper()
         LABEL = 'VAGUE' if LABEL == 'UNCERTAIN' else LABEL
-        SENTDIFF = str(abs(ment1['sent_id'] - ment2['sent_id']))
+        sent_diff_int = abs(ment1['sent_id'] - ment2['sent_id'])
+        SENTDIFF = str(sent_diff_int)
 
-        sentence_element = ET.SubElement(data, 'SENTENCE',
-                                         DOCID=DOCID,
-                                         SOURCE=SOURCE,
-                                         TARGET=TARGET,
-                                         SOURCE_SENTID=SOURCE_SENTID,
-                                         TARGET_SENTID=TARGET_SENTID,
-                                         LABEL=LABEL,
-                                         SENTDIFF=SENTDIFF)
-        sentence_element.text = text
+        if sent_diff_int <= 1:
+            sentence_element = ET.SubElement(data, 'SENTENCE',
+                                             DOCID=DOCID,
+                                             SOURCE=SOURCE,
+                                             TARGET=TARGET,
+                                             SOURCE_SENTID=SOURCE_SENTID,
+                                             TARGET_SENTID=TARGET_SENTID,
+                                             LABEL=LABEL,
+                                             SENTDIFF=SENTDIFF)
+            sentence_element.text = text
 
 
 def process_doc(doc, nlp, xml_data, doc_id):
@@ -169,6 +171,6 @@ def start_process(nlp, input_folder, output_file):
 
 if __name__ == '__main__':
     _nlp = spacy.load("en_core_web_trf")
-    _input_folder = 'data/TimeBank-Dense/test_converted'
-    _output_file = 'data/bayesian_format/testset_small_size_tbd.xml'
+    _input_folder = 'data/NarrativeTime/converted_no_overlap/test'
+    _output_file = 'data/NarrativeTime/converted_no_overlap/trainset_nt_consecutive_sents.xml'
     start_process(_nlp, _input_folder, _output_file)

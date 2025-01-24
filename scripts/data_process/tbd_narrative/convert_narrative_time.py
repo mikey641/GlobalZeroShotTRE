@@ -4,6 +4,7 @@ import re
 import uuid
 import xml.etree.ElementTree as ET
 from collections import Counter
+from nltk.tokenize import sent_tokenize
 
 from tqdm import tqdm
 
@@ -285,7 +286,7 @@ def read_folder(folder_path, timeml_parser):
     return all_read_files
 
 
-def generate(all_tb, convertor, label_set):
+def generate(all_tb, convertor):
     my_format = dict()
     for tb_file_name, tb_file_values in tqdm(all_tb.items()):
         tb_file_name = tb_file_name.removesuffix('.tml')
@@ -331,12 +332,11 @@ def generate(all_tb, convertor, label_set):
 
 
 def main():
-    TB_LABELS = {"BEFORE": 0, "AFTER": 1, "EQUAL": 2, "UNCERTAIN": 3, "INCLUDES": 4, "IS_INCLUDED": 5}
     narrative_time_path = 'data/NarrativeTime/original'
     all_tb = read_folder(narrative_time_path, parse_timeml)
     output_path = 'data/NarrativeTime/converted'
 
-    conv_my_format = generate(all_tb, convert_relation, TB_LABELS)
+    conv_my_format = generate(all_tb, convert_relation)
     for doc_id, doc_data in tqdm(conv_my_format.items()):
         with open(f"{output_path}/{doc_id}.json", 'w') as f:
             json.dump(doc_data, f, default=lambda o: o.__dict__, indent=4)

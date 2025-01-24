@@ -95,7 +95,6 @@ def compute_iaa(group_tmp_results):
 if __name__ == "__main__":
     annotator1 = 'MATRES'
     annotator2 = 'TBD'
-    output_file = f'data/my_data/evaluations/output/131d3_coref_{annotator1}_{annotator2}_v1'
     _folder1 = 'data/MATRES/in_my_format/all'
     _folder2 = 'data/TimeBank-Dense/all_converted'
 

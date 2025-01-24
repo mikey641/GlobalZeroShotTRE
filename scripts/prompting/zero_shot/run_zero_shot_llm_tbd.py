@@ -152,7 +152,7 @@ if __name__ == "__main__":
     # read all line from file
     _llm_to_use = gpt4o
 
-    with open("data/my_data/zero_shot/nt_cot_prompts.jsonl") as _file:
+    with open("data/my_data/zero_shot/tbd_remove_large_docs_cot_prompts.jsonl") as _file:
         data = json.load(_file)
 
     start_time = time.time()
