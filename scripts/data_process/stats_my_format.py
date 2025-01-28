@@ -2,7 +2,7 @@ import json
 import os
 
 if __name__ == '__main__':
-    _folder = "data/NarrativeTime/converted_no_overlap/test_18ment"
+    _folder = "data/MATRES/in_my_format/test"
     _relation_distribution = dict()
     _total_pairs = 0
     _total_events = 0
