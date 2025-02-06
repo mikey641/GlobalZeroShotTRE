@@ -61,7 +61,7 @@ def process_text(sentences, mentions):
     return mentions
 
 
-def process_doc(doc, nlp):
+def process_doc(doc, nlp, only_consecutive=True):
     json_file_data = json.load(open(doc))
     tokens = json_file_data['tokens']
     mentions = json_file_data['allMentions']
@@ -79,14 +79,19 @@ def process_doc(doc, nlp):
     relv_mentions = process_text(spacy_doc.sents, relv_mentions)
 
     ment_id_dict = {ment['m_id']: ment for ment in relv_mentions}
-    consecutive_pairs = []
+    return_pairs = []
     for pair in all_pairs:
         ment_source = ment_id_dict[pair['_firstId']]
         ment_target = ment_id_dict[pair['_secondId']]
-        if abs(ment_source['sent_id'] - ment_target['sent_id']) <= 1:
-            consecutive_pairs.append(pair)
+        sent_diff = abs(ment_source['sent_id'] - ment_target['sent_id'])
+        pair['send_diff'] = sent_diff
+        if only_consecutive:
+            if sent_diff <= 1:
+                return_pairs.append(pair)
+        else:
+            return_pairs.append(pair)
 
-    ret_new_data = {'tokens': tokens, 'allMentions': relv_mentions, 'allPairs': consecutive_pairs}
+    ret_new_data = {'tokens': tokens, 'allMentions': relv_mentions, 'allPairs': return_pairs}
     return ret_new_data
 
 
@@ -102,6 +107,6 @@ def start_process(nlp, input_folder, output_folder):
 
 if __name__ == '__main__':
     _nlp = spacy.load("en_core_web_trf")
-    _input_folder = 'data/NarrativeTime/converted_no_overlap/test'
-    _output_folder = 'data/NarrativeTime/converted_no_overlap/test_consecutive_sents'
+    _input_folder = 'data/EventFullTrainExports/test'
+    _output_folder = 'data/EventFullTrainExports/test_consecutive_sents'
     start_process(_nlp, _input_folder, _output_folder)

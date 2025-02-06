@@ -173,7 +173,7 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_
     json_lines = list()
 
     examples = prepare_instructions(train_folder, dot_train_data, num_of_examples, selected_file, reduction)
-    final_instructions = task_description_4res_only_global(examples)
+    final_instructions = task_description_6res_only_global(examples)
 
     total_tokens = 0
     count = 0
@@ -202,10 +202,11 @@ def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, output_
 
     print(f'Total number of tokens in all prompts={total_tokens}')
     split = 1
-    if total_tokens > 90000:
-        if total_tokens / 2 < 90000:
+    curr_tok_limit = 800000
+    if total_tokens > curr_tok_limit:
+        if total_tokens / 2 < curr_tok_limit:
             split = 2
-        elif total_tokens / 3 < 90000:
+        elif total_tokens / 3 < curr_tok_limit:
             split = 3
         else:
             split = 4

@@ -86,9 +86,9 @@ def ret_only_relevant_mentions(mentions, pairs):
 
 
 if __name__ == "__main__":
-    _max_pairs_in_chunk = 150
-    _test_folder = 'data/TimeBank-Dense/test_converted'
-    _test_out_folder = 'data/TimeBank-Dense/test_converted_allpairs'
+    _max_pairs_in_chunk = 100
+    _test_folder = 'data/TimeBank-Dense/testOnlyProb'
+    _test_out_folder = 'data/TimeBank-Dense/testOnlyProb_allpairs'
     for i, file1 in enumerate(tqdm(os.listdir(_test_folder))):
         file_name, file_extension = os.path.splitext(file1)
 
@@ -98,6 +98,6 @@ if __name__ == "__main__":
         assert len(_all_new_pairs) == (len(_mentions) * (len(_mentions) - 1)) / 2
         assert _pairs_with_rel == len(_data['allPairs'])
 
-        # handle_chunks(_all_new_pairs, _mentions, _tokens, _max_pairs_in_chunk, _test_out_folder)
+        handle_chunks(_all_new_pairs, _mentions, _tokens, _max_pairs_in_chunk, _test_out_folder)
         with open(f'{_test_out_folder}/{file1}', 'w') as file:
             json.dump({'tokens': _tokens, 'allMentions': _mentions, 'allPairs': _all_new_pairs}, file, indent=4)

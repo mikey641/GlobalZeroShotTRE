@@ -169,6 +169,6 @@ def start_process(nlp, input_folder, output_file):
 
 if __name__ == '__main__':
     _nlp = spacy.load("en_core_web_trf")
-    _input_folder = 'data/MATRES/in_my_format/test_less20'
-    _output_file = 'data/bayesian_format/testset_20events_matres.xml'
+    _input_folder = 'data/TimeBank-Dense/test_30more'
+    _output_file = 'data/bayesian_format/testset_30more_tbd.xml'
     start_process(_nlp, _input_folder, _output_file)

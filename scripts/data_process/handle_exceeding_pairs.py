@@ -5,7 +5,7 @@ import random
 
 from tqdm import tqdm
 
-from scripts.data_process.matres.create_all_pairs_matres import get_data, ret_only_relevant_mentions, handle_chunks
+from scripts.data_process.create_all_pairs import ret_only_relevant_mentions, handle_chunks
 from scripts.prompting.jup_utils import open_input_file
 
 
@@ -58,8 +58,8 @@ def chunk_by_edges(test_folder, max_pairs_in_chunk, test_out_folder):
 
 if __name__ == "__main__":
     _max_pairs_in_chunk = 200
-    _test_folder = 'data/TimeBank-Dense/test_converted'
-    _test_out_folder = 'data/TimeBank-Dense/test_converted_managed_size'
+    _test_folder = 'data/TimeBank-Dense/test_converted_allpairs'
+    _test_out_folder = 'data/TimeBank-Dense/test_converted_allpairs_managed_size'
     # chunk_by_node_size(_test_folder, _max_pairs_in_chunk, _test_out_folder)
     reduce_pairs_random(_test_folder, _max_pairs_in_chunk, _test_out_folder)
     print("Done")

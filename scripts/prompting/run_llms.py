@@ -10,7 +10,8 @@ from tqdm import tqdm
 
 from scripts.eval.dataset.utils import find_ment_by_id
 from scripts.prompting.jup_utils import open_input_file, get_input_text, prepare_instructions, get_all_pairs
-from scripts.prompting.prompts import task_description_4res_only_timeline
+from scripts.prompting.prompts import task_description_4res_only_timeline, task_description_4res_only_global, \
+    task_description_6res_only_global, task_description_6res_only_timeline
 
 gemini_pro_model = None
 gemini_flash_model = None
@@ -228,19 +229,19 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
 
 
 if __name__ == "__main__":
-    example_db = 'eventfull'
-    test_db = 'tb_dense'
+    example_db = 'nt'
+    test_db = 'nt'
     # -1 for all predictions
     # Number of prompt examples
-    num_of_pred = 1
+    num_of_pred = -1
     num_of_prompt_examples = 1
-    _reduction = 0.1
+    _reduction = -1
     # APW19980213.1380.json
     _selected_file = 'AP_20130322.json'
     _instructions = task_description_4res_only_timeline
-    _llm_to_use = gpt3_5
+    _llm_to_use = gpt4o
     # _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
-    _test_folder = 'data/TimeBank-Dense/test_converted_managed_size'
+    _test_folder = 'data/EventFullTrainExports/test'
     # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
     # _test_folder = 'data/EventFullTrainExports/test'
 
@@ -250,7 +251,7 @@ if __name__ == "__main__":
     # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
     # _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
-    _output_file = f'data/my_data/predictions/{test_db}/outputs/test_{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmp_rand_21_{_instructions.__name__}.json'
+    _output_file = f'data/my_data/predictions/{test_db}/test_{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmp_{_instructions.__name__}.json'
 
     start_time = time.time()
     main(test_folder=_test_folder, train_folder=_train_folder,
