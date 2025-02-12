@@ -268,7 +268,7 @@ def read_folder(folder_path, timeml_parser):
             total_time_tlinks += len(time_tlinks)
             total_events += len(events)
             tot_tlink_elements_all += tot_tlink_elements
-            if len(event_tlinks) != (len(events) * len(events)) - len(events):
+            if len(event_tlinks) != ((len(events) * len(events)) - len(events)) / 2:
                 print(f"ERROR: {entry.name} has {len(event_tlinks)} missing tlinks for {len(events)} events")
 
             all_read_files[entry.name] = (doc, tokens, events, event_tlinks)
@@ -332,9 +332,9 @@ def generate(all_tb, convertor):
 
 
 def main():
-    narrative_time_path = 'data/NarrativeTime/original'
+    narrative_time_path = 'data/NarrativeTime_A2/original'
     all_tb = read_folder(narrative_time_path, parse_timeml)
-    output_path = 'data/NarrativeTime/converted'
+    output_path = 'data/NarrativeTime_A2/converted'
 
     conv_my_format = generate(all_tb, convert_relation)
     for doc_id, doc_data in tqdm(conv_my_format.items()):

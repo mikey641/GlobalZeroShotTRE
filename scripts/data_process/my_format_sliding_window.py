@@ -107,6 +107,6 @@ def start_process(nlp, input_folder, output_folder):
 
 if __name__ == '__main__':
     _nlp = spacy.load("en_core_web_trf")
-    _input_folder = 'data/EventFullTrainExports/test'
-    _output_folder = 'data/EventFullTrainExports/test_consecutive_sents'
+    _input_folder = 'data/NarrativeTime_A2/converted_no_overlap/test'
+    _output_folder = 'data/NarrativeTime_A2/converted_no_overlap/test_consecutive_sents'
     start_process(_nlp, _input_folder, _output_folder)

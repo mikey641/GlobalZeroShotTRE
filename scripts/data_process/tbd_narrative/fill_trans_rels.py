@@ -170,8 +170,8 @@ def create_sent_distrib(doc_ments, pairs):
 if __name__ == "__main__":
     _nlp = spacy.load("en_core_web_trf")
 
-    _input_folder_original = 'data/NarrativeTime/converted_no_overlap/test'
-    _input_folder_cons_sents = 'data/NarrativeTime/converted_no_overlap/test_consecutive_sents'
+    _input_folder_original = 'data/NarrativeTime_A2/converted_no_overlap/test'
+    _input_folder_cons_sents = 'data/NarrativeTime_A2/converted_no_overlap/test_consecutive_sents'
 
     _all_pairs_orig, _all_doc_json_mentions = get_file_pairs(_input_folder_original)
     _all_pairs_cons_sent, _all_cons_json_mentions = get_file_pairs(_input_folder_cons_sents)

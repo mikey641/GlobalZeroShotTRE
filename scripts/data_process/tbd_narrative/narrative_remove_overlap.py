@@ -46,6 +46,6 @@ def main(narrative_folder, narrative_folder_no_overlap):
 
 
 if __name__ == '__main__':
-    _narrative_folder = "data/NarrativeTime/converted"
-    _narrative_folder_no_overlap = "data/NarrativeTime/converted_no_overlap_v2"
+    _narrative_folder = "data/NarrativeTime_A2/converted"
+    _narrative_folder_no_overlap = "data/NarrativeTime_A2/converted_no_overlap"
     main(_narrative_folder, _narrative_folder_no_overlap)

@@ -2,10 +2,9 @@ import matplotlib.pyplot as plt
 from collections import Counter
 
 # Define the three data sets
-counter1 = Counter({1: 845, 2: 634, 0: 552, 3: 546, 4: 500, 6: 476, 5: 459, 7: 358, 8: 224, 9: 159,
-                    10: 130, 11: 84, 17: 62, 12: 57, 14: 50, 13: 46, 15: 41, 16: 35, 18: 24, 20: 20, 19: 13})
-counter2 = Counter({1: 845, 0: 552})
-counter3 = Counter({1: 845, 0: 552, 2: 157, 3: 30, 4: 9})
+counter1 = Counter({1: 796, 2: 627, 0: 537, 3: 533, 4: 454, 6: 451, 5: 422, 7: 336, 8: 215, 9: 156, 10: 132, 11: 83, 12: 70, 17: 62, 14: 45, 13: 43, 15: 40, 16: 33, 18: 24, 20: 24, 19: 13})
+counter2 = Counter({1: 796, 0: 537})
+counter3 = Counter({1: 796, 0: 537, 2: 144, 3: 6})
 
 # Get all unique keys sorted
 all_keys = sorted(set(counter1.keys()).union(set(counter2.keys())).union(set(counter3.keys())))
