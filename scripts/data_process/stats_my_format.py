@@ -2,7 +2,7 @@ import json
 import os
 
 if __name__ == '__main__':
-    _folder = "data/MATRES/in_my_format/test"
+    _folder = "data/EventFullTrainExports/all"
     _relation_distribution = dict()
     _total_pairs = 0
     _total_events = 0
@@ -14,6 +14,7 @@ if __name__ == '__main__':
             with open(f'{_folder}/{file}') as f:
                 data = json.load(f)
                 mentions = data['allMentions']
+                mentions = [m for m in mentions if m['axisType'] == 'main']
                 pairs_ = data['allPairs']
                 _total_pairs += len(pairs_)
                 _total_events += len(mentions)

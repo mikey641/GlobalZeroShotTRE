@@ -29,9 +29,9 @@ plt.bar([i + bar_width for i in x], values2, width=bar_width, color='darkorange'
 plt.bar([i + 2 * bar_width for i in x], values3, width=bar_width, color='seagreen', edgecolor='black', label="Consecutive Sentences + Transitive", align='center')
 
 # Labels and title
-plt.xlabel("Sentence Distance", fontsize=12)
-plt.ylabel("Number Of Non-Vague Relations", fontsize=12)
-plt.title("NarrativeTime Relations Distance", fontsize=14)
+plt.xlabel("Sentence Distance", fontsize=16)
+plt.ylabel("Number Of Non-Vague Relations", fontsize=16)
+# plt.title("NarrativeTime Relations Distance", fontsize=14)
 
 # Ensure all keys are shown on x-axis
 plt.xticks([i + bar_width for i in x], all_keys, fontsize=10, rotation=45)
