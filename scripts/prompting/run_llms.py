@@ -206,6 +206,9 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
         if count == number_of_pred:
             break
 
+        if selected_file is not None and file1 != selected_file:
+            continue
+
         count += 1
         data = open_input_file(f'{test_folder}/{file1}')
         text, all_pairs = get_input_text(data)
@@ -229,25 +232,23 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
 
 
 if __name__ == "__main__":
-    example_db = 'nt'
-    test_db = 'nt'
-    # -1 for all predictions
-    # Number of prompt examples
+    example_db = 'OmniTemp'
+    test_db = 'OmniTemp'
     num_of_pred = -1
     num_of_prompt_examples = 1
     _reduction = -1
     # APW19980213.1380.json
-    _selected_file = 'AP_20130322.json'
+    _selected_file = '21_final.json'
     _instructions = task_description_4res_only_timeline
     _llm_to_use = gpt4o
     # _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
-    _test_folder = 'data/EventFullTrainExports/test'
+    _test_folder = 'data/OmniTemp/train'
     # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
-    # _test_folder = 'data/EventFullTrainExports/test'
+    # _test_folder = 'data/OmniTemp/test'
 
     _train_folder = 'data/MATRES/in_my_format/train'
     _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
-    # _train_folder = 'data/EventFullTrainExports/train'
+    # _train_folder = 'data/OmniTemp/train'
     # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
     # _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'

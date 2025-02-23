@@ -21,5 +21,5 @@ def rename_files_in_folder():
 
 
 # Example usage
-folder_path = 'data/my_data/EventFullTrainExports'
+folder_path = 'data/my_data/OmniTemp'
 rename_files_in_folder()

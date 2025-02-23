@@ -109,8 +109,8 @@ if __name__ == "__main__":
     # Step-1: create the request and save it to a file
     # --------
     # print("Running Step-1")
-    # _test_folder = 'data/EventFullTrainExports/test'
-    # _train_folder = 'data/EventFullTrainExports/dev'
+    # _test_folder = 'data/OmniTemp/test'
+    # _train_folder = 'data/OmniTemp/dev'
     # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
     # _output_file = f'data/my_data/batch_req/eventfull_req_gpt3_5_3exmlps.jsonl'
     #

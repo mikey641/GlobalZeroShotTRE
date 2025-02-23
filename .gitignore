@@ -3,7 +3,7 @@ node_modules
 package-lock.json
 data/*
 !data/MATRES
-!data/EventFullTrainExports
+!data/OmniTemp
 !data/DOT_format
 data/MATRES/orig_files
 data/MATRES/aquaint.txt

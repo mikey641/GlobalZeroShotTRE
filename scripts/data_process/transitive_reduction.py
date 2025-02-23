@@ -29,7 +29,7 @@ def build_graphs(files_content):
 
 
 if __name__ == "__main__":
-    _folder_path = 'data/EventFullTrainExports/all'
+    _folder_path = 'data/OmniTemp/all'
     _output_path = 'data/DOT_format/trans_reduced/EventFull_all_dot.json'
 
     _files_content = read_files_from_folder(_folder_path)

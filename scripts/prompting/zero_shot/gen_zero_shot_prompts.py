@@ -63,7 +63,7 @@ def prepare_instructions(test_folder, instructions_func):
 if __name__ == "__main__":
     _instructions = prompt_cot
 
-    # _test_folder = 'data/EventFullTrainExports/test'
+    # _test_folder = 'data/OmniTemp/test'
     # _output_file = f'data/my_data/zero_shot/eventfull_cot_prompts.jsonl'
 
     _test_folder = 'data/MATRES/in_my_format/test_less20'

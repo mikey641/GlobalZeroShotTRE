@@ -14,12 +14,12 @@ plt.plot(buckets_line2, values_line2, marker='s', linestyle='--', label="TimeBan
 
 # Labels and title
 # plt.xlabel("Threshold", fontsize=16)
-plt.ylabel("F1 (%)", fontsize=16, fontweight='bold')
+plt.ylabel("F1 (%)", fontsize=20, fontweight='bold')
 # plt.title("Number of Events in Documents", fontsize=18, fontweight='bold')
-plt.legend(fontsize=16)
-# plt.xticks(rotation=45, fontsize=11)
-plt.xticks(fontsize=16)
-plt.yticks(fontsize=16)
+plt.legend(fontsize=18)
+plt.xticks(rotation=15, fontsize=18)
+# plt.xticks(fontsize=18)
+plt.yticks(fontsize=18)
 plt.grid(True)
 
 # Show plot

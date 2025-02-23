@@ -20,7 +20,7 @@ def convert_doc_to_json(content):
 
 
 if __name__ == '__main__':
-    _folder_path = 'data/EventFullTrainExports'
+    _folder_path = 'data/OmniTemp'
     _output_path = 'data/tmp/EventFull_notDot.json'
     _files_content = read_files_from_folder(_folder_path)
 

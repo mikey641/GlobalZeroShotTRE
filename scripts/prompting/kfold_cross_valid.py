@@ -57,7 +57,7 @@ if __name__ == "__main__":
     _instructions_func = task_description_v2
     _model_id = 'gpt-4o'
 
-    _train_folder = 'data/EventFullTrainExports/dev'
+    _train_folder = 'data/OmniTemp/dev'
     _all_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
     enc = tiktoken.encoding_for_model(_model_id)

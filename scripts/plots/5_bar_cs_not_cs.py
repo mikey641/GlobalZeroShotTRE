@@ -3,7 +3,7 @@ import numpy as np
 
 
 
-def draw_plot(categories, scores, title):
+def draw_plot(categories, scores, min_val, max_val):
     # Define bar width and x positions
     bar_width = 0.1  # Keep bar width fixed
     spacing_factor = 0.6  # Adjust this to control spacing between categories
@@ -19,7 +19,7 @@ def draw_plot(categories, scores, title):
     plt.style.use('ggplot')
 
     # Create figure
-    plt.figure(figsize=(12, 8))
+    plt.figure(figsize=(16, 7))
 
     # Plot bars for each score group
     for i, (key, values) in enumerate(scores.items()):
@@ -31,6 +31,8 @@ def draw_plot(categories, scores, title):
     plt.ylabel("F1 (%)", fontsize=16, fontweight='bold')
     plt.yticks(fontsize=16)
     # plt.title(title, fontsize=20, fontweight='bold')
+
+    plt.ylim(min_val, max_val)
 
     # Ensure all categories are shown on x-axis
     plt.xticks(adjusted_x + (len(scores) / 2 - 0.5) * bar_width, categories, fontsize=16)
@@ -47,6 +49,7 @@ def draw_plot(categories, scores, title):
 
 def plot_nt():
     # Define categories (x-axis) and accuracy scores (y-values)
+    # NarrativeTime
     categories = ["CoT", "ZSL-Global", "ZSL-TimeLine"]
     scores = {
         "All": [49.3, 48.4, 52.2],
@@ -54,10 +57,11 @@ def plot_nt():
         "Non-Consecutive Sentences": [46.7, 47.6, 51.9],
         # 4: [81.8, 80.1, 63.9, 46.9, 0, 0] # Bayesian
     }
-    draw_plot(categories, scores, "NarrativeTime")
+    draw_plot(categories, scores, 40, 60)
 
 
 def plot_eventfull():
+    # OmniTemp
     categories = ["CoT", "ZSL-Global", "ZSL-TimeLine"]
     scores = {
         "All": [67.2, 62.3, 68.5],
@@ -65,7 +69,7 @@ def plot_eventfull():
         "Non-Consecutive Sentences": [67.1, 60.0, 67.4],
         # 4: [81.8, 80.1, 63.9, 46.9, 0, 0] # Bayesian
     }
-    draw_plot(categories, scores, "OmniTemp")
+    draw_plot(categories, scores, 55, 75)
 
 
 if __name__ == '__main__':

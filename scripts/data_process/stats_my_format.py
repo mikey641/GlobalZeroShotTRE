@@ -2,7 +2,7 @@ import json
 import os
 
 if __name__ == '__main__':
-    _folder = "data/EventFullTrainExports/all"
+    _folder = "data/NarrativeTime_A1/converted/test"
     _relation_distribution = dict()
     _total_pairs = 0
     _total_events = 0
