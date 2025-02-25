@@ -1,7 +1,100 @@
 import json
 import re
 from copy import copy
-from datetime import datetime
+
+
+class Time(object):
+    def __init__(self, year, month, day, order=None):
+        self.year = year
+        self.month = month
+        self.day = day
+        self.order = order
+
+    @staticmethod
+    def min():
+        return Time(1, 1, 1, 0)
+
+    @staticmethod
+    def max():
+        return Time(9999, 12, 31, 0)
+
+
+    def __gt__(self, other):
+        if isinstance(other, Time):
+            if self.year > other.year:
+                return True
+            elif self.year == other.year:
+                if self.month > other.month:
+                    return True
+                elif self.month == other.month:
+                    if self.day > other.day:
+                        return True
+                    elif self.day == other.day:
+                        if self.order > other.order:
+                            return True
+            return False
+        return NotImplemented
+
+    def __lt__(self, other):
+        if isinstance(other, Time):
+            if self.year < other.year:
+                return True
+            elif self.year == other.year:
+                if self.month < other.month:
+                    return True
+                elif self.month == other.month:
+                    if self.day < other.day:
+                        return True
+                    elif self.day == other.day:
+                        if self.order < other.order:
+                            return True
+            return False
+        return NotImplemented
+
+    def __ge__(self, other):
+        if isinstance(other, Time):
+            if self.year > other.year:
+                return True
+            elif self.year == other.year:
+                if self.month > other.month:
+                    return True
+                elif self.month == other.month:
+                    if self.day > other.day:
+                        return True
+                    elif self.day == other.day:
+                        if self.order >= other.order:
+                            return True
+            return False
+        return NotImplemented
+
+    def __le__(self, other):
+        if isinstance(other, Time):
+            if self.year < other.year:
+                return True
+            elif self.year == other.year:
+                if self.month < other.month:
+                    return True
+                elif self.month == other.month:
+                    if self.day < other.day:
+                        return True
+                    elif self.day == other.day:
+                        if self.order <= other.order:
+                            return True
+            return False
+        return NotImplemented
+
+    def __eq__(self, other):
+        if isinstance(other, Time):
+            return self.year == other.year and self.month == other.month and self.day == other.day
+        return NotImplemented
+
+    def __ne__(self, other):
+        if isinstance(other, Time):
+            return self.year != other.year or self.month != other.month or self.day != other.day
+        return NotImplemented
+
+    def __str__(self):
+        return f"{self.day}:{self.month}:{self.year}:{self.order}"
 
 
 class IComponent(object):
@@ -13,23 +106,24 @@ class IComponent(object):
     def fix_start(time):
         ret_time = copy(time)
         if time[0] == 'XX':
-            ret_time[0] = '01'
+            ret_time[0] = 1
         if time[1] == 'XX':
-            ret_time[1] = '01'
+            ret_time[1] = 1
         if time[2] == 'XXXX' or time[2] == 'YYYY':
-            ret_time[2] = '0001'
-        return datetime(int(ret_time[2]), int(ret_time[1]), int(ret_time[0]), 0, 0)
+            ret_time[2] = 1
+
+        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=0)
 
     @staticmethod
     def fix_end(time):
         ret_time = copy(time)
         if time[0] == 'XX':
-            ret_time[0] = '28'
+            ret_time[0] = 31
         if time[1] == 'XX':
-            ret_time[1] = '12'
+            ret_time[1] = 12
         if time[2] == 'XXXX' or time[2] == 'YYYY':
             ret_time[2] = '5000'
-        return datetime(int(ret_time[2]), int(ret_time[1]), int(ret_time[0]), 0, 0)
+        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=0)
 
     def is_encapsulating(self, start, end):
         if self.start <= start and self.end >= end:
@@ -122,7 +216,7 @@ class Interval(IComponent):
         self.timeline.append(interval)
 
     def __str__(self):
-        return f"{self.start.strftime('%d:%m:%Y')}--{self.end.strftime('%d:%m:%Y')}"
+        return f"{self.start}--{self.end}"
 
 
 class Event(IComponent):
@@ -136,7 +230,7 @@ class Event(IComponent):
         self.interval = interval
 
     def __str__(self):
-        return f"{self.text}({self.m_id}) # {self.start.strftime('%d:%m:%Y')}--{self.end.strftime('%d:%m:%Y')}"
+        return f"{self.text}({self.m_id}) # {self.start}--{self.end}"
 
 
 def validate_date(date):
@@ -178,7 +272,7 @@ def insert_into_timeline(timeline, date, event, m_id):
 
 def main(in_file):
     data = json.load(open(in_file))
-    timeline = Interval(datetime.min, datetime.max)
+    timeline = Interval(Time.min, Time.max)
     # unknown_dates = list()
     for key, value in data.items():
         text, m_id = parse_key(key)

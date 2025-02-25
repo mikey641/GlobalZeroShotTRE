@@ -9,8 +9,8 @@ from together import Together
 from tqdm import tqdm
 
 from scripts.eval.dataset.utils import find_ment_by_id
-from scripts.prompting.jup_utils import open_input_file, get_input_text, prepare_instructions, get_all_pairs
-from scripts.prompting.prompts import task_description_4res_only_timeline, task_description_4res_only_global, \
+from scripts.prompting_global.jup_utils import open_input_file, get_input_text, prepare_instructions, get_all_pairs
+from scripts.prompting_global.prompts import task_description_4res_only_timeline, task_description_4res_only_global, \
     task_description_6res_only_global, task_description_6res_only_timeline
 
 gemini_pro_model = None

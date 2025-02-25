@@ -4,8 +4,8 @@ import os
 import tiktoken
 from openai import OpenAI
 
-from scripts.prompting.prompts import task_description_v2
-from scripts.prompting.run_llms import open_input_file, prepare_instructions, get_input_text
+from scripts.prompting_global.prompts import task_description_v2
+from scripts.prompting_global.run_llms import open_input_file, prepare_instructions, get_input_text
 
 
 def create_batch_request(prompt, request_id, model_id):

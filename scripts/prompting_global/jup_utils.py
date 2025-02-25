@@ -3,7 +3,7 @@ import os
 import random
 import tiktoken
 
-from scripts.prompting.prompts import task_description_4res_only_global, task_description_6res_only_global, \
+from scripts.prompting_global.prompts import task_description_4res_only_global, task_description_6res_only_global, \
     task_description_4res_only_timeline, task_description_6res_only_timeline, task_description_6rels
 
 
