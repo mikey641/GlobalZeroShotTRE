@@ -1,5 +1,3 @@
-import json
-import re
 from copy import copy
 
 
@@ -18,6 +16,28 @@ class Time(object):
     def max():
         return Time(9999, 12, 31, 0)
 
+    @staticmethod
+    def fix_start(time):
+        ret_time = copy(time)
+        if time[0] == 'XX':
+            ret_time[0] = 1
+        if time[1] == 'XX':
+            ret_time[1] = 1
+        if time[2] == 'XXXX' or time[2] == 'YYYY':
+            ret_time[2] = 1
+
+        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=-1)
+
+    @staticmethod
+    def fix_end(time):
+        ret_time = copy(time)
+        if time[0] == 'XX':
+            ret_time[0] = 31
+        if time[1] == 'XX':
+            ret_time[1] = 12
+        if time[2] == 'XXXX' or time[2] == 'YYYY':
+            ret_time[2] = '5000'
+        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=-1)
 
     def __gt__(self, other):
         if isinstance(other, Time):
@@ -102,29 +122,6 @@ class IComponent(object):
         self.start = start
         self.end = end
 
-    @staticmethod
-    def fix_start(time):
-        ret_time = copy(time)
-        if time[0] == 'XX':
-            ret_time[0] = 1
-        if time[1] == 'XX':
-            ret_time[1] = 1
-        if time[2] == 'XXXX' or time[2] == 'YYYY':
-            ret_time[2] = 1
-
-        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=0)
-
-    @staticmethod
-    def fix_end(time):
-        ret_time = copy(time)
-        if time[0] == 'XX':
-            ret_time[0] = 31
-        if time[1] == 'XX':
-            ret_time[1] = 12
-        if time[2] == 'XXXX' or time[2] == 'YYYY':
-            ret_time[2] = '5000'
-        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=0)
-
     def is_encapsulating(self, start, end):
         if self.start <= start and self.end >= end:
             return self
@@ -144,7 +141,7 @@ class Interval(IComponent):
         self.timeline.append(event_or_interval)
         event_or_interval.set_interval(self)
 
-    def get_interval(self, event):
+    def get_encapsulating_interval(self, event):
         ret_interval = None
         for interval in self.timeline:
             if isinstance(interval, Interval):
@@ -156,7 +153,7 @@ class Interval(IComponent):
 
         return ret_interval
 
-    def get_event(self, event):
+    def get_encapsulating_event(self, event):
         ret_event = None
         for loop_event in self.timeline:
             if isinstance(loop_event, Event):
@@ -168,10 +165,16 @@ class Interval(IComponent):
 
         return ret_event
 
+    def get_all_intervals(self):
+        return [interval for interval in self.timeline if isinstance(interval, Interval)]
+
+    def get_all_events(self):
+        return [event for event in self.timeline if isinstance(event, Event)]
+
     def add_event(self, event):
         is_added = False
-        interval = self.get_interval(event)
-        inner_event = self.get_event(event)
+        interval = self.get_encapsulating_interval(event)
+        inner_event = self.get_encapsulating_event(event)
         if interval:
             is_added = interval.add_event(event)
 
@@ -209,14 +212,44 @@ class Interval(IComponent):
         if is_empty_interval:
             self.add_first(event)
 
-    def add_events(self, events):
-        self.timeline.extend(events)
+    def is_resolved(self):
+        intervals = self.get_all_intervals()
+        events = self.get_all_events()
+        if len(intervals) == 0:
+            for event in events:
+                if not event.is_resolved():
+                    return False
 
-    def add_interval(self, interval):
-        self.timeline.append(interval)
+            return True
+
+        return False
+
+    def locate_unresolved_interval(self):
+        intervals = self.get_all_intervals()
+        if len(intervals) == 0:
+            return None
+
+        for interval in intervals:
+            move_in = interval.locate_unresolved_interval()
+            if move_in is None:
+                if not interval.is_resolved():
+                    return interval
+            else:
+                return move_in
+        return None
 
     def __str__(self):
         return f"{self.start}--{self.end}"
+
+    def print_timeline(self, tab=0):
+        tabs = '\t' * tab
+        tab += 1
+        print(f"{tabs}{self}")
+        for event_interval in self.timeline:
+            if isinstance(event_interval, Interval):
+                event_interval.print_timeline(tab)
+            else:
+                print(f"{tabs}\t{event_interval.text}({event_interval.m_id}) # {event_interval.start}--{event_interval.end}")
 
 
 class Event(IComponent):
@@ -229,62 +262,13 @@ class Event(IComponent):
     def set_interval(self, interval):
         self.interval = interval
 
+    def is_resolved(self):
+        if self.start.order != -1 and self.end.order != -1:
+            return True
+        return False
+
     def __str__(self):
         return f"{self.text}({self.m_id}) # {self.start}--{self.end}"
 
-
-def validate_date(date):
-    if date[0] == 'XX' and date[1] == 'XX' and (date[2] == 'XXXX' or date[2] == 'YYYY'):
-        return False
-    return True
-
-
-def parse_value(value):
-    start_end = value.split('--')
-    start = start_end[0].split(':')
-    end = start_end[1].split(':')
-    return start, end
-
-
-def parse_key(key):
-    match = re.match(r'([a-zA-Z]+)\((\d+)\)', key)
-    if match:
-        event, m_id = match.groups()  # Extracts the text and the number
-        return event, int(m_id)  # Convert B to an integer
-    else:
-        raise ValueError(f"Invalid format: {key}")
-
-
-def insert_into_timeline(timeline, date, event, m_id):
-    if date[2] in timeline:
-        year = timeline[date[2]]
-        if date[1] in year:
-            month = year[date[1]]
-            if date[0] in month:
-                month[date[0]].append((event, m_id))
-            else:
-                month[date[0]] = [(event, m_id)]
-        else:
-            year[date[1]] = {date[0]: [(event, m_id)]}
-    else:
-        timeline[date[2]] = {date[1]: {date[0]: [(event, m_id)]}}
-
-
-def main(in_file):
-    data = json.load(open(in_file))
-    timeline = Interval(Time.min, Time.max)
-    # unknown_dates = list()
-    for key, value in data.items():
-        text, m_id = parse_key(key)
-        start, end = parse_value(value)
-        fix_start = IComponent.fix_start(start)
-        fix_end = IComponent.fix_end(end)
-        event = Event(text, m_id, fix_start, fix_end)
-        timeline.add_event(event)
-
-    print(timeline)
-
-
-if __name__ == "__main__":
-    _in_file = "data/my_data/expr/temporal_expr/155d4_event_times3.json"
-    main(_in_file)
+    def print_timeline(self):
+        print(f"{self.text}({self.m_id}) # {self.start}--{self.end}")

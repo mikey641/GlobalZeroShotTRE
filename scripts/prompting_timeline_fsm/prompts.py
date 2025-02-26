@@ -14,19 +14,13 @@ def extract_timeline(events, pairs):
     #         called(18) - - asked(4)
     #         smacked(11) - - asked(4)
     desc = """
-    Provide the relations (before, after, equal, vague) between the events """ + events + """, according to the list of pairs below. 
+    Provide the timeline order of the following events: """ + events + """, with a numerical indicator. If two events started at the same time, assign them the same order indicator. 
+    Output in JSON format, where the key is the event (with identifier) and the value is the indicator.
+     
     The output should be in two steps:
     First: provide a detailed explanation of the timeline based on your interpretation and the events.
 
-    Then:
-    For each pair listed below, based on your explanation, provide the temporal relationship between the events in the following DOT format:
-    strict graph {
-    "Event1(id)" -- "Event2(id)" [rel=LABEL];
-    "Event1(id)" -- "Event3(id)" [rel=LABEL];
-    ...
-    }
-
-    Pairs require classification:
-    """ + pairs
+    Then, provide the JSON output.
+    """
 
     return desc
