@@ -8,13 +8,14 @@ def extract_times():
     return desc
 
 
-def extract_timeline(events, pairs):
+def extract_timeline(events):
     # events = called(18), smacked(11), asked(4)
     # pairs = called(18) - - smacked(11)
     #         called(18) - - asked(4)
     #         smacked(11) - - asked(4)
     desc = """
-    Provide the timeline order of the following events: """ + events + """, with a numerical indicator. If two events started at the same time, assign them the same order indicator. 
+    Provide the timeline order of the following events: """ + events + """, with a numerical indicator. 
+    If two events started at the same time, assign them the same order indicator. If the event order is uncertain, assign 'X' as the indicator. 
     Output in JSON format, where the key is the event (with identifier) and the value is the indicator.
      
     The output should be in two steps:

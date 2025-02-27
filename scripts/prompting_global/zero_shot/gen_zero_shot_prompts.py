@@ -1,9 +1,8 @@
 import json
 import os
-from itertools import combinations
 
-from scripts.prompting_global.jup_utils import open_input_file, filter_non_events
-from scripts.prompting_global.run_llms import gpt4o
+from scripts.utils.io_utils import open_input_file
+from scripts.utils.omni_format_utils import filter_non_events
 
 
 def prompt_zero_shot(source, target):

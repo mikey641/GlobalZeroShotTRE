@@ -1,8 +1,9 @@
 import json
 import re
 
+from scripts.prompting_global.jup_utils import get_input_text
 from scripts.prompting_timeline_fsm.timeline.timeline_obj import Interval, Time, Event
-from scripts.utils.dot_format import parse_dot
+from scripts.utils.io_utils import open_input_file
 
 
 def validate_date(date):
@@ -81,6 +82,11 @@ def find_unresolved_timeline(timeline):
     return timeline.locate_unresolved_interval()
 
 
+def initial_state(doc_file):
+    data = open_input_file(f'{doc_file}')
+    text, _ = get_input_text(data)
+
+
 def main(in_file, _in_timeline1):
     timeline = extract_initial_timeline(in_file)
     stop = False
@@ -101,6 +107,7 @@ def main(in_file, _in_timeline1):
 
 
 if __name__ == "__main__":
+    _in_initial_doc = "data/OmniTemp/train/30_final.json"
     _in_time_file = "data/my_data/expr/time_expr/155d4_event_times3.json"
     _in_timeline1 = "data/my_data/expr/timelines/155d4_event_timeline1.json"
     main(_in_time_file, _in_timeline1)

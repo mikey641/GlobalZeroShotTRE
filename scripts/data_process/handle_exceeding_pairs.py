@@ -6,7 +6,7 @@ import random
 from tqdm import tqdm
 
 from scripts.data_process.create_all_pairs import ret_only_relevant_mentions, handle_chunks
-from scripts.prompting_global.jup_utils import open_input_file
+from scripts.utils.io_utils import open_input_file
 
 
 def reduce_pairs_random(test_folder, max_pairs_in_chunk, test_out_folder):

@@ -5,7 +5,8 @@ import tiktoken
 
 from scripts.prompting_global.prompts import task_description_v2
 from scripts.prompting_global.run_gpt_batch import create_batch_request
-from scripts.prompting_global.run_llms import gpt4o, open_input_file, prepare_instructions, get_input_text
+from scripts.prompting_global.run_llms import gpt4o, prepare_instructions, get_input_text
+from scripts.utils.io_utils import open_input_file
 
 
 def from_dataset_to_batch_req(test_folder, train_folder, dot_train_data, instructions_func, output_file, num_of_files,

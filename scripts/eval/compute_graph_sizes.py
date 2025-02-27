@@ -2,7 +2,7 @@ import json
 import os
 import google.generativeai as genai
 
-from scripts.prompting_global.run_llms import open_input_file
+from scripts.utils.io_utils import open_input_file
 
 
 def calc_examples(dot_folder):
