@@ -5,8 +5,8 @@ import random
 
 from tqdm import tqdm
 
-from scripts.prompting_global.jup_utils import filter_non_events
 from scripts.utils.io_utils import open_input_file
+from scripts.utils.omni_format_utils import filter_non_events
 
 
 def reverse_label(label):

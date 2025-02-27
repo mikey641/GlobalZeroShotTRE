@@ -21,12 +21,8 @@ def get_input_text(data):
         tokens = data['tokens']
         all_mentions = filter_non_events(data['allMentions'])
         all_mentions.sort(key=lambda x: x['tokens_ids'][0])
-        # all_mentions_text = [m['tokens'] for m in all_mentions]
-        # all_ment_ids = [m['m_id'] for m in all_mentions]
         all_pairs = data['allPairs']
         text = mark_events_in_text(tokens, all_mentions)
-        # print(f'The mentions are-{all_mentions_text}')
-        # print(f'The input text is-{text}')
         return text, all_pairs
 
 

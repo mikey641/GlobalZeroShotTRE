@@ -5,7 +5,7 @@ import time
 
 from tqdm import tqdm
 
-from scripts.prompting_global.run_llms import gpt4o, gpt4, gpt3_5
+from scripts.prompting_global.run_llms import gpt4o
 
 
 def get_equal_prompt(source_id, source_text, target_id, target_text, same_prompt=True):

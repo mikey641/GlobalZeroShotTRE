@@ -23,7 +23,7 @@ class Time(object):
             ret_time[0] = 1
         if time[1] == 'XX':
             ret_time[1] = 1
-        if time[2] == 'XXXX' or time[2] == 'YYYY':
+        if time[2] in ['XX', 'XXXX', 'YYYY']:
             ret_time[2] = 1
 
         return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=-1)
@@ -35,7 +35,7 @@ class Time(object):
             ret_time[0] = 31
         if time[1] == 'XX':
             ret_time[1] = 12
-        if time[2] == 'XXXX' or time[2] == 'YYYY':
+        if time[2] in ['XX', 'XXXX', 'YYYY']:
             ret_time[2] = '5000'
         return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=-1)
 
@@ -128,6 +128,11 @@ class IComponent(object):
 
         return None
 
+    def is_resolved(self):
+        if self.start.order != -1 and self.end.order != -1:
+            return True
+        return False
+
 
 class Interval(IComponent):
     def __init__(self, start, end):
@@ -186,7 +191,9 @@ class Interval(IComponent):
                         inner_event_interval.add_first(event)
                         return True
                     else:
-                        new_interval = Interval(inner_event.start, inner_event.end)
+                        int_start = Time(inner_event.start.year, inner_event.start.month, inner_event.start.day, -1)
+                        int_end = Time(inner_event.end.year, inner_event.end.month, inner_event.end.day, -1)
+                        new_interval = Interval(int_start, int_end)
                         new_interval.add_first(inner_event)
                         new_interval.add_first(event)
                         self.timeline.remove(inner_event)
@@ -199,7 +206,9 @@ class Interval(IComponent):
         return is_added
 
     def add_with_encapsulation_check(self, event):
-        new_interval = Interval(event.start, event.end)
+        int_start = Time(event.start.year, event.start.month, event.start.day, -1)
+        int_end = Time(event.end.year, event.end.month, event.end.day, -1)
+        new_interval = Interval(int_start, int_end)
         is_empty_interval = True
         for idx in range(len(self.timeline) - 1, -1, -1):
             interval_event = self.timeline[idx]
@@ -212,7 +221,7 @@ class Interval(IComponent):
         if is_empty_interval:
             self.add_first(event)
 
-    def is_resolved(self):
+    def is_resolved_events_only_interval(self):
         intervals = self.get_all_intervals()
         events = self.get_all_events()
         if len(intervals) == 0:
@@ -224,6 +233,13 @@ class Interval(IComponent):
 
         return False
 
+    def is_resolved_events_interval_mix(self):
+        for event_interval in self.timeline:
+            if not event_interval.is_resolved():
+                return False
+
+        return True
+
     def locate_unresolved_interval(self):
         intervals = self.get_all_intervals()
         if len(intervals) == 0:
@@ -232,10 +248,24 @@ class Interval(IComponent):
         for interval in intervals:
             move_in = interval.locate_unresolved_interval()
             if move_in is None:
-                if not interval.is_resolved():
+                if len(interval.get_all_intervals()) == 0 and not interval.is_resolved_events_only_interval():
                     return interval
             else:
-                return move_in
+                if len(move_in.get_all_intervals()) == 0 and not move_in.is_resolved_events_only_interval():
+                    return move_in
+        return None
+
+    def locate_unresolved_interval_events_mix(self):
+        intervals = self.get_all_intervals()
+        if len(intervals) == 0:
+            return None
+
+        for interval in intervals:
+            move_in = interval.locate_unresolved_interval_events_mix()
+            if move_in is None:
+                if not interval.is_resolved_events_interval_mix():
+                    return interval
+
         return None
 
     def __str__(self):
@@ -261,11 +291,6 @@ class Event(IComponent):
 
     def set_interval(self, interval):
         self.interval = interval
-
-    def is_resolved(self):
-        if self.start.order != -1 and self.end.order != -1:
-            return True
-        return False
 
     def __str__(self):
         return f"{self.text}({self.m_id}) # {self.start}--{self.end}"

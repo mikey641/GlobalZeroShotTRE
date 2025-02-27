@@ -3,7 +3,7 @@ import os
 
 import tiktoken
 
-from scripts.prompting_global.prompts import task_description_v2
+from scripts.prompting_global.prompt_old_bkp import task_description_v2
 from scripts.prompting_global.run_gpt_batch import create_batch_request
 from scripts.prompting_global.run_llms import gpt4o, prepare_instructions, get_input_text
 from scripts.utils.io_utils import open_input_file

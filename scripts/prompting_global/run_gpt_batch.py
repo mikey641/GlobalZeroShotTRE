@@ -4,7 +4,6 @@ import os
 import tiktoken
 from openai import OpenAI
 
-from scripts.prompting_global.prompts import task_description_v2
 from scripts.prompting_global.run_llms import prepare_instructions, get_input_text
 from scripts.utils.io_utils import open_input_file
 
