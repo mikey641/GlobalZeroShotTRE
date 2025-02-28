@@ -1,20 +1,20 @@
+import re
 from copy import copy
 
 
 class Time(object):
-    def __init__(self, year, month, day, order=None):
+    def __init__(self, year, month, day):
         self.year = year
         self.month = month
         self.day = day
-        self.order = order
 
     @staticmethod
     def min():
-        return Time(1, 1, 1, 0)
+        return Time(1, 1, 1)
 
     @staticmethod
     def max():
-        return Time(9999, 12, 31, 0)
+        return Time(9999, 12, 31)
 
     @staticmethod
     def fix_start(time):
@@ -26,7 +26,7 @@ class Time(object):
         if time[2] in ['XX', 'XXXX', 'YYYY']:
             ret_time[2] = 1
 
-        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=-1)
+        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]))
 
     @staticmethod
     def fix_end(time):
@@ -37,7 +37,14 @@ class Time(object):
             ret_time[1] = 12
         if time[2] in ['XX', 'XXXX', 'YYYY']:
             ret_time[2] = '5000'
-        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]), order=-1)
+        return Time(year=int(ret_time[2]), month=int(ret_time[1]), day=int(ret_time[0]))
+
+    @staticmethod
+    def parse_value(value):
+        start_end = value.split('--')
+        start = start_end[0].split(':')
+        end = start_end[1].split(':')
+        return start, end
 
     def __gt__(self, other):
         if isinstance(other, Time):
@@ -49,9 +56,6 @@ class Time(object):
                 elif self.month == other.month:
                     if self.day > other.day:
                         return True
-                    elif self.day == other.day:
-                        if self.order > other.order:
-                            return True
             return False
         return NotImplemented
 
@@ -65,9 +69,6 @@ class Time(object):
                 elif self.month == other.month:
                     if self.day < other.day:
                         return True
-                    elif self.day == other.day:
-                        if self.order < other.order:
-                            return True
             return False
         return NotImplemented
 
@@ -79,11 +80,8 @@ class Time(object):
                 if self.month > other.month:
                     return True
                 elif self.month == other.month:
-                    if self.day > other.day:
+                    if self.day >= other.day:
                         return True
-                    elif self.day == other.day:
-                        if self.order >= other.order:
-                            return True
             return False
         return NotImplemented
 
@@ -95,11 +93,8 @@ class Time(object):
                 if self.month < other.month:
                     return True
                 elif self.month == other.month:
-                    if self.day < other.day:
+                    if self.day <= other.day:
                         return True
-                    elif self.day == other.day:
-                        if self.order <= other.order:
-                            return True
             return False
         return NotImplemented
 
@@ -114,13 +109,15 @@ class Time(object):
         return NotImplemented
 
     def __str__(self):
-        return f"{self.day}:{self.month}:{self.year}:{self.order}"
+        return f"{self.day}:{self.month}:{self.year}"
 
 
 class IComponent(object):
     def __init__(self, start, end):
         self.start = start
         self.end = end
+        self.order = -1
+        self.relation = 'NA'
 
     def is_encapsulating(self, start, end):
         if self.start <= start and self.end >= end:
@@ -129,7 +126,7 @@ class IComponent(object):
         return None
 
     def is_resolved(self):
-        if self.start.order != -1 and self.end.order != -1:
+        if self.order != -1:
             return True
         return False
 
@@ -141,6 +138,9 @@ class Interval(IComponent):
 
     def set_interval(self, interval):
         pass
+
+    def sort_timeline(self):
+        self.timeline.sort(key=lambda x: x.start)
 
     def add_first(self, event_or_interval):
         self.timeline.append(event_or_interval)
@@ -170,11 +170,20 @@ class Interval(IComponent):
 
         return ret_event
 
-    def get_all_intervals(self):
+    def get_layer_intervals(self):
         return [interval for interval in self.timeline if isinstance(interval, Interval)]
 
-    def get_all_events(self):
+    def get_layer_events(self):
         return [event for event in self.timeline if isinstance(event, Event)]
+
+    def get_all_events(self):
+        events = []
+        for interval_event in self.timeline:
+            if isinstance(interval_event, Interval):
+                events.extend(interval_event.get_all_events())
+            else:
+                events.append(interval_event)
+        return events
 
     def add_event(self, event):
         is_added = False
@@ -191,8 +200,8 @@ class Interval(IComponent):
                         inner_event_interval.add_first(event)
                         return True
                     else:
-                        int_start = Time(inner_event.start.year, inner_event.start.month, inner_event.start.day, -1)
-                        int_end = Time(inner_event.end.year, inner_event.end.month, inner_event.end.day, -1)
+                        int_start = Time(inner_event.start.year, inner_event.start.month, inner_event.start.day)
+                        int_end = Time(inner_event.end.year, inner_event.end.month, inner_event.end.day)
                         new_interval = Interval(int_start, int_end)
                         new_interval.add_first(inner_event)
                         new_interval.add_first(event)
@@ -206,8 +215,8 @@ class Interval(IComponent):
         return is_added
 
     def add_with_encapsulation_check(self, event):
-        int_start = Time(event.start.year, event.start.month, event.start.day, -1)
-        int_end = Time(event.end.year, event.end.month, event.end.day, -1)
+        int_start = Time(event.start.year, event.start.month, event.start.day)
+        int_end = Time(event.end.year, event.end.month, event.end.day)
         new_interval = Interval(int_start, int_end)
         is_empty_interval = True
         for idx in range(len(self.timeline) - 1, -1, -1):
@@ -222,8 +231,8 @@ class Interval(IComponent):
             self.add_first(event)
 
     def is_resolved_events_only_interval(self):
-        intervals = self.get_all_intervals()
-        events = self.get_all_events()
+        intervals = self.get_layer_intervals()
+        events = self.get_layer_events()
         if len(intervals) == 0:
             for event in events:
                 if not event.is_resolved():
@@ -241,22 +250,22 @@ class Interval(IComponent):
         return True
 
     def locate_unresolved_interval(self):
-        intervals = self.get_all_intervals()
+        intervals = self.get_layer_intervals()
         if len(intervals) == 0:
             return None
 
         for interval in intervals:
             move_in = interval.locate_unresolved_interval()
             if move_in is None:
-                if len(interval.get_all_intervals()) == 0 and not interval.is_resolved_events_only_interval():
+                if len(interval.get_layer_intervals()) == 0 and not interval.is_resolved_events_only_interval():
                     return interval
             else:
-                if len(move_in.get_all_intervals()) == 0 and not move_in.is_resolved_events_only_interval():
+                if len(move_in.get_layer_intervals()) == 0 and not move_in.is_resolved_events_only_interval():
                     return move_in
         return None
 
     def locate_unresolved_interval_events_mix(self):
-        intervals = self.get_all_intervals()
+        intervals = self.get_layer_intervals()
         if len(intervals) == 0:
             return None
 
@@ -269,7 +278,7 @@ class Interval(IComponent):
         return None
 
     def __str__(self):
-        return f"{self.start}--{self.end}"
+        return f"{self.start}--{self.end} # order={self.order} # rel={self.relation}"
 
     def print_timeline(self, tab=0):
         tabs = '\t' * tab
@@ -279,7 +288,7 @@ class Interval(IComponent):
             if isinstance(event_interval, Interval):
                 event_interval.print_timeline(tab)
             else:
-                print(f"{tabs}\t{event_interval.text}({event_interval.m_id}) # {event_interval.start}--{event_interval.end}")
+                print(f"{tabs}\t{event_interval.text}({event_interval.m_id}) # {event_interval.start}--{event_interval.end} # order={event_interval.order} # rel={event_interval.relation}")
 
 
 class Event(IComponent):
@@ -293,7 +302,16 @@ class Event(IComponent):
         self.interval = interval
 
     def __str__(self):
-        return f"{self.text}({self.m_id}) # {self.start}--{self.end}"
+        return f"{self.text}({self.m_id}) # {self.start}--{self.end} # order={self.order} # rel={self.relation}"
 
     def print_timeline(self):
-        print(f"{self.text}({self.m_id}) # {self.start}--{self.end}")
+        print(f"{self.text}({self.m_id}) # {self.start}--{self.end} # order={self.order} # rel={self.relation}")
+
+    @staticmethod
+    def parse_key(key):
+        match = re.match(r'([a-zA-Z]+)\((\d+)\)', key)
+        if match:
+            event, m_id = match.groups()  # Extracts the text and the number
+            return event, int(m_id)  # Convert B to an integer
+        else:
+            raise ValueError(f"Invalid format: {key}")

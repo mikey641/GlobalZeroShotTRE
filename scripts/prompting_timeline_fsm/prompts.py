@@ -25,3 +25,28 @@ Then, provide the JSON output.
 """
 
     return desc
+
+
+def extract_relations(events, pairs):
+    desc = """
+Provide the temporal relations (before, after, equal, vague) between the following events: """ + events + """. 
+Assign vague if the relation is uncertain. 
+
+The output should be in two steps:
+First: provide a detailed explanation of the timeline based on your interpretation and the targeted events.
+
+Then:
+For each pair listed below, based on your explanation, provide the temporal relationship between the events in the following Json format:
+[
+    {
+        "source": event1(identifier),
+        "target": event2(identifier),
+        "relation": temporal_relation
+    },
+    ...
+]
+
+Pairs require classification:
+""" + pairs
+
+    return desc

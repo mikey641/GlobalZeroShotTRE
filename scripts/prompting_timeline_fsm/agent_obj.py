@@ -38,9 +38,6 @@ class GPTAgentSimulator(GPTAgent):
         self._messages = json.load(open("data/my_data/expr/sim/155d4_sim.json"))
 
     def call_llm(self):
-        return self.get_response_from_sim()
-
-    def get_response_from_sim(self):
         resp = self._messages[self._message_idx]['content']
         self._message_idx += 2
         return resp
