@@ -8,6 +8,14 @@ Use XX for unknown days or months; however, the year should be specified).
     return desc
 
 
+def extract_times_missing_events(events):
+    desc = """
+The following events where missed: """ + events + """.
+As instructed previously, for each of these events, state the date/time it took place in JSON format.
+"""
+    return desc
+
+
 def extract_timeline(events):
     # events = called(18), smacked(11), asked(4)
     # pairs = called(18) - - smacked(11)

@@ -32,10 +32,10 @@ class GPTAgent(Agent):
 
 
 class GPTAgentSimulator(GPTAgent):
-    def __init__(self):
+    def __init__(self, messages):
         super().__init__(None)
         self._message_idx = 1
-        self._messages = json.load(open("data/my_data/expr/sim/155d4_sim.json"))
+        self._messages = messages
 
     def call_llm(self):
         resp = self._messages[self._message_idx]['content']

@@ -12,7 +12,7 @@ from scripts.prompting_timeline_fsm.prompts import extract_times, extract_timeli
 from scripts.prompting_timeline_fsm.timeline_obj import Time, Event, Interval
 from scripts.utils.io_utils import open_input_file
 from scripts.utils.llms_definitions import gpt4o_mini
-
+from scripts.utils.omni_format_utils import filter_non_events
 
 Event_Relations = ['BEFORE', 'AFTER', 'EQUAL', 'UNCERTAIN']
 
@@ -41,6 +41,7 @@ def insert_into_timeline(timeline, date, event, m_id):
 
 
 def extract_initial_timeline(data, timeline):
+    print("Extracting initial timeline.")
     for key, value in data.items():
         text, m_id = Event.parse_key(key)
         start, end = Time.parse_value(value)
@@ -49,10 +50,14 @@ def extract_initial_timeline(data, timeline):
         event = Event(text, m_id, fix_start, fix_end)
         timeline.add_event(event)
 
+    print("Initial timeline extracted.")
+    timeline.print_timeline()
+    print("-----------------------------------------")
     return timeline
 
 
 def extract_timeline_within_interval_events(agent, timeline):
+    print("Extracting timeline between events within intervals.")
     stop = False
     stop_max_iter = 10
     loop_num = 0
@@ -69,10 +74,27 @@ def extract_timeline_within_interval_events(agent, timeline):
         loop_num += 1
 
     print(f"Timeline between events within intervals solved after {loop_num} iterations.")
+    timeline.print_timeline()
+    print("-----------------------------------------")
     return timeline
 
 
+def resolve_final_disambiguation(timeline):
+    all_events = timeline.get_all_events()
+    starting_date_group = {}
+    for event1 in all_events:
+        for event2 in all_events:
+            if event1 != event2:
+                if event1.start == event2.start and (event1.order == -1 or event2.order == -1):
+                    if f'{event1.start}' not in starting_date_group:
+                        starting_date_group[f'{event1.start}'] = set()
+                    starting_date_group[f'{event1.start}'].add(event1)
+                    starting_date_group[f'{event1.start}'].add(event2)
+    return starting_date_group
+
+
 def extract_timeline_between_interval_and_event_mix(timeline):
+    print("Building the graph and preparing final disambiguation.")
     all_events = timeline.get_all_events()
     all_events_ids = {event.m_id: i for i, event in enumerate(all_events)}
     graph = np.full((len(all_events_ids), len(all_events_ids)), -1)
@@ -97,13 +119,12 @@ def extract_timeline_between_interval_and_event_mix(timeline):
                         elif event1.order > event2.order:
                             graph[all_events_ids[event1.m_id]][all_events_ids[event2.m_id]] = Event_Relations.index('AFTER')
                             graph[all_events_ids[event2.m_id]][all_events_ids[event1.m_id]] = Event_Relations.index('BEFORE')
-                    else:
-                        if f'{event1.start}' not in starting_date_group:
-                            starting_date_group[f'{event1.start}'] = set()
-                        starting_date_group[f'{event1.start}'].add(event1)
-                        starting_date_group[f'{event1.start}'].add(event2)
 
-    return graph, all_events_ids, starting_date_group
+    print("Found the following events with the same starting date:")
+    for date, events in starting_date_group.items():
+        print(f"Date: {date}, Events: {', '.join([event.text for event in events])}")
+
+    return graph, all_events_ids
 
 
 def insert_final_pairs_into_graph(graph, all_events_ids, pairs_dict_json):
@@ -125,10 +146,13 @@ def handle_interval_timeline(agent, unresolved_timeline):
     agent.add_message_from_instruct(prompt)
     response = agent.call_llm()
     data = extract_json(response)
+    resolve_time_from_json(data, unresolved_timeline.timeline)
 
+
+def resolve_time_from_json(data, unresolved_timeline):
     for event_id, order in data.items():
         event, _id = Event.parse_key(event_id)
-        for inter_event in unresolved_timeline.timeline:
+        for inter_event in unresolved_timeline:
             if inter_event.m_id == _id:
                 inter_event.order = order
 
@@ -180,26 +204,46 @@ def final_pairs_to_resolve(agent, starting_date_groups):
     for start_date, events in starting_date_groups.items():
         print(f"Resolve the following events with the same starting date: {start_date}")
         event_str = ", ".join([f"{event.text}({event.m_id})" for event in events])
-        all_pairs = list(combinations(events, 2))
-        pairs_str = "\n".join([f"{pair[0].text}({pair[0].m_id}) - - {pair[1].text}({pair[1].m_id})" for pair in all_pairs])
-        prompt = extract_relations(event_str, pairs_str)
+        # all_pairs = list(combinations(events, 2))
+        # pairs_str = "\n".join([f"{pair[0].text}({pair[0].m_id}) - - {pair[1].text}({pair[1].m_id})" for pair in all_pairs])
+        # prompt = extract_relations(event_str, pairs_str)
+        prompt = extract_timeline(event_str)
         agent.add_message_from_instruct(prompt)
         response = agent.call_llm()
-        results[start_date] = extract_json_list(response)
+        results[start_date] = extract_json(response)
 
     return results
 
 
+def validate_all_events_extracted(timeline, all_mentions):
+    all_events = timeline.get_all_events()
+    if len(all_events) != len(all_mentions):
+        all_time_line_ids = [event.m_id for event in all_events]
+        all_mention_ids = [int(mention['m_id']) for mention in all_mentions]
+        missing_events = set(all_mention_ids) - set(all_time_line_ids)
+        print(f"Missing events: {missing_events}")
+
+
 def main(agent, timeline, doc_file):
+    # Initial State
     data = open_input_file(f'{doc_file}')
     event_times = initial_state(agent, data)
     timeline = extract_initial_timeline(event_times, timeline)
-    timeline = extract_timeline_within_interval_events(agent, timeline)
-    graph, event_ids, starting_date_group = extract_timeline_between_interval_and_event_mix(timeline)
+    validate_all_events_extracted(timeline, filter_non_events(data['allMentions']))
 
+    # Mid State - Resolve timeline within intervals
+    timeline = extract_timeline_within_interval_events(agent, timeline)
+    starting_date_group = resolve_final_disambiguation(timeline)
+
+    # Final state --
     if len(starting_date_group) > 0:
         result_dict = final_pairs_to_resolve(agent, starting_date_group)
-        insert_final_pairs_into_graph(graph, event_ids, result_dict)
+        # insert_final_pairs_into_graph(graph, event_ids, result_dict)
+        for start_date, data_json in result_dict.items():
+            print(f"Resolved pairs for date: {start_date}")
+            resolve_time_from_json(data_json, list(starting_date_group[start_date]))
+
+    graph, event_ids = extract_timeline_between_interval_and_event_mix(timeline)
 
     pred_pairs = from_graph_to_pairs(graph, event_ids)
     gold_pairs = {f"{pair['_firstId']}#{pair['_secondId']}": pair['_relation'] for pair in data['allPairs']}
@@ -217,9 +261,9 @@ def main(agent, timeline, doc_file):
 
 
 if __name__ == "__main__":
-    _in_initial_doc = "data/OmniTemp/train/30_final.json"
-    _agent = GPTAgent(gpt4o_mini)
-    # _agent = GPTAgentSimulator()
+    _in_initial_doc = "data/OmniTemp/train/29_final.json"
+    # _agent = GPTAgent(gpt4o_mini)
+    _agent = GPTAgentSimulator(json.load(open("data/my_data/expr/sim/29_sim.json")))
     _timeline = Interval(Time.min, Time.max)
     try:
         main(_agent, _timeline, _in_initial_doc)
