@@ -309,7 +309,8 @@ class Event(IComponent):
 
     @staticmethod
     def parse_key(key):
-        match = re.match(r'([a-zA-Z]+)\((\d+)\)', key)
+        # match = re.match(r'([a-zA-Z]+)\((\d+)\)', key)
+        match = re.match(r'([\w\s]+)\((\d+)\)', key)
         if match:
             event, m_id = match.groups()  # Extracts the text and the number
             return event, int(m_id)  # Convert B to an integer

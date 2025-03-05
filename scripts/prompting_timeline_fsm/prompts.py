@@ -16,6 +16,15 @@ As instructed previously, for each of these events, state the date/time it took 
     return desc
 
 
+def extract_timeline_order():
+    desc = """
+Now provide the timeline order between the events, the order should be indicated with a numerical indicator. 
+If two events started at the same time, assign them the same order indicator. If the event order is uncertain, assign 'X' as the order indicator. 
+Output in JSON format, where the key is the event (with identifier) and the value is the indicator.
+"""
+    return desc
+
+
 def extract_timeline(events):
     # events = called(18), smacked(11), asked(4)
     # pairs = called(18) - - smacked(11)
@@ -32,6 +41,14 @@ First: provide a detailed explanation of the timeline based on your interpretati
 Then, provide the JSON output.
 """
 
+    return desc
+
+
+def extract_missing_events_order(events):
+    desc = """
+The timeline order of the following events was missed: """ + events + """.  
+As previously instructed, for each of these events, provide its order (considering the sequence of events you generated earlier) in JSON format.
+"""
     return desc
 
 
