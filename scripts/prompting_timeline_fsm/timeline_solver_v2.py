@@ -56,15 +56,20 @@ class TimelineSolverV2(object):
         prompt = extract_times_missing_events(event_str)
         self.agent.add_message_from_instruct(prompt)
         response = self.agent.call_llm()
-        events_ordered = self.extract_json(response)
-
+        missing_event_times = self.extract_json(response)
+        self.extract_initial_timeline(missing_event_times)
 
     def resolve_timeline_order(self):
         prompt = extract_timeline_order()
         self.agent.add_message_from_instruct(prompt)
         response = self.agent.call_llm()
-        missing_event_times = self.extract_json(response)
-        self.extract_initial_timeline(missing_event_times)
+        events_order = self.extract_json(response)
+        events = self.timeline.get_all_events()
+        for key, value in events_order.items():
+            _, m_id = Event.parse_key(key)
+            for event in events:
+                if event.m_id == int(m_id):
+                    event.order = value
 
     def extract_initial_timeline(self, response):
         print("Extracting initial timeline.")

@@ -4,6 +4,7 @@ import traceback
 from scripts.prompting_timeline_fsm.agent_obj import GPTAgentSimulator, GPTAgent
 from scripts.prompting_timeline_fsm.eval import evaluation
 from scripts.prompting_timeline_fsm.timeline_solver_v1 import TimelineSolverV1, Event_Relations
+from scripts.prompting_timeline_fsm.timeline_solver_v2 import TimelineSolverV2
 from scripts.utils.io_utils import open_input_file
 from scripts.utils.llms_definitions import gpt4o_mini
 
@@ -21,8 +22,9 @@ def from_graph_to_pairs(graph, event_ids):
 
 # states = ['init', 'init_timeline', 'check_missing_events', 'resolve_intervals', 'disambiguation', 'done']
 def main_v1(timeline_solver):
-    timeline_solver.start()
     print("Initial state: ", timeline_solver.state)
+    timeline_solver.start()
+    print("Transitioning to state: ", timeline_solver.state)
     timeline_solver.check_missing_events()
     print("Transitioning to state: ", timeline_solver.state)
     timeline_solver.resolve_intervals()
@@ -49,22 +51,34 @@ def main_v1(timeline_solver):
     return golds, preds
 
 
+def main_v2(timeline_solver):
+    timeline_solver.start()
+    print("Initial state: ", timeline_solver.state)
+    timeline_solver.check_missing_events()
+    print("Transitioning to state: ", timeline_solver.state)
+    timeline_solver.event_order()
+    print("Transitioning to state: ", timeline_solver.state)
+
+
 if __name__ == "__main__":
-    _in_initial_doc = "data/OmniTemp/train/27_final.json"
+    _doc_num = '6'
+    _in_initial_doc = f"data/OmniTemp/test/{_doc_num}_final.json"
     data = open_input_file(f'{_in_initial_doc}')
-    # _agent = GPTAgent(gpt4o_mini)
-    _agent = GPTAgentSimulator(json.load(open("data/my_data/expr/sim/27_sim.json")))
+    _agent = GPTAgent(gpt4o_mini)
+    # _agent = GPTAgentSimulator(json.load(open(f"data/my_data/expr/sim/test/{_doc_num}_sim_v1.json")))
     _timeline_solver = TimelineSolverV1(_agent, data)
     try:
         if type(_timeline_solver) is TimelineSolverV1:
             _golds, _preds = main_v1(_timeline_solver)
+        elif type(_timeline_solver) is TimelineSolverV2:
+            _golds, _preds = main_v2(_timeline_solver)
         else:
             raise TypeError('Invalid timeline solver type')
     except Exception as e:
         traceback.print_exc()
         _golds, _preds = None, None
 
-    print(json.dumps(_agent.get_messages(), indent=4))
+    print("Agent Messages: " + json.dumps(_agent.get_messages(), indent=4))
     print("-----------------------------------------")
     _timeline_solver.print_timeline()
     print("-----------------------------------------")

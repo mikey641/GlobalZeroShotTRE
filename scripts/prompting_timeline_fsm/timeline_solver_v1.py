@@ -11,7 +11,7 @@ from scripts.prompting_timeline_fsm.timeline_obj import Time, Event, Interval
 from scripts.utils.omni_format_utils import filter_non_events
 
 Event_Relations = ['BEFORE', 'AFTER', 'EQUAL', 'UNCERTAIN']
-
+MAX_LOOP_ITERATIONS = 5
 
 class TimelineSolverV1(object):
     states = ['init', 'init_timeline', 'missing_events_fulfilment', 'resolve_intervals', 'disambiguation', 'missing_relations_fulfilment', 'done']
@@ -23,8 +23,8 @@ class TimelineSolverV1(object):
         self.machine.add_transition('start', 'init', 'init_timeline', after='initial_state')
         self.machine.add_transition('check_missing_events', 'init_timeline', 'missing_events_fulfilment', conditions='found_missing_events', after='resolve_missing_events')
         self.machine.add_transition('resolve_intervals', ['missing_events_fulfilment', 'init_timeline'], 'resolve_intervals', unless='found_missing_events', after='extract_timeline_within_interval_events')
-        self.machine.add_transition('solve_disambiguation', '*', 'disambiguation', conditions='is_disambiguation', after='resolve_disambiguation')
-        self.machine.add_transition('check_missing_relations', 'disambiguation', 'missing_relations_fulfilment', conditions='found_missing_relations', after='extract_missing_relations')
+        self.machine.add_transition('solve_disambiguation', ['init_timeline', 'missing_events_fulfilment', 'resolve_intervals'], 'disambiguation', conditions='is_disambiguation', after='resolve_disambiguation')
+        self.machine.add_transition('check_missing_relations', ['init_timeline', 'missing_events_fulfilment', 'resolve_intervals', 'disambiguation'], 'missing_relations_fulfilment', conditions='found_missing_relations', after='extract_missing_relations')
         self.machine.add_transition('done', '*', 'done', after='extract_timeline_between_interval_and_event_mix')
 
         self.data = data
@@ -49,21 +49,32 @@ class TimelineSolverV1(object):
         return self.missing_events is not None and len(self.missing_events) > 0
 
     def resolve_missing_events(self):
-        events = [event for event in filter_non_events(self.data['allMentions']) if int(event['m_id']) in self.missing_events]
-        event_str = ", ".join([f"{event['tokens']}({event['m_id']})" for event in events])
-        prompt = extract_times_missing_events(event_str)
-        self.agent.add_message_from_instruct(prompt)
-        response = self.agent.call_llm()
-        missing_event_times = self.extract_json(response)
-        self.extract_initial_timeline(missing_event_times)
+        count = 0
+        while self.missing_events is not None and len(self.missing_events) > 0 and count < MAX_LOOP_ITERATIONS:
+            events = [event for event in filter_non_events(self.data['allMentions']) if int(event['m_id']) in self.missing_events]
+            event_str = ", ".join([f"{event['tokens']}({event['m_id']})" for event in events])
+            prompt = extract_times_missing_events(event_str)
+            self.agent.add_message_from_instruct(prompt)
+            response = self.agent.call_llm()
+            missing_event_times = self.extract_json(response)
+            self.extract_initial_timeline(missing_event_times)
+            self.missing_events = self.validate_all_events_extracted(filter_non_events(self.data['allMentions']))
+            count += 1
+
+        if count == MAX_LOOP_ITERATIONS and self.missing_events is not None and len(self.missing_events) > 0:
+            raise InterruptedError("Max iterations reached however not all events resolved.")
 
     def extract_initial_timeline(self, response):
         print("Extracting initial timeline.")
         for key, value in response.items():
             text, m_id = Event.parse_key(key)
             start, end = Time.parse_value(value)
+            if text is None or m_id is None or start is None or end is None:
+                # Failed to parse the key or value
+                continue
 
             if start[2] == 'XXXX' or end[2] == 'XXXX':
+                # Year is not available, skip
                 continue
 
             fix_start = Time.fix_start(start)
@@ -192,17 +203,17 @@ class TimelineSolverV1(object):
         for event1 in all_events:
             for event2 in all_events:
                 if event1 != event2:
-                    if event1.order == 'X' or event2.order == 'X':
-                        graph[all_events_ids[event1.m_id]][all_events_ids[event2.m_id]] = Event_Relations.index('UNCERTAIN')
-                        graph[all_events_ids[event2.m_id]][all_events_ids[event1.m_id]] = Event_Relations.index('UNCERTAIN')
-                    elif event1.start < event2.start:
+                    if event1.start < event2.start:
                         graph[all_events_ids[event1.m_id]][all_events_ids[event2.m_id]] = Event_Relations.index('BEFORE')
                         graph[all_events_ids[event2.m_id]][all_events_ids[event1.m_id]] = Event_Relations.index('AFTER')
                     elif event1.start > event2.start:
                         graph[all_events_ids[event1.m_id]][all_events_ids[event2.m_id]] = Event_Relations.index('AFTER')
                         graph[all_events_ids[event2.m_id]][all_events_ids[event1.m_id]] = Event_Relations.index('BEFORE')
                     elif event1.start == event2.start:
-                        if event1.order != -1 and event2.order != -1:
+                        if event1.order == 'X' or event2.order == 'X':
+                            graph[all_events_ids[event1.m_id]][all_events_ids[event2.m_id]] = Event_Relations.index('UNCERTAIN')
+                            graph[all_events_ids[event2.m_id]][all_events_ids[event1.m_id]] = Event_Relations.index('UNCERTAIN')
+                        elif event1.order != -1 and event2.order != -1:
                             if event1.order == event2.order:
                                 graph[all_events_ids[event1.m_id]][all_events_ids[event2.m_id]] = Event_Relations.index('EQUAL')
                                 graph[all_events_ids[event2.m_id]][all_events_ids[event1.m_id]] = Event_Relations.index('EQUAL')

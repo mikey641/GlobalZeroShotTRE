@@ -16,6 +16,7 @@ class GPTAgent(Agent):
         return self._messages
 
     def add_message_from_instruct(self, instruct):
+        print("Preparing to send the following instruct: " + instruct)
         self._messages.append({
             "role": "user",
             "content": instruct
@@ -24,6 +25,7 @@ class GPTAgent(Agent):
     def call_llm(self):
         try:
             response = self._llm_client(None, self._messages)
+            print("Response from LLM: " + response)
             self._messages.append({"role": "assistant", "content": response})
         except Exception as e:
             response = {"Generation Failed"}

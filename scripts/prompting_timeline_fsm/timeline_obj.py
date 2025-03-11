@@ -41,9 +41,14 @@ class Time(object):
 
     @staticmethod
     def parse_value(value):
-        start_end = value.split('--')
-        start = start_end[0].split(':')
-        end = start_end[1].split(':')
+        try:
+            start_end = value.split('--')
+            start = start_end[0].split(':')
+            end = start_end[1].split(':')
+        except IndexError:
+            start = None
+            end = None
+
         return start, end
 
     def __gt__(self, other):
@@ -315,4 +320,5 @@ class Event(IComponent):
             event, m_id = match.groups()  # Extracts the text and the number
             return event, int(m_id)  # Convert B to an integer
         else:
-            raise ValueError(f"Invalid format: {key}")
+            print(f"Key {key} does not match the pattern")
+            return None, None
