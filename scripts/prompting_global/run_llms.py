@@ -48,19 +48,15 @@ def get_prompt_pairs(mentions, gold_pairs):
     return prompt_pairs, example_with_rels
 
 
-def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_func, output_file,
-         number_of_pred, prompt_examples, selected_file, reduction=-1.0, gen_pairs=False):
+def main(test_folder, llm_to_use, instructions_func, output_file,
+         number_of_pred, gen_pairs=True):
     # load json file
     predictions = dict()
-    # examples = prepare_instructions(train_folder, dot_train_data, prompt_examples, selected_file, reduction)
     final_instructions = instructions_func(None)
     count = 0
     for i, file1 in enumerate(tqdm(os.listdir(test_folder))):
         if count == number_of_pred:
             break
-
-        if selected_file is not None and file1 != selected_file:
-            continue
 
         count += 1
         data = open_input_file(f'{test_folder}/{file1}')
@@ -71,7 +67,7 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
             all_mentions = data['allMentions']
             # all_ment_ids = {m['m_id']: f"{m['tokens']}({m['m_id']})" for m in all_mentions}
             all_ment_ids = {m['m_id']: m for m in all_mentions}
-            example_matrix = get_all_pairs(all_pairs, all_ment_ids, reduction)
+            example_matrix = get_all_pairs(all_pairs, all_ment_ids, reduction=-1)
             task_desc += '\nPairs require classification:\n' + '\n'.join(example_matrix)
 
         try:
@@ -85,33 +81,18 @@ def main(test_folder, train_folder, dot_train_data, llm_to_use, instructions_fun
 
 
 if __name__ == "__main__":
-    example_db = 'OmniTemp'
     test_db = 'OmniTemp'
     num_of_pred = -1
-    num_of_prompt_examples = 1
-    _reduction = -1
-    # APW19980213.1380.json
-    _selected_file = '21_final.json'
     _instructions = task_description_4res_only_timeline
     _llm_to_use = gpt4o
     # _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
     _test_folder = 'data/OmniTemp/train'
-    # _dot_test_data = open_input_file('data/DOT_format/MATRES_test_dot.json')
-    # _test_folder = 'data/OmniTemp/test'
-
-    _train_folder = 'data/MATRES/in_my_format/train'
-    _dot_train_data = open_input_file('data/DOT_format/MATRES_train_dot.json')
-    # _train_folder = 'data/OmniTemp/train'
-    # _dot_train_data = open_input_file('data/DOT_format/EventFull_dev_dot.json')
 
     # _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
-    _output_file = f'data/my_data/predictions/{test_db}/test_{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmp_{_instructions.__name__}.json'
+    _output_file = f'data/my_data/predictions/{test_db}/{_llm_to_use.__name__}_{_instructions.__name__}.json'
 
     start_time = time.time()
-    main(test_folder=_test_folder, train_folder=_train_folder,
-         dot_train_data=_dot_train_data, llm_to_use=_llm_to_use, instructions_func=_instructions,
-         output_file=_output_file, number_of_pred=num_of_pred, prompt_examples=num_of_prompt_examples,
-         selected_file=_selected_file, reduction=_reduction, gen_pairs=True)
+    main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions, output_file=_output_file, number_of_pred=num_of_pred)
     end_time = time.time()
     execution_time = end_time - start_time
     print(f"Execution time: {execution_time:.4f} seconds")

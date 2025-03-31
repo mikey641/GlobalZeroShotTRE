@@ -32,6 +32,9 @@ class GPTAgent(Agent):
 
         return response
 
+    def clear_messages(self):
+        self._messages = list()
+
 
 class GPTAgentSimulator(GPTAgent):
     def __init__(self, messages):

@@ -63,7 +63,7 @@ def gpt3_5(_prompt, messages=None):
     return get_gpt("gpt-3.5-turbo", _prompt, messages)
 
 
-def run_gemini_pro(_prompt):
+def run_gemini_1_5_pro(_prompt):
     global gemini_pro_model
     if gemini_pro_model is None:
         genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
