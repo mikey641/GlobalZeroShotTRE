@@ -9,10 +9,7 @@ from scripts.prompting_global.jup_utils import get_input_text, prepare_instructi
 from scripts.prompting_global.prompts import task_description_4res_only_timeline, task_description_4res_only_global, \
     task_description_6res_only_global, task_description_6res_only_timeline
 from scripts.utils.io_utils import open_input_file
-from scripts.utils.llms_definitions import gpt4o
-
-gemini_pro_model = None
-gemini_flash_model = None
+from scripts.utils.llms_definitions import LLM
 
 
 def get_example_matrix(pairs, all_ment_ids):
@@ -71,7 +68,7 @@ def main(test_folder, llm_to_use, instructions_func, output_file,
             task_desc += '\nPairs require classification:\n' + '\n'.join(example_matrix)
 
         try:
-            response = llm_to_use(task_desc)
+            response = llm_to_use.run_model(task_desc)
             predictions[file1] = {"target": response}
         except Exception as e:
             predictions[file1] = {"target": "Generation Failed"}
@@ -84,15 +81,19 @@ if __name__ == "__main__":
     test_db = 'OmniTemp'
     num_of_pred = -1
     _instructions = task_description_4res_only_timeline
-    _llm_to_use = gpt4o
+    # _llm_to_use = LLM('Llama-3.3-70B-Instruct-Turbo')
+    # _llm_to_use = LLM('together', 'meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo')
+    _llm_to_use = LLM('gemini','gemini-2.0-flash')
     # _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
-    _test_folder = 'data/OmniTemp/train'
+    _test_folder = 'data/OmniTemp/test'
 
-    # _output_file = f'data/my_data/predictions/{test_db}/{example_db}_{_llm_to_use.__name__}_{num_of_pred}pred_{num_of_prompt_examples}exmples_{_instructions.__name__}.json'
-    _output_file = f'data/my_data/predictions/{test_db}/{_llm_to_use.__name__}_{_instructions.__name__}.json'
+    num_of_repetitions = 4
+    for i in range(num_of_repetitions):
+        _output_file = f'data/my_data/predictions/new_expr/{test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{i}.json'
 
-    start_time = time.time()
-    main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions, output_file=_output_file, number_of_pred=num_of_pred)
-    end_time = time.time()
-    execution_time = end_time - start_time
-    print(f"Execution time: {execution_time:.4f} seconds")
+        start_time = time.time()
+        main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions,
+             output_file=_output_file, number_of_pred=num_of_pred)
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"Execution time: {execution_time:.4f} seconds")
