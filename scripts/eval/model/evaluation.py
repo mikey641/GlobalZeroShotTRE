@@ -37,7 +37,8 @@ def confusion2prf6class(confusion):
 def evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_type):
     dataset_name = dataset_type.get_name()
     if dataset_name in [EVENTFULL_DATASET_NAME] and pred_for_trans is not None and gold_for_trans is not None:
-        count_discrepancies(pred_for_trans, gold_for_trans, True)
+        pass
+        # count_discrepancies(pred_for_trans, gold_for_trans, True)
 
     report, cl_report, f1 = None, None, -1
     acc = accuracy_score(all_golds, all_preds)

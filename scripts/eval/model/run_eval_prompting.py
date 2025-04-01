@@ -60,7 +60,7 @@ def matres_conversion(orig_ins_list):
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/predictions/new_expr/OmniTemp_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_4res_only_timeline_0.json"
+    _prediction_file = "data/my_data/predictions/new_expr/OmniTemp_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_4res_only_global_3.json"
     _dataset_type = EventFullDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())

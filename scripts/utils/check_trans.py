@@ -2,9 +2,7 @@ from collections import Counter
 
 import numpy as np
 
-
-MATRES_labels = {"BEFORE":0,"AFTER":1,"EQUAL":2,"VAGUE":3}
-Relations = {0: "Before", 1: "After", 2: "Equal", 3: "Vague", 4: "Includes", 5: "IsIncluded", 6: "Overlap"}
+Relations = {0: "Before", 1: "After", 2: "Equal", 3: "Vague"}
 
 
 def get_symmetric_rel(rel):
@@ -12,15 +10,11 @@ def get_symmetric_rel(rel):
         return 1
     elif rel == 1:
         return 0
-    elif rel == 4:
-        return 5
-    elif rel == 5:
-        return 4
     else:
         return rel
 
 
-def full_triplets_to_numpy_graph(triplet_list):
+def full_triplets_to_numpy_graph(triplet_list, labels):
     event_ids = set()
     for triplet in triplet_list:
         if triplet[0] not in event_ids:
@@ -32,8 +26,8 @@ def full_triplets_to_numpy_graph(triplet_list):
     # build the graph
     graph = np.full((len(event_ids), len(event_ids)), -1)
     for triplet in triplet_list:
-        graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = MATRES_labels[triplet[1].upper()]
-        graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = get_symmetric_rel(MATRES_labels[triplet[1].upper()])
+        graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = labels[triplet[1].upper()]
+        graph[event_ids_dict[triplet[2]], event_ids_dict[triplet[0]]] = get_symmetric_rel(labels[triplet[1].upper()])
 
     # returning the upper triangular matrix
     return graph, event_ids_dict
@@ -50,7 +44,7 @@ def triplets_to_numpy_graph(triplet_list, is_pred):
     event_ids_dict = {event: i for i, event in enumerate(sorted(list(event_ids)))}
     # build the graph
     graph = np.full((len(event_ids), len(event_ids)), -1)
-    rel_hist = {"Before": 0, "After": 0, "Equal": 0, "Vague": 0, "Includes": 0, "IsIncluded": 0, "Overlap": 0}
+    rel_hist = {"Before": 0, "After": 0, "Equal": 0, "Vague": 0}
     for triplet in triplet_list:
         if is_pred:
             graph[event_ids_dict[triplet[0]], event_ids_dict[triplet[2]]] = triplet[1]
@@ -73,7 +67,7 @@ def count_graph_transitive_discrepancies(graph, event_ids_dict):
 
     Parameters:
     graph (2D list or numpy array): Adjacency matrix of the input graph
-                                    where each element is a string ('B', 'A', 'E', 'V', 'I', 'II', or '').
+                                    where each element is a string ('B', 'A', 'E', 'V', or '').
                                     '' means no relation.
 
     Returns:
@@ -130,13 +124,13 @@ def count_graph_transitive_discrepancies(graph, event_ids_dict):
                                 error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Equal, Equal != Equal)'))
                         # Handling interaction between 'vague' and other relations
                         elif closure_graph[i][k] == 0 and closure_graph[k][j] == 3:
-                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 3 and closure_graph[i][j] != 4 and closure_graph[i][j] != 5:
+                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 3:
                                 doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Before, Vague != Before/Vague/Includes/IsIncluded)'))
+                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Before, Vague != Before/Vague)'))
                         elif closure_graph[i][k] == 1 and closure_graph[k][j] == 3:
-                            if closure_graph[i][j] != 1 and closure_graph[i][j] != 3 and closure_graph[i][j] != 4 and closure_graph[i][j] != 5:
+                            if closure_graph[i][j] != 1 and closure_graph[i][j] != 3:
                                 doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(After, Vague != After/Vague/Includes/IsIncluded)'))
+                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(After, Vague != After/Vague)'))
                         elif closure_graph[i][k] == 2 and closure_graph[k][j] == 3:
                             if closure_graph[i][j] != 3:
                                 doc_discrepancies += 1
@@ -146,41 +140,13 @@ def count_graph_transitive_discrepancies(graph, event_ids_dict):
                                 doc_discrepancies += 1
                                 error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Vague, Equal != Vague)'))
                         elif closure_graph[i][k] == 3 and closure_graph[k][j] == 0:
-                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 3 and closure_graph[i][j] != 4 and closure_graph[i][j] != 5:
+                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 3:
                                 doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Vague, Before != Before/Vague/Includes/IsIncluded)'))
+                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Vague, Before != Before/Vague)'))
                         elif closure_graph[i][k] == 3 and closure_graph[k][j] == 1:
-                            if closure_graph[i][j] != 1 and closure_graph[i][j] != 3 and closure_graph[i][j] != 4 and closure_graph[i][j] != 5:
+                            if closure_graph[i][j] != 1 and closure_graph[i][j] != 3:
                                 doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Vague, After != After/Vague/Includes/IsIncluded)'))
-                        elif closure_graph[i][k] == 4 and closure_graph[k][j] == 4:
-                            if closure_graph[i][j] != 4:
-                                doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Includes, Includes != Includes)'))
-                        elif closure_graph[i][k] == 4 and closure_graph[k][j] == 2:
-                            if closure_graph[i][j] != 4:
-                                doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Includes, Equals != Includes)'))
-                        elif closure_graph[i][k] == 2 and closure_graph[k][j] == 4:
-                            if closure_graph[i][j] != 4:
-                                doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Equals, Includes != Includes)'))
-                        elif closure_graph[i][k] == 0 and closure_graph[k][j] == 4:
-                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 4 and closure_graph[i][j] != 3:
-                                doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Before, Includes != Before/Includes/Vague)'))
-                        elif closure_graph[i][k] == 4 and closure_graph[k][j] == 0:
-                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 4 and closure_graph[i][j] != 3:
-                                doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Includes, Before != Before/Includes/Vague)'))
-                        elif closure_graph[i][k] == 0 and closure_graph[k][j] == 5:
-                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 5 and closure_graph[i][j] != 3:
-                                doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Before, IsInclude != Before/IsIncludes/Vague)'))
-                        elif closure_graph[i][k] == 5 and closure_graph[k][j] == 0:
-                            if closure_graph[i][j] != 0 and closure_graph[i][j] != 5 and closure_graph[i][j] != 3:
-                                doc_discrepancies += 1
-                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(IsInclude, Before != Before/IsIncludes/Vague)'))
+                                error_log.append((f'{event_ids_reversed[i]}#{event_ids_reversed[k]}#{event_ids_reversed[j]}', '(Vague, After != After/Vague)'))
 
     return doc_discrepancies, doc_contradictions, error_log
 

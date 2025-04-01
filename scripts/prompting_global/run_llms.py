@@ -80,10 +80,10 @@ def main(test_folder, llm_to_use, instructions_func, output_file,
 if __name__ == "__main__":
     test_db = 'OmniTemp'
     num_of_pred = -1
-    _instructions = task_description_4res_only_timeline
+    _instructions = task_description_4res_only_global
     # _llm_to_use = LLM('Llama-3.3-70B-Instruct-Turbo')
-    # _llm_to_use = LLM('together', 'meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo')
-    _llm_to_use = LLM('gemini','gemini-2.0-flash')
+    _llm_to_use = LLM('together', 'meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo')
+    # _llm_to_use = LLM('gemini','gemini-2.0-flash')
     # _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
     _test_folder = 'data/OmniTemp/test'
 
