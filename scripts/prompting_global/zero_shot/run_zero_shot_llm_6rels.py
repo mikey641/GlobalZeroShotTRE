@@ -4,7 +4,7 @@ import time
 
 from tqdm import tqdm
 
-from scripts.prompting_global.run_llms import gpt4o
+from scripts.utils.llms_definitions import TogetherModel, GeminiChatModel
 
 
 def get_equal_prompt(source_id, source_text, target_id, target_text, same_prompt=True):
@@ -62,16 +62,10 @@ def run_CoT(all_examples, llm_to_use):
         gold_label = example['gold_label']
         key = f"{on_file}#{source}#{target}"
 
-        messages = [
-            {
-                "role": "user",
-                "content": instruction
-            },
-        ]
+        llm_to_use.clear()
 
         try:
-            response = llm_to_use(None, messages)
-            messages.append({"role": "assistant", "content": response})
+            response = llm_to_use.run_model_chat(instruction)
             response = response.rstrip(string.whitespace + string.punctuation).lower()
 
             if 'yes' in response:
@@ -79,39 +73,37 @@ def run_CoT(all_examples, llm_to_use):
             else:
                 is_same = False
 
-            messages.append({"role": "user", "content": get_equal_prompt(source, source_text, target, target_text, same_prompt=is_same)})
-            response = llm_to_use(None, messages)
-            messages.append({"role": "assistant", "content": response})
+            response = llm_to_use.run_model_chat(get_equal_prompt(source, source_text, target, target_text, same_prompt=is_same))
             response = response.rstrip(string.whitespace + string.punctuation).lower()
+
             if 'yes' in response:
                 predictions[key] = {"target": 'equal', "gold_label": gold_label}
                 continue
 
-            messages.append({"role": "user", "content": get_before_prompt(source, source_text, target, target_text, same_prompt=is_same)})
-            response = llm_to_use(None, messages)
-            messages.append({"role": "assistant", "content": response})
+            response = llm_to_use.run_model_chat(get_before_prompt(source, source_text, target, target_text, same_prompt=is_same))
             response = response.rstrip(string.whitespace + string.punctuation).lower()
+
             if 'yes' in response:
                 predictions[key] = {"target": 'before', "gold_label": gold_label}
                 continue
 
-            messages.append({"role": "user", "content": get_after_prompt(source, source_text, target, target_text, same_prompt=is_same)})
-            response = llm_to_use(None, messages)
+            response = llm_to_use.run_model_chat(get_after_prompt(source, source_text, target, target_text, same_prompt=is_same))
             response = response.rstrip(string.whitespace + string.punctuation).lower()
+
             if 'yes' in response:
                 predictions[key] = {"target": 'after', "gold_label": gold_label}
                 continue
 
-            messages.append({"role": "user", "content": get_is_included_prompt(source, source_text, target, target_text, same_prompt=is_same)})
-            response = llm_to_use(None, messages)
+            response = llm_to_use.run_model_chat(get_is_included_prompt(source, source_text, target, target_text, same_prompt=is_same))
             response = response.rstrip(string.whitespace + string.punctuation).lower()
+
             if 'yes' in response:
                 predictions[key] = {"target": 'is_included', "gold_label": gold_label}
                 continue
 
-            messages.append({"role": "user", "content": get_includes_prompt(source, source_text, target, target_text, same_prompt=is_same)})
-            response = llm_to_use(None, messages)
+            response = llm_to_use.run_model_chat(get_includes_prompt(source, source_text, target, target_text, same_prompt=is_same))
             response = response.rstrip(string.whitespace + string.punctuation).lower()
+
             if 'yes' in response:
                 predictions[key] = {"target": 'includes', "gold_label": gold_label}
                 continue
@@ -150,9 +142,11 @@ def run_zero_shot(all_examples, llm_to_use):
 
 if __name__ == "__main__":
     # read all line from file
-    _llm_to_use = gpt4o
+    # _llm_to_use = TogetherModel('meta-llama/Llama-3.3-70B-Instruct-Turbo')
+    _llm_to_use = GeminiChatModel('models/gemini-2.0-flash')
+    _test_set = 'nt'
 
-    with open("data/my_data/zero_shot/tbd_remove_large_docs_cot_prompts.jsonl") as _file:
+    with open("data/my_data/zero_shot/nt_6rel_cot_prompts.jsonl") as _file:
         data = json.load(_file)
 
     start_time = time.time()
@@ -162,5 +156,5 @@ if __name__ == "__main__":
     execution_time = end_time - start_time
     print(f"Execution time: {execution_time:.4f} seconds")
 
-    with open(f"data/my_data/zero_shot/nt_{_llm_to_use.__name__}_cot_predictions.json", "w") as _file:
+    with open(f"data/my_data/zero_shot/new_expr/{_test_set}_{_llm_to_use.get_model_name()}_cot_predictions.json", "w") as _file:
         json.dump(_predictions, _file, indent=4)

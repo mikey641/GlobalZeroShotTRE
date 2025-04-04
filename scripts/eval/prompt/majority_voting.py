@@ -1,6 +1,6 @@
 from scripts.eval.dataset.utils import parse_DOT
 from scripts.eval.model.compute_metrics import calculate
-from scripts.eval.model.eval_obj import EvalObj
+from scripts.eval.shared.eval_obj import EvalObj
 from scripts.utils.io_utils import open_input_file
 
 

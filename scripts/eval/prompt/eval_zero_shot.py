@@ -1,12 +1,12 @@
 import json
 import string
 
-from scripts.eval.model.evaluation import evaluation
-from scripts.utils.classes.datasets_type import TBDDataset, EventFullDataset
+from scripts.eval.shared.evaluation import evaluation
+from scripts.utils.classes.datasets_type import TBDDataset, EventFullDataset, NarrativeDataset
 
 if __name__ == "__main__":
-    _prediction_file = "data/my_data/zero_shot/new_expr/eventfull_gemini-2.0-flash_4rels_cot_prompts_predictions.json"
-    _data_type = EventFullDataset()
+    _prediction_file = "data/my_data/zero_shot/new_expr/nt_Llama-3.3-70B-Instruct-Turbo_cot_predictions.json"
+    _data_type = NarrativeDataset()
 
     _dataset_name = _data_type.get_name()
     _labels = _data_type.get_label_set()

@@ -55,7 +55,8 @@ def evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_typ
         cl_report = classification_report(all_golds, all_preds, digits=4)
 
         prec, rec, f1 = confusion2prf6class(confu)
-        report = "Prec=%.4f, Rec=%.4f, F1=%.4f, Acc=%.4f, MATRES_F1=%.4f" % (precision, recall, f1_micro, acc, f1)
+        report = "Prec=%.4f, Rec=%.4f, F1=%.4f, Acc=%.4f, MICRO_F1=%.4f" % (prec, rec, f1, acc, f1_micro)
+        # report = "Prec=%.4f, Rec=%.4f, F1=%.4f, Acc=%.4f, MATRES_F1=%.4f" % (precision, recall, f1_micro, acc, f1)
 
     print(cl_report)
     print(confu, flush=True)

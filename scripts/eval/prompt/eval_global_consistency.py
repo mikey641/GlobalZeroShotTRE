@@ -3,10 +3,10 @@ from itertools import permutations
 
 import numpy as np
 
-from scripts.eval.model.evaluation import evaluation
-from scripts.eval.model.gurobi_optimizer_entrop import run_transitive_constraints
+from scripts.eval.shared.evaluation import evaluation
+from scripts.eval.shared.gurobi_optimizer_entrop import run_transitive_constraints
 from scripts.utils.classes.datasets_type import MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset
+    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset, NarrativeDataset
 from scripts.utils.io_utils import read_pred_dot_file, read_file
 
 
@@ -122,11 +122,11 @@ def gen_prediction_for_transitive(order_list, predictions, labels):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/predictions/new_expr/OmniTemp_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_4res_only_timeline_0.json",
-        "data/my_data/predictions/new_expr/OmniTemp_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_4res_only_timeline_1.json",
-        "data/my_data/predictions/new_expr/OmniTemp_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_4res_only_timeline_2.json",
-        "data/my_data/predictions/new_expr/OmniTemp_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_4res_only_timeline_3.json",
-        "data/my_data/predictions/new_expr/OmniTemp_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_4res_only_timeline_4.json",
+        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json",
+        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_1.json",
+        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json",
+        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_3.json",
+        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_4.json",
     ]
 
     _dataset_type = EventFullDataset()

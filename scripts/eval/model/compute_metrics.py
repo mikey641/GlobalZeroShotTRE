@@ -1,7 +1,7 @@
 from collections import Counter
 from enum import Enum
 
-from scripts.eval.model.eval_obj import EvalObj
+from scripts.eval.shared.eval_obj import EvalObj
 
 
 class DIST_TYPE(Enum):

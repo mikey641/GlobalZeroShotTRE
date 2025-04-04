@@ -44,7 +44,7 @@ def task_description_4res_only_timeline(examples):
 Given the document below where each event is marked with <eventName(identifier)>, for each pair of events listed below, determine the temporal relationships (before, after, equal, vague) between them. 
 
 The output should be in two steps:
-First: provide a detailed explanation of the story timeline based on the events marked in it.
+First: provide an explanation of the story timeline based on the events marked in it.
 
 Then:
 Based on your explanation, provide the temporal relationship between the events in the following DOT format:
