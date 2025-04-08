@@ -87,15 +87,19 @@ class TogetherModel(GenLLM):
         stream = model.chat.completions.create(
             model=model_name,
             messages=messages,
-            max_tokens=16000,
+            max_tokens=4000,
             stream=True,
         )
 
         response = []
         for chunk in stream:
-            print(chunk.choices[0].delta.content or "", end="", flush=True)
-            if chunk.choices[0].delta.content:
-                response.append(chunk.choices[0].delta.content)
+            try:
+                if chunk.choices and len(chunk.choices) > 0 and chunk.choices[0].delta.content:
+                    print(chunk.choices[0].delta.content or "", end="", flush=True)
+                    response.append(chunk.choices[0].delta.content)
+            except Exception as e:
+                print("Error in chunk:", repr(e))
+                continue
 
         return "".join(response)
 

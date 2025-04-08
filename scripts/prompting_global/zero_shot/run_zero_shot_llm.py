@@ -13,7 +13,7 @@ def get_equal_prompt(source_id, source_text, target_id, target_text, same_prompt
         same_event = " in that event"
     else:
         same_event = ""
-    return f"""Did <EVENT {source_id}>{source_text}</EVENT> and <EVENT {target_id}>{target_text}</EVENT> simultaneously happened{same_event}? Answer yer or no."""
+    return f"""Did <EVENT {source_id}>{source_text}</EVENT> and <EVENT {target_id}>{target_text}</EVENT> simultaneously happened{same_event}? Answer yes or no."""
 
 
 def get_before_prompt(source_id, source_text, target_id, target_text, same_prompt=True):
@@ -21,7 +21,7 @@ def get_before_prompt(source_id, source_text, target_id, target_text, same_promp
         same_event = " in that event"
     else:
         same_event = ""
-    return f"""is <EVENT {source_id}>{source_text}</EVENT> before <EVENT {target_id}>{target_text}</EVENT>{same_event}? Answer yer or no."""
+    return f"""is <EVENT {source_id}>{source_text}</EVENT> before <EVENT {target_id}>{target_text}</EVENT>{same_event}? Answer yes or no."""
 
 
 def get_after_prompt(source_id, source_text, target_id, target_text, same_prompt=True):
@@ -29,13 +29,13 @@ def get_after_prompt(source_id, source_text, target_id, target_text, same_prompt
         same_event = " in that event"
     else:
         same_event = ""
-    return f"""is <EVENT {source_id}>{source_text}</EVENT> after <EVENT {target_id}>{target_text}</EVENT>{same_event}? Answer yer or no."""
+    return f"""is <EVENT {source_id}>{source_text}</EVENT> after <EVENT {target_id}>{target_text}</EVENT>{same_event}? Answer yes or no."""
 
 
 def run_CoT(all_examples, llm_to_use):
     predictions = {}
     for i, example in enumerate(tqdm(all_examples)):
-        if i == 3:
+        if i == 10:
             break
 
         on_file = example['file']
@@ -51,6 +51,8 @@ def run_CoT(all_examples, llm_to_use):
 
         try:
             response = llm_to_use.run_model_chat(instruction)
+            # to clean DeepSeek response
+            response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
             response = response.rstrip(string.whitespace + string.punctuation).lower()
 
             if 'yes' in response:
@@ -59,6 +61,7 @@ def run_CoT(all_examples, llm_to_use):
                 is_same = False
 
             response = llm_to_use.run_model_chat(get_equal_prompt(source, source_text, target, target_text, same_prompt=is_same))
+            response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
             response = response.rstrip(string.whitespace + string.punctuation).lower()
 
             if 'yes' in response:
@@ -66,6 +69,7 @@ def run_CoT(all_examples, llm_to_use):
                 continue
 
             response = llm_to_use.run_model_chat(get_before_prompt(source, source_text, target, target_text, same_prompt=is_same))
+            response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
             response = response.rstrip(string.whitespace + string.punctuation).lower()
 
             if 'yes' in response:
@@ -73,6 +77,7 @@ def run_CoT(all_examples, llm_to_use):
                 continue
 
             response = llm_to_use.run_model_chat(get_after_prompt(source, source_text, target, target_text, same_prompt=is_same))
+            response = re.sub(r'<think>.*?</think>', '', response, flags=re.DOTALL)
             response = response.rstrip(string.whitespace + string.punctuation).lower()
 
             if 'yes' in response:
@@ -142,14 +147,26 @@ def run_first_timeline(all_examples, llm_to_use):
 
 
 if __name__ == "__main__":
+    '''
+    This is the script to run the 4 relation CoT
+    To run the 6 relation CoT, run the script *run_zero_shot_llm_6rel.py*
+    '''
+
     # read all line from file
     # _llm_to_use = GPTModel('gpt-4o-mini')
     # _llm_to_use = GeminiChatModel('gemini-2.0-flash')
     # _llm_to_use = TogetherModel('meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo')
-    _llm_to_use = TogetherModel('deepseek-ai/DeepSeek-R1')
-    _test_set = 'eventfull'
+    _llm_to_use = TogetherModel('google/gemma-2b-it')
+    # _llm_to_use = TogetherModel('deepseek-ai/DeepSeek-R1')
+    _input_file = "data/my_data/zero_shot/eventfull_cot_prompts.jsonl"
+    _test_set = 'omni'
 
-    with open("data/my_data/zero_shot/eventfull_cot_prompts.jsonl") as _file:
+    print(f"Using LLM: {_llm_to_use.get_model_name()}")
+    print(f"Using input file: {_input_file}")
+    print(f"Using test set: {_test_set}")
+    print("Running CoT for 4 relations dataset!")
+
+    with open(_input_file) as _file:
         data = json.load(_file)
 
     start_time = time.time()
@@ -159,5 +176,5 @@ if __name__ == "__main__":
     execution_time = end_time - start_time
     print(f"Execution time: {execution_time:.4f} seconds")
 
-    with open(f"data/my_data/zero_shot/new_expr/{_test_set}_{_llm_to_use.get_model_name()}_6rels_cot_prompts_predictions.json", "w") as _file:
+    with open(f"data/my_data/zero_shot/new_expr/{_test_set}_{_llm_to_use.get_model_name()}_4rels_cot_prompts_predictions.json", "w") as _file:
         json.dump(_predictions, _file, indent=4)

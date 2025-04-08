@@ -122,14 +122,14 @@ def gen_prediction_for_transitive(order_list, predictions, labels):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_1.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_3.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_4.json",
+        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_0.json",
+        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_1.json",
+        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_2.json",
+        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_3.json",
+        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_4.json",
     ]
 
-    _dataset_type = EventFullDataset()
+    _dataset_type = NarrativeDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'

@@ -69,7 +69,7 @@ Answer vague if unsure.
 Treat every event marked with a unique identifier (e.g., <eventName(identifier)>) as distinct, regardless of similarities in descriptions. Ensure no identifiers are skipped.
 
 The output should be in two steps:
-First: provide a detailed explanation of the story timeline based on your interpretation and the events marked in it.
+First: provide an explanation of the story timeline based on your interpretation and the events marked in it.
 
 Then:
 For each pair listed below, based on your explanation, provide the temporal relationship between the events in the following DOT format:

@@ -6,7 +6,7 @@ import numpy as np
 from scripts.eval.prompt.eval_global_consistency import gen_prediction_for_transitive
 from scripts.eval.shared.evaluation import evaluation
 from scripts.utils.classes.datasets_type import EventFullDataset, MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, NarrativeDataset
+    NARRATIVE_4RELS_DATASET_NAME, NarrativeDataset, MatresDataset
 from scripts.utils.io_utils import read_file, read_pred_dot_file
 
 
@@ -22,14 +22,14 @@ def get_reverse_list(labels, pred_norm):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_1.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_3.json",
-        "data/my_data/predictions/new_expr/omni_DeepSeek-R1_task_description_4res_only_timeline_4.json",
+        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_0.json",
+        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_1.json",
+        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_2.json",
+        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_3.json",
+        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_4.json",
     ]
 
-    _dataset_type = EventFullDataset()
+    _dataset_type = MatresDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'

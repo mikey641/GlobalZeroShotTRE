@@ -103,19 +103,19 @@ if __name__ == "__main__":
     if args.test_db == "nt":
         _test_folder = 'data/NarrativeTime_A1/converted_no_overlap/test_18ment'
     elif args.test_db == "matres":
-        _test_folder = 'data/MATRES/in_my_format_all_pairs/test'
+        _test_folder = 'data/MATRES/in_my_format/test_all_pairs_chunked'
     elif args.test_db == "omni":
         _test_folder = 'data/OmniTemp/test'
     elif args.test_db == "tbd":
-        _test_folder = 'data/TBDense/test'
+        _test_folder = 'data/TimeBank-Dense/test_converted_allpairs_chunked'
     else:
         raise ValueError("Invalid test database name.")
 
-    if args.instruct == 'global' and args.test_db in ["nt", "tb"]:
+    if args.instruct == 'global' and args.test_db in ["nt", "tbd"]:
         _instructions = task_description_6res_only_global
     elif args.instruct == 'global' and args.test_db in ["matres", "omni"]:
         _instructions = task_description_4res_only_global
-    elif args.instruct == 'timeline' and args.test_db in ["nt", "tb"]:
+    elif args.instruct == 'timeline' and args.test_db in ["nt", "tbd"]:
         _instructions = task_description_6res_only_timeline
     elif args.instruct == 'timeline' and args.test_db in ["matres", "omni"]:
         _instructions = task_description_4res_only_timeline

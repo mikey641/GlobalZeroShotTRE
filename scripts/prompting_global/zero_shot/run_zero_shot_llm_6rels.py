@@ -142,11 +142,17 @@ def run_zero_shot(all_examples, llm_to_use):
 
 if __name__ == "__main__":
     # read all line from file
-    # _llm_to_use = TogetherModel('meta-llama/Llama-3.3-70B-Instruct-Turbo')
-    _llm_to_use = GeminiChatModel('models/gemini-2.0-flash')
-    _test_set = 'nt'
+    _llm_to_use = TogetherModel('meta-llama/Llama-3.3-70B-Instruct-Turbo')
+    # _llm_to_use = GeminiChatModel('models/gemini-2.0-flash')
+    _input_file = "data/my_data/zero_shot/tbd_cot_prompts.jsonl"
+    _test_set = 'tbd'
 
-    with open("data/my_data/zero_shot/nt_6rel_cot_prompts.jsonl") as _file:
+    print(f"Using LLM: {_llm_to_use.get_model_name()}")
+    print(f"Using input file: {_input_file}")
+    print(f"Using test set: {_test_set}")
+    print("Running CoT for 6 relations dataset!")
+
+    with open(_input_file) as _file:
         data = json.load(_file)
 
     start_time = time.time()
