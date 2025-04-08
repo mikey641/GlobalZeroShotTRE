@@ -6,11 +6,11 @@ import argparse
 from tqdm import tqdm
 
 from scripts.eval.dataset.utils import find_ment_by_id
-from scripts.prompting_global.jup_utils import get_input_text, prepare_instructions, get_all_pairs
-from scripts.prompting_global.prompts_gpt import task_description_4res_only_timeline, task_description_4res_only_global, \
-    task_description_6res_only_global, task_description_6res_only_timeline, task_description_6rels
+from scripts.prompting.global_timeline_consistency.prompts_gpt import task_description_6res_only_global, \
+    task_description_4res_only_global, task_description_6res_only_timeline, task_description_4res_only_timeline
 from scripts.utils.io_utils import open_input_file
 from scripts.utils.llms_definitions import TogetherModel, GPTModel, GeminiModel
+from scripts.utils.omni_format_utils import get_input_text, get_all_pairs
 
 
 def get_example_matrix(pairs, all_ment_ids):

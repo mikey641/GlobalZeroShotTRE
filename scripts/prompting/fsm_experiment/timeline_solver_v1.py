@@ -4,7 +4,7 @@ import re
 import numpy as np
 from transitions import Machine
 
-from scripts.prompting_global.jup_utils import get_input_text
+from scripts.prompting.jup_utils import get_input_text
 from scripts.prompting_timeline_fsm.prompts import extract_times, extract_timeline, extract_relations, \
     extract_times_missing_events, extract_missing_events_order
 from scripts.prompting_timeline_fsm.timeline_obj import Time, Event, Interval

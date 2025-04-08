@@ -4,7 +4,7 @@ import os
 import tiktoken
 from openai import OpenAI
 
-from scripts.prompting_global.run_llms import prepare_instructions, get_input_text
+from scripts.utils.gpt_utils import check_batch_status, convert_response
 from scripts.utils.io_utils import open_input_file
 
 
@@ -63,42 +63,6 @@ def upload_batch_request(input_request_jsonl):
     )
 
     print(f'Batch input file with id {batch_input_file.id} uploaded')
-
-
-def run_batch(batch_input_file_id):
-    client = OpenAI()
-    create = client.batches.create(input_file_id=batch_input_file_id, endpoint="/v1/chat/completions",
-                                   completion_window="24h", metadata={"description": "eventfull gpt4o batch job"})
-
-    print(f'Batch object created: {create}')
-
-
-def check_batch_status(batch_id, output_file):
-    client = OpenAI()
-    batch = client.batches.retrieve(batch_id)
-    print(f'Batch status: {batch}')
-
-    if batch.status == 'completed':
-        file_response = client.files.content(batch.output_file_id)
-        with open(output_file, 'w', encoding='utf8') as file:
-            for req in file_response.text.split('\n'):
-                file.write(json.dumps(req) + '\n')
-        print(file_response.text)
-
-
-def convert_response(response_file, final_output_file):
-    converted = dict()
-    with (open(response_file, 'r', encoding='utf8') as file):
-        for line in file:
-            if not line.strip():
-                continue
-
-            response = json.loads(line)
-            res_loads = json.loads(response)
-            converted[res_loads['custom_id']] = {'target': res_loads['response']['body']['choices'][0]['message']['content']}
-
-    with open(final_output_file, 'w', encoding='utf8') as file:
-        json.dump(converted, file, indent=4)
 
 
 if __name__ == "__main__":

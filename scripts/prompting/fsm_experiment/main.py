@@ -1,12 +1,8 @@
 import json
 import traceback
 
-from scripts.prompting_timeline_fsm.agent_obj import GPTAgentSimulator, GPTAgent
-from scripts.prompting_timeline_fsm.eval import evaluation
-from scripts.prompting_timeline_fsm.timeline_solver_v1 import TimelineSolverV1, Event_Relations
-from scripts.prompting_timeline_fsm.timeline_solver_v2 import TimelineSolverV2
+from scripts.prompting.fsm_experiment.timeline_solver_v1 import Event_Relations
 from scripts.utils.io_utils import open_input_file
-from scripts.utils.llms_definitions import gpt4o_mini
 
 
 def from_graph_to_pairs(graph, event_ids):
