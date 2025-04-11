@@ -3,7 +3,7 @@ import os
 import random
 import tiktoken
 
-from scripts.prompting.global_timeline_consistency.prompts_gpt import task_description_6res_only_global
+from scripts.prompting.global_timeline_consistency.prompts import task_description_6res_only_global
 from scripts.utils.gpt_utils import create_batch_request
 from scripts.utils.io_utils import open_input_file
 from scripts.utils.omni_format_utils import get_input_text, get_example, get_all_pairs

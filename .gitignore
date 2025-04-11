@@ -12,5 +12,9 @@ data/MATRES/timebank.txt
 data/MATRES/in_my_format
 data/MATRES/in_my_format_all_pairs
 data/MATRES/in_my_format_all_pairs_120
+data/OmniTemp/test_chunked_20
+data/OmniTemp/test_chunked_40
+data/OmniTemp/test_chunked_60
+data/OmniTemp/test_chunked_100
 __pycache__
 scorer

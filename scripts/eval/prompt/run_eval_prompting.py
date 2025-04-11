@@ -59,10 +59,31 @@ def matres_conversion(orig_ins_list):
         orig_ins_list[i] = new_ins
 
 
+def doc_wise_eval(pred_as_dict, orig_ins_list, labels, dataset_type):
+    doc_wise_preds = dict()
+    for key, pred in pred_as_dict.items():
+        doc_id = key.split('#')[0]
+        if doc_id not in doc_wise_preds:
+            doc_wise_preds[doc_id] = dict()
+        doc_wise_preds[doc_id][key] = pred
+
+    orig_doc_wise = dict()
+    for ins in orig_ins_list:
+        if ins.docid not in orig_doc_wise:
+            orig_doc_wise[ins.docid] = list()
+        orig_doc_wise[ins.docid].append(ins)
+
+    print('-' * 50)
+    for doc_id in doc_wise_preds:
+        all_golds, all_preds, gold_for_trans, pred_for_trans, count_nas = convert_format(orig_doc_wise[doc_id], doc_wise_preds[doc_id], labels, debug=False)
+        doc_f1 = evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_type, print_confusion=True)
+        print(f"DocID: {doc_id}: F1: {doc_f1}")
+
+
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/predictions/new_expr/tbd_DeepSeek-R1_task_description_6res_only_global_0.json"
-    _dataset_type = TBDDataset()
+    _prediction_file = "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_0.json"
+    _dataset_type = NarrativeDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
     _labels = _dataset_type.get_label_set()
@@ -83,4 +104,7 @@ if __name__ == "__main__":
     count_gold = {i:_all_golds.count(i) for i in _all_golds}
     print(f"Predictions dist: {dict(count_pred)}")
     print(f"Gold dist: {dict(count_gold)}")
+    print("Done!")
+
+    doc_wise_eval(_pred_as_dict, _orig_ins_list, _labels, _dataset_type)
     print("Done!")

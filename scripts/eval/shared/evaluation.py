@@ -34,7 +34,7 @@ def confusion2prf6class(confusion):
 
     return prec, rec, f1
 
-def evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_type):
+def evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_type, print_confusion=True):
     dataset_name = dataset_type.get_name()
     if dataset_name in [EVENTFULL_DATASET_NAME] and pred_for_trans is not None and gold_for_trans is not None:
         pass
@@ -58,9 +58,10 @@ def evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_typ
         report = "Prec=%.4f, Rec=%.4f, F1=%.4f, Acc=%.4f, MICRO_F1=%.4f" % (prec, rec, f1, acc, f1_micro)
         # report = "Prec=%.4f, Rec=%.4f, F1=%.4f, Acc=%.4f, MATRES_F1=%.4f" % (precision, recall, f1_micro, acc, f1)
 
-    print(cl_report)
-    print(confu, flush=True)
-    print(report)
+    if print_confusion:
+        print(cl_report)
+        print(confu, flush=True)
+        print(report)
     return f1
 
 

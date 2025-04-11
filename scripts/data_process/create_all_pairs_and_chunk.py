@@ -61,6 +61,7 @@ def get_data(data):
 
 def handle_chunks(all_pairs, all_mentions, tokens, max_pairs_in_chunk, test_out_folder):
     if len(all_pairs) > max_pairs_in_chunk:
+        sanity_check = 0
         random.shuffle(all_pairs)
         chunks_size = math.ceil(len(all_pairs) / math.ceil(len(all_pairs) / max_pairs_in_chunk))
         chunk_pairs = [all_pairs[i:i + chunks_size] for i in range(0, len(all_pairs), chunks_size)]
@@ -69,11 +70,17 @@ def handle_chunks(all_pairs, all_mentions, tokens, max_pairs_in_chunk, test_out_
             chunk_sorted = sorted(chunk, key=lambda x: x['index'])
             new_data = {'tokens': tokens, 'allMentions': ret_only_relevant_mentions(all_mentions, chunk_sorted),
                         'allPairs': chunk_sorted}
+
+            sanity_check += len(chunk_sorted)
+
             with open(f'{test_out_folder}/{file_name}_chunk_{j}.json', 'w') as file:
                 json.dump(new_data, file, indent=4)
+
+        assert sanity_check == len(all_pairs), f"Sanity check failed: {sanity_check} != {len(all_pairs)}"
     else:
         new_data = {'tokens': tokens, 'allMentions': all_mentions,
                     'allPairs': sorted(all_pairs, key=lambda x: x['index'])}
+
         with open(f'{test_out_folder}/{file1}', 'w') as file:
             json.dump(new_data, file, indent=4)
 
@@ -87,9 +94,9 @@ def ret_only_relevant_mentions(mentions, pairs):
 
 
 if __name__ == "__main__":
-    _max_pairs_in_chunk = 100
-    _test_folder = 'data/TimeBank-Dense/testOnlyProb'
-    _test_out_folder = 'data/TimeBank-Dense/testOnlyProb_allpairs'
+    _max_pairs_in_chunk = 60
+    _test_folder = 'data/NarrativeTime_A1/converted_no_overlap/test_18ment'
+    _test_out_folder = f'data/NarrativeTime_A1/converted_no_overlap/test_18ment_chucked_{_max_pairs_in_chunk}'
     for i, file1 in enumerate(tqdm(os.listdir(_test_folder))):
         file_name, file_extension = os.path.splitext(file1)
 
@@ -100,5 +107,5 @@ if __name__ == "__main__":
         assert _pairs_with_rel == len(_data['allPairs'])
 
         handle_chunks(_all_new_pairs, _mentions, _tokens, _max_pairs_in_chunk, _test_out_folder)
-        with open(f'{_test_out_folder}/{file1}', 'w') as file:
-            json.dump({'tokens': _tokens, 'allMentions': _mentions, 'allPairs': _all_new_pairs}, file, indent=4)
+        # with open(f'{_test_out_folder}/{file1}', 'w') as file:
+        #     json.dump({'tokens': _tokens, 'allMentions': _mentions, 'allPairs': _all_new_pairs}, file, indent=4)

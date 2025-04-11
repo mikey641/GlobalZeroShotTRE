@@ -5,7 +5,7 @@ import random
 
 from tqdm import tqdm
 
-from scripts.data_process.create_all_pairs import ret_only_relevant_mentions, handle_chunks
+from scripts.data_process.create_all_pairs_and_chunk import ret_only_relevant_mentions, handle_chunks
 from scripts.utils.io_utils import open_input_file
 
 
@@ -36,24 +36,6 @@ def reduce_pairs_random(test_folder, max_pairs_in_chunk, test_out_folder):
             new_data = {'tokens': tokens, 'allMentions': all_mentions, 'allPairs': sorted(all_pairs, key=lambda x: x['index'])}
             with open(f'{test_out_folder}/{file1}', 'w') as file:
                 json.dump(new_data, file, indent=4)
-
-
-
-def chunk_by_edges(test_folder, max_pairs_in_chunk, test_out_folder):
-    for i, file1 in enumerate(tqdm(os.listdir(test_folder))):
-        file_name, file_extension = os.path.splitext(file1)
-
-        data = open_input_file(f'{test_folder}/{file1}')
-        tokens = data['tokens']
-        all_mentions = data['allMentions']
-        all_pairs = data['allPairs']
-
-        all_ment_ids = {m['m_id']: m for m in all_mentions}
-
-        for pair in all_pairs:
-            pair['index'] = all_ment_ids[pair['_firstId']]['tokens_ids'][0]
-
-        handle_chunks(all_pairs, all_mentions, tokens, max_pairs_in_chunk, test_out_folder)
 
 
 if __name__ == "__main__":

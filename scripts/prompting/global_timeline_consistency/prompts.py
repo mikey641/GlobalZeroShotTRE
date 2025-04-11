@@ -114,3 +114,24 @@ strict graph {
 }
 """
     return desc
+
+
+def task_description_6res_only_timeline_sub_events(examples):
+    desc = """
+Given the document below where each event is marked with <eventName(identifier)>, for each pair of events listed below, determine the temporal relationships (before, after, equal, includes, is_included, vague) between them. 
+
+The output should be in two phases, first phase:
+1) Group together event mentions that refer to the same event, these should be marked as equal.
+2) Identify event mentions that are sub-events of other events, these should be marked as includes or is_included.
+3) provide a detailed explanation of the story timeline based on the events marked in it.
+
+Then, in the second phase:
+Based on your explanation, provide the temporal relationship between the events in the following DOT format:
+
+strict graph {
+"Event1(id)" -- "Event2(id)" [rel=LABEL];
+"Event1(id)" -- "Event3(id)" [rel=LABEL];
+...
+}
+"""
+    return desc
