@@ -10,6 +10,8 @@ def convert_format(orig_ins_list, pred_as_dict, labels, debug=False):
     all_golds = []
     all_preds = []
     count_nas = 0
+
+    # Consider only the gold labels (for all_golds and all_preds)
     for gold_ins in orig_ins_list:
         if gold_ins.target == 'included':
             gold_ins.target = 'is_included'
@@ -27,14 +29,11 @@ def convert_format(orig_ins_list, pred_as_dict, labels, debug=False):
         set_label = -1
         if key in pred_as_dict:
             set_label = pred_as_dict[key]
-            pred_for_trans[gold_ins.docid].append((gold_ins.source, set_label, gold_ins.target))
             all_preds.append(set_label)
         elif rev_key in pred_as_dict:
             set_label = labels.get_reverse_numerical_label(pred_as_dict[rev_key])
-            pred_for_trans[gold_ins.docid].append((gold_ins.source, set_label, gold_ins.target))
             all_preds.append(set_label)
         else:
-            pred_for_trans[gold_ins.docid].append((gold_ins.source, 0, gold_ins.target))
             all_preds.append(0)
             count_nas += 1
             print(f"NA: {gold_ins.docid}#{gold_ins.source}#{gold_ins.target}")
@@ -45,6 +44,10 @@ def convert_format(orig_ins_list, pred_as_dict, labels, debug=False):
             if labels[gold_ins.label] != set_label:
                 print(f'relation-{key}, gold={labels[gold_ins.label]}, pred={set_label}')
 
+    # Consider all predictions to generate the pred_for_trans obj
+    for key, pred in pred_as_dict.items():
+        split = key.split('#')
+        pred_for_trans[split[0]].append((split[1], pred, split[2]))
 
     return all_golds, all_preds, gold_for_trans, pred_for_trans, count_nas
 
@@ -82,8 +85,8 @@ def doc_wise_eval(pred_as_dict, orig_ins_list, labels, dataset_type):
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_0.json"
-    _dataset_type = NarrativeDataset()
+    _prediction_file = "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_TimeLineOnly_matresAllChunk_gpt4o_task_description_5.json"
+    _dataset_type = MatresDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
     _labels = _dataset_type.get_label_set()
@@ -104,7 +107,6 @@ if __name__ == "__main__":
     count_gold = {i:_all_golds.count(i) for i in _all_golds}
     print(f"Predictions dist: {dict(count_pred)}")
     print(f"Gold dist: {dict(count_gold)}")
-    print("Done!")
 
-    doc_wise_eval(_pred_as_dict, _orig_ins_list, _labels, _dataset_type)
+    # doc_wise_eval(_pred_as_dict, _orig_ins_list, _labels, _dataset_type)
     print("Done!")

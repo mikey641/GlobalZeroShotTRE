@@ -23,6 +23,12 @@ class AbsLabels(object):
     def __getitem__(self, item):
         return self.labels[item]
 
+    def get_labels_hist(self):
+        labels_hist = {}
+        for label in self.labels.keys():
+            labels_hist[label] = 0
+        return labels_hist
+
 
 class FourRelsLabels(AbsLabels):
     def __init__(self):

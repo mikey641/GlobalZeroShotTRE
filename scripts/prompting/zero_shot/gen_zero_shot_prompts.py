@@ -60,13 +60,13 @@ def prepare_instructions(test_folder, instructions_func):
 
 
 if __name__ == "__main__":
-    _instructions = prompt_cot
+    _instructions = prompt_zero_shot
 
     # _test_folder = 'data/OmniTemp/test'
     # _output_file = f'data/my_data/zero_shot/eventfull_cot_prompts.jsonl'
 
-    _test_folder = 'data/MATRES/in_my_format/test_less20'
-    _output_file = f'data/my_data/zero_shot/matres_less20_prompts.jsonl'
+    _test_folder = 'data/MATRES/in_my_format/test'
+    _output_file = f'data/my_data/zero_shot/matres_zero_shot_prompts.jsonl'
 
     # _test_folder = 'data/TimeBank-Dense/test_converted'
     # _output_file = f'data/my_data/zero_shot/tbd_remove_large_docs_cot_prompts.jsonl'

@@ -3,10 +3,11 @@ from itertools import permutations
 
 import numpy as np
 
+from scripts.eval.prompt.run_eval_prompting import convert_format
 from scripts.eval.shared.evaluation import evaluation
 from scripts.eval.shared.gurobi_optimizer_entrop import run_transitive_constraints
 from scripts.utils.classes.datasets_type import MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset, NarrativeDataset
+    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset, NarrativeDataset, TBDDataset
 from scripts.utils.io_utils import read_pred_dot_file, read_file
 
 
@@ -59,8 +60,7 @@ def run_majority_vote_trans_const(dataset_type, test_docs_dict, prediction_files
         pred_as_dict, _ = read_pred_dot_file(file_, test_docs_dict, dataset_type)
         for key in all_posibile_keys:
             if key not in aggregate_pred_as_dict:
-                if dataset_type.get_name() in [EVENTFULL_DATASET_NAME, MATRES_DATASET_NAME,
-                                                NARRATIVE_4RELS_DATASET_NAME]:
+                if dataset_type.get_name() in [EVENTFULL_DATASET_NAME, MATRES_DATASET_NAME, NARRATIVE_4RELS_DATASET_NAME]:
                     aggregate_pred_as_dict[key] = np.array([0.0, 0.0, 0.0, 0.0])
                 else:
                     aggregate_pred_as_dict[key] = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
@@ -87,10 +87,15 @@ def run_majority_vote_trans_const(dataset_type, test_docs_dict, prediction_files
             raise ValueError(f'Key-{key} not found in predictions!')
 
     np_predictions = np.array(predictions)
-    _all_golds, _all_preds, _ = run_transitive_constraints(np_predictions, order_list.copy(), None, alpha=-1,
+    _all_golds, _all_preds, gold_pred_mapping = run_transitive_constraints(np_predictions, order_list.copy(), None, alpha=-1,
                                                            dataset_type=dataset_type)
-    gold_for_trans, pred_for_trans, pred_as_dict = gen_prediction_for_transitive(order_list, _all_preds,
-                                                                                 dataset_type.get_label_set())
+
+    _pred_as_dict = dict()
+    for doc_id, mapp_list in gold_pred_mapping.items():
+        for key, item in mapp_list.items():
+            _pred_as_dict[f'{doc_id}#{key[0]}#{key[1]}'] = int(item[1])
+
+    _, _, gold_for_trans, pred_for_trans, _ = convert_format(_orig_ins_list, _pred_as_dict, dataset_type.get_label_set(), debug=False)
 
     final_golds = []
     final_preds = []
@@ -122,14 +127,14 @@ def gen_prediction_for_transitive(order_list, predictions, labels):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_0.json",
-        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_1.json",
-        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_2.json",
-        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_3.json",
-        "data/my_data/predictions/new_expr/nt/nt_DeepSeek-R1_task_description_6res_only_timeline_4.json",
+        "data/my_data/predictions/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_0.json",
+        "data/my_data/predictions/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_1.json",
+        "data/my_data/predictions/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_2.json",
+        "data/my_data/predictions/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_3.json",
+        "data/my_data/predictions/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_4.json",
     ]
 
-    _dataset_type = NarrativeDataset()
+    _dataset_type = TBDDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'

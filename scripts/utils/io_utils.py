@@ -235,12 +235,6 @@ def read_pred_dot_file(pred_file_path, test_docs_dict, data_type: DataType):
 
             pred_as_dict[f'{file}#{source_id}#{target_id}'] = labels[labels.adjust_label(relation)]
 
-        # graph, event_id_dict = full_triplets_to_numpy_graph(all_preds, labels)
-        # trans_graph = transitive_closure_with_relations(graph)
-        # trip_with_trans = from_graph_to_triplets(trans_graph, event_id_dict)
-        # print(len(all_preds))
-        # print(len(trip_with_trans))
-
     return pred_as_dict, pred_triplets
 
 

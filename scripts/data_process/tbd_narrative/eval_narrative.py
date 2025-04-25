@@ -44,7 +44,7 @@ def main(narrative_folder):
 
     for doc_id, triplets in doc_triplets.items():
         print(f"Document ID: {doc_id}")
-        total_hist, trans_discrepancies, sym_contradictions, error_log = evaluate_triplets(triplets, False)
+        total_hist, trans_discrepancies, sym_contradictions, error_log = evaluate_triplets(triplets, None, False)
         total_discrepancies += trans_discrepancies
         print(f"Total History: {total_hist}")
         print(f"Total Discrepancies: {trans_discrepancies}")

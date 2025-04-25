@@ -3,10 +3,10 @@ from typing import final
 
 import numpy as np
 
-from scripts.eval.prompt.eval_global_consistency import gen_prediction_for_transitive
+from scripts.eval.prompt.run_eval_prompting import convert_format
 from scripts.eval.shared.evaluation import evaluation
 from scripts.utils.classes.datasets_type import EventFullDataset, MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, NarrativeDataset, MatresDataset
+    NARRATIVE_4RELS_DATASET_NAME, NarrativeDataset, MatresDataset, TBDDataset
 from scripts.utils.io_utils import read_file, read_pred_dot_file
 
 
@@ -22,11 +22,11 @@ def get_reverse_list(labels, pred_norm):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_0.json",
-        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_1.json",
-        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_2.json",
-        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_3.json",
-        "data/my_data/predictions/new_expr/matres_DeepSeek-R1_task_description_4res_only_timeline_4.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_TimeLineOnly_matresAllChunk_gpt4o_task_description_1.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_TimeLineOnly_matresAllChunk_gpt4o_task_description_2.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_TimeLineOnly_matresAllChunk_gpt4o_task_description_3.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_TimeLineOnly_matresAllChunk_gpt4o_task_description_4.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_TimeLineOnly_matresAllChunk_gpt4o_task_description_5.json",
     ]
 
     _dataset_type = MatresDataset()
@@ -49,27 +49,28 @@ if __name__ == "__main__":
     for file_ in _prediction_files:
         _pred_as_dict, _ = read_pred_dot_file(file_, _test_docs_dict, _dataset_type)
         for key, value in _pred_as_dict.items():
-            if key not in aggregate_pred_as_dict and key in gold_rels:
+            if key not in aggregate_pred_as_dict:
                 if _dataset_type.get_name() in [EVENTFULL_DATASET_NAME, MATRES_DATASET_NAME, NARRATIVE_4RELS_DATASET_NAME]:
                     aggregate_pred_as_dict[key] = [0.0,0.0,0.0,0.0]
                 else:
                     aggregate_pred_as_dict[key] = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-                aggregate_pred_as_dict[key][value] += 1
+            aggregate_pred_as_dict[key][value] += 1
 
     final_golds = []
     final_preds = []
 
     # assert len(gold_rels) == len(aggregate_pred_as_dict)
     _pred_order = []
-    for key, value in gold_rels.items():
-        if key in aggregate_pred_as_dict:
+    _pred_as_dict = dict()
+    for key in aggregate_pred_as_dict.keys():
+        _pred_as_dict[key] = np.argmax(aggregate_pred_as_dict[key])
+        if key in gold_rels:
             key_spl = key.split("#")
-            gold_rel_val = _dataset_type.get_label_set()[value]
+            gold_rel_val = _dataset_type.get_label_set()[gold_rels[key]]
             final_golds.append(gold_rel_val)
-            final_preds.append(np.argmax(aggregate_pred_as_dict[key]))
-            _pred_order.append((key_spl[0], key_spl[1], gold_rel_val, key_spl[2]))
+            final_preds.append(_pred_as_dict[key])
 
-    gold_for_trans, pred_for_trans, pred_as_dict = gen_prediction_for_transitive(_pred_order, final_preds, labels=_label_set)
+    _, _, gold_for_trans, pred_for_trans, _ = convert_format(_orig_ins_list, _pred_as_dict, _label_set, debug=False)
     evaluation(final_golds, final_preds, gold_for_trans, pred_for_trans, _dataset_type)
 
     print('Done!')

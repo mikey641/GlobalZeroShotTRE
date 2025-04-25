@@ -35,7 +35,7 @@ def get_after_prompt(source_id, source_text, target_id, target_text, same_prompt
 def run_CoT(all_examples, llm_to_use):
     predictions = {}
     for i, example in enumerate(tqdm(all_examples)):
-        if i == 10:
+        if i == 15:
             break
 
         on_file = example['file']
@@ -104,8 +104,10 @@ def run_zero_shot(all_examples, llm_to_use):
         gold_label = example['gold_label']
         key = f"{on_file}#{source}#{target}"
 
+        llm_to_use.clear()
+
         try:
-            response = llm_to_use(instruction)
+            response = llm_to_use.run_model_chat(instruction)
             predictions[key] = {"target": response, "gold_label": gold_label}
         except Exception as e:
             print('Failed to predict', repr(e))
@@ -155,26 +157,29 @@ if __name__ == "__main__":
     # read all line from file
     # _llm_to_use = GPTModel('gpt-4o-mini')
     # _llm_to_use = GeminiChatModel('gemini-2.0-flash')
-    # _llm_to_use = TogetherModel('meta-llama/Meta-Llama-3.1-405B-Instruct-Turbo')
-    _llm_to_use = TogetherModel('google/gemma-2b-it')
-    # _llm_to_use = TogetherModel('deepseek-ai/DeepSeek-R1')
+    # _llm_to_use = TogetherModel('meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8')
+    # _llm_to_use = TogetherModel('google/gemma-2b-it')
+    _llm_to_use = TogetherModel('deepseek-ai/DeepSeek-R1')
     _input_file = "data/my_data/zero_shot/eventfull_cot_prompts.jsonl"
     _test_set = 'omni'
+    _method = run_CoT
 
     print(f"Using LLM: {_llm_to_use.get_model_name()}")
     print(f"Using input file: {_input_file}")
     print(f"Using test set: {_test_set}")
-    print("Running CoT for 4 relations dataset!")
+    print("Running ZSL for 4 relations dataset!")
+    print(f'running method: {_method.__name__}()')
 
     with open(_input_file) as _file:
         data = json.load(_file)
 
     start_time = time.time()
-    _predictions = run_CoT(data, _llm_to_use)
+    _predictions = _method(data, _llm_to_use)
     end_time = time.time()
 
     execution_time = end_time - start_time
+    print()
     print(f"Execution time: {execution_time:.4f} seconds")
 
-    with open(f"data/my_data/zero_shot/new_expr/{_test_set}_{_llm_to_use.get_model_name()}_4rels_cot_prompts_predictions.json", "w") as _file:
+    with open(f"data/my_data/zero_shot/new_expr/{_test_set}_{_llm_to_use.get_model_name()}_{run_CoT.__name__}_predictions.json", "w") as _file:
         json.dump(_predictions, _file, indent=4)

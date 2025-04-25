@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     for i in range(num_of_repetitions):
         if args.selected_file is not None:
-            _output_file = f'data/my_data/predictions/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}.json'
+            _output_file = f'data/my_data/predictions/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{i}.json'
         else:
             _output_file = f'data/my_data/predictions/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{i}.json'
 
