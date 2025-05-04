@@ -85,8 +85,8 @@ def doc_wise_eval(pred_as_dict, orig_ins_list, labels, dataset_type):
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_TimeLineOnly_matresAllChunk_gpt4o_task_description_5.json"
-    _dataset_type = MatresDataset()
+    _prediction_file = "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_6.json"
+    _dataset_type = EventFullDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
     _labels = _dataset_type.get_label_set()

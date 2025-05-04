@@ -5,8 +5,8 @@ from scripts.eval.shared.evaluation import evaluation
 from scripts.utils.classes.datasets_type import TBDDataset, EventFullDataset, NarrativeDataset, MatresDataset
 
 if __name__ == "__main__":
-    _prediction_file = "data/my_data/zero_shot/new_expr/omni_Llama-3.3-70B-Instruct-Turbo_4rels_zero_shot_prompts_predictions.json"
-    _data_type = EventFullDataset()
+    _prediction_file = "data/my_data/zero_shot/keeper/nt_6rels_gpt4o_cot_predictions.json"
+    _data_type = NarrativeDataset()
 
     _dataset_name = _data_type.get_name()
     _labels = _data_type.get_label_set()

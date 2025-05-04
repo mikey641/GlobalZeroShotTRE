@@ -87,25 +87,39 @@ def run_majority_vote_trans_const(dataset_type, test_docs_dict, prediction_files
             raise ValueError(f'Key-{key} not found in predictions!')
 
     np_predictions = np.array(predictions)
-    all_golds, all_preds, gold_pred_mapping = run_transitive_constraints(np_predictions, order_list.copy(), None, alpha=-1,
+    _all_golds, _all_preds, gold_pred_mapping = run_transitive_constraints(np_predictions, order_list.copy(), None, alpha=-1,
                                                            dataset_type=dataset_type)
 
-    pred_as_dict = dict()
+    _pred_as_dict = dict()
     for doc_id, mapp_list in gold_pred_mapping.items():
         for key, item in mapp_list.items():
-            pred_as_dict[f'{doc_id}#{key[0]}#{key[1]}'] = int(item[1])
+            _pred_as_dict[f'{doc_id}#{key[0]}#{key[1]}'] = int(item[1])
 
-    _, _, gold_for_trans, pred_for_trans, _ = convert_format(orig_ins_list, pred_as_dict, dataset_type.get_label_set(), debug=False)
+    _, _, gold_for_trans, pred_for_trans, _ = convert_format(_orig_ins_list, _pred_as_dict, dataset_type.get_label_set(), debug=False)
 
     final_golds = []
     final_preds = []
-    for idx in range(len(all_golds)):
-        if all_golds[idx] == -1:
-            continue
-        final_golds.append(all_golds[idx])
-        final_preds.append(all_preds[idx])
+    for ins in _orig_ins_list:
+        doc_id = ins.docid
+        source = ins.source
+        target = ins.target
+        label = ins.label
+        sentdiff = ins.sentdiff
+        key = f'{doc_id}#{source}#{target}'
+        rev_key = f'{doc_id}#{target}#{source}'
+        if sentdiff > 1:
+            if key in _pred_as_dict:
+                final_golds.append(_dataset_type.get_label_set()[label])
+                final_preds.append(_pred_as_dict[key])
+            elif rev_key in _pred_as_dict:
+                final_golds.append(
+                    _dataset_type.get_label_set()[_dataset_type.get_label_set().get_reverse_label(label)])
+                final_preds.append(_pred_as_dict[rev_key])
+            else:
+                raise KeyError(
+                    f'Key {key} not found in aggregate predictions and reverse key {rev_key} not found in aggregate predictions!')
 
-    return evaluation(final_golds, final_preds, gold_for_trans, pred_for_trans, dataset_type)
+    return evaluation(final_golds, final_preds, None, None, dataset_type)
 
 
 def gen_prediction_for_transitive(order_list, predictions, labels):
@@ -127,14 +141,14 @@ def gen_prediction_for_transitive(order_list, predictions, labels):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_1.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_2.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_3.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_4.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_5.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_1.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_3.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_4.json",
     ]
 
-    _dataset_type = NarrativeDataset()
+    _dataset_type = EventFullDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'
