@@ -32,7 +32,7 @@ def eval_full_doc(orig_ins_list, gold_rels, aggregate_pred_as_dict, dataset_type
             final_golds.append(gold_rel_val)
             final_preds.append(pred_as_dict[key])
     _, _, gold_for_trans, pred_for_trans, _ = convert_format(orig_ins_list, pred_as_dict, dataset_type.get_label_set(), debug=False)
-    evaluation(final_golds, final_preds, gold_for_trans, pred_for_trans, dataset_type)
+    return evaluation(final_golds, final_preds, gold_for_trans, pred_for_trans, dataset_type)
 
 
 def eval_sentdiff(orig_ins_list, aggregate_pred_as_dict, dataset_type, consecutive):
@@ -63,7 +63,7 @@ def eval_sentdiff(orig_ins_list, aggregate_pred_as_dict, dataset_type, consecuti
             else:
                 raise KeyError(f'Key {key} not found in aggregate predictions and reverse key {rev_key} not found in aggregate predictions!')
 
-    evaluation(final_golds, final_preds, None, None, dataset_type)
+    return evaluation(final_golds, final_preds, None, None, dataset_type)
 
 
 
@@ -104,10 +104,15 @@ if __name__ == "__main__":
             _aggregate_pred_as_dict[key][value] += 1
 
     print('\n\n###### Evaluation Results Full Document ########')
-    eval_full_doc(_orig_ins_list, _gold_rels, _aggregate_pred_as_dict, _dataset_type)
+    f1_full = eval_full_doc(_orig_ins_list, _gold_rels, _aggregate_pred_as_dict, _dataset_type)
 
     print('\n\n###### Evaluation Results Consecutive Sentences ########')
-    eval_sentdiff(_orig_ins_list, _aggregate_pred_as_dict, _dataset_type, consecutive=True)
+    f1_consec = eval_sentdiff(_orig_ins_list, _aggregate_pred_as_dict, _dataset_type, consecutive=True)
     print('\n\n###### Evaluation Results Non-Consecutive Sentences ########')
-    eval_sentdiff(_orig_ins_list, _aggregate_pred_as_dict, _dataset_type, consecutive=False)
+    f1_non_consec = eval_sentdiff(_orig_ins_list, _aggregate_pred_as_dict, _dataset_type, consecutive=False)
+
+    print('\n\n###### Summary ######')
+    print(f"Full F1: {f1_full}")
+    print(f"Consecutive F1: {f1_consec}")
+    print(f"Non-Consecutive F1: {f1_non_consec}")
     print('Done!')

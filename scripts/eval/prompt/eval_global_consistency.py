@@ -182,13 +182,17 @@ if __name__ == "__main__":
     end_time = time.time()
 
     print('\n\n####### Full Document Evaluation ####')
-    eval_full_doc(_all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _dataset_type)
+    f1_full = eval_full_doc(_all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _dataset_type)
 
     print('\n\n####### *Consecutive* Sentence Document Evaluation ####')
-    eval_by_sent(_pred_as_dict, _dataset_type, True)
+    f1_consec = eval_by_sent(_pred_as_dict, _dataset_type, True)
     print('\n\n####### *Non-Consecutive* Sentence Document Evaluation ####')
-    eval_by_sent(_pred_as_dict, _dataset_type, False)
+    f1_non_consec = eval_by_sent(_pred_as_dict, _dataset_type, False)
     execution_time = end_time - start_time
 
+    print('\n\n###### Summary ######')
+    print(f"Full F1: {f1_full}")
+    print(f"Consecutive F1: {f1_consec}")
+    print(f"Non-Consecutive F1: {f1_non_consec}")
     print(f"Execution time: {execution_time:.4f} seconds")
     print('Done!')

@@ -87,7 +87,7 @@ class TogetherModel(GenLLM):
         stream = model.chat.completions.create(
             model=model_name,
             messages=messages,
-            max_tokens=16000,
+            max_tokens=6000,
             stream=True,
         )
 
