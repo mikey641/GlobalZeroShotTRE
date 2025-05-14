@@ -18,8 +18,9 @@ def from_jsonl_to_dict(loaded_data):
 
 
 if __name__ == "__main__":
-    _prediction_file = "data/my_data/zero_shot/new_expr/nt_DeepSeek-R1_run_CoT_predictions.jsonl"
-    _data_type = NarrativeDataset()
+    _prediction_file = "data/my_data/zero_shot/new_expr/omni/omni_Meta-Llama-3.1-405B-Instruct-Turbo_4rels_cot_prompts_predictions.json"
+    _data_type = EventFullDataset()
+
     if _prediction_file.endswith(".jsonl"):
         json_lines = load_json_lines(_prediction_file)
         _data = from_jsonl_to_dict(json_lines)

@@ -5,7 +5,7 @@ import time
 
 from tqdm import tqdm
 
-from scripts.utils.io_utils import load_json_lines
+from scripts.utils.io_utils import load_json_lines, write_json_line
 from scripts.utils.llms_definitions import GPTModel, GeminiChatModel, TogetherModel
 
 
@@ -31,15 +31,6 @@ def get_after_prompt(source_id, source_text, target_id, target_text, same_prompt
     else:
         same_event = ""
     return f"""is <EVENT {source_id}>{source_text}</EVENT> after <EVENT {target_id}>{target_text}</EVENT>{same_event}? Answer yes or no."""
-
-
-def write_json_line(pred, fos):
-    """
-    Write a JSON object to a file as a single line.
-    """
-    json.dump(pred, fos)
-    fos.write('\n')
-    fos.flush()
 
 
 def run_CoT(all_examples, llm_to_use, key_set, output_file_stream):
@@ -126,18 +117,19 @@ if __name__ == "__main__":
     # _llm_to_use = GPTModel('gpt-4o-mini')
     # _llm_to_use = GeminiChatModel('gemini-2.0-flash')
     # _llm_to_use = TogetherModel('meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8')
+    _llm_to_use = TogetherModel('meta-llama/Llama-3.3-70B-Instruct-Turbo-Free')
     # _llm_to_use = TogetherModel('google/gemma-2b-it')
-    _llm_to_use = TogetherModel('deepseek-ai/DeepSeek-R1')
-    _test_set = 'matres'
+    # _llm_to_use = TogetherModel('deepseek-ai/DeepSeek-R1')
+    _test_set = 'omni'
 
-    _input_file = "data/my_data/zero_shot/matres_cot_prompts.jsonl"
+    _input_file = "data/my_data/zero_shot/eventfull_cot_prompts.jsonl"
     _output_file = f"data/my_data/zero_shot/new_expr/{_test_set}_{_llm_to_use.get_model_name()}_{run_CoT.__name__}_predictions.jsonl"
 
     print(f"Using LLM: {_llm_to_use.get_model_name()}")
     print(f"Using input file: {_input_file}")
     print(f"Using output file: {_output_file}")
     print(f"Using test set: {_test_set}")
-    print("Running ZSL/CoT for 4 relations dataset!")
+    print("Running CoT for 4 relations dataset!")
     print(f'running method: {run_CoT.__name__}()')
 
     with open(_input_file) as _file:

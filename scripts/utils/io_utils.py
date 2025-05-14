@@ -256,3 +256,12 @@ def load_json_lines(jsonl_file):
             for line in file:
                 data.append(json.loads(line))
     return data
+
+
+def write_json_line(pred, fos):
+    """
+    Write a JSON object to a file as a single line.
+    """
+    json.dump(pred, fos)
+    fos.write('\n')
+    fos.flush()

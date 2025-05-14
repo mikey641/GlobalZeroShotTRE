@@ -85,7 +85,7 @@ def doc_wise_eval(pred_as_dict, orig_ins_list, labels, dataset_type):
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_8.json"
+    _prediction_file = "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json"
     _dataset_type = EventFullDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
@@ -99,6 +99,8 @@ if __name__ == "__main__":
 
     _all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _count_nas = convert_format(_orig_ins_list, _pred_as_dict, _labels, debug=False)
 
+    doc_wise_eval(_pred_as_dict, _orig_ins_list, _labels, _dataset_type)
+
     evaluation(_all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _dataset_type)
 
     print()
@@ -107,6 +109,4 @@ if __name__ == "__main__":
     count_gold = {i:_all_golds.count(i) for i in _all_golds}
     print(f"Predictions dist: {dict(count_pred)}")
     print(f"Gold dist: {dict(count_gold)}")
-
-    # doc_wise_eval(_pred_as_dict, _orig_ins_list, _labels, _dataset_type)
     print("Done!")

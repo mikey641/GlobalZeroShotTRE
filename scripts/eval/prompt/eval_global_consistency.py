@@ -97,6 +97,9 @@ def run_majority_vote_trans_const(dataset_type, test_docs_dict, prediction_files
 
     _, _, gold_for_trans, pred_for_trans, _ = convert_format(orig_ins_list, pred_as_dict, dataset_type.get_label_set(), debug=False)
 
+    return all_golds, all_preds, gold_for_trans, pred_for_trans, pred_as_dict
+
+def eval_full_doc(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_type):
     final_golds = []
     final_preds = []
     for idx in range(len(all_golds)):
@@ -106,6 +109,40 @@ def run_majority_vote_trans_const(dataset_type, test_docs_dict, prediction_files
         final_preds.append(all_preds[idx])
 
     return evaluation(final_golds, final_preds, gold_for_trans, pred_for_trans, dataset_type)
+
+
+def eval_by_sent(pred_as_dict, dataset_type, consecutive):
+    final_golds = []
+    final_preds = []
+    for ins in _orig_ins_list:
+        doc_id = ins.docid
+        source = ins.source
+        target = ins.target
+        label = ins.label
+        sentdiff = ins.sentdiff
+        key = f'{doc_id}#{source}#{target}'
+        rev_key = f'{doc_id}#{target}#{source}'
+
+        condition_ = False
+        if consecutive and sentdiff <= 1:
+            condition_ = True
+        elif not consecutive and sentdiff > 1:
+            condition_ = True
+
+        if condition_:
+            if key in pred_as_dict:
+                final_golds.append(_dataset_type.get_label_set()[label])
+                final_preds.append(pred_as_dict[key])
+            elif rev_key in pred_as_dict:
+                final_golds.append(
+                    _dataset_type.get_label_set()[_dataset_type.get_label_set().get_reverse_label(label)])
+                final_preds.append(pred_as_dict[rev_key])
+            else:
+                raise KeyError(
+                    f'Key {key} not found in aggregate predictions and reverse key {rev_key} not found in aggregate predictions!')
+
+    return evaluation(final_golds, final_preds, None, None, dataset_type)
+
 
 
 def gen_prediction_for_transitive(order_list, predictions, labels):
@@ -127,22 +164,31 @@ def gen_prediction_for_transitive(order_list, predictions, labels):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_0_orig.json",
-        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_1.json",
-        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_2.json",
-        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_3.json",
-        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_4.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_1.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_3.json",
+        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_4.json",
     ]
 
-    _dataset_type = NarrativeDataset()
+    _dataset_type = EventFullDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
 
     start_time = time.time()
-    run_majority_vote_trans_const(_dataset_type, _test_docs_dict, _prediction_files, _orig_ins_list)
+    _all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _pred_as_dict = run_majority_vote_trans_const(_dataset_type, _test_docs_dict, _prediction_files, _orig_ins_list)
     end_time = time.time()
+
+    print('\n\n####### Full Document Evaluation ####')
+    eval_full_doc(_all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _dataset_type)
+
+    print('\n\n####### *Consecutive* Sentence Document Evaluation ####')
+    eval_by_sent(_pred_as_dict, _dataset_type, True)
+    print('\n\n####### *Non-Consecutive* Sentence Document Evaluation ####')
+    eval_by_sent(_pred_as_dict, _dataset_type, False)
     execution_time = end_time - start_time
+
     print(f"Execution time: {execution_time:.4f} seconds")
     print('Done!')
