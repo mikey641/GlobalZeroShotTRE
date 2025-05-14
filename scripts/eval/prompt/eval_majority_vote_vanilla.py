@@ -47,13 +47,7 @@ def eval_sentdiff(orig_ins_list, aggregate_pred_as_dict, dataset_type, consecuti
         key = f'{doc_id}#{source}#{target}'
         rev_key = f'{doc_id}#{target}#{source}'
 
-        condition = False
-        if consecutive and sentdiff <= 1:
-            condition = True
-        elif not consecutive and sentdiff > 1:
-            condition = True
-
-        if condition:
+        if (consecutive and sentdiff <= 1) or (not consecutive and sentdiff > 1):
             if key in aggregate_pred_as_dict:
                 final_golds.append(dataset_type.get_label_set()[label])
                 final_preds.append(np.argmax(aggregate_pred_as_dict[key]))
@@ -86,11 +80,11 @@ if __name__ == "__main__":
 
     _gold_rels = dict()
     for inst in _orig_ins_list:
-        doc_id = inst.docid.removesuffix('.json') if _dataset_type.get_name() == MATRES_DATASET_NAME else inst.docid
-        source = inst.source.removeprefix('E')
-        target = inst.target.removeprefix('E')
-        label = inst.label
-        _gold_rels[f'{doc_id}#{source}#{target}'] = label
+        _doc_id = inst.docid.removesuffix('.json') if _dataset_type.get_name() == MATRES_DATASET_NAME else inst.docid
+        _source = inst.source.removeprefix('E')
+        _target = inst.target.removeprefix('E')
+        _label = inst.label
+        _gold_rels[f'{_doc_id}#{_source}#{_target}'] = _label
 
     _aggregate_pred_as_dict = dict()
     for file_ in _prediction_files:

@@ -123,13 +123,7 @@ def eval_by_sent(pred_as_dict, dataset_type, consecutive):
         key = f'{doc_id}#{source}#{target}'
         rev_key = f'{doc_id}#{target}#{source}'
 
-        condition_ = False
-        if consecutive and sentdiff <= 1:
-            condition_ = True
-        elif not consecutive and sentdiff > 1:
-            condition_ = True
-
-        if condition_:
+        if (consecutive and sentdiff <= 1) or (not consecutive and sentdiff > 1):
             if key in pred_as_dict:
                 final_golds.append(_dataset_type.get_label_set()[label])
                 final_preds.append(pred_as_dict[key])
