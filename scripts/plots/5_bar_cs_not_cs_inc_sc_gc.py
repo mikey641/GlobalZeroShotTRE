@@ -52,24 +52,24 @@ def plot_nt():
     # NarrativeTime
     categories = ["CoT", "ZSL-Global", "ZSL-TimeLine", "SelfConsistency", "GlobalConsistency"]
     scores = {
-        "All": [49.3, 48.4, 52.2, 55.6, 58.4],
-        "Consecutive Sentences": [54.5, 49.8, 52.8, 56.1, 59.1],
-        "Non-Consecutive Sentences": [46.7, 47.6, 51.9, 55.0, 58.2],
+        "All": [57.9, 57.0, 59.4, 62.1, 64.1],
+        "Consecutive Sentences": [64.2, 58.4, 62.8, 64.5, 67.7],
+        "Non-Consecutive Sentences": [54.7, 56.3, 57.7, 61.4, 62.2],
         # 4: [81.8, 80.1, 63.9, 46.9, 0, 0] # Bayesian
     }
-    draw_plot(categories, scores, 45, 60)
+    draw_plot(categories, scores, 45, 70)
 
 
 def plot_eventfull():
     # OmniTemp
     categories = ["CoT", "ZSL-Global", "ZSL-TimeLine", "SelfConsistency", "GlobalConsistency"]
     scores = {
-        "All": [67.2, 62.3, 68.5, 71.0, 73.6],
-        "Consecutive Sentences": [67.7, 69.7, 71.1, 73.1, 78.4],
-        "Non-Consecutive Sentences": [67.1, 60.0, 67.4, 70.4, 70.4],
+        "All": [78.4, 70.5, 74.6, 78.7, 79.2],
+        "Consecutive Sentences": [78.6, 72.0, 77.2, 81.3, 79.9],
+        "Non-Consecutive Sentences": [78.4, 68.8, 73.0, 78.1, 78.6],
         # 4: [81.8, 80.1, 63.9, 46.9, 0, 0] # Bayesian
     }
-    draw_plot(categories, scores, 57.5, 80)
+    draw_plot(categories, scores, 60, 85)
 
 
 if __name__ == '__main__':

@@ -72,7 +72,7 @@ if __name__ == "__main__":
     _selected_file = args.selected_file
 
     if args.test_db == "nt":
-        _test_folder = 'data/NarrativeTime_A1/converted_no_overlap/test_18ment_chucked_60'
+        _test_folder = 'data/NarrativeTime_A1/converted_no_overlap/test_18ment'
     elif args.test_db == "matres":
         _test_folder = 'data/MATRES/in_my_format/test_all_pairs_chunked'
     elif args.test_db == "omni":
@@ -106,9 +106,9 @@ if __name__ == "__main__":
 
     for i in range(num_of_repetitions):
         if args.selected_file is not None:
-            _output_file = f'data/my_data/predictions/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{i}.json'
+            _output_file = f'data/my_data/prompt/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{i}.json'
         else:
-            _output_file = f'data/my_data/predictions/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{i}.json'
+            _output_file = f'data/my_data/prompt/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{i}.json'
 
         start_time = time.time()
         main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions,

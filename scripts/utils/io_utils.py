@@ -1,3 +1,4 @@
+import os
 import re
 from dataclasses import dataclass
 import xml.etree.ElementTree as ET
@@ -241,4 +242,17 @@ def read_pred_dot_file(pred_file_path, test_docs_dict, data_type: DataType):
 def open_input_file(file_path):
     with open(file_path) as file:
         data = json.load(file)
+    return data
+
+
+def load_json_lines(jsonl_file):
+    """
+    Load a JSON Lines file into a list of dictionaries.
+    Each line in the file should be a valid JSON object.
+    """
+    data = []
+    if os.path.exists(jsonl_file):
+        with open(jsonl_file, 'r', encoding='utf-8') as file:
+            for line in file:
+                data.append(json.loads(line))
     return data

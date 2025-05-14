@@ -46,8 +46,8 @@ def draw_plot(categories, scores):
 def plot_matres_omni():
     categories = ["B", "A", "E", "V"]
     scores = {
-        "OmniTemp": [69.7, 73.5, 49.8, 10.5],  # Global
-        "MATRES": [69.7, 50.2, 8.7, 1.7],  # TimeLine
+        "OmniTemp": [72.5, 82.0, 55.6, 42.4],
+        "MATRES": [64.1, 63.8, 14.7, 19.6],
         # 4: [74.2, 77.4, 62.8, 0.0],  # TimeLine + Const
         # 4: [81.8, 80.1, 63.9, 46.9] # Bayesian
     }
@@ -58,8 +58,8 @@ def plot_nt_tbd():
     # Define categories (x-axis) and accuracy scores (y-values)
     _categories = ["B", "A", "I", "II", "E", "V"]
     _scores = {
-        "NarrativeTime": [62.4, 63.3, 8.81, 12.6, 31.4, 22.2],  # Global
-        "TimeBank-Dense": [47.4, 34.0, 13.3, 12.5, 18.2, 1.6],
+        "NarrativeTime": [66.4, 67.8, 11.1, 11.8, 19.8, 33.7],  # Global
+        "TimeBank-Dense": [50.6, 53.4, 21.9, 21.9, 16.7, 15.6],
         # 4: [74.2, 77.4, 62.8, 0.0],  # TimeLine + Const
         # 4: [81.8, 80.1, 63.9, 46.9] # Bayesian
     }

@@ -22,11 +22,11 @@ def get_reverse_list(labels, pred_norm):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_1.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_2.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_3.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_4.json",
-        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_nt_gpt4o_task_description_5.json",
+        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_0_orig.json",
+        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_1.json",
+        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_2.json",
+        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_3.json",
+        "data/my_data/prompt/new_expr/nt/nt_Meta-Llama-3.1-405B-Instruct-Turbo_task_description_6res_only_timeline_4.json",
     ]
 
     _dataset_type = NarrativeDataset()

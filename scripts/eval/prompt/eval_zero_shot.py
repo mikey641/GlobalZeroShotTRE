@@ -3,16 +3,32 @@ import string
 
 from scripts.eval.shared.evaluation import evaluation
 from scripts.utils.classes.datasets_type import TBDDataset, EventFullDataset, NarrativeDataset, MatresDataset
+from scripts.utils.io_utils import load_json_lines
+
+
+def from_jsonl_to_dict(loaded_data):
+    """
+    Convert loaded data from jsonl to dict
+    """
+    data = dict()
+    for line in loaded_data:
+        data[line['key']] = {"target": line['target'], "gold_label": line['gold_label']}
+
+    return data
+
 
 if __name__ == "__main__":
-    _prediction_file = "data/my_data/zero_shot/keeper/nt_6rels_gpt4o_cot_predictions.json"
+    _prediction_file = "data/my_data/zero_shot/new_expr/nt_DeepSeek-R1_run_CoT_predictions.jsonl"
     _data_type = NarrativeDataset()
+    if _prediction_file.endswith(".jsonl"):
+        json_lines = load_json_lines(_prediction_file)
+        _data = from_jsonl_to_dict(json_lines)
+    else:
+        with open(_prediction_file) as _file:
+            _data = json.load(_file)
 
     _dataset_name = _data_type.get_name()
     _labels = _data_type.get_label_set()
-
-    with open(_prediction_file) as _file:
-        _data = json.load(_file)
 
     _pred_for_trans = {}
     _gold_for_trans = {}
