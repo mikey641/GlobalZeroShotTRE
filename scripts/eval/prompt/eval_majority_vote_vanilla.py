@@ -63,14 +63,14 @@ def eval_sentdiff(orig_ins_list, aggregate_pred_as_dict, dataset_type, consecuti
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_1.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_3.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_4.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_tbdAllChunk_gpt4o_task_description_1.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_tbdAllChunk_gpt4o_task_description_2.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_tbdAllChunk_gpt4o_task_description_3.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_tbdAllChunk_gpt4o_task_description_4.json",
+        "data/my_data/prompt/ablation/OnlyTimeLine_BEST/prompt_OnlyTimeLine_tbdAllChunk_gpt4o_task_description_5.json",
     ]
 
-    _dataset_type = EventFullDataset()
+    _dataset_type = TBDDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'

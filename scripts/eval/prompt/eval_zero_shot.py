@@ -17,7 +17,7 @@ def from_jsonl_to_dict(loaded_data):
     return data
 
 
-def prepare_dicts(value, all_golds, all_preds, pred_for_trans, gold_for_trans, labels):
+def prepare_dicts(key, value, all_golds, all_preds, pred_for_trans, gold_for_trans, labels):
     count_nas = 0
     gold = 'VAGUE' if value['gold_label'].upper() == 'UNCERTAIN' else value['gold_label'].upper()
     pred = value['target'].rstrip(string.whitespace + string.punctuation).upper()
@@ -26,23 +26,26 @@ def prepare_dicts(value, all_golds, all_preds, pred_for_trans, gold_for_trans, l
         count_nas = 1
     all_golds.append(labels[gold])
     all_preds.append(labels[pred])
-    if doc_id not in pred_for_trans:
-        pred_for_trans[doc_id] = []
-        gold_for_trans[doc_id] = []
-    pred_for_trans[doc_id].append((source, labels[pred], target))
-    gold_for_trans[doc_id].append((source, labels[gold], target))
+
+    key_split = key.split("#")
+    if key_split[0] not in pred_for_trans:
+        pred_for_trans[key_split[0]] = []
+        gold_for_trans[key_split[0]] = []
+
+    pred_for_trans[key_split[0]].append((key_split[1], labels[pred], key_split[2]))
+    gold_for_trans[key_split[0]].append((key_split[1], labels[gold], key_split[2]))
     return count_nas
 
 
-def run_eval_all(data_type):
+def run_eval_all(data, data_type):
     pred_for_trans = {}
     gold_for_trans = {}
     all_golds = []
     all_preds = []
     labels = data_type.get_label_set()
     count_nas = 0
-    for key, value in _data.items():
-        count_nas = prepare_dicts(value, all_golds, all_preds, pred_for_trans, gold_for_trans, labels)
+    for key, value in data.items():
+        count_nas = prepare_dicts(key, value, all_golds, all_preds, pred_for_trans, gold_for_trans, labels)
     f1 = evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, data_type)
 
     print(f"Number of Gold Relations: {len(all_golds)}")
@@ -59,9 +62,9 @@ def run_eval_sentdiff(data_type, gold_dict_send_diff, consecutive):
     labels = data_type.get_label_set()
     count_nas = 0
     for key, value in _data.items():
-        sentdiff = _gold_dict_send_diff[key]
+        sentdiff = gold_dict_send_diff[key]
         if (consecutive and sentdiff <= 1) or (not consecutive and sentdiff > 1):
-            count_nas += prepare_dicts(value, all_golds, all_preds, pred_for_trans, gold_for_trans, labels)
+            count_nas += prepare_dicts(key, value, all_golds, all_preds, pred_for_trans, gold_for_trans, labels)
     f1 = evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, data_type)
 
     print(f"Number of Gold Relations: {len(all_golds)}")
@@ -71,7 +74,7 @@ def run_eval_sentdiff(data_type, gold_dict_send_diff, consecutive):
 
 
 if __name__ == "__main__":
-    _prediction_file = "data/my_data/zero_shot/new_expr/omni/omni_Meta-Llama-3.1-405B-Instruct-Turbo_4rels_cot_prompts_predictions.json"
+    _prediction_file = "data/my_data/zero_shot/new_expr/omni_Llama-3.3-70B-Instruct-Turbo-Free_run_CoT_predictions.jsonl"
     _data_type = EventFullDataset()
 
     if _prediction_file.endswith(".jsonl"):
@@ -87,19 +90,19 @@ if __name__ == "__main__":
 
     _gold_dict_send_diff = {}
     for ins in _orig_ins_list:
-        doc_id = ins.docid
-        source = ins.source.removeprefix("E")
-        target = ins.target.removeprefix("E")
+        _doc_id = ins.docid
+        _source = ins.source.removeprefix("E")
+        _target = ins.target.removeprefix("E")
         _sentdiff = ins.sentdiff
-        key = f'{doc_id}#{source}#{target}'
-        rev_key = f'{doc_id}#{target}#{source}'
-        if key not in _gold_dict_send_diff:
-            _gold_dict_send_diff[key] = _sentdiff
-        if rev_key not in _gold_dict_send_diff:
-            _gold_dict_send_diff[rev_key] = _sentdiff
+        _key = f'{_doc_id}#{_source}#{_target}'
+        _rev_key = f'{_doc_id}#{_target}#{_source}'
+        if _key not in _gold_dict_send_diff:
+            _gold_dict_send_diff[_key] = _sentdiff
+        if _rev_key not in _gold_dict_send_diff:
+            _gold_dict_send_diff[_rev_key] = _sentdiff
 
     print('\n\n###### Running eval for all ######')
-    f1_full = run_eval_all(_data_type)
+    f1_full = run_eval_all(_data, _data_type)
     print('\n\n###### Running eval for Consecutive sentences ######')
     f1_consec = run_eval_sentdiff(_data_type, _gold_dict_send_diff, consecutive=True)
     print('\n\n###### Running eval for Non-consecutive sentences ######')

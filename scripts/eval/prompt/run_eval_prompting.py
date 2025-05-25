@@ -108,7 +108,7 @@ def eval_sent_diff(pred_as_dict, orig_ins_list, labels, dataset_type, consecutiv
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json"
+    _prediction_file = "data/my_data/prompt/new_expr/omnitemp/non_deepseek/OmniTemp_Llama-3.3-70B-Instruct-Turbo_task_description_4res_only_timeline_1.json"
     _dataset_type = EventFullDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
@@ -117,7 +117,6 @@ if __name__ == "__main__":
 
     if _dataset_name == MATRES_DATASET_NAME:
         matres_conversion(_orig_ins_list)
-
 
     _pred_as_dict, _ = read_pred_dot_file(_prediction_file, _test_docs_dict, _dataset_type)
 

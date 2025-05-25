@@ -42,6 +42,6 @@ if __name__ == "__main__":
     _matres_input = 'data/MATRES/in_my_format/test_all_pairs_chunked'
     _nt_input = 'data/NarrativeTime_A1/converted_no_overlap/test_18ment'
 
-    _omni_deepseek_out_timeline = 'data/my_data/predictions/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json'
+    # _omni_deepseek_out_timeline = 'data/my_data/predictions/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json'
     main([_omni_input, _tbd_input, _matres_input, _nt_input])
 

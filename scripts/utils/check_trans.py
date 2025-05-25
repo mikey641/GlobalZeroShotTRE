@@ -189,7 +189,6 @@ def count_graph_transitive_discrepancies_6rels(graph, event_ids_dict, dataset_ty
                                 if closure_graph[i][j] != 'IS_INCLUDED':
                                     found = True
 
-
                             elif closure_graph[i][k] == 'BEFORE' and closure_graph[k][j] == 'VAGUE':
                                 if closure_graph[i][j] != 'BEFORE' and closure_graph[i][j] != 'VAGUE' \
                                         and closure_graph[i][j] != 'INCLUDES' and closure_graph[i][j] != 'IS_INCLUDED':

@@ -106,9 +106,9 @@ if __name__ == "__main__":
 
     for i in range(num_of_repetitions):
         if args.selected_file is not None:
-            _output_file = f'data/my_data/prompt/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{i}.json'
+            _output_file = f'data/my_data/prompt/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{i}.json'
         else:
-            _output_file = f'data/my_data/prompt/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{i}.json'
+            _output_file = f'data/my_data/prompt/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{i}.json'
 
         start_time = time.time()
         main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions,

@@ -2,7 +2,7 @@ from collections import namedtuple, Counter
 
 from numpy.ma.extras import average
 
-from scripts.eval.prompt.eval_global_consistency import run_majority_vote_trans_const
+from scripts.eval.prompt.eval_global_consistency import run_majority_vote_trans_const, eval_full_doc
 from scripts.utils.classes.datasets_type import MatresDataset, NarrativeDataset, TBDDataset
 from scripts.utils.io_utils import Event_Rel, read_file
 
@@ -112,14 +112,14 @@ def matres_conversion(orig_ins_list):
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
     _prediction_files = [
-        "data/my_data/prompt/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_0.json",
-        "data/my_data/prompt/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_1.json",
-        "data/my_data/prompt/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_2.json",
-        "data/my_data/prompt/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_3.json",
-        "data/my_data/prompt/new_expr/tbd_DeepSeek-R1_task_description_6res_only_timeline_4.json",
+        "data/my_data/prompt/new_expr/matres/matres_DeepSeek-R1_task_description_4res_only_timeline_0.json",
+        "data/my_data/prompt/new_expr/matres/matres_DeepSeek-R1_task_description_4res_only_timeline_1.json",
+        "data/my_data/prompt/new_expr/matres/matres_DeepSeek-R1_task_description_4res_only_timeline_2.json",
+        "data/my_data/prompt/new_expr/matres/matres_DeepSeek-R1_task_description_4res_only_timeline_3.json",
+        "data/my_data/prompt/new_expr/matres/matres_DeepSeek-R1_task_description_4res_only_timeline_4.json",
     ]
 
-    _dataset_type = TBDDataset()
+    _dataset_type = MatresDataset()
 
     if _dataset_type.get_name() == 'matres':
         _buckets = [10, 15, 20, 25, 30, 100]
@@ -138,7 +138,8 @@ if __name__ == "__main__":
         _new_orig = orig_list_from_keys(doc_bucket, _orig_ins_list)
 
         try:
-            _f1 = run_majority_vote_trans_const(_dataset_type, _test_docs_dict, _prediction_files, _new_orig)
+            _all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _pred_as_dict = run_majority_vote_trans_const(_dataset_type, _test_docs_dict, _prediction_files, _new_orig)
+            _f1 = eval_full_doc(_all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _dataset_type)
             results_bucket[buk_idx].append(_f1)
             print(f"Bucket- {buk_idx}: F1={_f1}, NAs={'NA'}")
         except Exception as e:
