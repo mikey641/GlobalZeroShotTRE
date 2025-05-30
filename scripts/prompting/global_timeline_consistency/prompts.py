@@ -135,3 +135,21 @@ strict graph {
 }
 """
     return desc
+
+
+def task_description_4res_experiment(examples):
+    desc = """
+Given the document below where each event is marked with <eventName(identifier)>, for each pair of events listed below, determine the temporal relationships (before, after, equal, vague) between them. 
+
+Below provided the and explanation of how to solve the task:
+""" + examples + """
+
+Based on the explanation, provide the temporal relationship between the events in the following DOT format:
+
+strict graph {
+"Event1(id)" -- "Event2(id)" [rel=LABEL];
+"Event1(id)" -- "Event3(id)" [rel=LABEL];
+...
+}
+"""
+    return desc

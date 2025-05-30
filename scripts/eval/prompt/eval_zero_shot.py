@@ -74,7 +74,7 @@ def run_eval_sentdiff(data_type, gold_dict_send_diff, consecutive):
 
 
 if __name__ == "__main__":
-    _prediction_file = "data/my_data/zero_shot/new_expr/omni_Llama-3.3-70B-Instruct-Turbo-Free_run_CoT_predictions.jsonl"
+    _prediction_file = "data/my_data/zero_shot/new_expr/omni/omni_Meta-Llama-3-8B-Instruct_run_CoT_predictions.jsonl"
     _data_type = EventFullDataset()
 
     if _prediction_file.endswith(".jsonl"):

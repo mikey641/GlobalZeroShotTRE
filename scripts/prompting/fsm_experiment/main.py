@@ -1,7 +1,10 @@
 import json
 import traceback
 
-from scripts.prompting.fsm_experiment.timeline_solver_v1 import Event_Relations
+from scripts.eval.shared.evaluation import evaluation
+from scripts.prompting.fsm_experiment.agent_obj import GPTAgent
+from scripts.prompting.fsm_experiment.timeline_solver_v1 import Event_Relations, TimelineSolverV1
+from scripts.prompting.fsm_experiment.timeline_solver_v2 import TimelineSolverV2
 from scripts.utils.io_utils import open_input_file
 
 

@@ -108,7 +108,7 @@ def eval_sent_diff(pred_as_dict, orig_ins_list, labels, dataset_type, consecutiv
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/prompt/new_expr/omnitemp/non_deepseek/OmniTemp_Llama-3.3-70B-Instruct-Turbo_task_description_4res_only_timeline_1.json"
+    _prediction_file = "data/my_data/prompt/new_expr/omnitemp/non_deepseek/OmniTemp_Qwen2.5-72B-Instruct-Turbo_task_description_4res_only_timeline_2.json"
     _dataset_type = EventFullDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
@@ -143,6 +143,6 @@ if __name__ == "__main__":
 
     print("\n\n###### Document-wise Evaluation ######")
     for doc_id in _doc_preds:
-        print(f"Document ID: {doc_id}; F1: {_doc_preds[doc_id]}")
+        print(f"DocID: {doc_id}: F1: {_doc_preds[doc_id]}")
 
     print("Done!")
