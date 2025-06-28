@@ -5,6 +5,7 @@ EVENTFULL_DATASET_NAME = "eventfull"
 TBD_DATASET_NAME = "tbd"
 NARRATIVE_DATASET_NAME = "nt"
 NARRATIVE_4RELS_DATASET_NAME = "nt4rels"
+MAVEN_DATASET_NAME = "maven"
 
 
 class DataType(object):
@@ -49,6 +50,7 @@ class EventFullDataset(DataType):
     def __init__(self):
         super().__init__(FourRelsLabels(), EVENTFULL_DATASET_NAME, 'data/bayesian_format/testset_eventfull.xml')
 
+
 class TBDDataset(DataType):
     def __init__(self):
         super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/bayesian_format/testset_tbd.xml')
@@ -59,10 +61,17 @@ class TBDDataset(DataType):
 
 class NarrativeDataset(DataType):
     def __init__(self):
-        super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/bayesian_format/testset_nt.xml')
+        # super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/bayesian_format/testset_nt.xml')
+        super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/bayesian_format/testset_nt_50.xml')
         # super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/testset_consSent_nt.xml')
         # super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/testset_small_size_tbd.xml')
+
 
 class NarrativeDataset4Rels(DataType):
     def __init__(self):
         super().__init__(FourRelsLabels(), NARRATIVE_4RELS_DATASET_NAME, 'data/bayesian_format/testset_nt4rels.xml')
+
+
+class MAVENDataset(DataType):
+    def __init__(self):
+        super().__init__(FourRelsLabels(), MAVEN_DATASET_NAME, 'data/bayesian_format/validset_maven.xml')

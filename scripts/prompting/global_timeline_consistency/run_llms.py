@@ -38,6 +38,9 @@ def main(test_folder, llm_to_use, instructions_func, output_file,
         if selected_file is not None and file1 != selected_file:
             continue
 
+        if not file1.endswith('.json') and not file1.endswith('.jsonl'):
+            continue
+
         print("Processing file:", file1)
 
         count += 1
@@ -79,6 +82,8 @@ if __name__ == "__main__":
         _test_folder = 'data/OmniTemp/test'
     elif args.test_db == "tbd":
         _test_folder = 'data/TimeBank-Dense/test_converted_allpairs_chunked'
+    elif args.test_db == "maven":
+        _test_folder = 'data/MAVEN-ERE/valid_fix'
     else:
         raise ValueError("Invalid test database name.")
 
@@ -90,7 +95,7 @@ if __name__ == "__main__":
         _instructions = task_description_6res_only_timeline_sub_events
     elif args.instruct == 'timeline' and args.test_db in ["nt", "tbd"]:
         _instructions = task_description_6res_only_timeline
-    elif args.instruct == 'timeline' and args.test_db in ["matres", "omni"]:
+    elif args.instruct == 'timeline' and args.test_db in ["matres", "omni", "maven"]:
         _instructions = task_description_4res_only_timeline
     else:
         raise ValueError("Invalid instruction type.")

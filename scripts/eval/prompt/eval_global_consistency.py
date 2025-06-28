@@ -7,7 +7,8 @@ from scripts.eval.prompt.run_eval_prompting import convert_format
 from scripts.eval.shared.evaluation import evaluation
 from scripts.eval.shared.gurobi_optimizer_entrop import run_transitive_constraints
 from scripts.utils.classes.datasets_type import MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset, NarrativeDataset, TBDDataset
+    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset, NarrativeDataset, TBDDataset, MAVENDataset, \
+    MAVEN_DATASET_NAME
 from scripts.utils.io_utils import read_pred_dot_file, read_file
 
 
@@ -60,7 +61,7 @@ def run_majority_vote_trans_const(dataset_type, test_docs_dict, prediction_files
         pred_as_dict, _ = read_pred_dot_file(file_, test_docs_dict, dataset_type)
         for key in all_posibile_keys:
             if key not in aggregate_pred_as_dict:
-                if dataset_type.get_name() in [EVENTFULL_DATASET_NAME, MATRES_DATASET_NAME, NARRATIVE_4RELS_DATASET_NAME]:
+                if dataset_type.get_name() in [EVENTFULL_DATASET_NAME, MATRES_DATASET_NAME, NARRATIVE_4RELS_DATASET_NAME, MAVEN_DATASET_NAME]:
                     aggregate_pred_as_dict[key] = np.array([0.0, 0.0, 0.0, 0.0])
                 else:
                     aggregate_pred_as_dict[key] = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
@@ -158,14 +159,14 @@ def gen_prediction_for_transitive(order_list, predictions, labels):
 
 if __name__ == "__main__":
     _prediction_files = [
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_1.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_2.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_3.json",
-        "data/my_data/prompt/new_expr/omnitemp/omni_DeepSeek-R1_task_description_4res_only_timeline_4.json",
+        "data/my_data/prompt/new_expr/maven_gpt-4o_task_description_4res_only_timeline_0.json",
+        "data/my_data/prompt/new_expr/maven_gpt-4o_task_description_4res_only_timeline_1.json",
+        "data/my_data/prompt/new_expr/maven_gpt-4o_task_description_4res_only_timeline_2.json",
+        "data/my_data/prompt/new_expr/maven_gpt-4o_task_description_4res_only_timeline_3.json",
+        "data/my_data/prompt/new_expr/maven_gpt-4o_task_description_4res_only_timeline_4.json",
     ]
 
-    _dataset_type = EventFullDataset()
+    _dataset_type = MAVENDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'

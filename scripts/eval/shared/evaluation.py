@@ -8,7 +8,7 @@ from scripts.eval.dataset.utils import parse_DOT
 from scripts.eval.model.compute_metrics import calculate
 from scripts.utils.check_trans import count_discrepancies
 from scripts.utils.classes.datasets_type import EVENTFULL_DATASET_NAME, MATRES_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, TBD_DATASET_NAME, NARRATIVE_DATASET_NAME
+    NARRATIVE_4RELS_DATASET_NAME, TBD_DATASET_NAME, NARRATIVE_DATASET_NAME, MAVEN_DATASET_NAME
 
 
 def confusion2prf(confusion):
@@ -42,7 +42,7 @@ def evaluation(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_typ
     report, cl_report, f1 = None, None, -1
     acc = accuracy_score(all_golds, all_preds)
     confu = confusion_matrix(all_golds, all_preds)
-    if dataset_name in [MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, NARRATIVE_4RELS_DATASET_NAME]:
+    if dataset_name in [MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, NARRATIVE_4RELS_DATASET_NAME, MAVEN_DATASET_NAME]:
         cl_report = classification_report(all_golds, all_preds, digits=4)
         prec, rec, f1 = confusion2prf(confu)
         micro_f1 = f1_score(all_golds, all_preds, average='micro')
