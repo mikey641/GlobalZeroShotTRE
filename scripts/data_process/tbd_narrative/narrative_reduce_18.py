@@ -4,7 +4,7 @@ import random
 from collections import Counter
 
 
-def main(narrative_folder, narrative_folder_no_overlap):
+def main(narrative_folder, narrative_folder_no_overlap, num_of_mentions):
     # read all files in folder
     sanity = list()
     for nar_file in os.listdir(narrative_folder):
@@ -14,8 +14,8 @@ def main(narrative_folder, narrative_folder_no_overlap):
             all_mentions = data['allMentions']
             all_ids = [ment['m_id'] for ment in all_mentions]
             ment_sample_ids = all_ids
-            if len(all_ids) > 18:
-                ment_sample_ids = random.sample(all_ids, 18)
+            if len(all_ids) > num_of_mentions:
+                ment_sample_ids = random.sample(all_ids, num_of_mentions)
 
             all_new_ment = [ment for ment in all_mentions if ment['m_id'] in ment_sample_ids]
 
@@ -30,6 +30,7 @@ def main(narrative_folder, narrative_folder_no_overlap):
 
 
 if __name__ == '__main__':
-    _narrative_folder = "data/NarrativeTime/converted_no_overlap_include/test"
-    _narrative_folder_no_overlap = "data/NarrativeTime/converted_no_overlap_include/test_18ment"
-    main(_narrative_folder, _narrative_folder_no_overlap)
+    _num_of_mentions = 50
+    _narrative_folder = "data/NarrativeTime_A1/converted_no_overlap/test"
+    _narrative_folder_no_overlap = f'data/NarrativeTime_A1/converted_no_overlap/test_{_num_of_mentions}ment'
+    main(_narrative_folder, _narrative_folder_no_overlap, _num_of_mentions)

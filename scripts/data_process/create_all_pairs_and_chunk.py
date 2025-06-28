@@ -94,9 +94,9 @@ def ret_only_relevant_mentions(mentions, pairs):
 
 
 if __name__ == "__main__":
-    _max_pairs_in_chunk = 60
-    _test_folder = 'data/NarrativeTime_A1/converted_no_overlap/test_18ment'
-    _test_out_folder = f'data/NarrativeTime_A1/converted_no_overlap/test_18ment_chucked_{_max_pairs_in_chunk}'
+    _max_pairs_in_chunk = 200
+    _test_folder = 'data/NarrativeTime_A1/converted_no_overlap/test_50ment'
+    _test_out_folder = f'data/NarrativeTime_A1/converted_no_overlap/test_50ment_chucked_{_max_pairs_in_chunk}'
     for i, file1 in enumerate(tqdm(os.listdir(_test_folder))):
         file_name, file_extension = os.path.splitext(file1)
 

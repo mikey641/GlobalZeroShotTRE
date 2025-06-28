@@ -1,6 +1,7 @@
 import os
 
 import tiktoken
+import transformers
 from tqdm import tqdm
 
 from scripts.prompting.global_timeline_consistency.prompts import task_description_6res_only_global, \
@@ -16,7 +17,10 @@ def main(output_folder):
     llms_names = ['DeepSeek']
     cost_per_1m_out_token = [7/1000000.0]
 
-    enc = tiktoken.encoding_for_model("gpt-4o")
+    chat_tokenizer_dir = '/Users/aloneirew/workspace/TemporalRelExperiments/scripts/utils/deepseek_v3_tokenizer'
+
+    # enc = tiktoken.encoding_for_model("gpt-4o")
+    enc = transformers.AutoTokenizer.from_pretrained(chat_tokenizer_dir, trust_remote_code=True)
     input_tokens = 0
     for i, file1 in enumerate(sorted(os.listdir(output_folder))):
         if file1.endswith('.json'):
@@ -40,6 +44,6 @@ def main(output_folder):
 
 
 if __name__ == "__main__":
-    _output_folder = 'data/my_data/zero_shot/log'
+    _output_folder = 'data/my_data/prompt/new_expr/matres'
     main(_output_folder)
 
