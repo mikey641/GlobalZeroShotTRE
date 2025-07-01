@@ -1,6 +1,6 @@
 from scripts.eval.shared.evaluation import evaluation
 from scripts.utils.classes.datasets_type import NarrativeDataset, MATRES_DATASET_NAME, EventFullDataset, MatresDataset, \
-    TBDDataset
+    TBDDataset, MavenDataset, TcrHebDataset
 from scripts.utils.io_utils import Event_Rel, read_file, read_pred_dot_file
 
 
@@ -108,8 +108,8 @@ def eval_sent_diff(pred_as_dict, orig_ins_list, labels, dataset_type, consecutiv
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "data/my_data/prompt/new_expr/omnitemp/non_deepseek/OmniTemp_Qwen2.5-72B-Instruct-Turbo_task_description_4res_only_timeline_2.json"
-    _dataset_type = EventFullDataset()
+    _prediction_file = "data/my_data/prompt/new_expr/tcrheb_gpt-4o_task_description_4res_only_timeline_0.json"
+    _dataset_type = TcrHebDataset()
 
     _test_docs_dict, _orig_ins_list = read_file(_dataset_type.get_test_file())
     _labels = _dataset_type.get_label_set()
@@ -120,16 +120,16 @@ if __name__ == "__main__":
 
     _pred_as_dict, _ = read_pred_dot_file(_prediction_file, _test_docs_dict, _dataset_type)
 
-    _doc_preds = doc_wise_eval(_pred_as_dict, _orig_ins_list, _labels, _dataset_type)
+    # _doc_preds = doc_wise_eval(_pred_as_dict, _orig_ins_list, _labels, _dataset_type)
 
     _all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _count_nas = convert_format(_orig_ins_list, _pred_as_dict, _labels, debug=False)
 
     print('\n\n####### Full Document Evaluation ####')
     f1_full = evaluation(_all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _dataset_type)
     print('\n\n###### Evaluation Results Consecutive Sentences ########')
-    f1_consec = eval_sent_diff(_pred_as_dict, _orig_ins_list, _labels, _dataset_type, consecutive=True)
+    # f1_consec = eval_sent_diff(_pred_as_dict, _orig_ins_list, _labels, _dataset_type, consecutive=True)
     print('\n\n###### Evaluation Results Non-Consecutive Sentences ########')
-    f1_non_consec = eval_sent_diff(_pred_as_dict, _orig_ins_list, _labels, _dataset_type, consecutive=False)
+    # f1_non_consec = eval_sent_diff(_pred_as_dict, _orig_ins_list, _labels, _dataset_type, consecutive=False)
 
     print('\n\n###### Summary ######')
     print(f"Number of NAs: {_count_nas}")
@@ -138,11 +138,11 @@ if __name__ == "__main__":
     print(f"Predictions dist: {dict(count_pred)}")
     print(f"Gold dist: {dict(count_gold)}")
     print(f"Full F1: {f1_full}")
-    print(f"Consecutive F1: {f1_consec}")
-    print(f"Non-Consecutive F1: {f1_non_consec}")
+    # print(f"Consecutive F1: {f1_consec}")
+    # print(f"Non-Consecutive F1: {f1_non_consec}")
 
-    print("\n\n###### Document-wise Evaluation ######")
-    for doc_id in _doc_preds:
-        print(f"DocID: {doc_id}: F1: {_doc_preds[doc_id]}")
+    # print("\n\n###### Document-wise Evaluation ######")
+    # for doc_id in _doc_preds:
+    #     print(f"DocID: {doc_id}: F1: {_doc_preds[doc_id]}")
 
     print("Done!")

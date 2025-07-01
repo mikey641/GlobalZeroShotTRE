@@ -6,6 +6,7 @@ TBD_DATASET_NAME = "tbd"
 NARRATIVE_DATASET_NAME = "nt"
 NARRATIVE_4RELS_DATASET_NAME = "nt4rels"
 MAVEN_DATASET_NAME = "maven"
+TCR_HEB_DATASET_NAME = "tcr_heb"
 
 
 class DataType(object):
@@ -72,6 +73,11 @@ class NarrativeDataset4Rels(DataType):
         super().__init__(FourRelsLabels(), NARRATIVE_4RELS_DATASET_NAME, 'data/bayesian_format/testset_nt4rels.xml')
 
 
-class MAVENDataset(DataType):
+class MavenDataset(DataType):
     def __init__(self):
         super().__init__(FourRelsLabels(), MAVEN_DATASET_NAME, 'data/bayesian_format/validset_maven.xml')
+
+
+class TcrHebDataset(DataType):
+    def __init__(self):
+        super().__init__(FourRelsLabels(), TCR_HEB_DATASET_NAME, 'data/bayesian_format/testset_tcrheb.xml')

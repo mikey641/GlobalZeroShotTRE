@@ -7,7 +7,7 @@ from scripts.eval.prompt.run_eval_prompting import convert_format
 from scripts.eval.shared.evaluation import evaluation
 from scripts.eval.shared.gurobi_optimizer_entrop import run_transitive_constraints
 from scripts.utils.classes.datasets_type import MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset, NarrativeDataset, TBDDataset, MAVENDataset, \
+    NARRATIVE_4RELS_DATASET_NAME, MatresDataset, EventFullDataset, NarrativeDataset, TBDDataset, MavenDataset, \
     MAVEN_DATASET_NAME
 from scripts.utils.io_utils import read_pred_dot_file, read_file
 
@@ -166,7 +166,7 @@ if __name__ == "__main__":
         "data/my_data/prompt/new_expr/maven_gpt-4o_task_description_4res_only_timeline_4.json",
     ]
 
-    _dataset_type = MAVENDataset()
+    _dataset_type = MavenDataset()
 
     _output_np_file = 'llms/voting/delete.npy'
     _output_json_file = 'llms/voting/delete.json'

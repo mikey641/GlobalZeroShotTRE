@@ -83,7 +83,9 @@ if __name__ == "__main__":
     elif args.test_db == "tbd":
         _test_folder = 'data/TimeBank-Dense/test_converted_allpairs_chunked'
     elif args.test_db == "maven":
-        _test_folder = 'data/MAVEN-ERE/valid_fix'
+        _test_folder = 'data/MAVEN-ERE/valid'
+    elif args.test_db == "tcrheb":
+        _test_folder = 'data/TRC-Heb/converted'
     else:
         raise ValueError("Invalid test database name.")
 
@@ -95,7 +97,7 @@ if __name__ == "__main__":
         _instructions = task_description_6res_only_timeline_sub_events
     elif args.instruct == 'timeline' and args.test_db in ["nt", "tbd"]:
         _instructions = task_description_6res_only_timeline
-    elif args.instruct == 'timeline' and args.test_db in ["matres", "omni", "maven"]:
+    elif args.instruct == 'timeline' and args.test_db in ["matres", "omni", "maven", 'tcrheb']:
         _instructions = task_description_4res_only_timeline
     else:
         raise ValueError("Invalid instruction type.")
