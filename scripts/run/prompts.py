@@ -1,4 +1,4 @@
-def task_description_4res_only_global(examples):
+def task_description_4res_only_global():
     desc = """
 Given the document below where each event is marked with <eventName(identifier)>, for each pair of events listed below, determine the temporal relationships (before, after, equal, vague) between them. 
 Answer in the following DOT format:
@@ -12,7 +12,7 @@ strict graph {
     return desc
 
 
-def task_description_4res_only_timeline(examples):
+def task_description_4res_only_timeline():
     desc = """
 Given the document below where each event is marked with <eventName(identifier)>, for each pair of events listed below, determine the temporal relationships (before, after, equal, vague) between them. 
 
@@ -31,7 +31,7 @@ strict graph {
     return desc
 
 
-def task_description_6res_only_global(examples):
+def task_description_6res_only_global():
     desc = """
 Given the document below where each event is marked with <eventName(identifier)>, for each pair of events listed below, determine the temporal relationships (before, after, equal, includes, is_included, vague) between them. 
 Answer in the following DOT format:
@@ -45,7 +45,7 @@ strict graph {
     return desc
 
 
-def task_description_6res_only_timeline(examples):
+def task_description_6res_only_timeline():
     desc = """
 Given the document below where each event is marked with <eventName(identifier)>, for each pair of events listed below, determine the temporal relationships (before, after, equal, includes, is_included, vague) between them. 
 

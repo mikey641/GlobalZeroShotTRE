@@ -5,7 +5,7 @@ import time
 import argparse
 from tqdm import tqdm
 
-from scripts.prompting.prompts import task_description_6res_only_global, task_description_4res_only_global, \
+from scripts.run.prompts import task_description_6res_only_global, task_description_4res_only_global, \
     task_description_6res_only_timeline, task_description_4res_only_timeline
 from scripts.utils.io_utils import open_input_file
 from scripts.utils.llms_definitions import TogetherModel, GPTModel, GeminiModel
@@ -26,14 +26,11 @@ def get_complete_prompt(data, instructions_func, gen_pairs):
 
 
 def main(test_folder, llm_to_use, instructions_func, output_file,
-         number_of_pred, selected_file, gen_pairs=True):
+         selected_file, gen_pairs=True):
     # load json file
     predictions = dict()
     count = 0
     for i, file1 in enumerate(tqdm(os.listdir(test_folder))):
-        if count == number_of_pred:
-            break
-
         if selected_file is not None and file1 != selected_file:
             continue
 
@@ -59,7 +56,6 @@ def main(test_folder, llm_to_use, instructions_func, output_file,
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="run llm on test data")
     parser.add_argument("--test_db", help="The test database name (nt, matres, omni, tbd)", type=str, required=True)
-    parser.add_argument("--num_or_pred", help="The number of predictions to make (default all docs)", type=int)
     parser.add_argument("--instruct", help="Should be global/timeline", type=str, required=True)
     parser.add_argument("--api", help="Should be together/gpt/gemini", type=str, required=True)
     parser.add_argument("--model_name", help="the model to use", type=str, required=True)
@@ -69,18 +65,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     print(vars(args))
 
-    _num_of_pred = args.num_or_pred
     num_of_repetitions = args.repeat
     _selected_file = args.selected_file
 
     if args.test_db == "nt":
-        _test_folder = 'data/NarrativeTime_A1/converted_no_overlap/test_18ment'
+        _test_folder = 'data/NT_6/test_18ment'
     elif args.test_db == "matres":
-        _test_folder = 'data/MATRES/in_my_format/test_all_pairs_chunked'
+        _test_folder = 'data/MATRES/test_all_pairs_chunked'
     elif args.test_db == "omni":
         _test_folder = 'data/OmniTemp/test'
     elif args.test_db == "tbd":
-        _test_folder = 'data/TimeBank-Dense/test_converted_allpairs_chunked'
+        _test_folder = 'data/TBD/test_converted_allpairs_chunked'
     elif args.test_db == "maven":
         _test_folder = 'data/MAVEN-ERE/valid'
     else:
@@ -106,15 +101,15 @@ if __name__ == "__main__":
     else:
         raise ValueError("Invalid API type.")
 
-    for i in range(num_of_repetitions):
+    for _i in range(num_of_repetitions):
         if args.selected_file is not None:
-            _output_file = f'data/my_data/prompt/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{i}.json'
+            _output_file = f'output/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{_i}.json'
         else:
-            _output_file = f'data/my_data/prompt/new_expr/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{i}.json'
+            _output_file = f'output/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_i}.json'
 
         start_time = time.time()
         main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions,
-             output_file=_output_file, selected_file=_selected_file, number_of_pred=_num_of_pred)
+             output_file=_output_file, selected_file=_selected_file)
         end_time = time.time()
         execution_time = end_time - start_time
         print(f"Execution time: {execution_time:.4f} seconds")

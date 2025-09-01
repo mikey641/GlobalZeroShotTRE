@@ -62,6 +62,20 @@ def load_xml(xml_element):
                     length=length, event_ix=event_ix, verbs=verbs, sentdiff=sentdiff)
 
 
+def load_golds(test_folder, labels):
+    docs_dict = dict()
+    all_gold_files = set()
+    for file in os.listdir(test_folder):
+        if file.endswith(".json"):
+            all_gold_files.add(file)
+            load_file = open_input_file(os.path.join(test_folder, file))
+            all_pairs = load_file['allPairs']
+            for pair in all_pairs:
+                docs_dict[f"{file}#{pair['_firstId']}#{pair['_secondId']}"] = labels[pair['_relation'].upper()]
+
+    return docs_dict, all_gold_files
+
+
 def read_file(file_path):
     tree = ET.parse(file_path)
     root = tree.getroot()

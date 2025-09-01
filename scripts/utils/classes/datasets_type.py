@@ -1,12 +1,10 @@
 from scripts.utils.classes.label_sets import FourRelsLabels, SixRelsLabels
 
 MATRES_DATASET_NAME = "matres"
-EVENTFULL_DATASET_NAME = "eventfull"
+OMNITEMP_DATASET_NAME = "omni"
 TBD_DATASET_NAME = "tbd"
 NARRATIVE_DATASET_NAME = "nt"
-NARRATIVE_4RELS_DATASET_NAME = "nt4rels"
 MAVEN_DATASET_NAME = "maven"
-TCR_HEB_DATASET_NAME = "tcr_heb"
 
 
 class DataType(object):
@@ -28,56 +26,36 @@ class DataType(object):
     def get_dataset_by_name(name):
         if name == MATRES_DATASET_NAME:
             return MatresDataset()
-        elif name == EVENTFULL_DATASET_NAME:
-            return EventFullDataset()
+        elif name == OMNITEMP_DATASET_NAME:
+            return OmniTempDataset()
         elif name == TBD_DATASET_NAME:
             return TBDDataset()
         elif name == NARRATIVE_DATASET_NAME:
             return NarrativeDataset()
-        elif name == NARRATIVE_4RELS_DATASET_NAME:
-            return NarrativeDataset4Rels()
         else:
             raise ValueError(f"Unknown dataset name: {name}")
 
 
 class MatresDataset(DataType):
     def __init__(self):
-        super().__init__(FourRelsLabels(), MATRES_DATASET_NAME, 'data/bayesian_format/testset-temprel.xml')
-        # super().__init__(FourRelsLabels(), MATRES_DATASET_NAME, 'data/testset_20events_matres.xml')
-        # super().__init__(FourRelsLabels(), MATRES_DATASET_NAME, 'data/testset_20more_matres.xml')
+        super().__init__(FourRelsLabels(), MATRES_DATASET_NAME, 'data/MATRES/test')
 
 
-class EventFullDataset(DataType):
+class OmniTempDataset(DataType):
     def __init__(self):
-        super().__init__(FourRelsLabels(), EVENTFULL_DATASET_NAME, 'data/bayesian_format/testset_eventfull.xml')
+        super().__init__(FourRelsLabels(), OMNITEMP_DATASET_NAME, 'data/OmniTemp/test')
 
 
 class TBDDataset(DataType):
     def __init__(self):
-        super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/bayesian_format/testset_tbd.xml')
-        # super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/testset_AllPairs_tbd.xml')
-        # super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/testset_small_size_tbd.xml')
-        # super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/testset_30more_tbd.xml')
+        super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/TBD/test')
 
 
 class NarrativeDataset(DataType):
     def __init__(self):
-        # super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/bayesian_format/testset_nt.xml')
-        super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/bayesian_format/testset_nt_50.xml')
-        # super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/testset_consSent_nt.xml')
-        # super().__init__(SixRelsLabels(), TBD_DATASET_NAME, 'data/testset_small_size_tbd.xml')
-
-
-class NarrativeDataset4Rels(DataType):
-    def __init__(self):
-        super().__init__(FourRelsLabels(), NARRATIVE_4RELS_DATASET_NAME, 'data/bayesian_format/testset_nt4rels.xml')
+        super().__init__(SixRelsLabels(), NARRATIVE_DATASET_NAME, 'data/NT_6/test_18ment')
 
 
 class MavenDataset(DataType):
     def __init__(self):
         super().__init__(FourRelsLabels(), MAVEN_DATASET_NAME, 'data/bayesian_format/validset_maven.xml')
-
-
-class TcrHebDataset(DataType):
-    def __init__(self):
-        super().__init__(FourRelsLabels(), TCR_HEB_DATASET_NAME, 'data/bayesian_format/testset_tcrheb.xml')
