@@ -1,0 +1,6 @@
+tqdm
+numpy
+scikit-learn
+google-generativeai
+openai
+together

@@ -1,8 +1,6 @@
-import json
-
 import numpy as np
 
-from scripts.utils.classes.datasets_type import TBDDataset, DataType
+from scripts.utils.classes.datasets_type import DataType
 from scripts.utils.classes.gurobi_optimizer import GurobiOptimizer
 
 

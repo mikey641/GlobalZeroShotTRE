@@ -1,12 +1,9 @@
-import json
-from typing import final
-
 import numpy as np
 
-from scripts.eval.prompt.run_eval_prompting import convert_format
+from scripts.eval.run_eval_prompting import convert_format
 from scripts.eval.shared.evaluation import evaluation
-from scripts.utils.classes.datasets_type import EventFullDataset, MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
-    NARRATIVE_4RELS_DATASET_NAME, NarrativeDataset, MatresDataset, TBDDataset
+from scripts.utils.classes.datasets_type import MATRES_DATASET_NAME, EVENTFULL_DATASET_NAME, \
+    NARRATIVE_4RELS_DATASET_NAME, TBDDataset
 from scripts.utils.io_utils import read_file, read_pred_dot_file
 
 

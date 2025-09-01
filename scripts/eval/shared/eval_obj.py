@@ -1,5 +1,3 @@
-import numpy as np
-
 from scripts.utils.transitive_algos import triplets_to_numpy_graph, transitive_closure_with_relations, \
     transitive_reduction_with_relations
 

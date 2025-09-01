@@ -5,9 +5,8 @@ import time
 import argparse
 from tqdm import tqdm
 
-from scripts.prompting.global_timeline_consistency.prompts import task_description_6res_only_global, \
-    task_description_4res_only_global, task_description_6res_only_timeline, task_description_4res_only_timeline, \
-    task_description_6res_only_timeline_sub_events
+from scripts.prompting.prompts import task_description_6res_only_global, task_description_4res_only_global, \
+    task_description_6res_only_timeline, task_description_4res_only_timeline
 from scripts.utils.io_utils import open_input_file
 from scripts.utils.llms_definitions import TogetherModel, GPTModel, GeminiModel
 from scripts.utils.omni_format_utils import get_input_text, get_all_pairs
@@ -15,7 +14,7 @@ from scripts.utils.omni_format_utils import get_input_text, get_all_pairs
 
 def get_complete_prompt(data, instructions_func, gen_pairs):
     text, all_pairs = get_input_text(data)
-    final_instructions = instructions_func(None)
+    final_instructions = instructions_func()
     task_desc = final_instructions + '\n' + text
     if gen_pairs:
         all_mentions = data['allMentions']
@@ -84,8 +83,6 @@ if __name__ == "__main__":
         _test_folder = 'data/TimeBank-Dense/test_converted_allpairs_chunked'
     elif args.test_db == "maven":
         _test_folder = 'data/MAVEN-ERE/valid'
-    elif args.test_db == "tcrheb":
-        _test_folder = 'data/TRC-Heb/converted'
     else:
         raise ValueError("Invalid test database name.")
 
@@ -93,8 +90,6 @@ if __name__ == "__main__":
         _instructions = task_description_6res_only_global
     elif args.instruct == 'global' and args.test_db in ["matres", "omni"]:
         _instructions = task_description_4res_only_global
-    elif args.instruct == 'phases' and args.test_db in ["nt", "tbd"]:
-        _instructions = task_description_6res_only_timeline_sub_events
     elif args.instruct == 'timeline' and args.test_db in ["nt", "tbd"]:
         _instructions = task_description_6res_only_timeline
     elif args.instruct == 'timeline' and args.test_db in ["matres", "omni", "maven", 'tcrheb']:

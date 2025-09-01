@@ -1,9 +1,27 @@
-## Data Folders
-* DOT_format -- My data (EventFull) and MATRES in DOT format
-* DOT_format/trans_reduced -- The data after running the reduced transitive closure algorithm
-* EventFullTrainExports -- The data in the original format (Splits and all)
-* MATRES -- The original MATRES data
-* MATRES/in_my_format -- The MATRES data in my format
+This repository contains the code and data used in the experiments for the paper "[Beyond Pairwise: Global Zero-shot Temporal Graph Generation](https://arxiv.org/abs/2502.11114)".
+
+## Requirements
+- Python 3.10
+- Install the required packages using pip:
+```bash
+pip install -r requirements.txt
+```
+
+## Data 
+Here we list the sources of dataset we used in our experiments:
+1) OmniTemp: https://github.com/AlonEirew/event-relation-resources/tree/main/tre_datasets/OmniTemp
+2) MATRES: https://github.com/AlonEirew/event-relation-resources/tree/main/tre_datasets/MATRES/_in_OmniTemp_format
+3) TBD: https://github.com/AlonEirew/event-relation-resources/tree/main/tre_datasets/TimeBankDense/_In_OmniTemp_format
+4) NT_6: https://github.com/AlonEirew/event-relation-resources/tree/main/tre_datasets/NarrativeTime/_In_OmniTemp_format/exclude_overlap_rel_a1
+   - Download the train and test_18ment folders
+
+Download the dataset folders and place them in the `data` directory as follows:
+```data/
+    OmniTemp/
+    MATRES/
+    TBD/
+    NT-6/
+```
 
 ## Experiment Data
 * my_data/batch_req -- The files generated for the OpenAI batch request API

@@ -2,7 +2,6 @@ import os
 from typing import List
 
 import google.generativeai as genai
-from google import genai as gog_genai
 from openai import OpenAI
 from together import Together
 
@@ -46,21 +45,6 @@ class GeminiModel(GenLLM):
 
     def run_model_chat(self, prompt: str):
         raise TypeError("Gemini model does not support chat mode, use GeminiChatModel instead")
-
-
-class GeminiChatModel(GenLLM):
-    def __init__(self, model_name: str):
-        super().__init__(model_name)
-        print("Using Gemini model-", model_name)
-        self.client = gog_genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
-        self.model = self.client.chats.create(model="gemini-2.0-flash")
-
-    def run_model_chat(self, prompt: str):
-        response = self.model.send_message(prompt)
-        return response.text
-
-    def clear(self):
-        self.model = self.client.chats.create(model="gemini-2.0-flash")
 
 
 class TogetherModel(GenLLM):
