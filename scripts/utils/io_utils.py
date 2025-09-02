@@ -202,8 +202,6 @@ def read_pred_dot_file(pred_file_path, test_docs_dict, data_type: DataType):
         predictions = json.load(f)
 
     labels = data_type.get_label_set()
-    if data_type.get_name() == MATRES_DATASET_NAME:
-        return read_pred_dot_file_matres(predictions, labels)
 
     final_preds = dict()
     for pred_file in predictions.keys():

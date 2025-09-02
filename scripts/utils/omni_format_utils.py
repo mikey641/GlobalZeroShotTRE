@@ -13,13 +13,14 @@ def mark_events_in_text(tokens, all_mentions):
 
 
 def filter_non_events(events):
-    return [e for e in events if e['axisType'] == 'main']
+    return [e for e in events if 'axisType' in e and e['axisType'] == 'main']
 
 
 def get_input_text(data):
     if data is not None:
         tokens = data['tokens']
-        all_mentions = filter_non_events(data['allMentions'])
+        # all_mentions = filter_non_events(data['allMentions'])
+        all_mentions = data['allMentions']
         all_mentions.sort(key=lambda x: x['tokens_ids'][0])
         all_pairs = data['allPairs']
         text = mark_events_in_text(tokens, all_mentions)

@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import time
 
 import argparse
@@ -55,12 +56,13 @@ def main(test_folder, llm_to_use, instructions_func, output_file,
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="run llm on test data")
-    parser.add_argument("--test_db", help="The test database name (nt, matres, omni, tbd)", type=str, required=True)
+    parser.add_argument("--test_ds", help="The test dataset name (nt, matres, omni, tbd)", type=str, required=True)
     parser.add_argument("--instruct", help="Should be global/timeline", type=str, required=True)
     parser.add_argument("--api", help="Should be together/gpt/gemini", type=str, required=True)
     parser.add_argument("--model_name", help="the model to use", type=str, required=True)
     parser.add_argument("--repeat", help="Times to repeat the experiment", type=int, required=True)
     parser.add_argument("--selected_file", help="To only run a single specific file", type=str, required=False)
+    parser.add_argument("--output_folder", help="Where to save the outputs", type=str, required=False)
 
     args = parser.parse_args()
     print(vars(args))
@@ -68,26 +70,26 @@ if __name__ == "__main__":
     num_of_repetitions = args.repeat
     _selected_file = args.selected_file
 
-    if args.test_db == "nt":
+    if args.test_ds == "nt":
         _test_folder = 'data/NT_6/test_18ment'
-    elif args.test_db == "matres":
+    elif args.test_ds == "matres":
         _test_folder = 'data/MATRES/test_all_pairs_chunked'
-    elif args.test_db == "omni":
+    elif args.test_ds == "omni":
         _test_folder = 'data/OmniTemp/test'
-    elif args.test_db == "tbd":
+    elif args.test_ds == "tbd":
         _test_folder = 'data/TBD/test_converted_allpairs_chunked'
-    elif args.test_db == "maven":
+    elif args.test_ds == "maven":
         _test_folder = 'data/MAVEN-ERE/valid'
     else:
         raise ValueError("Invalid test database name.")
 
-    if args.instruct == 'global' and args.test_db in ["nt", "tbd"]:
+    if args.instruct == 'global' and args.test_ds in ["nt", "tbd"]:
         _instructions = task_description_6res_only_global
-    elif args.instruct == 'global' and args.test_db in ["matres", "omni"]:
+    elif args.instruct == 'global' and args.test_ds in ["matres", "omni"]:
         _instructions = task_description_4res_only_global
-    elif args.instruct == 'timeline' and args.test_db in ["nt", "tbd"]:
+    elif args.instruct == 'timeline' and args.test_ds in ["nt", "tbd"]:
         _instructions = task_description_6res_only_timeline
-    elif args.instruct == 'timeline' and args.test_db in ["matres", "omni", "maven", 'tcrheb']:
+    elif args.instruct == 'timeline' and args.test_ds in ["matres", "omni", "maven",]:
         _instructions = task_description_4res_only_timeline
     else:
         raise ValueError("Invalid instruction type.")
@@ -101,11 +103,18 @@ if __name__ == "__main__":
     else:
         raise ValueError("Invalid API type.")
 
+    if os.path.exists(args.output_folder):
+        print("Experiment folder already exists. Exiting...")
+        sys.exit(0)
+    else:
+        os.makedirs(args.output_folder)
+        print(f"Created folder: {args.output_folder}")
+
     for _i in range(num_of_repetitions):
         if args.selected_file is not None:
-            _output_file = f'output/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{_i}.json'
+            _output_file = f'{args.output_folder}/{args.test_ds}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_selected_file}_{_i}.json'
         else:
-            _output_file = f'output/{args.test_db}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_i}.json'
+            _output_file = f'{args.output_folder}/{args.test_ds}_{_llm_to_use.get_model_name()}_{_instructions.__name__}_{_i}.json'
 
         start_time = time.time()
         main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions,

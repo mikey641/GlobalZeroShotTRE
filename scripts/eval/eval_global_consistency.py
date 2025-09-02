@@ -1,3 +1,5 @@
+import argparse
+import os
 import time
 from itertools import permutations
 
@@ -7,7 +9,7 @@ from scripts.eval.run_eval_prompting import convert_format
 from scripts.eval.shared.evaluation import evaluation
 from scripts.eval.shared.gurobi_optimizer_entrop import run_transitive_constraints
 from scripts.utils.classes.datasets_type import MATRES_DATASET_NAME, OMNITEMP_DATASET_NAME, MavenDataset, \
-    MAVEN_DATASET_NAME, OmniTempDataset
+    MAVEN_DATASET_NAME, OmniTempDataset, NarrativeDataset, MatresDataset, TBDDataset
 from scripts.utils.io_utils import read_pred_dot_file, load_golds
 
 
@@ -108,18 +110,31 @@ def eval_full_doc(all_golds, all_preds, gold_for_trans, pred_for_trans, dataset_
 
 
 if __name__ == "__main__":
-    _prediction_files = [
-        "output/omni/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_1.json",
-        "output/omni/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_2.json",
-        "output/omni/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_3.json",
-        "output/omni/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_4.json",
-        "output/omni/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_5.json",
-    ]
+    parser = argparse.ArgumentParser(description="run llm on test data")
+    parser.add_argument("--test_ds", help="The test database name (nt, matres, omni, tbd)", type=str, required=True)
+    parser.add_argument("--test_folder", help="Test folder, should only contain the files to consider", type=str, required=True)
 
-    _dataset_type = OmniTempDataset()
+    args = parser.parse_args()
+    print(vars(args))
 
-    _output_np_file = 'llms/voting/delete.npy'
-    _output_json_file = 'llms/voting/delete.json'
+    _test_folder = args.test_folder
+    _test_ds = args.test_ds
+
+    if args.test_ds == "nt":
+        _dataset_type = NarrativeDataset()
+    elif args.test_ds == "matres":
+        _dataset_type = MatresDataset()
+    elif args.test_ds == "omni":
+        _dataset_type = OmniTempDataset()
+    elif args.test_ds == "tbd":
+        _dataset_type = TBDDataset()
+    elif args.test_ds == "maven":
+        _dataset_type = MavenDataset()
+    else:
+        raise ValueError("Invalid test database name.")
+
+    _prediction_files = [f"{_test_folder}/{file_}" for file_ in os.listdir(args.test_folder) if file_.endswith('.json')]
+
     _test_as_dict, _all_gold_files = load_golds(_dataset_type.get_test_file(), _dataset_type.get_label_set())
 
     start_time = time.time()
