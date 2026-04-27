@@ -38,7 +38,7 @@ class DataType(object):
 
 class MatresDataset(DataType):
     def __init__(self):
-        super().__init__(FourRelsLabels(), MATRES_DATASET_NAME, 'data/MATRES/test')
+        super().__init__(FourRelsLabels(), MATRES_DATASET_NAME, 'data/MATRES/_in_OmniTemp_format/test')
 
 
 class OmniTempDataset(DataType):

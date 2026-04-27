@@ -13,21 +13,22 @@ from scripts.utils.llms_definitions import TogetherModel, GPTModel, GeminiModel
 from scripts.utils.omni_format_utils import get_input_text, get_all_pairs
 
 
-def get_complete_prompt(data, instructions_func, gen_pairs):
+def get_complete_prompt(data, instructions_func, gen_pairs, sort_by_distance=False, capsule_size=None):
     text, all_pairs = get_input_text(data)
     final_instructions = instructions_func()
     task_desc = final_instructions + '\n' + text
     if gen_pairs:
         all_mentions = data['allMentions']
         all_ment_ids = {m['m_id']: m for m in all_mentions}
-        example_matrix = get_all_pairs(all_pairs, all_ment_ids, reduction=-1)
+        example_matrix = get_all_pairs(all_pairs, all_ment_ids, reduction=-1,
+                                       sort_by_distance=sort_by_distance, capsule_size=capsule_size)
         task_desc += '\nPairs require classification:\n' + '\n'.join(example_matrix)
 
     return task_desc
 
 
 def main(test_folder, llm_to_use, instructions_func, output_file,
-         selected_file, gen_pairs=True):
+         selected_file, gen_pairs=True, sort_by_distance=False, capsule_size=None):
     # load json file
     predictions = dict()
     count = 0
@@ -42,12 +43,14 @@ def main(test_folder, llm_to_use, instructions_func, output_file,
 
         count += 1
         data = open_input_file(f'{test_folder}/{file1}')
-        task_desc = get_complete_prompt(data, instructions_func, gen_pairs)
+        task_desc = get_complete_prompt(data, instructions_func, gen_pairs,
+                                        sort_by_distance=sort_by_distance, capsule_size=capsule_size)
 
         try:
             response = llm_to_use.run_model(task_desc)
             predictions[file1] = {"target": response}
         except Exception as e:
+            print(f"Generation failed for {file1}: {e}")
             predictions[file1] = {"target": "Generation Failed"}
 
     with open(output_file, 'w') as file:
@@ -63,6 +66,8 @@ if __name__ == "__main__":
     parser.add_argument("--repeat", help="Times to repeat the experiment", type=int, required=True)
     parser.add_argument("--selected_file", help="To only run a single specific file", type=str, required=False)
     parser.add_argument("--output_folder", help="Where to save the outputs", type=str, required=False)
+    parser.add_argument("--sort_by_distance", help="Sort pairs by token distance (closest pair first)", action="store_true")
+    parser.add_argument("--capsule_size", help="Capsule size for capsule-ordered input (e.g. 5, 7, 10)", type=int, default=None)
 
     args = parser.parse_args()
     print(vars(args))
@@ -73,7 +78,7 @@ if __name__ == "__main__":
     if args.test_ds == "nt":
         _test_folder = 'data/NT_6/test_18ment'
     elif args.test_ds == "matres":
-        _test_folder = 'data/MATRES/test_all_pairs_chunked'
+        _test_folder = 'data/MATRES/_in_OmniTemp_format/test'
     elif args.test_ds == "omni":
         _test_folder = 'data/OmniTemp/test'
     elif args.test_ds == "tbd":
@@ -118,7 +123,8 @@ if __name__ == "__main__":
 
         start_time = time.time()
         main(test_folder=_test_folder, llm_to_use=_llm_to_use, instructions_func=_instructions,
-             output_file=_output_file, selected_file=_selected_file)
+             output_file=_output_file, selected_file=_selected_file,
+             sort_by_distance=args.sort_by_distance, capsule_size=args.capsule_size)
         end_time = time.time()
         execution_time = end_time - start_time
         print(f"Execution time: {execution_time:.4f} seconds")

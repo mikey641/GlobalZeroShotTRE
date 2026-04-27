@@ -102,15 +102,17 @@ def eval_sent_diff(pred_as_dict, orig_ins_list, labels, dataset_type, consecutiv
 
 if __name__ == "__main__":
     # \\"[a-z]*\(13\)\\" -- \\"[a-z]*\(20\)\\"
-    _prediction_file = "output/prompt_OnlyTimeLine_eventfull_gpt4o_task_description_1.json"
+    _prediction_file = "output/omni_deepseek_timeline_unsorted/omni_DeepSeek-R1_task_description_4res_only_timeline_0.json"
     _dataset_type = OmniTempDataset()
 
     _test_as_dict, _all_test_files = load_golds(_dataset_type.get_test_file(), _dataset_type.get_label_set())
     _labels = _dataset_type.get_label_set()
     _dataset_name = _dataset_type.get_name()
 
+    print(_test_as_dict)
     _pred_as_dict, _ = read_pred_dot_file(_prediction_file, _all_test_files, _dataset_type)
 
+    print(_pred_as_dict)
     _all_golds, _all_preds, _gold_for_trans, _pred_for_trans, _count_nas = convert_format(_test_as_dict, _pred_as_dict, _labels, debug=False)
 
     print('\n\n####### Full Document Evaluation ####')

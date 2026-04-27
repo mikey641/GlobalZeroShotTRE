@@ -317,3 +317,47 @@ def count_discrepancies(pred_triplet_dict, gold_triplet_dict, dataset_type, sym=
     # print(json.dumps(pred_docs_discrepancies, indent=4))
     print(f"Total-Docs: {len(gold_triplet_dict)}")
     print(f"Trans-Discrepancies: {total_trans_discrepancies}, Sym-Contradictions: {total_sym_contradictions // 2}, Total predictions: {total_pred_hist}")
+
+
+def convert_format(test_as_dict, pred_as_dict, labels, debug=False):
+    pred_for_trans = {}
+    gold_for_trans = {}
+    all_golds = []
+    all_preds = []
+    count_nas = 0
+
+    # Consider only the gold labels (for all_golds and all_preds)
+    for key, gold_label in test_as_dict.items():
+        all_golds.append(gold_label)
+        doc_id, source, target = key.split('#')
+        if doc_id not in pred_for_trans:
+            pred_for_trans[doc_id] = []
+            gold_for_trans[doc_id] = []
+
+        rev_key = f'{doc_id}#{target}#{source}'
+        pred_label = -1
+        if key in pred_as_dict:
+            pred_label = pred_as_dict[key]
+            pred_for_trans[doc_id].append((source, pred_label, target))
+            all_preds.append(pred_label)
+        elif rev_key in pred_as_dict:
+            pred_label = labels.get_reverse_numerical_label(pred_as_dict[rev_key])
+            pred_for_trans[doc_id].append((source, pred_label, target))
+            all_preds.append(pred_label)
+        else:
+            # Setting to before is relation is not found in predictions
+            pred_for_trans[doc_id].append((source, 0, target))
+            all_preds.append(0)
+            count_nas += 1
+            print(f"NA: {key}")
+
+        gold_for_trans[doc_id].append((source, gold_label, target))
+
+        if debug:
+            if gold_label != pred_label:
+                print(f'relation-{key}, gold={gold_label}, pred={pred_label}')
+
+
+    return all_golds, all_preds, gold_for_trans, pred_for_trans, count_nas
+
+
