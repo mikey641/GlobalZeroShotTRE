@@ -1,0 +1,567 @@
+Loaded 837 pairs from data/MATRES/_in_OmniTemp_format/test
+  0%|          | 0/837 [00:00<?, ?it/s]  0%|          | 1/837 [00:24<5:42:18, 24.57s/it]  0%|          | 2/837 [00:25<2:29:59, 10.78s/it]  0%|          | 3/837 [00:28<1:38:19,  7.07s/it]  0%|          | 4/837 [00:29<1:05:07,  4.69s/it]  1%|          | 5/837 [00:31<52:12,  3.77s/it]    1%|          | 6/837 [00:33<43:25,  3.14s/it]  1%|          | 7/837 [00:38<50:09,  3.63s/it]  1%|          | 8/837 [00:38<34:43,  2.51s/it]  1%|          | 9/837 [00:51<1:19:09,  5.74s/it]  1%|          | 10/837 [00:56<1:17:08,  5.60s/it]  1%|▏         | 11/837 [01:04<1:28:51,  6.46s/it]  1%|▏         | 12/837 [01:06<1:07:34,  4.91s/it]  2%|▏         | 13/837 [01:09<1:00:19,  4.39s/it]  2%|▏         | 14/837 [01:10<49:02,  3.58s/it]    2%|▏         | 15/837 [01:16<58:10,  4.25s/it]  2%|▏         | 16/837 [01:25<1:15:17,  5.50s/it]  2%|▏         | 17/837 [01:28<1:07:05,  4.91s/it]  2%|▏         | 18/837 [01:32<1:03:49,  4.68s/it]  2%|▏         | 19/837 [01:36<57:50,  4.24s/it]    2%|▏         | 20/837 [01:41<1:00:44,  4.46s/it]  3%|▎         | 22/837 [01:42<37:08,  2.73s/it]    3%|▎         | 23/837 [01:52<1:00:42,  4.47s/it]  3%|▎         | 24/837 [01:53<49:38,  3.66s/it]    3%|▎         | 25/837 [01:55<41:38,  3.08s/it]  3%|▎         | 26/837 [01:56<34:52,  2.58s/it]  3%|▎         | 27/837 [02:06<1:05:05,  4.82s/it]  3%|▎         | 28/837 [02:07<47:35,  3.53s/it]    3%|▎         | 29/837 [02:14<1:03:37,  4.73s/it]  4%|▎         | 30/837 [02:20<1:06:15,  4.93s/it]  4%|▎         | 31/837 [02:20<48:00,  3.57s/it]    4%|▍         | 32/837 [02:25<51:18,  3.82s/it]  4%|▍         | 33/837 [02:30<57:40,  4.30s/it]  4%|▍         | 34/837 [02:35<59:10,  4.42s/it]  4%|▍         | 35/837 [02:42<1:09:16,  5.18s/it]  4%|▍         | 36/837 [02:44<57:33,  4.31s/it]    4%|▍         | 37/837 [02:45<45:09,  3.39s/it]  5%|▍         | 38/837 [02:46<35:38,  2.68s/it]  5%|▍         | 39/837 [02:47<27:27,  2.06s/it]  5%|▍         | 40/837 [02:50<32:23,  2.44s/it]  5%|▍         | 41/837 [03:03<1:15:39,  5.70s/it]  5%|▌         | 42/837 [03:04<53:28,  4.04s/it]    5%|▌         | 43/837 [03:06<46:39,  3.53s/it]  5%|▌         | 44/837 [03:11<52:58,  4.01s/it]  5%|▌         | 45/837 [03:11<38:48,  2.94s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.2s
+  5%|▌         | 46/837 [03:24<1:15:16,  5.71s/it]  6%|▌         | 47/837 [03:26<1:03:25,  4.82s/it]  6%|▌         | 48/837 [03:29<56:06,  4.27s/it]    6%|▌         | 49/837 [03:37<1:08:31,  5.22s/it]  6%|▌         | 50/837 [03:37<48:21,  3.69s/it]    6%|▌         | 51/837 [03:44<1:03:26,  4.84s/it]  6%|▌         | 52/837 [03:47<52:35,  4.02s/it]    6%|▋         | 53/837 [03:51<52:12,  4.00s/it]  6%|▋         | 54/837 [03:53<44:20,  3.40s/it]  7%|▋         | 55/837 [03:53<33:25,  2.56s/it]  7%|▋         | 56/837 [03:57<37:41,  2.90s/it]  7%|▋         | 57/837 [04:01<42:05,  3.24s/it]  7%|▋         | 58/837 [04:02<35:52,  2.76s/it]  7%|▋         | 59/837 [04:04<32:24,  2.50s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.7s
+  7%|▋         | 60/837 [04:23<1:34:49,  7.32s/it]  7%|▋         | 61/837 [04:26<1:16:43,  5.93s/it]  7%|▋         | 62/837 [04:27<1:00:50,  4.71s/it]  8%|▊         | 63/837 [04:28<44:50,  3.48s/it]    8%|▊         | 64/837 [04:38<1:09:04,  5.36s/it]  8%|▊         | 65/837 [04:39<53:56,  4.19s/it]    8%|▊         | 66/837 [04:50<1:20:06,  6.23s/it]  8%|▊         | 67/837 [04:54<1:10:58,  5.53s/it]  8%|▊         | 68/837 [04:58<1:03:44,  4.97s/it]  8%|▊         | 69/837 [05:00<53:33,  4.18s/it]    8%|▊         | 70/837 [05:01<38:44,  3.03s/it][retry 1/6] ClientError: sleeping 2.7s
+  8%|▊         | 71/837 [05:07<52:33,  4.12s/it]  9%|▊         | 72/837 [05:08<39:19,  3.08s/it]  9%|▊         | 73/837 [05:11<40:23,  3.17s/it]  9%|▉         | 74/837 [05:24<1:15:34,  5.94s/it]  9%|▉         | 75/837 [05:29<1:12:51,  5.74s/it]  9%|▉         | 76/837 [05:32<1:03:57,  5.04s/it]  9%|▉         | 77/837 [05:34<50:01,  3.95s/it]    9%|▉         | 78/837 [05:45<1:17:07,  6.10s/it]  9%|▉         | 79/837 [05:47<1:03:47,  5.05s/it] 10%|▉         | 80/837 [05:59<1:28:38,  7.03s/it] 10%|▉         | 81/837 [06:00<1:05:12,  5.18s/it] 10%|▉         | 82/837 [06:01<47:43,  3.79s/it]   10%|▉         | 83/837 [06:02<39:05,  3.11s/it] 10%|█         | 84/837 [06:09<53:22,  4.25s/it] 10%|█         | 85/837 [06:19<1:15:20,  6.01s/it] 10%|█         | 86/837 [06:27<1:22:57,  6.63s/it] 10%|█         | 87/837 [06:33<1:21:51,  6.55s/it] 11%|█         | 88/837 [06:41<1:23:52,  6.72s/it] 11%|█         | 89/837 [06:45<1:15:30,  6.06s/it] 11%|█         | 90/837 [06:48<1:04:50,  5.21s/it] 11%|█         | 91/837 [06:48<45:46,  3.68s/it]   11%|█         | 92/837 [06:49<33:32,  2.70s/it][retry 1/6] ClientError: sleeping 2.4s
+ 11%|█         | 93/837 [07:03<1:15:59,  6.13s/it] 11%|█         | 94/837 [07:08<1:12:26,  5.85s/it] 11%|█▏        | 95/837 [07:09<53:31,  4.33s/it]   11%|█▏        | 96/837 [07:10<41:35,  3.37s/it] 12%|█▏        | 97/837 [07:11<32:01,  2.60s/it] 12%|█▏        | 98/837 [07:19<52:37,  4.27s/it] 12%|█▏        | 99/837 [07:31<1:21:16,  6.61s/it] 12%|█▏        | 100/837 [07:32<1:00:14,  4.90s/it] 12%|█▏        | 101/837 [07:33<45:07,  3.68s/it]   12%|█▏        | 102/837 [07:36<41:28,  3.39s/it] 12%|█▏        | 103/837 [07:38<36:31,  2.99s/it] 12%|█▏        | 104/837 [07:39<30:28,  2.49s/it] 13%|█▎        | 105/837 [07:47<50:29,  4.14s/it] 13%|█▎        | 106/837 [07:51<50:09,  4.12s/it] 13%|█▎        | 107/837 [07:53<43:55,  3.61s/it] 13%|█▎        | 108/837 [07:57<44:28,  3.66s/it] 13%|█▎        | 109/837 [08:02<49:22,  4.07s/it] 13%|█▎        | 110/837 [08:08<56:53,  4.69s/it] 13%|█▎        | 111/837 [08:10<44:05,  3.64s/it] 13%|█▎        | 112/837 [08:10<31:56,  2.64s/it] 14%|█▎        | 113/837 [08:26<1:19:06,  6.56s/it] 14%|█▎        | 114/837 [08:30<1:10:11,  5.83s/it] 14%|█▎        | 115/837 [08:35<1:08:43,  5.71s/it] 14%|█▍        | 116/837 [08:36<49:54,  4.15s/it]   14%|█▍        | 117/837 [08:37<41:09,  3.43s/it] 14%|█▍        | 118/837 [08:45<57:30,  4.80s/it] 14%|█▍        | 119/837 [08:47<44:22,  3.71s/it][retry 1/6] ClientError: sleeping 2.3s
+ 14%|█▍        | 120/837 [08:58<1:11:50,  6.01s/it] 14%|█▍        | 121/837 [08:58<51:45,  4.34s/it]   15%|█▍        | 122/837 [08:59<38:30,  3.23s/it] 15%|█▍        | 123/837 [09:03<42:35,  3.58s/it] 15%|█▍        | 124/837 [09:05<34:21,  2.89s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.9s
+ 15%|█▍        | 125/837 [09:19<1:15:07,  6.33s/it][retry 1/6] ClientError: sleeping 2.1s
+ 15%|█▌        | 126/837 [09:21<59:57,  5.06s/it]   15%|█▌        | 127/837 [09:21<42:32,  3.60s/it] 15%|█▌        | 128/837 [09:24<38:03,  3.22s/it] 15%|█▌        | 129/837 [09:27<36:55,  3.13s/it] 16%|█▌        | 130/837 [09:29<33:04,  2.81s/it] 16%|█▌        | 131/837 [09:29<24:46,  2.11s/it] 16%|█▌        | 132/837 [09:36<41:39,  3.54s/it] 16%|█▌        | 133/837 [09:44<57:26,  4.90s/it] 16%|█▌        | 134/837 [09:48<54:14,  4.63s/it] 16%|█▌        | 135/837 [09:49<42:15,  3.61s/it] 16%|█▌        | 136/837 [09:51<36:09,  3.10s/it][retry 1/6] ClientError: sleeping 2.2s
+ 16%|█▋        | 137/837 [09:54<33:35,  2.88s/it] 16%|█▋        | 138/837 [09:54<24:19,  2.09s/it] 17%|█▋        | 139/837 [09:56<22:57,  1.97s/it] 17%|█▋        | 140/837 [10:06<52:53,  4.55s/it] 17%|█▋        | 141/837 [10:13<59:47,  5.16s/it] 17%|█▋        | 142/837 [10:18<59:30,  5.14s/it] 17%|█▋        | 143/837 [10:22<55:22,  4.79s/it][retry 1/6] ClientError: sleeping 2.6s
+ 17%|█▋        | 144/837 [10:27<58:22,  5.05s/it] 17%|█▋        | 145/837 [10:32<56:16,  4.88s/it] 17%|█▋        | 146/837 [10:36<55:01,  4.78s/it] 18%|█▊        | 147/837 [10:43<1:00:16,  5.24s/it] 18%|█▊        | 148/837 [10:45<49:50,  4.34s/it]   18%|█▊        | 149/837 [11:01<1:30:39,  7.91s/it] 18%|█▊        | 151/837 [11:02<49:33,  4.33s/it]   18%|█▊        | 152/837 [11:08<53:59,  4.73s/it] 18%|█▊        | 153/837 [11:16<1:06:15,  5.81s/it] 18%|█▊        | 154/837 [11:16<48:32,  4.26s/it]   19%|█▊        | 155/837 [11:17<36:31,  3.21s/it] 19%|█▊        | 156/837 [11:21<38:41,  3.41s/it] 19%|█▉        | 157/837 [11:23<34:14,  3.02s/it] 19%|█▉        | 158/837 [11:31<49:45,  4.40s/it] 19%|█▉        | 159/837 [11:36<53:50,  4.77s/it] 19%|█▉        | 160/837 [11:42<57:16,  5.08s/it] 19%|█▉        | 161/837 [11:44<47:04,  4.18s/it] 19%|█▉        | 162/837 [11:45<36:58,  3.29s/it] 19%|█▉        | 163/837 [11:46<29:25,  2.62s/it] 20%|█▉        | 164/837 [12:01<1:08:25,  6.10s/it] 20%|█▉        | 165/837 [12:02<51:12,  4.57s/it]   20%|█▉        | 166/837 [12:08<56:58,  5.09s/it] 20%|█▉        | 167/837 [12:10<46:34,  4.17s/it] 20%|██        | 168/837 [12:10<33:35,  3.01s/it] 20%|██        | 169/837 [12:14<36:42,  3.30s/it] 20%|██        | 170/837 [12:16<31:51,  2.87s/it] 20%|██        | 171/837 [12:19<31:59,  2.88s/it] 21%|██        | 172/837 [12:23<33:53,  3.06s/it] 21%|██        | 173/837 [12:31<50:43,  4.58s/it] 21%|██        | 174/837 [12:39<1:03:40,  5.76s/it] 21%|██        | 175/837 [12:41<50:49,  4.61s/it]   21%|██        | 176/837 [12:42<37:16,  3.38s/it] 21%|██        | 177/837 [12:43<29:56,  2.72s/it] 21%|██▏       | 178/837 [12:43<21:57,  2.00s/it] 21%|██▏       | 179/837 [12:49<33:53,  3.09s/it] 22%|██▏       | 180/837 [12:50<27:35,  2.52s/it][retry 1/6] ClientError: sleeping 3.0s
+ 22%|██▏       | 181/837 [12:57<43:01,  3.94s/it] 22%|██▏       | 182/837 [13:09<1:09:54,  6.40s/it] 22%|██▏       | 183/837 [13:11<55:11,  5.06s/it]   22%|██▏       | 184/837 [13:15<51:46,  4.76s/it][retry 1/6] ClientError: sleeping 2.3s
+ 22%|██▏       | 185/837 [13:20<51:56,  4.78s/it] 22%|██▏       | 186/837 [13:21<38:29,  3.55s/it] 22%|██▏       | 187/837 [13:26<42:34,  3.93s/it] 22%|██▏       | 188/837 [13:35<59:36,  5.51s/it] 23%|██▎       | 189/837 [13:37<48:43,  4.51s/it] 23%|██▎       | 190/837 [13:39<41:30,  3.85s/it] 23%|██▎       | 191/837 [13:46<49:57,  4.64s/it] 23%|██▎       | 192/837 [13:48<40:32,  3.77s/it] 23%|██▎       | 193/837 [13:50<37:38,  3.51s/it] 23%|██▎       | 194/837 [13:51<26:57,  2.52s/it] 23%|██▎       | 195/837 [14:00<49:04,  4.59s/it] 23%|██▎       | 196/837 [14:02<40:12,  3.76s/it] 24%|██▎       | 197/837 [14:09<49:34,  4.65s/it] 24%|██▎       | 198/837 [14:10<40:32,  3.81s/it] 24%|██▍       | 199/837 [14:12<31:53,  3.00s/it] 24%|██▍       | 200/837 [14:13<26:56,  2.54s/it] 24%|██▍       | 201/837 [14:15<24:13,  2.29s/it] 24%|██▍       | 202/837 [14:21<37:09,  3.51s/it] 24%|██▍       | 203/837 [14:23<32:15,  3.05s/it] 24%|██▍       | 204/837 [14:25<29:43,  2.82s/it] 24%|██▍       | 205/837 [14:34<46:53,  4.45s/it] 25%|██▍       | 206/837 [14:34<34:31,  3.28s/it] 25%|██▍       | 207/837 [14:37<31:41,  3.02s/it] 25%|██▍       | 208/837 [14:39<30:39,  2.92s/it][retry 1/6] ClientError: sleeping 2.4s
+ 25%|██▍       | 209/837 [14:49<52:51,  5.05s/it] 25%|██▌       | 210/837 [14:51<41:32,  3.97s/it] 25%|██▌       | 211/837 [14:53<34:52,  3.34s/it] 25%|██▌       | 212/837 [14:58<41:25,  3.98s/it] 25%|██▌       | 213/837 [15:03<42:37,  4.10s/it][retry 1/6] ClientError: sleeping 2.2s
+ 26%|██▌       | 214/837 [15:06<40:00,  3.85s/it] 26%|██▌       | 215/837 [15:10<42:16,  4.08s/it] 26%|██▌       | 216/837 [15:15<45:08,  4.36s/it] 26%|██▌       | 217/837 [15:16<33:48,  3.27s/it] 26%|██▌       | 218/837 [15:21<38:31,  3.73s/it] 26%|██▌       | 219/837 [15:22<29:15,  2.84s/it] 26%|██▋       | 220/837 [15:28<40:57,  3.98s/it][retry 1/6] ClientError: sleeping 2.3s
+ 26%|██▋       | 221/837 [15:31<35:51,  3.49s/it][retry 1/6] ClientError: sleeping 2.4s
+ 27%|██▋       | 222/837 [15:44<1:06:26,  6.48s/it] 27%|██▋       | 223/837 [15:48<57:11,  5.59s/it]   27%|██▋       | 224/837 [15:51<51:06,  5.00s/it] 27%|██▋       | 225/837 [15:57<52:55,  5.19s/it] 27%|██▋       | 226/837 [16:00<46:38,  4.58s/it] 27%|██▋       | 227/837 [16:00<33:25,  3.29s/it] 27%|██▋       | 228/837 [16:03<29:54,  2.95s/it] 27%|██▋       | 229/837 [16:04<26:06,  2.58s/it][retry 1/6] ClientError: sleeping 2.5s
+ 27%|██▋       | 230/837 [16:18<1:00:10,  5.95s/it] 28%|██▊       | 231/837 [16:19<44:36,  4.42s/it]   28%|██▊       | 232/837 [16:24<47:27,  4.71s/it] 28%|██▊       | 233/837 [16:25<36:16,  3.60s/it] 28%|██▊       | 234/837 [16:26<27:07,  2.70s/it] 28%|██▊       | 235/837 [16:27<22:41,  2.26s/it] 28%|██▊       | 236/837 [16:30<25:21,  2.53s/it] 28%|██▊       | 237/837 [16:32<21:23,  2.14s/it] 28%|██▊       | 238/837 [16:44<51:42,  5.18s/it] 29%|██▊       | 239/837 [16:45<40:31,  4.07s/it] 29%|██▊       | 240/837 [16:47<33:47,  3.40s/it][retry 1/6] ClientError: sleeping 2.2s
+ 29%|██▉       | 241/837 [16:53<40:59,  4.13s/it][retry 1/6] ClientError: sleeping 2.3s
+ 29%|██▉       | 242/837 [16:57<39:52,  4.02s/it] 29%|██▉       | 243/837 [16:57<28:51,  2.91s/it][retry 2/6] ClientError: sleeping 4.3s
+ 29%|██▉       | 244/837 [17:02<35:11,  3.56s/it] 29%|██▉       | 246/837 [17:04<24:12,  2.46s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.3s
+ 30%|██▉       | 247/837 [17:14<41:17,  4.20s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 2/6] ClientError: sleeping 5.0s
+ 30%|██▉       | 248/837 [17:18<42:00,  4.28s/it] 30%|██▉       | 249/837 [17:20<34:35,  3.53s/it] 30%|██▉       | 250/837 [17:23<33:10,  3.39s/it] 30%|██▉       | 251/837 [17:30<43:16,  4.43s/it][retry 1/6] ClientError: sleeping 2.5s
+ 30%|███       | 252/837 [17:32<36:40,  3.76s/it] 30%|███       | 253/837 [17:38<42:51,  4.40s/it][retry 1/6] ClientError: sleeping 2.6s
+ 30%|███       | 254/837 [17:47<54:29,  5.61s/it] 30%|███       | 255/837 [17:48<43:01,  4.43s/it] 31%|███       | 256/837 [17:53<43:12,  4.46s/it] 31%|███       | 257/837 [17:53<32:19,  3.34s/it] 31%|███       | 258/837 [17:55<25:45,  2.67s/it] 31%|███       | 259/837 [18:00<33:24,  3.47s/it] 31%|███       | 260/837 [18:03<30:58,  3.22s/it] 31%|███       | 261/837 [18:15<58:25,  6.09s/it] 31%|███▏      | 262/837 [18:16<41:46,  4.36s/it] 31%|███▏      | 263/837 [18:19<40:12,  4.20s/it] 32%|███▏      | 264/837 [18:21<33:19,  3.49s/it] 32%|███▏      | 265/837 [18:22<23:51,  2.50s/it] 32%|███▏      | 266/837 [18:32<45:54,  4.82s/it] 32%|███▏      | 267/837 [18:32<33:37,  3.54s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 1/6] ClientError: sleeping 2.5s
+ 32%|███▏      | 268/837 [18:54<1:25:08,  8.98s/it] 32%|███▏      | 269/837 [18:54<1:00:29,  6.39s/it] 32%|███▏      | 270/837 [18:55<43:23,  4.59s/it]  [retry 1/6] ClientError: sleeping 2.2s
+[retry 2/6] ClientError: sleeping 4.9s
+[retry 3/6] ClientError: sleeping 8.4s
+[retry 1/6] ClientError: sleeping 2.7s
+ 32%|███▏      | 271/837 [18:59<42:52,  4.54s/it][retry 2/6] ClientError: sleeping 4.0s
+ 32%|███▏      | 272/837 [19:07<53:04,  5.64s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.4s
+ 33%|███▎      | 273/837 [19:17<1:05:36,  6.98s/it][retry 2/6] ClientError: sleeping 4.4s
+ 33%|███▎      | 274/837 [19:23<1:01:40,  6.57s/it][retry 1/6] ClientError: sleeping 2.8s
+ 33%|███▎      | 275/837 [19:25<47:51,  5.11s/it]   33%|███▎      | 276/837 [19:27<40:32,  4.34s/it] 33%|███▎      | 277/837 [19:32<40:42,  4.36s/it][retry 2/6] ClientError: sleeping 4.2s
+ 33%|███▎      | 278/837 [19:37<43:40,  4.69s/it][retry 1/6] ClientError: sleeping 2.5s
+ 33%|███▎      | 279/837 [19:46<55:27,  5.96s/it] 33%|███▎      | 280/837 [19:48<45:23,  4.89s/it] 34%|███▎      | 281/837 [19:50<35:39,  3.85s/it] 34%|███▎      | 282/837 [19:50<25:29,  2.76s/it][retry 1/6] ClientError: sleeping 2.9s
+ 34%|███▍      | 283/837 [19:56<34:34,  3.74s/it][retry 1/6] ClientError: sleeping 2.7s
+ 34%|███▍      | 284/837 [19:59<32:57,  3.58s/it][retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 2/6] ClientError: sleeping 4.1s
+ 34%|███▍      | 285/837 [20:09<48:48,  5.30s/it] 34%|███▍      | 286/837 [20:09<36:12,  3.94s/it][retry 2/6] ClientError: sleeping 4.3s
+[retry 2/6] ClientError: sleeping 4.0s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 3/6] ClientError: sleeping 8.0s
+ 34%|███▍      | 288/837 [20:23<48:04,  5.25s/it] 35%|███▍      | 289/837 [20:37<1:07:05,  7.35s/it] 35%|███▍      | 290/837 [20:38<51:33,  5.66s/it]  [retry 1/6] ClientError: sleeping 2.8s
+ 35%|███▍      | 291/837 [20:39<39:45,  4.37s/it] 35%|███▍      | 292/837 [20:39<29:25,  3.24s/it][retry 1/6] ClientError: sleeping 2.6s
+ 35%|███▌      | 293/837 [20:51<51:26,  5.67s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.6s
+ 35%|███▌      | 294/837 [20:58<55:16,  6.11s/it][retry 2/6] ClientError: sleeping 5.0s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.2s
+ 35%|███▌      | 295/837 [21:06<59:54,  6.63s/it] 35%|███▌      | 296/837 [21:07<46:31,  5.16s/it] 35%|███▌      | 297/837 [21:11<41:47,  4.64s/it][retry 2/6] ClientError: sleeping 4.8s
+[retry 3/6] ClientError: sleeping 8.2s
+[retry 1/6] ClientError: sleeping 2.9s
+ 36%|███▌      | 298/837 [21:20<54:54,  6.11s/it][retry 1/6] ClientError: sleeping 2.8s
+ 36%|███▌      | 299/837 [21:26<53:03,  5.92s/it] 36%|███▌      | 300/837 [21:27<40:49,  4.56s/it][retry 1/6] ClientError: sleeping 2.9s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 4/6] ClientError: sleeping 16.1s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 2/6] ClientError: sleeping 4.7s
+ 36%|███▌      | 301/837 [21:32<42:45,  4.79s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 2/6] ClientError: sleeping 4.8s
+[retry 3/6] ClientError: sleeping 8.9s
+[retry 2/6] ClientError: sleeping 4.7s
+ 36%|███▌      | 302/837 [21:42<55:05,  6.18s/it] 36%|███▌      | 303/837 [21:43<42:38,  4.79s/it][retry 1/6] ClientError: sleeping 2.5s
+[retry 4/6] ClientError: sleeping 16.2s
+[retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 1/6] ClientError: sleeping 2.7s
+ 36%|███▋      | 304/837 [21:57<1:06:41,  7.51s/it] 36%|███▋      | 305/837 [21:58<49:39,  5.60s/it]  [retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.3s
+ 37%|███▋      | 306/837 [22:08<58:48,  6.64s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 2/6] ClientError: sleeping 4.5s
+[retry 2/6] ClientError: sleeping 4.6s
+ 37%|███▋      | 307/837 [22:12<52:22,  5.93s/it][retry 2/6] ClientError: sleeping 4.1s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.0s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 3/6] ClientError: sleeping 9.0s
+[retry 2/6] ClientError: sleeping 4.1s
+[retry 2/6] ClientError: sleeping 4.4s
+[retry 1/6] ClientError: sleeping 2.1s
+ 37%|███▋      | 308/837 [22:34<1:34:24, 10.71s/it] 37%|███▋      | 309/837 [22:36<1:12:01,  8.18s/it] 37%|███▋      | 310/837 [22:37<52:03,  5.93s/it]  [retry 1/6] ClientError: sleeping 2.6s
+ 37%|███▋      | 311/837 [22:40<45:58,  5.25s/it][retry 1/6] ClientError: sleeping 2.3s
+[retry 2/6] ClientError: sleeping 4.9s
+ 37%|███▋      | 312/837 [22:43<38:16,  4.37s/it][retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 2/6] ClientError: sleeping 5.0s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 3/6] ClientError: sleeping 8.2s
+[retry 2/6] ClientError: sleeping 4.6s
+[retry 2/6] ClientError: sleeping 4.5s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 2/6] ClientError: sleeping 4.5s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 3/6] ClientError: sleeping 8.4s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 3/6] ClientError: sleeping 8.8s
+[retry 3/6] ClientError: sleeping 8.8s
+[retry 3/6] ClientError: sleeping 8.6s
+[retry 4/6] ClientError: sleeping 16.9s
+[retry 3/6] ClientError: sleeping 8.1s
+[retry 1/6] ClientError: sleeping 2.1s
+ 37%|███▋      | 313/837 [23:08<1:34:06, 10.78s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 4/6] ClientError: sleeping 16.7s
+ 38%|███▊      | 314/837 [23:14<1:21:40,  9.37s/it] 38%|███▊      | 315/837 [23:15<58:50,  6.76s/it]   38%|███▊      | 316/837 [23:16<43:29,  5.01s/it][retry 1/6] ClientError: sleeping 2.9s
+ 38%|███▊      | 317/837 [23:28<1:01:52,  7.14s/it][retry 1/6] ClientError: sleeping 2.9s
+[retry 1/6] ClientError: sleeping 2.2s
+ 38%|███▊      | 318/837 [23:37<1:06:22,  7.67s/it][retry 1/6] ClientError: sleeping 2.9s
+[retry 2/6] ClientError: sleeping 4.8s
+ 38%|███▊      | 319/837 [23:43<1:01:14,  7.09s/it][retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.3s
+ 38%|███▊      | 320/837 [23:49<1:00:06,  6.98s/it][retry 2/6] ClientError: sleeping 4.7s
+ 38%|███▊      | 322/837 [23:54<41:11,  4.80s/it]  [retry 1/6] ClientError: sleeping 2.2s
+[retry 2/6] ClientError: sleeping 4.1s
+[retry 3/6] ClientError: sleeping 8.9s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 3/6] ClientError: sleeping 8.6s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 2/6] ClientError: sleeping 4.4s
+[retry 3/6] ClientError: sleeping 8.2s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 4/6] ClientError: sleeping 16.1s
+[retry 1/6] ClientError: sleeping 3.0s
+ 39%|███▊      | 323/837 [24:14<1:13:53,  8.62s/it][retry 4/6] ClientError: sleeping 16.7s
+[retry 3/6] ClientError: sleeping 8.5s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 3/6] ClientError: sleeping 8.9s
+[retry 4/6] ClientError: sleeping 16.9s
+[retry 2/6] ClientError: sleeping 4.0s
+[retry 4/6] ClientError: sleeping 16.8s
+[retry 3/6] ClientError: sleeping 8.7s
+[retry 5/6] ClientError: sleeping 32.6s
+ 39%|███▊      | 324/837 [24:35<1:41:59, 11.93s/it][retry 1/6] ClientError: sleeping 2.4s
+ 39%|███▉      | 325/837 [24:39<1:22:27,  9.66s/it][retry 2/6] ClientError: sleeping 4.1s
+ 39%|███▉      | 326/837 [24:44<1:10:59,  8.34s/it][retry 5/6] ClientError: sleeping 32.5s
+[retry 3/6] ClientError: sleeping 8.0s
+[retry 1/6] ClientError: sleeping 2.0s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 2/6] ClientError: sleeping 4.6s
+[retry 1/6] ClientError: sleeping 2.2s
+ 39%|███▉      | 327/837 [25:10<1:53:43, 13.38s/it][retry 1/6] ClientError: sleeping 2.0s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 6/6] ClientError: sleeping 64.8s
+ 39%|███▉      | 328/837 [25:15<1:32:52, 10.95s/it] 39%|███▉      | 329/837 [25:15<1:06:28,  7.85s/it][retry 2/6] ClientError: sleeping 4.5s
+[retry 2/6] ClientError: sleeping 4.1s
+ 39%|███▉      | 330/837 [25:26<1:14:30,  8.82s/it] 40%|███▉      | 331/837 [25:28<56:45,  6.73s/it]   40%|███▉      | 332/837 [25:32<48:34,  5.77s/it] 40%|███▉      | 333/837 [25:33<38:18,  4.56s/it] 40%|███▉      | 334/837 [25:42<49:23,  5.89s/it][retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 2/6] ClientError: sleeping 4.2s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 2/6] ClientError: sleeping 4.5s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 3/6] ClientError: sleeping 8.3s
+[retry 3/6] ClientError: sleeping 8.8s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 4/6] ClientError: sleeping 17.0s
+ 40%|████      | 335/837 [26:12<1:49:36, 13.10s/it] 40%|████      | 336/837 [26:13<1:17:33,  9.29s/it] 40%|████      | 337/837 [26:15<58:44,  7.05s/it]   40%|████      | 338/837 [26:15<42:11,  5.07s/it] 41%|████      | 339/837 [26:16<31:04,  3.74s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.2s
+ 41%|████      | 340/837 [26:25<45:52,  5.54s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.8s
+ 41%|████      | 341/837 [26:33<50:42,  6.13s/it] 41%|████      | 342/837 [26:37<44:30,  5.40s/it] 41%|████      | 343/837 [26:46<53:00,  6.44s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.5s
+ 41%|████      | 344/837 [26:50<48:08,  5.86s/it] 41%|████      | 345/837 [26:51<35:17,  4.30s/it] 41%|████▏     | 346/837 [26:53<29:44,  3.63s/it][retry 2/6] ClientError: sleeping 4.0s
+ 41%|████▏     | 347/837 [26:58<33:26,  4.09s/it][retry 3/6] ClientError: sleeping 8.1s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 2/6] ClientError: sleeping 4.2s
+ 42%|████▏     | 348/837 [27:12<58:31,  7.18s/it] 42%|████▏     | 349/837 [27:13<43:03,  5.29s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 3/6] ClientError: sleeping 9.0s
+[retry 2/6] ClientError: sleeping 4.6s
+ 42%|████▏     | 350/837 [27:18<42:46,  5.27s/it][retry 2/6] ClientError: sleeping 4.5s
+[retry 2/6] ClientError: sleeping 4.9s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 4/6] ClientError: sleeping 16.8s
+[retry 3/6] ClientError: sleeping 8.8s
+[retry 3/6] ClientError: sleeping 8.5s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.5s
+ 42%|████▏     | 351/837 [27:35<1:09:35,  8.59s/it][retry 1/6] ClientError: sleeping 2.8s
+[retry 2/6] ClientError: sleeping 4.5s
+[retry 4/6] ClientError: sleeping 16.4s
+[retry 2/6] ClientError: sleeping 4.2s
+ 42%|████▏     | 352/837 [27:41<1:04:16,  7.95s/it][retry 3/6] ClientError: sleeping 8.8s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 2/6] ClientError: sleeping 4.6s
+[retry 4/6] ClientError: sleeping 16.3s
+[retry 1/6] ClientError: sleeping 2.2s
+ 42%|████▏     | 353/837 [28:00<1:29:48, 11.13s/it][retry 2/6] ClientError: sleeping 5.0s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 2/6] ClientError: sleeping 4.4s
+[retry 2/6] ClientError: sleeping 4.8s
+[retry 2/6] ClientError: sleeping 4.5s
+ 42%|████▏     | 354/837 [28:10<1:27:11, 10.83s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 3/6] ClientError: sleeping 8.5s
+[retry 3/6] ClientError: sleeping 8.4s
+[retry 3/6] ClientError: sleeping 8.5s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 3/6] ClientError: sleeping 8.1s
+ 42%|████▏     | 355/837 [28:16<1:16:04,  9.47s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 4/6] ClientError: sleeping 16.5s
+[retry 4/6] ClientError: sleeping 16.2s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 2/6] ClientError: sleeping 4.9s
+ 43%|████▎     | 356/837 [28:30<1:26:26, 10.78s/it][retry 2/6] ClientError: sleeping 4.2s
+ 43%|████▎     | 357/837 [28:35<1:11:17,  8.91s/it] 43%|████▎     | 358/837 [28:39<1:01:07,  7.66s/it][retry 3/6] ClientError: sleeping 8.8s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 4/6] ClientError: sleeping 16.8s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 5/6] ClientError: sleeping 32.6s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 2/6] ClientError: sleeping 4.8s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 2/6] ClientError: sleeping 4.1s
+[retry 3/6] ClientError: sleeping 8.1s
+[retry 2/6] ClientError: sleeping 4.6s
+ 43%|████▎     | 359/837 [29:11<1:59:12, 14.96s/it][retry 1/6] ClientError: sleeping 2.7s
+ 43%|████▎     | 360/837 [29:13<1:27:35, 11.02s/it][retry 5/6] ClientError: sleeping 32.2s
+[retry 4/6] ClientError: sleeping 17.0s
+ 43%|████▎     | 361/837 [29:14<1:04:13,  8.10s/it][retry 1/6] ClientError: sleeping 2.7s
+ 43%|████▎     | 362/837 [29:17<52:02,  6.57s/it]  [retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 2/6] ClientError: sleeping 4.6s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 2/6] ClientError: sleeping 4.1s
+[retry 2/6] ClientError: sleeping 4.4s
+[retry 3/6] ClientError: sleeping 8.6s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 5/6] ClientError: sleeping 32.7s
+[retry 1/6] ClientError: sleeping 2.1s
+ 43%|████▎     | 363/837 [29:45<1:41:53, 12.90s/it][retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 1/6] ClientError: sleeping 2.9s
+ 43%|████▎     | 364/837 [29:53<1:29:02, 11.29s/it][retry 1/6] ClientError: sleeping 2.5s
+[retry 2/6] ClientError: sleeping 4.3s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 2/6] ClientError: sleeping 4.6s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 2/6] ClientError: sleeping 4.1s
+[retry 3/6] ClientError: sleeping 8.0s
+[retry 3/6] ClientError: sleeping 9.0s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 2/6] ClientError: sleeping 4.9s
+ 44%|████▎     | 365/837 [30:04<1:29:53, 11.43s/it] 44%|████▎     | 366/837 [30:07<1:07:58,  8.66s/it][retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 4/6] ClientError: sleeping 16.7s
+[retry 6/6] ClientError: sleeping 64.1s
+[retry 2/6] ClientError: sleeping 4.5s
+[retry 2/6] ClientError: sleeping 4.8s
+ 44%|████▍     | 367/837 [30:16<1:09:08,  8.83s/it][retry 1/6] ClientError: sleeping 2.5s
+ 44%|████▍     | 368/837 [30:23<1:05:05,  8.33s/it][retry 1/6] ClientError: sleeping 2.1s
+ 44%|████▍     | 369/837 [30:27<54:36,  7.00s/it]   44%|████▍     | 370/837 [30:31<48:38,  6.25s/it][retry 1/6] ClientError: sleeping 2.8s
+ 44%|████▍     | 371/837 [30:33<37:41,  4.85s/it] 44%|████▍     | 372/837 [30:34<28:39,  3.70s/it] 45%|████▍     | 373/837 [30:39<31:26,  4.07s/it][retry 1/6] ClientError: sleeping 2.8s
+ 45%|████▍     | 374/837 [30:42<28:19,  3.67s/it][retry 2/6] ClientError: sleeping 4.4s
+ 45%|████▍     | 375/837 [30:45<27:53,  3.62s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 2/6] ClientError: sleeping 4.0s
+[retry 2/6] ClientError: sleeping 4.9s
+[retry 3/6] ClientError: sleeping 8.5s
+ 45%|████▍     | 376/837 [30:59<50:35,  6.58s/it] 45%|████▌     | 377/837 [31:02<42:34,  5.55s/it] 45%|████▌     | 378/837 [31:07<41:10,  5.38s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 2/6] ClientError: sleeping 4.4s
+ 45%|████▌     | 379/837 [31:25<1:09:58,  9.17s/it][retry 2/6] ClientError: sleeping 5.0s
+ 45%|████▌     | 380/837 [31:26<52:31,  6.90s/it]   46%|████▌     | 381/837 [31:27<39:08,  5.15s/it] 46%|████▌     | 382/837 [31:31<36:15,  4.78s/it][retry 1/6] ClientError: sleeping 2.8s
+ 46%|████▌     | 383/837 [31:38<39:54,  5.27s/it] 46%|████▌     | 384/837 [31:43<40:40,  5.39s/it][retry 2/6] ClientError: sleeping 4.1s
+[retry 1/6] ClientError: sleeping 2.5s
+ 46%|████▌     | 385/837 [31:52<48:26,  6.43s/it] 46%|████▌     | 386/837 [31:55<39:47,  5.29s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.6s
+ 46%|████▌     | 387/837 [31:57<32:15,  4.30s/it] 46%|████▋     | 388/837 [31:58<24:49,  3.32s/it] 46%|████▋     | 389/837 [32:00<20:50,  2.79s/it] 47%|████▋     | 390/837 [32:05<27:18,  3.67s/it][retry 1/6] ClientError: sleeping 2.3s
+ 47%|████▋     | 391/837 [32:12<33:58,  4.57s/it] 47%|████▋     | 393/837 [32:17<26:32,  3.59s/it][retry 1/6] ClientError: sleeping 2.4s
+ 47%|████▋     | 394/837 [32:26<37:28,  5.08s/it] 47%|████▋     | 395/837 [32:31<36:10,  4.91s/it] 47%|████▋     | 396/837 [32:33<29:53,  4.07s/it] 47%|████▋     | 397/837 [32:35<26:09,  3.57s/it][retry 1/6] ClientError: sleeping 2.0s
+ 48%|████▊     | 398/837 [32:37<22:38,  3.09s/it] 48%|████▊     | 399/837 [32:39<20:07,  2.76s/it][retry 1/6] ClientError: sleeping 2.6s
+ 48%|████▊     | 400/837 [32:43<22:14,  3.05s/it] 48%|████▊     | 401/837 [32:46<23:13,  3.20s/it][retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 2/6] ClientError: sleeping 4.8s
+ 48%|████▊     | 402/837 [32:56<37:32,  5.18s/it] 48%|████▊     | 403/837 [32:58<30:44,  4.25s/it][retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.7s
+ 48%|████▊     | 404/837 [33:07<41:14,  5.72s/it] 48%|████▊     | 405/837 [33:07<29:16,  4.07s/it][retry 1/6] ClientError: sleeping 2.1s
+ 49%|████▊     | 406/837 [33:09<22:51,  3.18s/it] 49%|████▊     | 407/837 [33:09<17:56,  2.50s/it] 49%|████▊     | 408/837 [33:19<32:32,  4.55s/it] 49%|████▉     | 409/837 [33:20<25:09,  3.53s/it] 49%|████▉     | 410/837 [33:23<24:29,  3.44s/it] 49%|████▉     | 411/837 [33:30<31:11,  4.39s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.1s
+ 49%|████▉     | 412/837 [33:33<29:28,  4.16s/it][retry 1/6] ClientError: sleeping 2.6s
+ 49%|████▉     | 413/837 [33:41<37:29,  5.31s/it] 49%|████▉     | 414/837 [33:43<30:20,  4.30s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.0s
+[retry 1/6] ClientError: sleeping 2.1s
+ 50%|████▉     | 415/837 [33:53<42:33,  6.05s/it] 50%|████▉     | 416/837 [33:57<36:35,  5.22s/it] 50%|████▉     | 417/837 [33:57<26:43,  3.82s/it] 50%|████▉     | 418/837 [33:58<19:58,  2.86s/it][retry 1/6] ClientError: sleeping 2.1s
+ 50%|█████     | 419/837 [34:06<31:37,  4.54s/it] 50%|█████     | 420/837 [34:10<28:44,  4.13s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.9s
+ 50%|█████     | 421/837 [34:22<46:46,  6.75s/it][retry 1/6] ClientError: sleeping 2.3s
+ 50%|█████     | 422/837 [34:28<44:51,  6.49s/it][retry 1/6] ClientError: sleeping 2.2s
+ 51%|█████     | 423/837 [34:31<36:53,  5.35s/it] 51%|█████     | 424/837 [34:34<32:11,  4.68s/it] 51%|█████     | 425/837 [34:35<25:05,  3.66s/it][retry 2/6] ClientError: sleeping 4.3s
+ 51%|█████     | 426/837 [34:41<30:02,  4.39s/it] 51%|█████     | 427/837 [34:47<32:33,  4.77s/it][retry 3/6] ClientError: sleeping 8.2s
+ 51%|█████     | 428/837 [34:49<25:44,  3.78s/it] 51%|█████▏    | 429/837 [34:51<22:53,  3.37s/it][retry 1/6] ClientError: sleeping 2.7s
+ 51%|█████▏    | 430/837 [34:56<25:42,  3.79s/it][retry 1/6] ClientError: sleeping 2.2s
+ 51%|█████▏    | 431/837 [35:04<35:16,  5.21s/it][retry 2/6] ClientError: sleeping 4.9s
+ 52%|█████▏    | 432/837 [35:14<44:58,  6.66s/it] 52%|█████▏    | 433/837 [35:15<32:29,  4.83s/it] 52%|█████▏    | 434/837 [35:16<25:24,  3.78s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.0s
+ 52%|█████▏    | 435/837 [35:20<24:28,  3.65s/it][retry 1/6] ClientError: sleeping 2.7s
+ 52%|█████▏    | 436/837 [35:21<19:59,  2.99s/it] 52%|█████▏    | 437/837 [35:22<16:19,  2.45s/it] 52%|█████▏    | 438/837 [35:23<13:23,  2.01s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.4s
+ 52%|█████▏    | 439/837 [35:38<39:27,  5.95s/it] 53%|█████▎    | 440/837 [35:41<33:02,  4.99s/it] 53%|█████▎    | 441/837 [35:42<25:50,  3.92s/it] 53%|█████▎    | 442/837 [35:46<24:48,  3.77s/it] 53%|█████▎    | 443/837 [35:55<34:55,  5.32s/it] 53%|█████▎    | 444/837 [35:55<25:11,  3.85s/it][retry 1/6] ClientError: sleeping 2.1s
+ 53%|█████▎    | 445/837 [36:01<28:25,  4.35s/it][retry 1/6] ClientError: sleeping 2.7s
+ 53%|█████▎    | 446/837 [36:03<24:04,  3.69s/it] 53%|█████▎    | 447/837 [36:14<38:49,  5.97s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 3.0s
+ 54%|█████▎    | 448/837 [36:22<41:33,  6.41s/it] 54%|█████▎    | 449/837 [36:27<38:51,  6.01s/it] 54%|█████▍    | 450/837 [36:30<34:24,  5.33s/it] 54%|█████▍    | 451/837 [36:31<25:05,  3.90s/it] 54%|█████▍    | 452/837 [36:33<21:55,  3.42s/it][retry 1/6] ClientError: sleeping 2.9s
+[retry 1/6] ClientError: sleeping 2.3s
+ 54%|█████▍    | 453/837 [36:37<21:38,  3.38s/it] 54%|█████▍    | 454/837 [36:39<19:55,  3.12s/it][retry 1/6] ClientError: sleeping 3.0s
+ 54%|█████▍    | 455/837 [36:53<39:39,  6.23s/it][retry 1/6] ClientError: sleeping 2.9s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.2s
+ 54%|█████▍    | 456/837 [37:08<56:10,  8.85s/it] 55%|█████▍    | 457/837 [37:08<40:42,  6.43s/it] 55%|█████▍    | 458/837 [37:15<40:15,  6.37s/it] 55%|█████▍    | 459/837 [37:16<30:45,  4.88s/it] 55%|█████▍    | 460/837 [37:17<23:56,  3.81s/it] 55%|█████▌    | 461/837 [37:21<23:04,  3.68s/it][retry 1/6] ClientError: sleeping 2.5s
+ 55%|█████▌    | 462/837 [37:31<34:55,  5.59s/it] 55%|█████▌    | 463/837 [37:32<27:24,  4.40s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.0s
+ 55%|█████▌    | 464/837 [37:44<40:07,  6.45s/it] 56%|█████▌    | 465/837 [37:44<29:35,  4.77s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.6s
+ 56%|█████▌    | 467/837 [37:51<24:33,  3.98s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.8s
+ 56%|█████▌    | 468/837 [37:57<28:00,  4.55s/it] 56%|█████▌    | 469/837 [38:00<24:57,  4.07s/it][retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 3.0s
+ 56%|█████▌    | 470/837 [38:05<26:57,  4.41s/it] 56%|█████▋    | 471/837 [38:06<21:35,  3.54s/it] 56%|█████▋    | 472/837 [38:14<29:16,  4.81s/it] 57%|█████▋    | 474/837 [38:18<21:17,  3.52s/it] 57%|█████▋    | 475/837 [38:22<21:20,  3.54s/it] 57%|█████▋    | 476/837 [38:24<19:18,  3.21s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 2/6] ClientError: sleeping 4.2s
+ 57%|█████▋    | 477/837 [38:32<26:31,  4.42s/it][retry 1/6] ClientError: sleeping 2.9s
+ 57%|█████▋    | 478/837 [38:43<38:22,  6.41s/it] 57%|█████▋    | 479/837 [38:45<29:33,  4.96s/it] 57%|█████▋    | 480/837 [38:45<21:31,  3.62s/it][retry 1/6] ClientError: sleeping 2.1s
+ 58%|█████▊    | 482/837 [38:46<13:38,  2.31s/it][retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.4s
+ 58%|█████▊    | 483/837 [38:54<21:33,  3.65s/it][retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.3s
+ 58%|█████▊    | 484/837 [39:02<27:26,  4.66s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.9s
+ 58%|█████▊    | 485/837 [39:03<22:15,  3.79s/it] 58%|█████▊    | 486/837 [39:07<22:45,  3.89s/it][retry 1/6] ClientError: sleeping 2.3s
+ 58%|█████▊    | 487/837 [39:16<31:19,  5.37s/it] 58%|█████▊    | 488/837 [39:17<23:31,  4.04s/it] 58%|█████▊    | 489/837 [39:22<24:58,  4.31s/it] 59%|█████▊    | 490/837 [39:23<19:53,  3.44s/it][retry 1/6] ClientError: sleeping 2.6s
+ 59%|█████▊    | 491/837 [39:32<28:15,  4.90s/it][retry 1/6] ClientError: sleeping 2.8s
+ 59%|█████▉    | 492/837 [39:35<26:00,  4.52s/it] 59%|█████▉    | 493/837 [39:38<21:49,  3.81s/it] 59%|█████▉    | 494/837 [39:42<23:18,  4.08s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.4s
+ 59%|█████▉    | 495/837 [39:52<33:15,  5.84s/it] 59%|█████▉    | 496/837 [39:59<35:11,  6.19s/it] 59%|█████▉    | 497/837 [40:01<27:18,  4.82s/it] 59%|█████▉    | 498/837 [40:10<34:11,  6.05s/it] 60%|█████▉    | 499/837 [40:14<30:39,  5.44s/it][retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.2s
+ 60%|█████▉    | 500/837 [40:24<39:19,  7.00s/it][retry 1/6] ClientError: sleeping 3.0s
+ 60%|█████▉    | 501/837 [40:29<35:32,  6.35s/it] 60%|█████▉    | 502/837 [40:29<25:09,  4.51s/it] 60%|██████    | 503/837 [40:32<21:30,  3.86s/it] 60%|██████    | 504/837 [40:34<18:37,  3.35s/it][retry 1/6] ClientError: sleeping 2.2s
+ 60%|██████    | 505/837 [40:35<15:00,  2.71s/it][retry 1/6] ClientError: sleeping 2.2s
+ 60%|██████    | 506/837 [40:43<22:41,  4.11s/it] 61%|██████    | 507/837 [40:47<22:57,  4.18s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 2/6] ClientError: sleeping 4.2s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 2/6] ClientError: sleeping 4.5s
+ 61%|██████    | 508/837 [40:53<26:11,  4.78s/it] 61%|██████    | 509/837 [40:56<22:44,  4.16s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 3/6] ClientError: sleeping 8.5s
+ 61%|██████    | 510/837 [41:02<26:31,  4.87s/it][retry 1/6] ClientError: sleeping 2.3s
+ 61%|██████    | 511/837 [41:09<30:12,  5.56s/it] 61%|██████    | 512/837 [41:13<26:35,  4.91s/it] 61%|██████▏   | 513/837 [41:18<26:58,  5.00s/it][retry 1/6] ClientError: sleeping 2.9s
+[retry 2/6] ClientError: sleeping 4.5s
+ 61%|██████▏   | 514/837 [41:24<27:37,  5.13s/it][retry 1/6] ClientError: sleeping 2.7s
+ 62%|██████▏   | 515/837 [41:28<26:52,  5.01s/it] 62%|██████▏   | 516/837 [41:31<23:21,  4.36s/it] 62%|██████▏   | 517/837 [41:39<28:41,  5.38s/it][retry 1/6] ClientError: sleeping 2.0s
+ 62%|██████▏   | 519/837 [41:43<19:59,  3.77s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.3s
+ 62%|██████▏   | 520/837 [41:57<33:13,  6.29s/it] 62%|██████▏   | 521/837 [41:58<26:00,  4.94s/it] 62%|██████▏   | 522/837 [41:58<19:15,  3.67s/it] 62%|██████▏   | 523/837 [42:01<18:03,  3.45s/it] 63%|██████▎   | 524/837 [42:05<19:33,  3.75s/it] 63%|██████▎   | 525/837 [42:07<16:32,  3.18s/it] 63%|██████▎   | 526/837 [42:08<12:12,  2.36s/it] 63%|██████▎   | 527/837 [42:15<19:15,  3.73s/it] 63%|██████▎   | 528/837 [42:19<19:46,  3.84s/it] 63%|██████▎   | 529/837 [42:28<28:36,  5.57s/it] 63%|██████▎   | 530/837 [42:30<22:22,  4.37s/it] 63%|██████▎   | 531/837 [42:34<21:37,  4.24s/it] 64%|██████▎   | 532/837 [42:35<16:27,  3.24s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 2/6] ClientError: sleeping 4.4s
+[retry 1/6] ClientError: sleeping 2.3s
+ 64%|██████▎   | 533/837 [42:44<26:09,  5.16s/it][retry 3/6] ClientError: sleeping 9.0s
+[retry 1/6] ClientError: sleeping 2.6s
+ 64%|██████▍   | 534/837 [42:52<29:55,  5.93s/it][retry 1/6] ClientError: sleeping 2.7s
+ 64%|██████▍   | 536/837 [43:01<25:49,  5.15s/it] 64%|██████▍   | 537/837 [43:03<22:24,  4.48s/it] 64%|██████▍   | 538/837 [43:16<32:57,  6.61s/it] 64%|██████▍   | 539/837 [43:20<30:00,  6.04s/it] 65%|██████▍   | 540/837 [43:20<21:50,  4.41s/it] 65%|██████▍   | 541/837 [43:24<21:11,  4.29s/it] 65%|██████▍   | 542/837 [43:29<21:59,  4.47s/it] 65%|██████▍   | 543/837 [43:33<21:07,  4.31s/it] 65%|██████▍   | 544/837 [43:35<17:34,  3.60s/it] 65%|██████▌   | 545/837 [43:37<15:25,  3.17s/it] 65%|██████▌   | 546/837 [43:43<19:10,  3.95s/it] 65%|██████▌   | 547/837 [43:45<16:44,  3.46s/it][retry 1/6] ClientError: sleeping 2.0s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.4s
+ 65%|██████▌   | 548/837 [44:00<32:51,  6.82s/it] 66%|██████▌   | 549/837 [44:00<23:30,  4.90s/it] 66%|██████▌   | 550/837 [44:03<19:54,  4.16s/it] 66%|██████▌   | 551/837 [44:08<20:43,  4.35s/it] 66%|██████▌   | 552/837 [44:08<15:27,  3.25s/it] 66%|██████▌   | 553/837 [44:12<15:29,  3.27s/it][retry 1/6] ClientError: sleeping 2.5s
+[retry 1/6] ClientError: sleeping 2.4s
+ 66%|██████▌   | 554/837 [44:15<15:40,  3.32s/it][retry 1/6] ClientError: sleeping 2.0s
+ 66%|██████▋   | 555/837 [44:24<23:31,  5.00s/it] 66%|██████▋   | 556/837 [44:26<18:59,  4.06s/it] 67%|██████▋   | 557/837 [44:31<19:59,  4.28s/it][retry 1/6] ClientError: sleeping 2.1s
+ 67%|██████▋   | 558/837 [44:39<25:17,  5.44s/it] 67%|██████▋   | 559/837 [44:46<28:05,  6.06s/it] 67%|██████▋   | 560/837 [44:47<20:06,  4.36s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.2s
+ 67%|██████▋   | 561/837 [45:03<37:04,  8.06s/it] 67%|██████▋   | 562/837 [45:05<27:47,  6.06s/it] 67%|██████▋   | 563/837 [45:07<21:54,  4.80s/it][retry 1/6] ClientError: sleeping 2.8s
+ 67%|██████▋   | 564/837 [45:10<19:45,  4.34s/it][retry 2/6] ClientError: sleeping 4.8s
+ 68%|██████▊   | 565/837 [45:18<24:04,  5.31s/it] 68%|██████▊   | 566/837 [45:22<23:16,  5.15s/it] 68%|██████▊   | 567/837 [45:24<18:17,  4.06s/it] 68%|██████▊   | 568/837 [45:30<21:40,  4.83s/it] 68%|██████▊   | 569/837 [45:34<19:32,  4.38s/it] 68%|██████▊   | 570/837 [45:39<19:58,  4.49s/it] 68%|██████▊   | 571/837 [45:39<14:16,  3.22s/it][retry 1/6] ClientError: sleeping 2.1s
+ 68%|██████▊   | 572/837 [45:42<14:45,  3.34s/it] 68%|██████▊   | 573/837 [45:44<12:59,  2.95s/it][retry 1/6] ClientError: sleeping 2.9s
+ 69%|██████▊   | 574/837 [45:53<20:35,  4.70s/it][retry 1/6] ClientError: sleeping 2.9s
+ 69%|██████▊   | 575/837 [46:02<25:45,  5.90s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.2s
+ 69%|██████▉   | 576/837 [46:05<21:52,  5.03s/it] 69%|██████▉   | 577/837 [46:06<16:05,  3.71s/it][retry 1/6] ClientError: sleeping 2.4s
+ 69%|██████▉   | 578/837 [46:11<17:48,  4.13s/it] 69%|██████▉   | 579/837 [46:17<20:54,  4.86s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.9s
+ 69%|██████▉   | 580/837 [46:30<31:25,  7.33s/it] 69%|██████▉   | 581/837 [46:34<26:45,  6.27s/it] 70%|██████▉   | 582/837 [46:35<20:01,  4.71s/it] 70%|██████▉   | 583/837 [46:37<16:48,  3.97s/it] 70%|██████▉   | 584/837 [46:38<12:52,  3.06s/it] 70%|██████▉   | 585/837 [46:40<11:28,  2.73s/it] 70%|███████   | 586/837 [46:43<11:46,  2.82s/it] 70%|███████   | 587/837 [46:52<18:33,  4.46s/it][retry 1/6] ClientError: sleeping 2.2s
+ 70%|███████   | 588/837 [47:03<27:24,  6.60s/it] 70%|███████   | 589/837 [47:07<23:41,  5.73s/it] 70%|███████   | 590/837 [47:11<21:23,  5.20s/it] 71%|███████   | 591/837 [47:11<15:19,  3.74s/it] 71%|███████   | 592/837 [47:15<14:51,  3.64s/it] 71%|███████   | 593/837 [47:15<11:05,  2.73s/it] 71%|███████   | 594/837 [47:23<17:30,  4.32s/it][retry 1/6] ClientError: sleeping 3.0s
+[retry 1/6] ClientError: sleeping 2.1s
+ 71%|███████   | 595/837 [47:42<35:21,  8.76s/it] 71%|███████   | 596/837 [47:45<28:20,  7.06s/it] 71%|███████▏  | 597/837 [47:47<22:06,  5.53s/it][retry 1/6] ClientError: sleeping 2.5s
+ 71%|███████▏  | 598/837 [47:50<17:59,  4.52s/it] 72%|███████▏  | 599/837 [47:53<16:25,  4.14s/it] 72%|███████▏  | 600/837 [47:57<16:37,  4.21s/it] 72%|███████▏  | 601/837 [48:00<14:19,  3.64s/it] 72%|███████▏  | 602/837 [48:08<20:24,  5.21s/it] 72%|███████▏  | 603/837 [48:13<19:39,  5.04s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.4s
+ 72%|███████▏  | 604/837 [48:17<18:03,  4.65s/it] 72%|███████▏  | 605/837 [48:22<19:03,  4.93s/it][retry 1/6] ClientError: sleeping 2.0s
+ 72%|███████▏  | 606/837 [48:27<19:01,  4.94s/it] 73%|███████▎  | 607/837 [48:30<15:54,  4.15s/it] 73%|███████▎  | 608/837 [48:32<14:08,  3.70s/it][retry 1/6] ClientError: sleeping 2.2s
+ 73%|███████▎  | 609/837 [48:35<12:45,  3.36s/it] 73%|███████▎  | 610/837 [48:39<13:14,  3.50s/it] 73%|███████▎  | 611/837 [48:39<09:41,  2.57s/it] 73%|███████▎  | 612/837 [48:48<16:17,  4.35s/it] 73%|███████▎  | 613/837 [48:51<14:43,  3.95s/it] 73%|███████▎  | 614/837 [48:51<10:35,  2.85s/it][retry 1/6] ClientError: sleeping 2.0s
+ 73%|███████▎  | 615/837 [48:57<14:37,  3.95s/it] 74%|███████▎  | 616/837 [48:58<11:20,  3.08s/it][retry 1/6] ClientError: sleeping 2.5s
+ 74%|███████▎  | 617/837 [49:00<09:45,  2.66s/it] 74%|███████▍  | 618/837 [49:01<07:20,  2.01s/it][retry 1/6] ClientError: sleeping 2.3s
+[retry 2/6] ClientError: sleeping 4.8s
+ 74%|███████▍  | 619/837 [49:12<17:31,  4.83s/it][retry 1/6] ClientError: sleeping 2.2s
+ 74%|███████▍  | 620/837 [49:17<17:37,  4.87s/it] 74%|███████▍  | 621/837 [49:20<15:14,  4.23s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.2s
+ 74%|███████▍  | 622/837 [49:26<17:22,  4.85s/it][retry 1/6] ClientError: sleeping 2.8s
+ 74%|███████▍  | 623/837 [49:36<22:21,  6.27s/it] 75%|███████▍  | 624/837 [49:37<17:20,  4.89s/it] 75%|███████▍  | 625/837 [49:37<12:12,  3.46s/it] 75%|███████▍  | 626/837 [49:38<09:02,  2.57s/it] 75%|███████▍  | 627/837 [49:58<27:02,  7.73s/it][retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.6s
+ 75%|███████▌  | 628/837 [50:03<24:45,  7.11s/it][retry 1/6] ClientError: sleeping 2.9s
+ 75%|███████▌  | 630/837 [50:12<19:54,  5.77s/it][retry 2/6] ClientError: sleeping 4.6s
+[retry 1/6] ClientError: sleeping 2.5s
+ 75%|███████▌  | 631/837 [50:14<16:53,  4.92s/it][retry 1/6] ClientError: sleeping 2.6s
+ 76%|███████▌  | 632/837 [50:28<24:34,  7.19s/it] 76%|███████▌  | 633/837 [50:31<20:44,  6.10s/it][retry 1/6] ClientError: sleeping 2.5s
+ 76%|███████▌  | 634/837 [50:35<18:57,  5.60s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 2/6] ClientError: sleeping 4.8s
+[retry 3/6] ClientError: sleeping 8.3s
+ 76%|███████▌  | 635/837 [50:50<27:49,  8.26s/it] 76%|███████▌  | 636/837 [50:53<22:54,  6.84s/it][retry 1/6] ClientError: sleeping 2.2s
+ 76%|███████▌  | 637/837 [51:00<22:17,  6.69s/it] 76%|███████▌  | 638/837 [51:04<20:07,  6.07s/it] 76%|███████▋  | 639/837 [51:06<15:51,  4.81s/it][retry 1/6] ClientError: sleeping 2.5s
+ 76%|███████▋  | 640/837 [51:20<24:19,  7.41s/it] 77%|███████▋  | 641/837 [51:22<19:23,  5.94s/it] 77%|███████▋  | 642/837 [51:24<15:16,  4.70s/it][retry 1/6] ClientError: sleeping 2.5s
+ 77%|███████▋  | 643/837 [51:30<16:30,  5.11s/it][retry 1/6] ClientError: sleeping 2.5s
+ 77%|███████▋  | 644/837 [51:38<18:59,  5.90s/it] 77%|███████▋  | 645/837 [51:43<18:15,  5.71s/it][retry 1/6] ClientError: sleeping 2.4s
+ 77%|███████▋  | 646/837 [51:49<17:53,  5.62s/it][retry 1/6] ClientError: sleeping 2.4s
+ 77%|███████▋  | 647/837 [51:49<12:50,  4.06s/it] 77%|███████▋  | 648/837 [51:53<13:03,  4.14s/it][retry 1/6] ClientError: sleeping 2.0s
+ 78%|███████▊  | 649/837 [52:00<14:58,  4.78s/it] 78%|███████▊  | 650/837 [52:01<11:30,  3.69s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 1/6] ClientError: sleeping 2.6s
+ 78%|███████▊  | 651/837 [52:05<12:17,  3.96s/it] 78%|███████▊  | 652/837 [52:06<09:07,  2.96s/it] 78%|███████▊  | 653/837 [52:11<10:44,  3.50s/it] 78%|███████▊  | 654/837 [52:14<10:07,  3.32s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.9s
+ 78%|███████▊  | 655/837 [52:27<19:24,  6.40s/it][retry 1/6] ClientError: sleeping 2.3s
+ 78%|███████▊  | 656/837 [52:28<14:04,  4.66s/it][retry 2/6] ClientError: sleeping 4.5s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.3s
+ 78%|███████▊  | 657/837 [52:38<18:51,  6.29s/it][retry 1/6] ClientError: sleeping 2.3s
+ 79%|███████▊  | 658/837 [52:43<17:28,  5.86s/it][retry 1/6] ClientError: sleeping 2.5s
+ 79%|███████▊  | 659/837 [52:44<13:04,  4.41s/it][retry 2/6] ClientError: sleeping 4.6s
+ 79%|███████▉  | 660/837 [52:49<13:24,  4.55s/it] 79%|███████▉  | 661/837 [52:49<09:37,  3.28s/it][retry 3/6] ClientError: sleeping 8.5s
+ 79%|███████▉  | 662/837 [52:51<08:32,  2.93s/it][retry 1/6] ClientError: sleeping 2.9s
+[retry 1/6] ClientError: sleeping 2.8s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 2/6] ClientError: sleeping 5.0s
+[retry 4/6] ClientError: sleeping 16.6s
+ 79%|███████▉  | 663/837 [53:10<22:17,  7.69s/it] 79%|███████▉  | 664/837 [53:11<16:57,  5.88s/it] 79%|███████▉  | 665/837 [53:13<13:26,  4.69s/it] 80%|███████▉  | 666/837 [53:14<09:56,  3.49s/it] 80%|███████▉  | 667/837 [53:16<08:41,  3.07s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.4s
+[retry 5/6] ClientError: sleeping 32.4s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 1/6] ClientError: sleeping 2.1s
+ 80%|███████▉  | 668/837 [53:31<18:17,  6.49s/it] 80%|███████▉  | 669/837 [53:32<13:59,  5.00s/it] 80%|████████  | 670/837 [53:34<11:15,  4.04s/it][retry 1/6] ClientError: sleeping 2.5s
+ 80%|████████  | 671/837 [53:36<09:08,  3.30s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 6/6] ClientError: sleeping 64.9s
+ 80%|████████  | 672/837 [54:02<28:08, 10.23s/it] 80%|████████  | 673/837 [54:03<20:15,  7.41s/it][retry 1/6] ClientError: sleeping 2.3s
+ 81%|████████  | 674/837 [54:15<24:05,  8.87s/it][retry 1/6] ClientError: sleeping 2.7s
+ 81%|████████  | 675/837 [54:19<20:20,  7.53s/it] 81%|████████  | 676/837 [54:22<15:52,  5.91s/it] 81%|████████  | 677/837 [54:28<16:10,  6.07s/it] 81%|████████  | 678/837 [54:38<18:49,  7.10s/it] 81%|████████  | 679/837 [54:39<14:12,  5.39s/it][retry 1/6] ClientError: sleeping 2.5s
+ 81%|████████  | 680/837 [54:40<10:59,  4.20s/it] 81%|████████▏ | 681/837 [54:41<08:27,  3.25s/it] 81%|████████▏ | 682/837 [54:47<10:13,  3.96s/it] 82%|████████▏ | 683/837 [54:48<08:07,  3.17s/it][retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.9s
+[retry 2/6] ClientError: sleeping 4.1s
+Task failed: ClientError("429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Resource exhausted. Please try again later. Please refer to https://cloud.google.com/vertex-ai/generative-ai/docs/error-code-429 for more details.', 'status': 'RESOURCE_EXHAUSTED'}}")
+ 82%|████████▏ | 684/837 [55:07<19:45,  7.75s/it][retry 1/6] ClientError: sleeping 2.3s
+ 82%|████████▏ | 685/837 [55:13<18:16,  7.21s/it] 82%|████████▏ | 686/837 [55:14<13:18,  5.29s/it] 82%|████████▏ | 687/837 [55:16<10:47,  4.32s/it] 82%|████████▏ | 688/837 [55:17<08:31,  3.43s/it] 82%|████████▏ | 689/837 [55:18<06:45,  2.74s/it] 82%|████████▏ | 690/837 [55:18<04:52,  1.99s/it] 83%|████████▎ | 691/837 [55:21<05:00,  2.06s/it][retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.2s
+ 83%|████████▎ | 692/837 [55:42<18:53,  7.82s/it][retry 1/6] ClientError: sleeping 2.6s
+ 83%|████████▎ | 693/837 [55:52<20:46,  8.66s/it] 83%|████████▎ | 694/837 [55:53<15:06,  6.34s/it] 83%|████████▎ | 695/837 [55:57<13:08,  5.56s/it] 83%|████████▎ | 696/837 [56:05<14:55,  6.35s/it] 83%|████████▎ | 697/837 [56:12<14:45,  6.33s/it] 83%|████████▎ | 698/837 [56:17<14:20,  6.19s/it] 84%|████████▎ | 699/837 [56:18<10:21,  4.51s/it] 84%|████████▎ | 700/837 [56:22<09:40,  4.23s/it][retry 1/6] ClientError: sleeping 2.1s
+ 84%|████████▍ | 701/837 [56:23<07:41,  3.40s/it][retry 1/6] ClientError: sleeping 2.1s
+[retry 2/6] ClientError: sleeping 4.7s
+[retry 1/6] ClientError: sleeping 2.0s
+[retry 1/6] ClientError: sleeping 2.1s
+ 84%|████████▍ | 702/837 [56:32<11:32,  5.13s/it][retry 3/6] ClientError: sleeping 8.3s
+[retry 2/6] ClientError: sleeping 4.0s
+ 84%|████████▍ | 703/837 [56:37<11:25,  5.12s/it] 84%|████████▍ | 704/837 [56:52<17:32,  7.91s/it] 84%|████████▍ | 705/837 [56:54<13:52,  6.31s/it] 84%|████████▍ | 706/837 [56:59<13:02,  5.98s/it] 84%|████████▍ | 707/837 [57:00<09:36,  4.44s/it] 85%|████████▍ | 708/837 [57:07<10:43,  4.99s/it] 85%|████████▍ | 709/837 [57:07<07:57,  3.73s/it] 85%|████████▍ | 710/837 [57:08<05:41,  2.69s/it][retry 1/6] ClientError: sleeping 2.4s
+[retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.8s
+ 85%|████████▍ | 711/837 [57:20<11:43,  5.59s/it] 85%|████████▌ | 712/837 [57:24<10:45,  5.17s/it][retry 1/6] ClientError: sleeping 2.5s
+ 85%|████████▌ | 713/837 [57:28<10:00,  4.84s/it] 85%|████████▌ | 714/837 [57:29<07:39,  3.73s/it] 85%|████████▌ | 715/837 [57:36<09:30,  4.67s/it] 86%|████████▌ | 716/837 [57:42<10:13,  5.07s/it] 86%|████████▌ | 717/837 [57:43<07:32,  3.77s/it] 86%|████████▌ | 718/837 [57:46<07:07,  3.59s/it] 86%|████████▌ | 719/837 [57:46<05:00,  2.55s/it] 86%|████████▌ | 720/837 [57:49<04:58,  2.55s/it][retry 1/6] ClientError: sleeping 2.0s
+ 86%|████████▌ | 721/837 [58:02<10:55,  5.65s/it] 86%|████████▋ | 722/837 [58:12<13:37,  7.11s/it] 86%|████████▋ | 723/837 [58:14<10:11,  5.36s/it] 86%|████████▋ | 724/837 [58:15<07:42,  4.09s/it] 87%|████████▋ | 725/837 [58:16<06:01,  3.23s/it][retry 1/6] ClientError: sleeping 3.0s
+ 87%|████████▋ | 726/837 [58:21<07:14,  3.91s/it] 87%|████████▋ | 728/837 [58:26<05:35,  3.08s/it] 87%|████████▋ | 729/837 [58:29<05:45,  3.20s/it] 87%|████████▋ | 730/837 [58:40<09:22,  5.25s/it] 87%|████████▋ | 731/837 [58:42<07:43,  4.38s/it] 87%|████████▋ | 732/837 [58:44<06:09,  3.52s/it] 88%|████████▊ | 733/837 [58:45<04:54,  2.83s/it] 88%|████████▊ | 734/837 [58:45<03:32,  2.06s/it] 88%|████████▊ | 735/837 [58:49<04:34,  2.69s/it] 88%|████████▊ | 736/837 [58:59<07:54,  4.69s/it] 88%|████████▊ | 737/837 [59:00<06:07,  3.68s/it] 88%|████████▊ | 738/837 [59:09<08:37,  5.23s/it] 88%|████████▊ | 740/837 [59:09<04:36,  2.85s/it][retry 1/6] ClientError: sleeping 2.0s
+ 89%|████████▊ | 741/837 [59:12<04:52,  3.05s/it][retry 1/6] ClientError: sleeping 2.2s
+ 89%|████████▊ | 742/837 [59:18<05:40,  3.59s/it] 89%|████████▉ | 743/837 [59:18<04:16,  2.73s/it][retry 1/6] ClientError: sleeping 2.7s
+[retry 1/6] ClientError: sleeping 2.2s
+ 89%|████████▉ | 744/837 [59:25<05:55,  3.82s/it] 89%|████████▉ | 745/837 [59:38<10:01,  6.53s/it] 89%|████████▉ | 746/837 [59:39<07:20,  4.84s/it] 89%|████████▉ | 747/837 [59:40<05:50,  3.89s/it] 89%|████████▉ | 748/837 [59:41<04:21,  2.94s/it] 89%|████████▉ | 749/837 [59:42<03:24,  2.32s/it][retry 1/6] ClientError: sleeping 2.7s
+ 90%|████████▉ | 750/837 [59:54<07:43,  5.32s/it] 90%|████████▉ | 751/837 [1:00:02<08:49,  6.16s/it] 90%|████████▉ | 752/837 [1:00:07<07:55,  5.59s/it] 90%|████████▉ | 753/837 [1:00:09<06:30,  4.65s/it][retry 1/6] ClientError: sleeping 2.8s
+ 90%|█████████ | 754/837 [1:00:11<05:11,  3.76s/it] 90%|█████████ | 755/837 [1:00:15<05:10,  3.78s/it] 90%|█████████ | 756/837 [1:00:15<03:50,  2.85s/it] 90%|█████████ | 757/837 [1:00:20<04:26,  3.33s/it][retry 1/6] ClientError: sleeping 2.3s
+[retry 1/6] ClientError: sleeping 2.2s
+ 91%|█████████ | 758/837 [1:00:24<04:55,  3.75s/it][retry 1/6] ClientError: sleeping 2.2s
+[retry 1/6] ClientError: sleeping 2.6s
+ 91%|█████████ | 759/837 [1:00:34<07:15,  5.59s/it][retry 1/6] ClientError: sleeping 2.5s
+ 91%|█████████ | 760/837 [1:00:46<09:40,  7.54s/it] 91%|█████████ | 761/837 [1:00:49<07:30,  5.93s/it] 91%|█████████ | 762/837 [1:00:51<06:15,  5.00s/it] 91%|█████████ | 763/837 [1:00:55<05:34,  4.53s/it] 91%|█████████▏| 764/837 [1:00:55<04:02,  3.32s/it] 91%|█████████▏| 765/837 [1:00:59<04:09,  3.47s/it][retry 1/6] ClientError: sleeping 2.5s
+ 92%|█████████▏| 766/837 [1:01:16<08:52,  7.50s/it][retry 1/6] ClientError: sleeping 2.4s
+ 92%|█████████▏| 767/837 [1:01:17<06:28,  5.55s/it] 92%|█████████▏| 768/837 [1:01:18<04:39,  4.06s/it][retry 1/6] ClientError: sleeping 2.9s
+ 92%|█████████▏| 769/837 [1:01:23<04:56,  4.36s/it] 92%|█████████▏| 770/837 [1:01:31<06:05,  5.45s/it] 92%|█████████▏| 771/837 [1:01:31<04:18,  3.92s/it][retry 1/6] ClientError: sleeping 2.6s
+[retry 1/6] ClientError: sleeping 2.5s
+[retry 2/6] ClientError: sleeping 5.0s
+ 92%|█████████▏| 772/837 [1:01:47<08:05,  7.47s/it] 92%|█████████▏| 773/837 [1:01:48<05:58,  5.61s/it] 92%|█████████▏| 774/837 [1:01:49<04:26,  4.23s/it] 93%|█████████▎| 775/837 [1:01:52<03:55,  3.80s/it] 93%|█████████▎| 776/837 [1:01:58<04:32,  4.47s/it] 93%|█████████▎| 777/837 [1:02:00<03:54,  3.90s/it] 93%|█████████▎| 778/837 [1:02:06<04:19,  4.40s/it] 93%|█████████▎| 779/837 [1:02:13<04:59,  5.16s/it] 93%|█████████▎| 780/837 [1:02:14<03:42,  3.91s/it] 93%|█████████▎| 782/837 [1:02:15<02:05,  2.29s/it] 94%|█████████▎| 783/837 [1:02:21<02:51,  3.17s/it] 94%|█████████▎| 784/837 [1:02:25<03:00,  3.40s/it] 94%|█████████▍| 785/837 [1:02:34<04:16,  4.92s/it] 94%|█████████▍| 786/837 [1:02:38<04:05,  4.82s/it] 94%|█████████▍| 787/837 [1:02:42<03:47,  4.55s/it][retry 1/6] ClientError: sleeping 2.8s
+ 94%|█████████▍| 788/837 [1:02:50<04:34,  5.60s/it][retry 1/6] ClientError: sleeping 2.0s
+ 94%|█████████▍| 789/837 [1:02:52<03:41,  4.60s/it][retry 2/6] ClientError: sleeping 4.1s
+ 94%|█████████▍| 790/837 [1:02:57<03:31,  4.50s/it] 95%|█████████▍| 791/837 [1:02:57<02:37,  3.41s/it] 95%|█████████▍| 792/837 [1:03:09<04:25,  5.91s/it] 95%|█████████▍| 793/837 [1:03:10<03:11,  4.34s/it] 95%|█████████▍| 794/837 [1:03:13<02:44,  3.83s/it][retry 1/6] ClientError: sleeping 2.9s
+ 95%|█████████▍| 795/837 [1:03:17<02:44,  3.91s/it][retry 1/6] ClientError: sleeping 2.7s
+ 95%|█████████▌| 796/837 [1:03:30<04:33,  6.67s/it] 95%|█████████▌| 797/837 [1:03:38<04:48,  7.21s/it] 95%|█████████▌| 798/837 [1:03:40<03:36,  5.54s/it] 95%|█████████▌| 799/837 [1:03:40<02:28,  3.92s/it] 96%|█████████▌| 800/837 [1:03:42<02:08,  3.47s/it] 96%|█████████▌| 801/837 [1:03:46<02:05,  3.50s/it] 96%|█████████▌| 802/837 [1:03:48<01:41,  2.90s/it] 96%|█████████▌| 803/837 [1:03:48<01:18,  2.30s/it][retry 1/6] ClientError: sleeping 2.7s
+ 96%|█████████▌| 804/837 [1:03:58<02:29,  4.54s/it] 96%|█████████▌| 805/837 [1:04:04<02:34,  4.82s/it] 96%|█████████▋| 806/837 [1:04:05<01:56,  3.76s/it] 96%|█████████▋| 807/837 [1:04:15<02:45,  5.53s/it] 97%|█████████▋| 808/837 [1:04:16<02:03,  4.26s/it] 97%|█████████▋| 809/837 [1:04:17<01:35,  3.39s/it] 97%|█████████▋| 810/837 [1:04:19<01:16,  2.84s/it] 97%|█████████▋| 811/837 [1:04:19<00:52,  2.03s/it] 97%|█████████▋| 812/837 [1:04:28<01:43,  4.13s/it] 97%|█████████▋| 813/837 [1:04:33<01:49,  4.54s/it] 97%|█████████▋| 814/837 [1:04:37<01:37,  4.22s/it] 97%|█████████▋| 815/837 [1:04:38<01:13,  3.32s/it] 97%|█████████▋| 816/837 [1:04:50<02:02,  5.86s/it] 98%|█████████▊| 817/837 [1:04:52<01:37,  4.85s/it] 98%|█████████▊| 818/837 [1:04:53<01:06,  3.49s/it] 98%|█████████▊| 819/837 [1:04:54<00:48,  2.68s/it][retry 1/6] ClientError: sleeping 2.5s
+ 98%|█████████▊| 820/837 [1:05:02<01:13,  4.31s/it] 98%|█████████▊| 821/837 [1:05:03<00:55,  3.44s/it] 98%|█████████▊| 822/837 [1:05:04<00:38,  2.57s/it][retry 1/6] ClientError: sleeping 2.1s
+ 98%|█████████▊| 823/837 [1:05:20<01:33,  6.69s/it] 98%|█████████▊| 824/837 [1:05:22<01:09,  5.35s/it] 99%|█████████▊| 825/837 [1:05:28<01:07,  5.61s/it] 99%|█████████▊| 826/837 [1:05:34<01:02,  5.64s/it] 99%|█████████▉| 827/837 [1:05:38<00:52,  5.25s/it] 99%|█████████▉| 828/837 [1:05:40<00:36,  4.08s/it] 99%|█████████▉| 829/837 [1:05:47<00:39,  4.98s/it] 99%|█████████▉| 830/837 [1:05:56<00:43,  6.19s/it][retry 1/6] ClientError: sleeping 2.2s
+ 99%|█████████▉| 831/837 [1:06:03<00:38,  6.39s/it] 99%|█████████▉| 832/837 [1:06:06<00:27,  5.59s/it]100%|█████████▉| 833/837 [1:06:07<00:16,  4.07s/it]100%|█████████▉| 834/837 [1:06:11<00:11,  3.94s/it]100%|█████████▉| 835/837 [1:06:12<00:06,  3.13s/it]100%|█████████▉| 836/837 [1:06:14<00:02,  2.82s/it]100%|██████████| 837/837 [1:06:27<00:00,  5.77s/it]100%|██████████| 837/837 [1:06:27<00:00,  4.76s/it]
+Wrote 20 docs to output/matres_gemini25pro_full/matres_cot_yuan_gemini-2.5-pro.json
+Took 3987.1s

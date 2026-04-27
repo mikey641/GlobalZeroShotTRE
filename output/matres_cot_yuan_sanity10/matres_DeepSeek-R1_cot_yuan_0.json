@@ -1,0 +1,5 @@
+{
+  "AP_20130322.json": {
+    "target": "strict graph {\n\"killed(2)\" -- \"started(3)\" [rel=after];\n\"killed(2)\" -- \"sparking(4)\" [rel=after];\n\"started(3)\" -- \"sparking(4)\" [rel=before];\n\"started(3)\" -- \"ended(6)\" [rel=before];\n\"started(3)\" -- \"according(7)\" [rel=before];\n\"sparking(4)\" -- \"ended(6)\" [rel=before];\n\"sparking(4)\" -- \"according(7)\" [rel=before];\n\"ended(6)\" -- \"according(7)\" [rel=before];\n\"ended(6)\" -- \"reported(8)\" [rel=vague];\n\"ended(6)\" -- \"said(9)\" [rel=before];\n}"
+  }
+}

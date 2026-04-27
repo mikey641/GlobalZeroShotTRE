@@ -1,0 +1,201 @@
+loaded 10 pairs
+
+creating dedicated endpoint for deepseek-ai/DeepSeek-R1-Distill-Qwen-14B ...
+  id=endpoint-391e8d07-e665-4263-b034-5937c28fc7a9  name=mikey641_af35/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B-f77ea3e1
+  [+  0s] state=PENDING
+  [+ 20s] state=STARTING
+  [+ 40s] state=STARTING
+  [+ 61s] state=STARTING
+  [+ 82s] state=STARTING
+  [+102s] state=STARTING
+  [+122s] state=STARTING
+  [+143s] state=STARTING
+  [+163s] state=STARTING
+  [+183s] state=STARTING
+  [+204s] state=STARTING
+  [+224s] state=STARTING
+  [+244s] state=STARTING
+  [+265s] state=STARTING
+  [+285s] state=STARTING
+  [+305s] state=STARTING
+  [+326s] state=STARTING
+  [+346s] state=STARTING
+  [+366s] state=STARTING
+  [+387s] state=STARTING
+  [+407s] state=STARTING
+  [+427s] state=STARTING
+  [+448s] state=STARTED
+
+running 10 probes via mikey641_af35/deepseek-ai/DeepSeek-R1-Distill-Qwen-14B-f77ea3e1
+   1/10  gold=AFTER   pred=BEFORE  ·  close=1  chain=1732  tok=416  4.0s
+   2/10  gold=VAGUE   pred=BEFORE  ·  close=1  chain=1192  tok=365  2.8s
+   3/10  gold=VAGUE   pred=BEFORE  ·  close=1  chain=1815  tok=426  3.8s
+   4/10  gold=BEFORE  pred=BEFORE  ✓  close=1  chain=1402  tok=462  4.5s
+   5/10  gold=BEFORE  pred=BEFORE  ✓  close=1  chain=2019  tok=500  3.7s
+   6/10  gold=BEFORE  pred=BEFORE  ✓  close=1  chain=1803  tok=450  4.0s
+   7/10  gold=BEFORE  pred=BEFORE  ✓  close=1  chain=1889  tok=439  3.9s
+   8/10  gold=BEFORE  pred=BEFORE  ✓  close=1  chain=2754  tok=658  5.4s
+   9/10  gold=AFTER   pred=AFTER   ✓  close=1  chain=2505  tok=613  5.1s
+  10/10  gold=BEFORE  pred=BEFORE  ✓  close=1  chain=1914  tok=454  4.0s
+
+======== per-pair detail ========
+
+--- pair 1 (AP_20130322.json  2-3)  gold=AFTER  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between the events e2 and e3 in the given document. Let me start by reading the document carefully to understand the context and the timing of these events.
+
+The document talks about the flu season winding down. It mentions that the flu
+
+  ... [1219 chars elided] ...
+
+before the killing (e2) took place. Because the season had to begin before any deaths occurred during it.
+
+So, the temporal relationship is that e3 (started) happened before e2 (killed). Therefore, e2 is after e3.
+</think>
+
+The event e3 ("started") occurred before e2 ("killed"). 
+
+**Answer:** before
+
+--- pair 2 (AP_20130322.json  2-4)  gold=VAGUE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between the two events mentioned in the document: <EVENT e2>killed</EVENT> and <EVENT e4>sparking</EVENT>. The user is asking whether one happened before, after, equal in time, or if the timing is vague.
+
+First, I'll read through the do
+
+  ... [904 chars elided] ...
+
+he temporal relationship between <EVENT e2>killed</EVENT> and <EVENT e4>sparking</EVENT> is **before**. 
+
+**Explanation:**
+- The flu season started earlier than usual, which **sparked** concerns (e4).
+- Subsequently, the season went on to **kill** 105 children (e2).
+- Therefore, e4 occurs before e2.
+
+--- pair 3 (AP_20130322.json  3-4)  gold=VAGUE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between the two events mentioned in the document: <EVENT e3>started</EVENT> and <EVENT e4>sparking</EVENT>. The user is asking whether one happened before, after, equal, or if the timing is vague.
+
+First, I'll read the document carefull
+
+  ... [1427 chars elided] ...
+
+Therefore, the temporal relationship is that e3 (started) happened before e4 (sparking).
+</think>
+
+The temporal relationship between <EVENT e3>started</EVENT> and <EVENT e4>sparking</EVENT> is **before**. The flu season starting earlier than usual (e3) occurred before the concerns were sparked (e4).
+
+--- pair 4 (AP_20130322.json  3-6)  gold=BEFORE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between the events e3 and e6 in the given document. Let me start by reading the document carefully to understand the context and the events mentioned.
+
+The document talks about the flu season winding down, having killed 105 children, wh
+
+  ... [1420 chars elided] ...
+
+and ended as it was winding down.
+3. **Determine Order:** Since the season began in December and ended later, e3 occurred before e6.
+4. **Conclusion:** The start (e3) happened before the end (e6).
+
+**Answer:** The event <EVENT e3>started</EVENT> occurred **before** the event <EVENT e6>ended</EVENT>.
+
+--- pair 5 (AP_20130322.json  3-7)  gold=BEFORE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between <EVENT e3>started</EVENT> and <EVENT e7>according</EVENT> in the given document. Let me start by reading the document carefully to understand the context and the events mentioned.
+
+The document talks about the flu season winding
+
+  ... [1620 chars elided] ...
+
+emporal relationship is that <EVENT e3>started</EVENT> happened before <EVENT e7>according</EVENT>.
+</think>
+
+The temporal relationship between <EVENT e3>started</EVENT> and <EVENT e7>according</EVENT> is that <EVENT e3>started</EVENT> occurred before <EVENT e7>according</EVENT>.
+
+**Answer:** before
+
+--- pair 6 (AP_20130322.json  4-6)  gold=BEFORE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between the two events mentioned in the document: <EVENT e4>sparking</EVENT> and <EVENT e6>ended</EVENT>. Let me start by reading the document carefully to understand the context and the order of these events.
+
+The document talks about 
+
+  ... [1398 chars elided] ...
+
+re, the temporal relationship is that <EVENT e4>sparking</EVENT> happened before <EVENT e6>ended</EVENT>.
+</think>
+
+The temporal relationship between <EVENT e4>sparking</EVENT> and <EVENT e6>ended</EVENT> is that <EVENT e4>sparking</EVENT> occurred before <EVENT e6>ended</EVENT>.
+
+**Answer:** before
+
+--- pair 7 (AP_20130322.json  4-7)  gold=BEFORE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between the two events mentioned in the document: <EVENT e4>sparking</EVENT> and <EVENT e7>according</EVENT>. The user has provided a document about the flu season, and I need to determine if one event happened before, after, equal to, 
+
+  ... [1404 chars elided] ...
+
+d e7 happening simultaneously; instead, it's clear that the concerns were sparked at the start, and the CDC's assessment comes later. So, the temporal relationship is definitely before.
+</think>
+
+The event e4 ("sparking concerns") occurs before event e7 ("according to the CDC"). 
+
+**Answer:** before
+
+--- pair 8 (AP_20130322.json  6-7)  gold=BEFORE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between <EVENT e6>ended</EVENT> and <EVENT e7>according</EVENT> in the given document. Let me start by reading the document carefully to understand the context of these two events.
+
+The document talks about the flu season winding down. 
+
+  ... [2302 chars elided] ...
+
+hey are in a cause-effect or event-reporting relationship, not happening at the same time.
+
+So, the temporal relationship is that e6 happened before e7.
+</think>
+
+The temporal relationship between <EVENT e6>ended</EVENT> and <EVENT e7>according</EVENT> is that e6 happened before e7. 
+
+Answer: before
+
+--- pair 9 (AP_20130322.json  6-8)  gold=AFTER  pred=AFTER ---
+<think>
+Okay, so I need to figure out the temporal relationship between the two events mentioned in the document: <EVENT e6>ended</EVENT> and <EVENT e8>reported</EVENT>. Let me start by reading the document carefully to understand the context and the timing of these events.
+
+The document talks about
+
+  ... [2098 chars elided] ...
+
+ season ended after the last week's reports were made. So, the order is report first, then the season ends.
+</think>
+
+The temporal relationship between <EVENT e6>ended</EVENT> and <EVENT e8>reported</EVENT> is that <EVENT e6>ended</EVENT> occurred after <EVENT e8>reported</EVENT>.
+
+**Answer:** after
+
+--- pair 10 (AP_20130322.json  6-9)  gold=BEFORE  pred=BEFORE ---
+<think>
+Okay, so I need to figure out the temporal relationship between the two events mentioned in the document: <EVENT e6>ended</EVENT> and <EVENT e9>said</EVENT>. Let me start by carefully reading the document to understand the context and timing of each event.
+
+First, the document talks about th
+
+  ... [1428 chars elided] ...
+
+sonable to infer that the ending of the season (event e6) happened before the statement (event e9).
+
+Therefore, the temporal relationship between e6 and e9 is that e6 happened before e9.
+</think>
+
+The event <EVENT e6>ended</EVENT> occurred before the event <EVENT e9>said</EVENT>.
+
+**Answer:** before
+
+======== summary ========
+  pairs with </think> close:          10/10
+  pairs with substantive chain:       8/10
+  pairs with parseable label:         10/10
+  pairs where label matches gold:     7/10
+
+deleting endpoint ...
+  deleted

@@ -2,7 +2,14 @@
 node_modules
 package-lock.json
 data
-output
 __pycache__
 scorer
 .env
+
+# Files >100MB exceed GitHub's hard per-file limit
+output/matres_train_v4a_split.jsonl
+output/matres_train_continue_full/matres_train_continue_DeepSeek-R1.traces.jsonl
+
+# In-flight v2 full run (still writing); push after completion
+output/matres_train_continue_r1_goldconditioned_v2_full.jsonl
+output/matres_train_continue_r1_goldconditioned_v2_full.log
