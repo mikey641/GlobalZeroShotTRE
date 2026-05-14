@@ -1,4 +1,4 @@
-"""Build v4 multi-turn training data files (v4a/v4b/v4c).
+"""Build v4 multi-turn training data files (v4a/v4b/v4c/v4d).
 
 Source traces: output/matres_train_continue_full/matres_train_continue_DeepSeek-R1.traces.jsonl
 Source docs:   data/MATRES/_in_OmniTemp_format/train/
@@ -7,6 +7,11 @@ Outputs:
   output/matres_train_v4a_full_directlabels.jsonl     (full data, no-think, teacher+gold-derived)
   output/matres_train_v4b_subset_noThink.jsonl        (teacher-correct subset, no-think)
   output/matres_train_v4c_subset_withThink.jsonl      (teacher-correct subset, <think>+label)
+
+v4d (separate flag --v4d):
+  Source: output/matres_train_v4d_full_reasoning_goldcond.jsonl  (raw merged, 11,885 rows)
+  Output: output/matres_train_v4d_sft_format.jsonl
+  Same chat-format as v4c (<think>...</Think>\\n\\nYes|No assistant), reasoning everywhere.
 
 Does NOT upload. Does NOT launch fine-tunes.
 """
@@ -489,7 +494,189 @@ def together_check(path):
         print(f'together CLI error: {type(e).__name__}: {e}')
 
 
+V4D_SRC = 'output/matres_train_v4d_full_reasoning_goldcond.jsonl'
+V4D_OUT = 'output/matres_train_v4d_sft_format.jsonl'
+HINT_RE = re.compile(r'\bhint\b', re.IGNORECASE)
+
+
+def build_v4d():
+    """Convert merged v4d raw file into Together SFT chat format.
+
+    Schema of source rows: doc_id, e1_id, e2_id, gold_label, predicted_label, turns,
+    generation_mode, [v2 metadata for gold-conditioned rows].
+    Each turn has: question (bare), think, response, parsed.
+
+    Output schema: {"messages": [{role, content}, ...]}
+    Assistant content format: f"<think>\\n{think}\\n</Think>\\n\\n{Yes|No}"
+    (uses </Think> capital T per R1-Distill chat-template requirement.)
+    """
+    if not os.path.exists(V4D_SRC):
+        raise SystemExit(f'Missing source: {V4D_SRC}')
+
+    raw = [json.loads(l) for l in open(V4D_SRC)]
+    print(f'loaded {len(raw)} v4d raw rows')
+
+    sft_rows = []
+    skipped = Counter()
+    for r in raw:
+        turns = r.get('turns') or []
+        if not turns:
+            skipped['no_turns'] += 1
+            continue
+        # Every turn must have definitive parsed in {yes, no}
+        if not all(t.get('parsed') in ('yes', 'no') for t in turns):
+            skipped['uncertain_turn'] += 1
+            continue
+        # Walk must terminate cleanly (Q1+Q2 / Q1+Q2+Q3 / Q1+Q2+Q3+Q4)
+        chain = chain_from_teacher(turns)
+        if chain is None:
+            skipped['bad_chain'] += 1
+            continue
+        terminal = chain_terminal_label(chain)
+        if terminal != r['gold_label']:
+            skipped['terminal_mismatches_gold'] += 1
+            continue
+
+        msgs = []
+        for t in turns:
+            q_text = strip_keep_short(t.get('question', ''))
+            think = (t.get('think') or '').strip()
+            ans = yes_no_str(t['parsed'])
+            msgs.append({'role': 'user', 'content': q_text})
+            msgs.append({
+                'role': 'assistant',
+                'content': f'<think>\n{think}\n</Think>\n\n{ans}',
+            })
+
+        sft_rows.append({
+            'messages': msgs,
+            'doc_id': r['doc_id'], 'e1_id': r['e1_id'], 'e2_id': r['e2_id'],
+            'gold_label': r['gold_label'],
+            'generation_mode': r.get('generation_mode'),
+            'terminal_q': chain[-1][0],
+        })
+
+    # Verify no \bhint\b in ASSISTANT content (training target). User content can
+    # legitimately contain "hint" because source documents (e.g. wsj_0584) may
+    # use the word as English — that's input, not what the model is trained to emit.
+    leak_count = 0
+    leak_examples = []
+    user_hint_count = 0
+    for r in sft_rows:
+        for m in r['messages']:
+            if not HINT_RE.search(m['content']):
+                continue
+            if m['role'] == 'user':
+                user_hint_count += 1
+                continue
+            leak_count += 1
+            if len(leak_examples) < 3:
+                idx = HINT_RE.search(m['content']).start()
+                leak_examples.append({
+                    'doc_id': r['doc_id'], 'pair': (r['e1_id'], r['e2_id']),
+                    'role': m['role'],
+                    'ctx': m['content'][max(0, idx-60):idx+60],
+                })
+    print(f'\\bhint\\b in user content (allowed; source-doc English): {user_hint_count}')
+    print(f'\\bhint\\b in assistant content: {leak_count}  (must be 0)')
+    if leak_count:
+        for ex in leak_examples:
+            print(f'   {ex["doc_id"]} pair={ex["pair"]} role={ex["role"]}: ...{ex["ctx"]!r}...')
+        raise SystemExit(1)
+
+    os.makedirs(os.path.dirname(V4D_OUT), exist_ok=True)
+    with open(V4D_OUT, 'w') as f:
+        for r in sft_rows:
+            f.write(json.dumps({'messages': r['messages']}) + '\n')
+    meta_path = V4D_OUT.replace('.jsonl', '.meta.jsonl')
+    with open(meta_path, 'w') as f:
+        for r in sft_rows:
+            f.write(json.dumps({k: v for k, v in r.items() if k != 'messages'}) + '\n')
+
+    print(f'\nwrote {len(sft_rows)} rows -> {V4D_OUT} (+ {meta_path})')
+    print(f'skipped: {dict(skipped)}')
+
+    return sft_rows
+
+
+def report_v4d(rows):
+    print(f'\n========== v4d (full+goldcond, with-think) ==========')
+    print(f'  rows: {len(rows)}')
+
+    label_dist = Counter(r['gold_label'] for r in rows)
+    print(f'  gold label dist:   {dict(sorted(label_dist.items()))}')
+
+    mode_dist = Counter(r['generation_mode'] for r in rows)
+    print(f'  generation_mode:   {dict(mode_dist.most_common())}')
+
+    terminal_q = Counter(r['terminal_q'] for r in rows)
+    print(f'  terminal-Q:        {dict(sorted(terminal_q.items()))}')
+
+    q1yes = sum(1 for r in rows
+                if r['messages'] and assistant_terminal(r['messages'][1]['content']) == 'yes')
+    print(f'  Q1=Yes: {q1yes}/{len(rows)} ({100*q1yes/max(1,len(rows)):.2f}%)')
+
+    bad = sum(1 for r in rows if not verify_q1yes_phrasing(r['messages']))
+    print(f'  Q1=Yes phrasing-rule violations: {bad}')
+
+    # Per-class × mode
+    xtab = Counter()
+    for r in rows:
+        xtab[(r['gold_label'], r['generation_mode'])] += 1
+    print(f'\n  class × generation_mode:')
+    for c in sorted(label_dist):
+        fwd = xtab[(c, 'forward_pass')]
+        gc  = xtab[(c, 'gold_conditioned_v2_per_turn_hint')]
+        print(f'    {c:7}: forward_pass={fwd:5}  gold_cond={gc:5}  total={fwd+gc:5}')
+
+
+def sample_dump_v4d(rows):
+    """3 samples: 1 EQUAL, 1 VAGUE, 1 BEFORE/AFTER. One from each generation_mode at minimum."""
+    print(f'\n---- v4d samples (1 EQUAL, 1 VAGUE, 1 BEFORE/AFTER) ----')
+
+    by_label = {}
+    for r in rows:
+        by_label.setdefault(r['gold_label'], []).append(r)
+
+    chosen = []
+    for label in ('EQUAL', 'VAGUE', 'BEFORE', 'AFTER'):
+        if label in by_label and len(chosen) < 3:
+            chosen.append(random.choice(by_label[label]))
+            if label == 'BEFORE' or label == 'AFTER':
+                break  # pick only one of BEFORE/AFTER
+
+    for i, r in enumerate(chosen):
+        print(f'\n--- sample {i} (gold={r["gold_label"]} mode={r["generation_mode"]} terminal={r["terminal_q"]}) ---')
+        msgs_print = []
+        for m in r['messages']:
+            c = m['content']
+            if len(c) > 1500:
+                c = c[:600] + f'\n... [{len(c)-1200} chars elided] ...\n' + c[-600:]
+            msgs_print.append({'role': m['role'], 'content': c})
+        print(json.dumps({'doc_id': r['doc_id'], 'pair': (r['e1_id'], r['e2_id']),
+                          'gold_label': r['gold_label'],
+                          'generation_mode': r['generation_mode'],
+                          'terminal_q': r['terminal_q'],
+                          'messages': msgs_print}, indent=2))
+
+
 if __name__ == '__main__':
+    if '--v4d' in sys.argv:
+        random.seed(42)
+        rows = build_v4d()
+        print('\n\n############# REPORT #############')
+        report_v4d(rows)
+
+        print('\n\n############# LENGTH STATS #############')
+        length_stats('v4d', rows)
+
+        print('\n\n############# SAMPLES #############')
+        sample_dump_v4d(rows)
+
+        print('\n\n############# TOGETHER CHECK #############')
+        together_check(V4D_OUT)
+        sys.exit(0)
+
     rows_v4a, rows_v4b, rows_v4c, skipped, _ = main()
     print('\n\n############# REPORTS #############')
     report('v4a (full, direct labels)', OUT_V4A, rows_v4a, skipped['v4a'],
